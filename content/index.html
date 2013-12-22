@@ -1,0 +1,20 @@
+---
+title: Binstar Overview
+subtitle: ''
+description: Binstar Overview
+---
+{% extends "columns.j2" %}
+
+{% block main %}
+
+<a id="overview"></a>
+
+Binstar is Continuum Analytics' hosted package management service.
+
+
+
+{% endblock main %}
+
+{% block mixpanel_event %}
+  mixpanel.track("Wakari Overview");	
+{% endblock mixpanel_event %}

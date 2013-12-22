@@ -1,0 +1,16 @@
+---
+title: Frequently Asked Questions
+subtitle: ''
+---
+{% extends "columns.j2" %}
+
+{% block main %}
+
+<a id="faq"></a>
+###FAQ
+
+{% endblock main %}
+
+{% block mixpanel_event %}
+  mixpanel.track("FAQ");	
+{% endblock mixpanel_event %}

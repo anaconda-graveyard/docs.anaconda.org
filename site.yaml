@@ -1,0 +1,51 @@
+mode: development # Use "hyde publish -c prod.yaml to have this automatically switch to production
+media_root: media # Relative path from content folder.
+media_url: media # URL where the media files are served from.
+
+plugins:
+    - hyde.ext.plugins.meta.MetaPlugin
+    - hyde.ext.plugins.auto_extend.AutoExtendPlugin
+    - hyde.ext.plugins.syntext.SyntextPlugin
+    - hyde.ext.plugins.textlinks.TextlinksPlugin
+context:
+    data:
+        site_title: Binstar Documentation
+        author:
+            name: Continuum Analytics
+            url: "https://binstar.org/"
+        #google_analytics_id: UA-40918310-2
+        home_url: gettingstarted.html
+        menu:
+            - title: Getting Started
+              submenu :
+                - title : Welcome to Binstar!
+                  url : gettingstarted.html    
+            - title : Frequently Asked Questions
+              submenu :
+                - title : FAQ
+                  url : faq.html
+            - title: Overview
+              submenu :
+                - title : Overview
+                  url : index.html
+                - title : Authoring Packages
+                  url : access.html             
+            - title : Conda Packaging
+              submenu :
+                - title : Authoring Conda Packages
+                  url : "conda.html#Authoring" 
+                - title : Installing Conda Packages
+                  url : "conda.html#Installing"               
+            - title : PyPI Packaging
+              submenu :
+                - title : Authoring PyPI Packages
+                  url : "pypi.html#Authoring" 
+                - title : Installing PyPI Packages
+                  url : "pypi.html#Installing"          
+
+                   
+                  
+simple_copy:
+    - media/js/*    
+    - media/js/libs*
+    - media/css/*    

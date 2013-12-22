@@ -1,0 +1,23 @@
+{% macro render_main_menu() -%}
+<ul class="nav">
+{% for menu_item in menu -%}
+  <li{% if menu_item.url == resource.url or menu_item.active %} class="active"{% endif %}><a href="{{ menu_item.url }}">{{ menu_item.title }}</a></li>
+{%- endfor %}
+</ul>
+{%- endmacro %}
+
+{% macro render_side_bar() -%}
+<ul class="nav nav-list">
+<h3 class="bs-docs-sidenav-heading"><a href="/">Binstar Docs</a></h3>
+{% for menu_item in menu -%}
+  {% if menu_item.submenu %}
+  <li class="nav-header">{{ menu_item.title }}</li>
+    {% for sub_item in menu_item.submenu %}
+    <li><a href="{{ sub_item.url }}">{{ sub_item.title }}</a></li>
+    {% endfor %}
+  {% else %}
+  <li><a href="{{ menu_item.url }}">{{ menu_item.title }}</a></li>
+  {% endif %}
+{% endfor %}
+</ul>
+{%- endmacro %}

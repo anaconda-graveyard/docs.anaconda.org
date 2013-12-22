@@ -1,0 +1,27 @@
+---
+title: Getting Started
+subtitle: 'Binstar'
+---
+{% extends "columns.j2" %}
+
+{% block main %}
+<a id="gettingstarted"></a>
+### Welcome to Binstar!
+
+We are excited to introduce binstar.
+
+#### Use Cases
+
+[You want to author conda packages](conda.html#Author) 
+
+[You are new to Wakari.](newuser.html) 
+
+[You want to use IPython Notebook.](notebookuser.html)
+
+[Wakari for Teams.](wt_usecase.html)
+
+{% endblock main %}
+
+{% block mixpanel_event %}
+  mixpanel.track("Getting Started");	
+{% endblock mixpanel_event %}

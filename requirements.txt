@@ -1,0 +1,4 @@
+distribute==0.6.19
+fs==0.4.0
+hyde==0.8.8
+wsgiref==0.1.2
