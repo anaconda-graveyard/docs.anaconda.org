@@ -5,7 +5,6 @@ BUCKET="docs.binstar.org"
 # git tag "$VERSION"
 hyde gen
 
-s3cmd -c .s3cfg sync --recursive deploy/ s3://"$BUCKET"/"$VERSION"/
 s3cmd -c .s3cfg sync --recursive deploy/ s3://"$BUCKET"/
 
 # echo "Don't Forget to update the binstar_app Config file! VERSION=$VERSION"

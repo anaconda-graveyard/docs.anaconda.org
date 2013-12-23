@@ -28,8 +28,12 @@ context:
               submenu :
                 - title : Overview
                   url : index.html
-                - title : Authoring Packages
+                - title : Installing Packages
                   url : access.html             
+                - title : Authoring Packages
+                  url : author.html             
+                - title : Binstar Collections
+                  url : collections.html   
             - title : Conda Packaging
               submenu :
                 - title : Authoring Conda Packages
