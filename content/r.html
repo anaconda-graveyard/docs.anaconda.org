@@ -1,0 +1,74 @@
+---
+title: R Packages 
+subtitle: ''
+---
+{% extends "columns.j2" %}
+
+{% block main %}
+<a id="Installing"></a>
+## Installing R packages
+
+The basic way to install a package from binstar is using R:
+ 
+    install.packages("PACKAGE", repos="r.binstar.org/REGISTRY-PATH")
+
+Where **REGISTRY-PATH** may be one of the following: 
+
+1. **public**, this allows installation of packages the global public registry. 
+   Published packages are users packages that they have choosen to put into a common registry. 
+   Check the package home page for details<br><br>
+   ```
+   install.packages("PACKAGE", repos="r.binstar.org/public")
+   ```<br><br>
+   <div class="alert">**Note:**<br> the **r** user contains a full up to date mirror of [cran.r-project.org](http://cran.r-project.org)</div>
+1. A **username**, this allows installation of packages from a user registry:  
+   `install.packages("PACKAGE", repos="r.binstar.org/USER")`
+   
+
+1. A **user collection**, this allows installation of packages from a collection of packages a user has put together:  
+   ```
+   install.packages("PACKAGE", repos="r.binstar.org/collections/USER/COLLECTION-NAME")
+   ```
+
+
+## Installing Private Packages
+
+All urls (except for the public registry) can be prefixed with `/t/$TOKEN` to access private packages. 
+
+In a bash script:
+
+    TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
+    echo $TOKEN
+
+    install.packages("PACKAGE", repos="r.binstar.org/collections/USER/COLLECTION-NAME")
+
+<a id="Rprofile"></a>
+### Modify your .Rprofile file
+
+In R you must enable https source downloads to access packages on binstar to do so modify your `~/.Rprofile` file.
+
+    local({
+      r <- getOption("repos")
+      options(pkgType="source", download.file.method="curl", download.file.extra="-L")
+    })
+
+You may also hard code binstar as your go-to for package management:
+
+    local({
+      r <- getOption("repos")
+      r["CRAN"] <- "r.binstar.org/cran"
+      r["YOU"] <- "r.binstar.org/YOU"
+      options(repos=r, pkgType="source", download.file.method="curl", download.file.extra="-L")
+    })
+
+
+See also the [official R installer documentation](http://www.statmethods.net/interface/customizing.html)
+
+
+<a id="Authoring"></a>
+## Authoring R packages
+
+All packages you author must go to a user account. To create a package go to [binstar.org/new](https://binstar.org/new)  
+
+See also [authoring packages](author.html) for a general overview.
+{%endblock%}
