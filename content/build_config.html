@@ -9,7 +9,13 @@ subtitle: '.binstar.yml'
 
 ## Build Lifecycle
 
-By default, the worker performs the build as following:
+## Your machine
+
+When you submit a build with the `binsar build --submit` command, the binstar client creates and uploads a tarball of the directory containing the .binstar.yml file.
+
+## Build machine
+   
+By default, the **worker** performs the build as following tasks:
 
 1.  Download the tarball containing the build resources (including the .binstar.yml file)
 1.  Run <a href="#before_script,after_script">before_script</a> commands.
@@ -65,6 +71,8 @@ You can also define scripts to be run before and after the main script:
     before_script: some_command
     after_script:  another_command
 
+For the `after_script` tag the environment variable, 
+`BINSTAR_BUILD_RESULT` will be made available as either *success* or *failure*  
 
 {{mytitle('after_XX', 'after_success and after_failure')}}
 
