@@ -103,16 +103,16 @@ Or a list or glob of files
       - test-results.json
       - html-coverage/*
 
-You can store all logs or any derived data here
+You can store all logs or any derived data here.
 Remember, the site http://artifacts.build.binstar.info is NOT secure and does not
-require a user to log in to view
+require a user to log in to view.
 
 # Build Matrix
 
-When you submit one .binstar.yml file many sub builds are launched, this is because of the
+When you submit one .binstar.yml file many sub-builds are launched.  This is because of the
 [platform](#platform), [engine](#engine) and [env](#env) tags.
 
-The build matrix is formed by combining `[platform * engine * env]` to get the sub builds.
+The build matrix is formed by combining `[platform * engine * env]` to get the sub-builds.
 
 The following configuration will run 8 sub builds:
 
@@ -166,7 +166,7 @@ An export of environment variables for the sub-build
 # Multiple build Matrices
 
 Some times it is not the best to define one large build matrix,
-for example if you running a build windows <span class="text-muted">(Windows is not available as of yet)</span>
+for example if you running a build on Windows <span class="text-muted">(Windows is not available as of yet)</span>.
 
 The matrix:
 
@@ -183,7 +183,7 @@ The matrix:
 Would not work the build items with `platform: linux-32 env: MSVC=2008` don't make sense:
 You can concatenate the sub-builds using yaml documents.
 
-Yaml documents are separated by `---`
+Yaml documents are separated by `---`.
 
     platform: linux-32
     env: CC=gcc
@@ -195,11 +195,11 @@ Yaml documents are separated by `---`
       - MSVC=2010
     script: build.bat
 
-This would now produce the correct sub builds
+This would now produce the correct sub-builds.
 
 # Excluding an item in the matrix
 
-You can exclude a sub-build entry from a matrix with the exclude tag
+You can exclude a sub-build entry from a matrix with the exclude tag.
 
     platform:
       - linux-32
@@ -213,7 +213,7 @@ You can exclude a sub-build entry from a matrix with the exclude tag
     engine: python=3
     exclude: true
 
-Now the sub-build: `platform: linux-32 engine: python=3` will not be submitted
+Now the sub-build: `platform: linux-32 engine: python=3` will not be submitted.
 
 {% endblock %}
 
