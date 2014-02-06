@@ -1,5 +1,5 @@
 ---
-title: Configuring Your Build 
+title: Configuring Your Build
 subtitle: '.binstar.yml'
 ---
 {% extends "columns.j2" %}
@@ -20,14 +20,14 @@ By default, the worker performs the build as following:
 1.  Run <a href="#after_XX">after_success</a> or <a href="#after_XX">after_failure</a> commands
 1.  Run <a href="#before_script,after_script">after_script</a> commands.
 1.  Upload <a href="#build_targets">build_targets</a>.
-     * Build targets will end up in your binstar package using binstar upload, 
+     * Build targets will end up in your binstar package using binstar upload,
      * These *must* be conda or pypi packages
 1.  Upload <a href="#build_artifacts">build_artifacts</a>.
     *   Build artifacts can be any arbitrary data. (log files, data files etc)
-    *   These will be uploaded to the url http://artifacts.build.binstar.info/USER/PACKAGE/BUILD.SUB_BUILD/FILE 
-            
+    *   These will be uploaded to the url http://artifacts.build.binstar.info/USER/PACKAGE/BUILD.SUB_BUILD/FILE
+
             http://artifacts.build.binstar.info/USER/PACKAGE/BUILD.SUB_BUILD/FILE
-    
+
 ## Binstar Build Preserves No State Between Builds
 
 Once the build is finished the VM is destroyed. But we can allow you to have sudo acccess!
@@ -38,7 +38,7 @@ Once the build is finished the VM is destroyed. But we can allow you to have sud
  * `BINSTAR_BUILD_MAJOR`
  * `BINSTAR_BUILD_MINOR`
  * `BINSTAR_ENGINE` the engine from the engine tag
- * `BINSTAR_PLATFORM` the platofrm from the platofrm tag 
+ * `BINSTAR_PLATFORM` the platform from the platform tag
 
 # .binstar.yml Tags
 
@@ -54,10 +54,10 @@ Define the main script:
 
 Script may also be a list:
 
-    after_script:  
+    after_script:
       - some_command
       - another_command
-    
+
 {{mytitle('before_script,after_script')}}
 
 You can also define scripts to be run before and after the main script:
@@ -70,7 +70,7 @@ You can also define scripts to be run before and after the main script:
 
 Like all tags, Script may also be a list:
 
-    after_script:  
+    after_script:
       - some_command
       - another_command
 
@@ -91,14 +91,14 @@ Upload anything you want. Your build artifacts will be put into the website
 Example:
 
     build_artifacts: ~/conda.log
-    
+
 Or a list or glob of files
 
-    build_artifacts: 
+    build_artifacts:
       - ~/conda.log
       - test-results.json
       - html-coverage/*
-    
+
 You can store all logs or any derived data here
 Remember, the site http://artifacts.build.binstar.info is NOT secure and does not
 require a user to log in to view
@@ -106,19 +106,19 @@ require a user to log in to view
 # Build Matrix
 
 When you submit one .binstar.yml file many sub builds are launched, this is because of the
-[platform](#platform), [engine](#engine) and [env](#env) tags.  
+[platform](#platform), [engine](#engine) and [env](#env) tags.
 
 The build matrix is formed by combining `[platform * engin * env]` to get the sub builds.
 
 The following configuration will run 8 sub builds:
 
-    platform: 
+    platform:
       - linux-32
       - linux-64
-    engine: 
+    engine:
       - python=2
       - python=3
-    env: 
+    env:
       - CXX=g++
       - CXX=clang++
 
@@ -135,7 +135,7 @@ The following configuration will run 8 sub builds:
 
 Right now this selects the machine type you want to run your build on.
 
-    platform: 
+    platform:
       - linux-64
 
 
@@ -143,30 +143,30 @@ Right now this selects the machine type you want to run your build on.
 
 Sets the initial conda packages you want to build with:
 
-    engine: 
+    engine:
       - python=2 nodejs=0.10
       - python=3
 
 Note that the first item `python=2 nodejs=0.10` is not a list.
- 
+
 In this sub build the both packages python and nodejs will be available
 
 {{mytitle('env')}}
 
 An export of environment variables for the sub-build
 
-    env: 
-      - FOO=BAR 
+    env:
+      - FOO=BAR
       - BINSTAR=GOOD JENKINS=BAD
 
 # Multiple build Matrices
 
-Some times it is not the best to define one large build matrix, 
-for example if you running a build windows <span class="text-muted">(Windows is not available as of yet)</span>  
-  
+Some times it is not the best to define one large build matrix,
+for example if you running a build windows <span class="text-muted">(Windows is not available as of yet)</span>
+
 The matrix:
 
-    platform: 
+    platform:
       - win-32
       - linux-32
     env:
@@ -191,16 +191,16 @@ Yaml documents are seporated by `---`
       - MSVC=2010
     script: build.bat
 
-This would now produce the correct sub builds 
+This would now produce the correct sub builds
 
 # Excluding an item in the matrix
 
 You can exclude a sub-build entry from a matrix with the exclude tag
 
-    platform: 
+    platform:
       - linux-32
       - linux-64
-    engine: 
+    engine:
       - python=2
       - python=3
     script: conda build .
@@ -212,4 +212,3 @@ You can exclude a sub-build entry from a matrix with the exclude tag
 Now the sub-build: `platform: linux-32 engine: python=3` will not be submitted
 
 {% endblock %}
-
