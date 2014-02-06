@@ -11,7 +11,7 @@ subtitle: '.binstar.yml'
 
 By default, the worker performs the build as following:
 
-1.  Download the tarbal containing the build resources (including the .binstar.yml file)
+1.  Download the tarball containing the build resources (including the .binstar.yml file)
 1.  Run <a href="#before_script,after_script">before_script</a> commands.
      * Use this to prepare your build
      * e.g. copy database configurations, environment variables, etc.
@@ -30,7 +30,7 @@ By default, the worker performs the build as following:
 
 ## Binstar Build Preserves No State Between Builds
 
-Once the build is finished the VM is destroyed. But we can allow you to have sudo acccess!
+Once the build is finished the VM is destroyed. But we can allow you to have sudo access!
 
 ## Environment Variables
 
@@ -54,11 +54,11 @@ Define the main script:
 
 Script may also be a list:
 
-    after_script:
+    script:
       - some_command
       - another_command
 
-{{mytitle('before_script,after_script')}}
+{{mytitle('before_script, after_script')}}
 
 You can also define scripts to be run before and after the main script:
 
@@ -70,13 +70,17 @@ You can also define scripts to be run before and after the main script:
 
 Like all tags, Script may also be a list:
 
-    after_script:
+    after_success:
+      - some_command
+      - another_command
+
+    after_failure:
       - some_command
       - another_command
 
 {{mytitle('build_targets')}}
 
-These files will be upload to your bunstar package. May be a file or a glob of files:
+These files will be upload to your binstar package. May be a file or a glob of files:
 
     build_targets: dist/*
 
@@ -108,7 +112,7 @@ require a user to log in to view
 When you submit one .binstar.yml file many sub builds are launched, this is because of the
 [platform](#platform), [engine](#engine) and [env](#env) tags.
 
-The build matrix is formed by combining `[platform * engin * env]` to get the sub builds.
+The build matrix is formed by combining `[platform * engine * env]` to get the sub builds.
 
 The following configuration will run 8 sub builds:
 
@@ -177,9 +181,9 @@ The matrix:
         build.sh
 
 Would not work the build items with `platform: linux-32 env: MSVC=2008` don't make sense:
-You can contatonate the sub-builds using yaml documents.
+You can concatenate the sub-builds using yaml documents.
 
-Yaml documents are seporated by `---`
+Yaml documents are separated by `---`
 
     platform: linux-32
     env: CC=gcc
@@ -212,3 +216,8 @@ You can exclude a sub-build entry from a matrix with the exclude tag
 Now the sub-build: `platform: linux-32 engine: python=3` will not be submitted
 
 {% endblock %}
+
+<!--  LocalWords:  yml pypi VM mytitle endmacro dist html env linux CXX FOO
+ -->
+<!--  LocalWords:  nodejs MSVC CC gcc sh yaml endblock
+ -->
