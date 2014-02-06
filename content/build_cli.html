@@ -1,5 +1,5 @@
 ---
-title: Binstar Build 
+title: Binstar Build
 subtitle: 'Command line interface'
 ---
 {% extends "columns.j2" %}
@@ -10,7 +10,7 @@ subtitle: 'Command line interface'
 ## Getting Started
 
 <div class="alert alert-danger">
-Binstar build is currently in development, you <strong>must</strong> install the binstar client from github
+Binstar build is currently in development, you <strong>must</strong> install the binstar client from GitHub.
    <hr>
 <pre><code>git clone -b feaure/build https://github.com/Binstar/binstar_client
 cd binstar_client
@@ -18,36 +18,36 @@ python setup.py install
 
 binstar config --set url http://api.alpha.binstar.org
 </code></pre>
-    
+
 </div>
 Check out these examples if you learn by doing:
 
  * [Example conda package](https://github.com/Binstar/binstar_client/tree/feature/build/test/conda)
- * [Binstar config Documentation](build_config.html)
- 
+ * [Binstar config documentation](build_config.html)
+
 ### Step 1: Create a package
 
-If you are not familiar with binstar create a package first. 
-This will be the namespace or the context of the build
+If you are not familiar with binstar create a package first.
+This will be the namespace or the context of the build.
 
     binstar package --create USERNAME/conda_build_test
 
 Replace `USERNAME` with your username.
 
-### Step 2: Add .binstar.yml file to your build directory 
+### Step 2: Add .binstar.yml file to your build directory
 
-This may be the same directory as your `meta.yaml` file if you are building a conda package
+This may be the same directory as your `meta.yaml` file if you are building a conda package.
 
 See the [.binstar.yml](build_config.html) documentation for more details:
 
     package: conda_build_test
-    platform: 
+    platform:
       - linux-64
       - linux-32
     script:
       - conda build .
-    
-      # Must do this otherwise we don't have controll over the build targets
+
+      # Must do this otherwise we don't have control over the build targets
       - mkdir dist
       - cp `conda build . --output` dist/
     build_targets:
@@ -55,20 +55,20 @@ See the [.binstar.yml](build_config.html) documentation for more details:
 
 ### Step 3: Submit your build
 
-Change directories to where you created your .binstar.yml file. Then you can run: 
+Change directories to where you created your .binstar.yml file. Then you can run:
 
     binstar build --submit
 
-The out put should be somthing like:
+The out put should be something like:
 
     Getting build product: /path/to/conda_build_test
     Submitting 2 sub builds
-     0) linux-32    python=2         None           
-     1) linux-64    python=2         None           
+     0) linux-32    python=2         None
+     1) linux-64    python=2         None
     Build 1 submitted
 
 Or you can do a dry run to check that your .binstar.yml file is OK.
-    
+
     binstar build --dry-run
 
 This command packs the entire directory containing the .binstar.yaml file and uploads it to binstar.
@@ -87,7 +87,7 @@ You build is now in the build queue.
 #### Tail the output of a build
 
     binstar build --tail 1.1
-    #or 
+    #or
     binstar build --tail 1.1 -f
 
 The `-f` option behaves exactly like the linux `tail -f` command
@@ -97,3 +97,8 @@ The `-f` option behaves exactly like the linux `tail -f` command
 'nuf said
 
 {% endblock %}
+
+<!--  LocalWords:  config html USERNAME username yml yaml linux mkdir dist cp
+ -->
+<!--  LocalWords:  nuf endblock
+ -->
