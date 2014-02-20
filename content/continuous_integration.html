@@ -1,0 +1,99 @@
+---
+title: Continuous Integration
+---
+{% extends "columns.j2" %}
+
+{% block main %}
+<a id="Installing"></a>
+
+## Setting up Continuous Integration on binstar
+
+<div class="alert alert-danger">
+Binstar build is currently in development
+   <hr>
+</div>
+
+### Navigate to the project settings
+
+In this case my user name is `sean` and the project is `testci` So I am at the URL 
+`alpha.binstar.org/sean/testci/settings/ci`
+
+### Log in to github
+
+
+![Continuous Integration Settings](media/img/ci-login.png)
+
+### Select the github repository
+
+![Continuous Integration Settings](media/img/ci-settings.png)
+
+The fields:
+
+*   **Repository**: The github repository you want to build. In this case it is [srossross/testci](https://github.com/srossross/testci)
+*   **Run tests only on these branches**: A [regex](http://docs.python.org/2/library/re.html#regular-expression-syntax)
+    that matches the git [refspec](http://git-scm.com/book/en/Git-Internals-The-Refspec)
+    you want to be build. **Note**: that this refspec is only tested, no build_targets will be uploaded  
+*   **Run full build these branches or tags**: A [regex](http://docs.python.org/2/library/re.html#regular-expression-syntax) 
+    that matches the branches or tags that match this refspec will also upload files to binstar using binstar upload. 
+
+### Add .binstar.yml file to your repository
+
+
+
+In order for Binstar to build your project, 
+you need add a `.binstar.yml` file to the root of your repository.
+To do this run `binstar-build init` in the root repository commit the file and push. 
+See all of the [.binstar.yml configuration](/build_config.html) options. 
+
+If .binstar.yml is not in the repository, is misspelled or is not valid YAML, 
+This will show up in your [dashboard](http://alpha.binstar.org/dashboard) as a build error.
+
+A simple .binstar.yaml example:
+ 
+    project: testci
+    script:
+        - echo "Hello Binstar CI!"
+
+
+<h3 id="private_keyfiles">Private Keyfiles</h3>
+
+Sometimes it is nessisary to use private keys to build your package even though the repository is public. 
+
+Binstar allows to you submit private `keyfiles` which will be copies to the build machine,
+so you won't have to publish this private information to the repository.
+
+To do this run the command:
+
+    binstar-build keyfile user/package 'remote-filename' --upload local-filename  
+
+#### Keyfile Example: 
+
+If I need to connect to an amazon AWS service using boto to test my build, I need my AWS credentials. 
+
+I would first create my test user credentials in a file named `boto.config`. Here are the contents of that file: 
+
+    # File boto.config
+    [Credentials]
+    # Test User Credentials
+    aws_access_key_id = XXXXXXXXXXXXXX
+    aws_secret_access_key = YYYYYYYYYYYYYYYYYYYYYYYYYYY
+
+
+I can now run:
+    
+    binstar-build keyfile sean/testci '~/.boto' --upload ./boto.config
+
+This first uploads the contents of ./boto.config to the binstar package `sean/testci` 
+and tells binstar that it should download the contents of the file 
+`boto.config` on the build machine as the file `~/.boto` for all builds of `testci`
+
+To view the keyfiles for this build run:
+
+    binstar-build keyfiles sean/testci
+
+
+
+{% endblock %}
+
+
+
