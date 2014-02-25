@@ -33,7 +33,9 @@ context:
                 - title : Authoring Packages
                   url : author.html             
                 - title : Binstar Collections
-                  url : collections.html   
+                  url : collections.html
+                - title : Binstar Channels
+                  url : channels.html
             - title : Conda Packaging
               submenu :
                 - title : Authoring Conda Packages
