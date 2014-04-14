@@ -18,8 +18,9 @@ but only users listening to that channel will be able to install it. This is par
 You can upload a file to a `dev` or `testing` channel, and when you are satisfied that it is a stable release, you can push
 it to the `main` user channel for all users to install.
 
-The the default channel that all files are put into is `main`. This can be used as a normal binstar file.
 
+The the default channel that all files are put into is `main`. This can be used as a normal channel.
+ 
 Typically when we are working on with conda we would do this:
 
     conda config --add channel http://conda.binstar.org/USER
@@ -40,7 +41,7 @@ This means that I can install the ipython-we package by using the main channel:
 
     conda config --add channel http://conda.binstar.org/wakari
 
-OR using the dev channel:
+Or using the dev channel:
 
     conda config --add channel http://conda.binstar.org/wakari/channel/dev
 
