@@ -1,0 +1,59 @@
+---
+title: Binstar Organizations
+subtitle: ''
+---
+{% extends "columns.j2" %}
+
+{% block main %}
+<a id="Installing"></a>
+## Creating an organization
+
+[Create a new organization](https://binstar.org/new/organization)
+
+## Managing an organization
+
+### Dashboard
+
+You can view your organization's by navigating to:
+
+ *  https://binstar.org/organization/:OrgName/dashboard
+
+Or by navigating to the [binstar.org](https://binstar.org) and selecting the org dropdown on the upper right.
+
+<center>
+<img src="media/img/org-dropdown.png" alt="Org Dashboard Dropdown" style="width: 300px;" align="middle"/>
+</center>
+
+You can manage your organization's settings by navigating to:
+
+ *  https://binstar.org/organization/:OrgName/settings/profile
+
+Or by navigating to [your settings](https://binstar.org/settings) and selecting the org dropdown on the upper right.
+
+<center>
+<img src="media/img/org-dropdown.png" alt="Org Dashboard Dropdown" style="width: 300px;"/>
+</center>
+
+## Groups and Access
+
+### Owners
+
+All organization owners have full access to the organization settings and all packages
+
+To give other users ownership navigate to the groups settings page and add them:
+
+![Org groups page](media/img/org-groups.png)
+
+![Org owners group page](media/img/org-owners.png)
+
+## Command line client
+
+To upload packages to your org account *'OrgName'* from the command line you must now use the '-u/--user' option:
+
+    $ binstar login
+    Username: your-personal-account
+    your-personal-account's Password: ******
+    $ binstar upload -u OrgName ... package.tar
+
+
+{% endblock %}
