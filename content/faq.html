@@ -7,7 +7,147 @@ subtitle: ''
 {% block main %}
 
 <a id="faq"></a>
-###FAQ
+### FAQ
+
+1. [General questions](#general-questions).
+2. [Getting help](#getting-help).
+3. [Authentication & authorization](#auth).
+4. [Searching & info](#info).
+5. [Customization](#customization).
+X. [Packages](#packages).
+X. [Collections](#collections).
+
+<a id='general-questions'></a>
+#### General questions
+
+1. What are the terms of service for [binstar.org](https://binstar.org)?
+
+The answer.
+
+<a id='getting-help'></a>
+#### Getting help
+
+1. How can I see what *binstar* commands are supported?
+
+```
+binstar -h
+```
+
+2. How can I get help for X command (e.g. *auth*)?
+
+```
+binstar auth -h
+```
+
+<a id='auth'></a>
+#### Authentication & authorization
+
+1. What is the *token* and why do I may need a one?
+
+The *token* is 24th (stronger version) or 13th (weaker version) length of characters authorization string.
+It allows You to perform any actions (according to *scope* of the *token*) on your [binstar.org](https://binstar.org) account.
+The appropriate tool for manipulating of your [binstar.org](https://binstar.org) account is *binstar* script.
+This tool is delivered in [Anaconda](https://store.continuum.io/cshop/anaconda/)
+and its code is available on [github.com](https://github.com/binstar/binstar_client).
+
+
+**Generally all of your *tokens* should be kept private (theirs content shouldn't be known to anybody except You).**
+
+1. What is the *scope* of *token*?
+
+The *scope* determines access level to your supplies on [binstar.org](https://binstar.org).
+According to the *scope* of *token* You are allowed or disallowed to perform specific actions.
+
+1. How can I list all available *scopes* for *tokens* which I can use?
+
+```
+binstar auth -x
+```
+
+1. How can I obtain my first *token* called 'fullaccess', with *scope* granting full permissions and save it for example in /home/irritum/.binstar.token file?
+
+```
+binstar auth -c -n fullaccess > /home/irritum/.binstar.token
+```
+or with explicitly given *scope* which grants full access permission:
+
+```
+binstar auth -c -n fullaccess -s 'all' > /home/irritum/.binstar.token
+```
+
+In both cases You will be asked for username and password of your [binstar.org](https://binstar.org) account.
+After successful operation your *token* will be saved into requested /home/irritum/.binstar.token file.
+You can examine the content of this file by typing:
+
+```
+cat /home/irritum/.binstar.token
+```
+
+
+**Remember** to change permissions of above *token* file as:
+```
+chmod 0600 /home/irritum/.binstar.token
+```
+
+1. How can I easy obtain another *token* which has limited *scope* of access (e.g. to perform all operations BUT only on *conda* repositories)?
+
+```
+export BINSTAR_TOKEN="$(</home/irritum/.binstar.token)"
+binstar -t ${BINSTAR_TOKEN} auth -c -n condafullaccess -s conda > /home/irritum/.binstar.token.condafullaccess
+```
+
+You will be asked for password of your [binstar.org](https://binstar.org) account.
+To use just generated *token*, please type:
+
+```
+export BINSTAR_TOKEN="$(</home/irritum/.binstar.token.condafullaccess)"
+
+```
+
+Now You should be able to perform any actions according to the *scope* of this new *token* (e.g. upload personal *conda* package):
+```
+binstar -t ${BINSTAR_TOKEN} upload /tmp/some_private_conda_package.tbz2
+```
+
+1. How can I get list of all of my *tokens*?
+
+```
+binstar -t ${BINSTAR_TOKEN} auth -l
+```
+
+1. How can I remove one of my *tokens* (e.g. the ID of *token* is 536caa38e1dad11ee9d4c8a6)?
+
+```
+binstar -t ${BINSTAR_TOKEN} auth -r 536caa38e1dad11ee9d4c8a6
+```
+
+1. How can I check my binstar personality?
+
+```
+binstar -t ${BINSTAR_TOKEN} whoami
+```
+
+<a id='info'></a>
+#### Searching & info
+
+1. ?
+
+<a id='customization'></a>
+#### Customization
+
+1. ?
+
+<a id='packages'></a>
+#### Packages
+
+1. What kind of packages [binstar.org](https://binstar.org) supports?
+
+There are mainly two types of packages. The *conda* packages and the *pypi* packages.
+
+<a id='collections'></a>
+#### Collections
+
+1. ?
 
 {% endblock main %}
 
