@@ -33,7 +33,7 @@ Please read [this](https://binstar.org/about/legal/terms).
 binstar -h
 ```
 
-2. How can I get help for X command (e.g. *auth*)?
+2. How can I get help for X *binstar* command (e.g. *auth*)?
 
 ```
 binstar auth -h
@@ -50,20 +50,23 @@ This tool is delivered in [Anaconda](https://store.continuum.io/cshop/anaconda/)
 and its code is available on [github.com](https://github.com/binstar/binstar_client).
 
 
-By using it, You can unlock full session to your account.
-And the second way is to use *token* to perform just a specific action.
+By using it, You can unlock full session to your account. The tool allows You to perform almost all actions
+without any password prompt and without necessity of specifying any *token* in command line.
+The second way is to use *token* - mostly to perform a specific action (but it's not limited to this).
+Last mentioned method requires to always specify appropriate *token* in command line to successfully perform the requested action.
 
 1. How can I open full session to [binstar.org](https://binstar.org)?
 
-By signing into your account, just type:
+By signing into your account, just like that:
 ```
 binstar login
 ```
 
 The above command  will ask for your username and password.
-Then You will be able to perform any actions on your account.
+Then You will be able to perform any actions on your account, generally without password prompt
+(creation of a new token may need enter the password once again due to security reason).
 
-1. How can close full session to my [binstar.org](https://binstar.org) account?
+1. How can I close full session to my [binstar.org](https://binstar.org) account?
 
 It's easy, just type:
 
@@ -71,7 +74,7 @@ It's easy, just type:
 binstar logout
 ```
 
-After that You won't be able to perform any action on your account.
+After that You won't be able to perform any actions on your account.
 
 1. What is the *token* and why do I may need a one?
 
@@ -105,7 +108,7 @@ binstar auth -c -n fullaccess -s 'all' > /home/irritum/.binstar.token
 
 In both cases You will be asked for username and password of your [binstar.org](https://binstar.org) account.
 After successful operation your *token* will be saved into requested /home/irritum/.binstar.token file.
-You can examine the content of this file by typing:
+You can examine the content of this file by typing (be sure that nobody can see it's value):
 
 ```
 cat /home/irritum/.binstar.token
@@ -115,12 +118,24 @@ cat /home/irritum/.binstar.token
 **Remember** to appropriately change permissions of above *token* file, like:
 ```
 chmod 0600 /home/irritum/.binstar.token
+
+1. How can I use my *token* which was saved in some file (e.g. /home/irritum/.binstar.token)?
+
 ```
+export BINSTAR_TOKEN="$(</home/irritum/.binstar.token)"
+```
+
+And now You should prefix any of *binstar* subcommand which is supposed to use the *token*, with '-t ${BINSTAR_TOKEN}', like:
+
+```
+binstar -t ${BINSTAR_TOKEN} subcommand
+```
+
+The variable name (in this example: BINSTAR_TOKEN) is free to choose.
 
 1. How can I easy obtain another one of *token* which has limited *scope* of access (e.g. to perform all operations BUT only on *conda* repositories)?
 
 ```
-export BINSTAR_TOKEN="$(</home/irritum/.binstar.token)"
 binstar -t ${BINSTAR_TOKEN} auth -c -n condafullaccess -s conda > /home/irritum/.binstar.token.condafullaccess
 ```
 
@@ -143,11 +158,19 @@ binstar -t ${BINSTAR_TOKEN} upload /tmp/some_private_conda_package.tbz2
 binstar -t ${BINSTAR_TOKEN} auth -l
 ```
 
-1. How can I remove one of my *tokens* (e.g. the ID of *token* is 536caa38e1dad11ee9d4c8a6)?
+The column 'Application' contains name of the *token*. This name was applied during the *token* creation process.
+If the name was ommitted, then default value will be used istead (currently this is: binstar_token:hostname.domainname).
+
+1. How can I remove one of my *tokens* (e.g. the ID of *token* to remove is 536caa38e1dad11ee9d4c8a6)?
 
 ```
 binstar -t ${BINSTAR_TOKEN} auth -r 536caa38e1dad11ee9d4c8a6
 ```
+
+1. What I should do if I get lost of my *token*?
+
+Currently there is no action to restore value of lost *token*.
+So, You should remove the *token* from your auth list and then generate the new *token* and save it's content to file one more again.
 
 1. How can I check my binstar personality?
 
