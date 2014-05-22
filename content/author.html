@@ -1,5 +1,5 @@
 ---
-title: Authoring Packages 
+title: Authoring Packages
 subtitle: ''
 ---
 {% extends "columns.j2" %}
@@ -7,37 +7,35 @@ subtitle: ''
 {% block main %}
 <a id="author"></a>
 
-Binstar is a package hosting service that allows uploading of a variety of package manager types. For concrete examples please see: 
+Binstar is a package hosting service that allows uploading of a variety of package manager types. For concrete examples please see:
 
- * [Authoring Conda Packages](conda.html#Author) 
- * [Authoring PyPI Packages](pypi.html#Author) 
+ * [Authoring Conda Packages](conda.html#Author)
+ * [Authoring PyPI Packages](pypi.html#Author)
 
 ## Creating a new Package
 
-All packages you author must be created in a user account. To create a package go to [binstar.org/new](https://binstar.org/new) 
+All packages you author must be created in a user account. To create a package go to [binstar.org/new](https://binstar.org/new)
 
 ### Select the privacy access to your package:
 
 You will be prompted with three options:
 
-1. **Publish**: The new package will be published to the binstar `public` registries in much the same way as [pypi](https://pypi.python.org) is a single package registry.
-   This is the simplest option, and however the package name *must* be unique among all of the other published packages. 
-2. **Public**: The new package will be hosted on your personal registry, this package will be viewable and installable by anonymous users. 
-   Users must add your unique registry url to their package manager's configuration.   
-3. **Private**: The new package will be hosted on your personal registry, however you controll the list of authorized users that will be able to access or modify this package.  
+1. **Personal**: The new package will be hosted on your personal registry, this package will be viewable and installable by anonymous users.
+   Users must add your unique registry url to their package manager's configuration.
+2. **Private**: The new package will be hosted on your personal registry, however you controll the list of authorized users that will be able to access or modify this package.
 
 
 ### Add a file to your package
 
 To upload files to binstar it is reccomended to use the [binstar command line client](https://github.com/binstar/binstar_client)
- 
+
 Run the command:
-   
+
 `binstar upload FILE-NAME`
 
 #### Use Cases
 
- * [You want to author conda packages](conda.html#Author) 
- * [You want to author pypi packages](pypi.html#Author) 
+ * [You want to author conda packages](conda.html#Author)
+ * [You want to author pypi packages](pypi.html#Author)
 
 {%endblock%}

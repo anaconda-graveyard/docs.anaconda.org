@@ -1,5 +1,5 @@
 ---
-title: Conda Packages 
+title: Conda Packages
 subtitle: ''
 ---
 {% extends "columns.j2" %}
@@ -9,39 +9,37 @@ subtitle: ''
 ## Installing Conda packages
 
 The basic way to install a package from binstar is using conda:
- 
+
 ```
-conda install --channel conda.binstar.org/REGISTRY-PATH PACKAGE
+conda install --channel https://conda.binstar.org/:username PACKAGE
 ```
 
-Where **REGISTRY-PATH** may be one of the following: 
+Where **REGISTRY-PATH** may be one of the following:
 
-1. **public**, this allows installation of packages the global public registry. 
-   Published packages are users packages that they have choosen to put into a common registry. 
-   Check the package home page for details
+
+1. A **username**, this allows installation of packages from a user registry:
    ```
-   conda install --channel conda.binstar.org/public PACKAGE
-   ```
-    
-1. A **username**, this allows installation of packages from a user registry:  
-   ```
-   conda install --channel conda.binstar.org/USER PACKAGE
+   conda install --channel https://conda.binstar.org/:username PACKAGE
    ```
 
-1. A **user collection**, this allows installation of packages from a collection of packages a user has put together:  
-   ```
-   conda install --channel conda.binstar.org/collections/USER/COLLECTION-NAME PACKAGE
-   ```
+1.  A **user channel**, this allows installation of packages from a collection of packages a user has put together:
+    ```
+    conda install --channel https://conda.binstar.org/collections/:username/channel/:channel-name PACKAGE
+    ```
+
+    The **main** channel is the default channel:
+    `https://conda.binstar.org/USER/channel/main` is equivalent to `https://conda.binstar.org/USER`
+
 
 ## Installing Private Packages
 
-All urls (except for the public registry) can be prefixed with `/t/$TOKEN` to access private packages. 
+All urls can be prefixed with `/t/$TOKEN` to access private packages.
 
 ```
 TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
 ```
 ```
-conda install --channel conda.binstar.org/t/$TOKEN/USER PACKAGE
+conda install --channel https://conda.binstar.org/t/$TOKEN/USER PACKAGE
 ```
 
 ### Modify your conda RC file

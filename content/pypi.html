@@ -1,5 +1,5 @@
 ---
-title: PyPI Packages 
+title: PyPI Packages
 subtitle: ''
 ---
 {% extends "columns.j2" %}
@@ -9,33 +9,35 @@ subtitle: ''
 ## Installing PyPI packages
 
 The basic way to install a package from binstar is using pip:
- 
+
 ```
 pip install --index-url pypi.binstar.org/REGISTRY-PATH/simple PACKAGE
 ```
 
-Where **REGISTRY-PATH** may be one of the following: 
+Where **REGISTRY-PATH** may be one of the following:
 
-1. **public**, this allows installation of packages the global public registry. 
-   Published packages are users packages that they have choosen to put into a common registry. 
-   Check the package home page for details<br><br>
-   ```
-   pip install --index-url pypi.binstar.org/public/simple PACKAGE
-   ```<br><br>
-   <div class="alert">**Note:**<br> the **pypi** user contains a full up to date mirror of [pypi.python.org](pypi.python.org)</div>
-1. A **username**, this allows installation of packages from a user registry:  
-   `pip install --index-url pypi.binstar.org/USER/simple PACKAGE`
-   
+1.  A **username**, this allows installation of packages from a user registry:
+    `pip install --index-url pypi.binstar.org/USER/simple PACKAGE`
+    <br><br>
+    <div class="alert">**Note:**<br> the **pypi** user contains a full up to date mirror of [pypi.python.org](pypi.python.org)
+        <br>
+        e.g. <code>[pypi.binstar.org/pypi](https://pypi.binstar.org/pypi)</code>
+    </div>
 
-1. A **user collection**, this allows installation of packages from a collection of packages a user has put together:  
-   ```
-   pip install --index-url pypi.binstar.org/collections/USER/COLLECTION-NAME/simple PACKAGE
-   ```
+
+1.  A **user channel**, this allows installation of packages from a collection of packages a user has put together:
+    ```
+    pip install --index-url pypi.binstar.org/USER/channel/channel-NAME/simple PACKAGE
+    ```
+
+    The **main** channel is the default channel:
+    `pypi.binstar.org/USER/channel/main/simple` is equivalent to `pypi.binstar.org/USER/simple`
+
 
 
 ## Installing Private Packages
 
-All urls (except for the public registry) can be prefixed with `/t/$TOKEN` to access private packages. 
+All urls (except for the public registry) can be prefixed with `/t/$TOKEN` to access private packages.
 
     TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
     pip install --index-url pypi.binstar.org/t/$TOKEN/USER/simple PACKAGE
@@ -55,7 +57,7 @@ Appending options like `--extra-index-url` or `--index-url` can be written as:
     [global]
     extra-index-url =
         http://pypi.binstar.org/user/simple
-    
+
     [install]
     extra-index-url =
         http://pypi.binstar.org/user2/simple
@@ -66,7 +68,7 @@ See also the [official pip installer documentation](http://www.pip-installer.org
 <a id="Authoring"></a>
 ## Authoring PyPI packages
 
-All packages you author must go to a user account. To create a package go to [binstar.org/new](https://binstar.org/new)  
+All packages you author must go to a user account. To create a package go to [binstar.org/new](https://binstar.org/new)
 
 See also [authoring packages](author.html) for a general overview.
 {%endblock%}
