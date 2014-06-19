@@ -1,0 +1,78 @@
+---
+title: Token Generation Process
+---
+{% extends "columns.j2" %}
+
+{% block main %}
+<a id="token_gen"></a>
+
+## Getting Started
+
+<div id="cli-installer" class="alert alert-danger">
+Binstar build is currently in development, you <strong>must</strong> install the binstar client from GitHub.
+   <hr>
+<pre><code>conda config --add channels binstar
+conda install binstar-build
+binstar config --set url http://api.alpha.binstar.org
+</code></pre>
+
+</div>
+
+### Why Tokens?
+
+Tokens can be used to make specific private repositories, collections or packages available to other users.  You have total control over the scope of access.  
+
+
+### How To Generate a Token
+
+At present, tokens can only be generated using the binstar client.  You can find more information on installing and configuring the binstar client [here](/build_cli.html).
+
+Once you have successfully installed the binstar client, you can generate a token via the following command:
+
+<pre>
+  <code>
+  binstar auth --create --name MyTokenNameHere --scopes 'repos conda:download'
+  </code>
+</pre>
+
+This will generate a random, alphanumeric token string.  Any binstar user to whom you distribute this token will be able to download any of your private conda repositories, of both the user and collection type.   To use the token, simply issue the following command:
+
+<pre>
+  <code>
+  conda config --add channels https://conda.binstar.org/t/<strong>TokenValue</strong>/
+  </code>
+</pre>
+
+### Reviewing Tokens
+
+You can review all tokens generated with your binstar account from the command line:
+<pre>
+  <code>
+    binstar auth --list
+  </code>
+</pre>
+
+Or in your [user settings](https://binstar.org/settings/access) on [http://binstar.org](http://binstar.org).  
+
+Please note: although you can review tokens from the binstar client, for security reasons you can only view the actual token value by logging into your binstar.org account.  
+
+### Revoking Tokens
+
+You can revoke a token at any time from your [user settings](https://binstar.org/settings/access).
+
+
+### Additional Configuration Options
+<dl class="switches">
+  <dt>-o</dt>
+  <dd>Set the token owner (must be an organization).  <strong>Note:</strong>You must have administrative rights to an organization in order to use this option.</dd>
+  <dt>-s</dt>
+  <dd>Scopes for token. For example if you want to limit this token to conda downloads only you would use --scopes "repo conda:download".  For a full list of scoping options, use "binstar auth --list-scopes"</dd>
+  <dt>-w</dt>
+  <dd>Create a shorter token.  <strong>Note:</strong> Default behavior is a longform (stronger) token.</dd>
+  <dt></dt>
+  <dd></dd>
+</dl>
+
+Use the binstar auth -h option for additional configuration information.
+
+{% endblock %}

@@ -50,6 +50,8 @@ context:
               submenu :
                 - title : Command line client
                   url : "build_cli.html"
+                - title : Token Generation
+                  url : "token_gen.html"
                 - title : Build Configuration
                   url : "build_config.html"
                 - title : Continuous Integration
