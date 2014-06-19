@@ -131,8 +131,12 @@
   color: #274d95;
   border-bottom: 5px solid #274d95;
 }
-
-
+pre {
+  margin: 20px 0;
+  }
+pre.short {  
+  width: 70%;
+}
 dl.switches {
     padding: 10px;
     outline: 1px solid #000;

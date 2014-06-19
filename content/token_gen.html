@@ -6,21 +6,10 @@ title: Token Generation Process
 {% block main %}
 <a id="token_gen"></a>
 
-## Getting Started
-
-<div id="cli-installer" class="alert alert-danger">
-Binstar build is currently in development, you <strong>must</strong> install the binstar client from GitHub.
-   <hr>
-<pre><code>conda config --add channels binstar
-conda install binstar-build
-binstar config --set url http://api.alpha.binstar.org
-</code></pre>
-
-</div>
 
 ### Why Tokens?
 
-Tokens can be used to make specific private repositories, collections or packages available to other users.  You have total control over the scope of access.  
+Tokens can be used to make specific private repositories, collections or packages available to other users.  Additionally, the degree of access a token grants is completely configurable at the time of generation.
 
 
 ### How To Generate a Token
@@ -29,15 +18,17 @@ At present, tokens can only be generated using the binstar client.  You can find
 
 Once you have successfully installed the binstar client, you can generate a token via the following command:
 
-<pre>
+<pre class="short">
   <code>
   binstar auth --create --name MyTokenNameHere --scopes 'repos conda:download'
   </code>
 </pre>
 
-This will generate a random, alphanumeric token string.  Any binstar user to whom you distribute this token will be able to download any of your private conda repositories, of both the user and collection type.   To use the token, simply issue the following command:
+This will generate a random, alphanumeric token string, which you can then distribute to fellow binstar users.  
 
-<pre>
+This sample token provides access to download any of your private conda repositories.   To use the token, simply issue the following command:
+
+<pre class="short">
   <code>
   conda config --add channels https://conda.binstar.org/t/<strong>TokenValue</strong>/
   </code>
@@ -46,7 +37,7 @@ This will generate a random, alphanumeric token string.  Any binstar user to who
 ### Reviewing Tokens
 
 You can review all tokens generated with your binstar account from the command line:
-<pre>
+<pre class="short">
   <code>
     binstar auth --list
   </code>
@@ -54,7 +45,7 @@ You can review all tokens generated with your binstar account from the command l
 
 Or in your [user settings](https://binstar.org/settings/access) on [http://binstar.org](http://binstar.org).  
 
-Please note: although you can review tokens from the binstar client, for security reasons you can only view the actual token value by logging into your binstar.org account.  
+Please note: although you can review tokens from the binstar client, for security reasons you can only view the actual token value from your binstar.org account.  
 
 ### Revoking Tokens
 
