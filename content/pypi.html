@@ -11,12 +11,12 @@ subtitle: ''
 The basic way to install a package from binstar is using pip:
 
 ```
-pip install --index-url pypi.binstar.org/REGISTRY-PATH/simple PACKAGE
+pip install --index-url pypi.binstar.org/REPOSITORY-PATH/simple PACKAGE
 ```
 
-Where **REGISTRY-PATH** may be one of the following:
+Where **REPOSITORY-PATH** may be one of the following:
 
-1.  A **username**, this allows installation of packages from a user registry:
+1.  A **username**, this allows installation of packages from a user repository:
     `pip install --index-url pypi.binstar.org/USER/simple PACKAGE`
     <br><br>
     <div class="alert">**Note:**<br> the **pypi** user contains a full up to date mirror of [pypi.python.org](pypi.python.org)
@@ -37,7 +37,7 @@ Where **REGISTRY-PATH** may be one of the following:
 
 ## Installing Private Packages
 
-All urls (except for the public registry) can be prefixed with `/t/$TOKEN` to access private packages.
+All urls (except for the public repository) can be prefixed with `/t/$TOKEN` to access private packages.
 
     TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
     pip install --index-url pypi.binstar.org/t/$TOKEN/USER/simple PACKAGE
