@@ -12,10 +12,8 @@ subtitle: 'Command line interface'
 <div class="alert alert-danger">
 Binstar build is currently in development, you <strong>must</strong> install the binstar client from GitHub.
    <hr>
-<pre><code>git clone -b feature/build https://github.com/Binstar/binstar_client
-cd binstar_client
-python setup.py install
-
+<pre><code>conda config --add channels binstar
+conda install binstar-build
 binstar config --set url http://api.alpha.binstar.org
 </code></pre>
 
@@ -45,12 +43,9 @@ See the [.binstar.yml](build_config.html) documentation for more details. Here i
     package: conda_build_test
     platform:
       - linux-64
-      - linux-32
     script:
       - conda build .
-
-      - mkdir dist
-      - cp `conda build . --output` dist/
+    build_targets: conda
 
 ### Step 3: Submit your build
 
@@ -93,7 +88,11 @@ The `-f` option behaves exactly like the linux `tail -f` command
 
 ## Look at the binstar-build --help option
 
-'nuf said
+Go ahead
+
+## Enable continuous integration
+
+[See the CI docs](continuous_integration.html)
 
 {% endblock %}
 

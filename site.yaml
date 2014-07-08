@@ -19,7 +19,7 @@ context:
             - title: Getting Started
               submenu :
                 - title : Welcome to Binstar!
-                  url : gettingstarted.html    
+                  url : gettingstarted.html
             - title : Frequently Asked Questions
               submenu :
                 - title : FAQ
@@ -29,29 +29,37 @@ context:
                 - title : Overview
                   url : index.html
                 - title : Installing Packages
-                  url : access.html             
+                  url : access.html
                 - title : Authoring Packages
-                  url : author.html             
-                - title : Binstar Collections
-                  url : collections.html
+                  url : author.html
                 - title : Binstar Channels
                   url : channels.html
             - title : Conda Packaging
               submenu :
                 - title : Authoring Conda Packages
-                  url : "conda.html#Authoring" 
+                  url : "conda.html#Authoring"
                 - title : Installing Conda Packages
-                  url : "conda.html#Installing"               
+                  url : "conda.html#Installing"
             - title : PyPI Packaging
               submenu :
                 - title : Authoring PyPI Packages
-                  url : "pypi.html#Authoring" 
+                  url : "pypi.html#Authoring"
                 - title : Installing PyPI Packages
-                  url : "pypi.html#Installing"          
+                  url : "pypi.html#Installing"
+            - title: Binstar Build
+              submenu :
+                - title : Command line client
+                  url : "build_cli.html"
+                - title : Token Generation
+                  url : "token_gen.html"
+                - title : Build Configuration
+                  url : "build_config.html"
+                - title : Continuous Integration
+                  url : "continuous_integration.html"
 
-                   
-                  
+
+
 simple_copy:
-    - media/js/*    
+    - media/js/*
     - media/js/libs*
-    - media/css/*    
+    - media/css/*
