@@ -45,7 +45,7 @@ binstar auth -h
 1. What methods are available to access my [binstar.org](https://binstar.org) account?
 
 Firstly, You can use web browser and offered [binstar.org graphical interface](https://binstar.org/account/login).
-The remaining options are allowed through *binstar* tool.
+The remaining options are allowed through the *binstar* tool.
 This tool is delivered in [Anaconda](https://store.continuum.io/cshop/anaconda/)
 and its code is available on [github.com](https://github.com/binstar/binstar_client).
 
@@ -82,7 +82,7 @@ The *token* is 24th (stronger version) or 13th (weaker version) length of charac
 It allows You to perform any actions (according to *scope* of the *token*) on your [binstar.org](https://binstar.org) account without any password prompt.
 
 
-**Generally all of your *tokens* should be kept private (theirs content shouldn't be known to anybody except You).**
+**Remember, treat your tokens like passwords.**
 
 1. What is the *scope* of *token*?
 
@@ -92,18 +92,18 @@ According to the *scope* of *token* You are allowed or disallowed to perform spe
 1. How can I list all of available *scopes* for *tokens* which I can use?
 
 ```
-binstar auth -x
+binstar auth --list-scopes
 ```
 
 1. How can I obtain my first *token* called 'fullaccess', with *scope* granting full permissions and save it for example in /home/irritum/.binstar.token file?
 
 ```
-binstar auth -c -n fullaccess > /home/irritum/.binstar.token
+binstar auth --create --name fullaccess > /home/irritum/.binstar.token
 ```
 or with explicitly given *scope* which grants full access permission:
 
 ```
-binstar auth -c -n fullaccess -s 'all' > /home/irritum/.binstar.token
+binstar auth --create --name fullaccess -s 'all' > /home/irritum/.binstar.token
 ```
 
 In both cases You will be asked for username and password of your [binstar.org](https://binstar.org) account.
@@ -136,7 +136,7 @@ The variable name (in this example: BINSTAR_TOKEN) is free to choose.
 1. How can I easy obtain another one of *token* which has limited *scope* of access (e.g. to perform all operations BUT only on *conda* repositories)?
 
 ```
-binstar -t ${BINSTAR_TOKEN} auth -c -n condafullaccess -s conda > /home/irritum/.binstar.token.condafullaccess
+binstar -t ${BINSTAR_TOKEN} auth --create --name condafullaccess -s conda > /home/irritum/.binstar.token.condafullaccess
 ```
 
 You will be asked for password of your [binstar.org](https://binstar.org) account.
@@ -155,7 +155,7 @@ binstar -t ${BINSTAR_TOKEN} upload /tmp/some_private_conda_package.tbz2
 1. How can I get list of all of my *tokens*?
 
 ```
-binstar -t ${BINSTAR_TOKEN} auth -l
+binstar -t ${BINSTAR_TOKEN} auth --list
 ```
 
 The column 'Application' contains name of the *token*. This name was applied during the *token* creation process.
@@ -164,7 +164,7 @@ If the name was ommitted, then default value will be used istead (currently this
 1. How can I remove one of my *tokens* (e.g. the ID of *token* to remove is 536caa38e1dad11ee9d4c8a6)?
 
 ```
-binstar -t ${BINSTAR_TOKEN} auth -r 536caa38e1dad11ee9d4c8a6
+binstar -t ${BINSTAR_TOKEN} auth --remove 536caa38e1dad11ee9d4c8a6
 ```
 
 1. What I should do if I get lost of my *token*?
@@ -189,7 +189,7 @@ binstar -t ${BINSTAR_TOKEN} whoami
 1. How can I obtain list of all of *binstar* configuration files which can be adjusted?
 
 ```
-binstar config -f
+binstar config --files
 ```
 
 1. How can I obtain list of all of my *binstar* configuration variables which can be adjusted?
