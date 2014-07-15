@@ -4,211 +4,199 @@ subtitle: ''
 ---
 {% extends "columns.j2" %}
 
+<div class="faq">
 {% block main %}
 
 <a id="faq"></a>
-### FAQ
 
-1. [General questions](#general-questions).
-1. [Getting help](#getting-help).
-1. [Authentication & authorization](#auth).
-1. [Searching & info](#info).
-1. [Customization](#customization).
-1. [Packages](#packages).
-1. [Collections](#collections).
+1. [General Questions](#general-questions)
+1. [Getting Started](#getting-started)
+1. [Accounts](#accounts)
+1. [Packages](#packages)
+1. [Channels](#channels)
+1. [Tokens](#tokens)
+1. [Using the Binstar Client](#using-binstar-client)
+1. [How Do I...](#how-do-i)
+1. [Finding Packages](#finding-packages)
 
 <a id='general-questions'></a>
-#### General questions
+### General Questions
 
-1. What are the terms of service for [binstar.org](https://binstar.org)?
 
-Please read [this](https://binstar.org/about/legal/terms).
+#####Q. What is Binstar?
 
-<a id='getting-help'></a>
-#### Getting help
+A. Binstar is a package management service.  You can read more [here](/index.html).
 
-1. How can I see what *binstar* commands are supported?
+#####Q. How much does it cost?
+
+A. Binstar is always free for public packages. For information on storage size limits, and on upgrading your account for benefits like private packaging see our [plans and pricing](https://binstar.org/about/plans/). 
+
+#####Q. What is Continuum Analytics?
+
+A. Continuum Analytics is a software development and consulting company based in Austin, TX.  We are committed to the open source community.  You can find out more about us [here](http://continuum.io/about-continuum). 
+
+#####Q. What are Binstar's terms of service? 
+
+A. You can read our terms of service [here](https://binstar.org/about/legal/terms). For any additional questions, please [email us](mailto:support@binstar.org).
+
+
+<a id='getting-started'></a>
+### Getting Started
+
+
+#####Q. How do I get started with Binstar?
+
+A. First, you will need to sign up for a Binstar account [here](https://binstar.org/).  Then download and install the Binstar client using these [instructions](/build_cli.html).  Although you can perform many task from the website, the Binstar client is required to build and upload packages. 
+
+
+
+<a id='accounts'></a>
+###Accounts
+
+#####Q. What kind of account do I have?
+
+A. By default your account is a personal, free account.  This means all packages you upload to Binstar will be public, and you will be the only person with administrative access to your account.
+
+#####Q. How can I upgrade my account? 
+
+A. You can upgrade to a paid account [here](https://binstar.org/settings/billing).  This will allow you to create private packages, as well as increase your storage limit.
+
+#####Q. What is an organization? How is it different from an individual account?
+
+A. An organization is a more robust account, which allows multiple individual users to administer packages, and more granular control of package access by other users.  
+
+<a id='packages'></a>
+###Packages
+
+
+#####Q. What kind of packages does Binstar support?
+
+Binstar supports conda and PyPI packages.
+
+
+#####Q. Who can find and install my packages?
+A. By default, all of your packages are public, and after you upload them to Binstar anyone can search for and download them.  To enable private package uploading, you can [purchase a paid account](https://binstar.org/about/plans/).  For information on searching for public packages, please go [here](/faq.html#finding-packages).
+
+#####Q. How do I build and upload a package?
+A. Please go [here](/faq.html#how-do-i) for instructions on package processing and workflow.
+
+<a id='channels'></a>
+###Channels
+
+#####Q. What is a channel?
+
+A. Channels are one way Binstar helps you control who can access your packages.  When you tag a package as belonging to a specific channel, only users who are listening to that channel will see the package and be able to install it.  
+
+By default, all packages you upload are sent to your `main` channel.  However, you could also have a `dev` channel that only your internal development team can access.  You can upload a package to the `dev` channel, allow other internal users to test it, and then promote it to the `main` channel when it is ready to be released.  You can find more information on channels [here](/channels.html).
+
+
+<a id='tokens'></a>
+### Tokens
+
+#####Q. What is a token?
+A. A token is the mechanism by which you authenticate to the Binstar client.  In addition, you can generate new tokens to give other users specifically scoped access to packages and collections.  You can find more information on tokens [here](/token_gen.html).
+
+<a id='using-binstar-client'></a>
+### Using the Binstar Client
+
+#####Q. How do I install the Binstar Client?
+A. You can find installation and setup instructions [here](/build_cli.html).
+
+#####Q. What are my login credentials for the Binstar client?
+
+A. Your credentials for the Binstar client will match those you created on [https://binstar.org](https://binstar.org).
+
+
+#####Q. How do I log into the Binstar client? 
+
+A. Once you have configured the Binstar client, simply execute the following command from the shell: 
+```
+binstar login
+```
+
+
+
+#####Q. How can I see what Binstar commands are supported?
 
 ```
-binstar -h
+binstar -h 
 ```
 
-2. How can I get help for X *binstar* command (e.g. *auth*)?
+#####Q. How can I find out more about a particular Binstar command (e.g. *auth*)?
 
 ```
 binstar auth -h
 ```
 
-<a id='auth'></a>
-#### Authentication & authorization
-
-1. What methods are available to access my [binstar.org](https://binstar.org) account?
-
-Firstly, You can use web browser and offered [binstar.org graphical interface](https://binstar.org/account/login).
-The remaining options are allowed through the *binstar* tool.
-This tool is delivered in [Anaconda](https://store.continuum.io/cshop/anaconda/)
-and its code is available on [github.com](https://github.com/binstar/binstar_client).
-
-
-By using it, You can unlock full session to your account. The tool allows You to perform almost all actions
-without any password prompt and without necessity of specifying any *token* in command line.
-The second way is to use *token* - mostly to perform a specific action (but it's not limited to this).
-Last mentioned method requires to always specify appropriate *token* in command line to successfully perform the requested action.
-
-1. How can I open full session to [binstar.org](https://binstar.org)?
-
-By signing into your account, just like that:
-```
-binstar login
-```
-
-The above command  will ask for your username and password.
-Then You will be able to perform any actions on your account, generally without password prompt
-(creation of a new token may need enter the password once again due to security reason).
-
-1. How can I close full session to my [binstar.org](https://binstar.org) account?
-
-It's easy, just type:
-
-```
-binstar logout
-```
-
-After that You won't be able to perform any actions on your account.
-
-1. What is the *token* and why do I may need a one?
-
-The *token* is 24th (stronger version) or 13th (weaker version) length of characters authorization string.
-It allows You to perform any actions (according to *scope* of the *token*) on your [binstar.org](https://binstar.org) account without any password prompt.
-
-
-**Remember, treat your tokens like passwords.**
-
-1. What is the *scope* of *token*?
-
-The *scope* determines access level to your account on [binstar.org](https://binstar.org).
-According to the *scope* of *token* You are allowed or disallowed to perform specific actions.
-
-1. How can I list all of available *scopes* for *tokens* which I can use?
-
-```
-binstar auth --list-scopes
-```
-
-1. How can I obtain my first *token* called 'fullaccess', with *scope* granting full permissions and save it for example in /home/irritum/.binstar.token file?
-
-```
-binstar auth --create --name fullaccess > /home/irritum/.binstar.token
-```
-or with explicitly given *scope* which grants full access permission:
-
-```
-binstar auth --create --name fullaccess -s 'all' > /home/irritum/.binstar.token
-```
-
-In both cases You will be asked for username and password of your [binstar.org](https://binstar.org) account.
-After successful operation your *token* will be saved into requested /home/irritum/.binstar.token file.
-You can examine the content of this file by typing (be sure that nobody can see it's value):
-
-```
-cat /home/irritum/.binstar.token
-```
-
-
-**Remember** to appropriately change permissions of above *token* file, like:
-```
-chmod 0600 /home/irritum/.binstar.token
-
-1. How can I use my *token* which was saved in some file (e.g. /home/irritum/.binstar.token)?
-
-```
-export BINSTAR_TOKEN="$(</home/irritum/.binstar.token)"
-```
-
-And now You should prefix any of *binstar* subcommand which is supposed to use the *token*, with '-t ${BINSTAR_TOKEN}', like:
-
-```
-binstar -t ${BINSTAR_TOKEN} subcommand
-```
-
-The variable name (in this example: BINSTAR_TOKEN) is free to choose.
-
-1. How can I easy obtain another one of *token* which has limited *scope* of access (e.g. to perform all operations BUT only on *conda* repositories)?
-
-```
-binstar -t ${BINSTAR_TOKEN} auth --create --name condafullaccess -s conda > /home/irritum/.binstar.token.condafullaccess
-```
-
-You will be asked for password of your [binstar.org](https://binstar.org) account.
-To use just generated *token*, please type:
-
-```
-export BINSTAR_TOKEN="$(</home/irritum/.binstar.token.condafullaccess)"
-
-```
-
-Now You should be able to perform any actions according to the *scope* of this new *token* (e.g. upload personal *conda* package):
-```
-binstar -t ${BINSTAR_TOKEN} upload /tmp/some_private_conda_package.tbz2
-```
-
-1. How can I get list of all of my *tokens*?
-
-```
-binstar -t ${BINSTAR_TOKEN} auth --list
-```
-
-The column 'Application' contains name of the *token*. This name was applied during the *token* creation process.
-If the name was ommitted, then default value will be used istead (currently this is: binstar_token:hostname.domainname).
-
-1. How can I remove one of my *tokens* (e.g. the ID of *token* to remove is 536caa38e1dad11ee9d4c8a6)?
-
-```
-binstar -t ${BINSTAR_TOKEN} auth --remove 536caa38e1dad11ee9d4c8a6
-```
-
-1. What I should do if I get lost of my *token*?
-
-Currently there is no action to restore value of lost *token*.
-So, You should remove the *token* from your auth list and then generate the new *token* and save it's content to file one more again.
-
-1. How can I check my binstar personality?
-
-```
-binstar -t ${BINSTAR_TOKEN} whoami
-```
-
-<a id='info'></a>
-#### Searching & info
-
-1. ?
-
-<a id='customization'></a>
-#### Customization
-
-1. How can I obtain list of all of *binstar* configuration files which can be adjusted?
+#####Q. How can I see a list of all available Binstar configuration files?
 
 ```
 binstar config --files
 ```
 
-1. How can I obtain list of all of my *binstar* configuration variables which can be adjusted?
+#####Q. How can I see a list of all of my Binstar configuration variables?
 
 ```
 binstar config --show
 ```
 
-<a id='packages'></a>
-#### Packages
+#####Q. Where can I find more information about the Binstar client?
 
-1. What kind of packages [binstar.org](https://binstar.org) supports?
+A. Please visit the [Binstar client](/build_cli.html) section of the documentation.
 
-There are mainly two types of packages. The *conda* packages and the *pypi* packages.
 
-<a id='collections'></a>
-#### Collections
+<a id='how-do-i'></a>
+###How Do I...
 
-1. ?
+#####Q. How do I build a package?
+
+A. Please reference [this guide](/build_cli.html) for step-by-step instructions on building a package.
+
+#####Q. I have built a package using 'conda build', how do I test the package before uploading to Binstar?
+
+A. Specify the '--use-local' option, e.g.  `conda create --use-local -n test ....`
+
+
+#####Q. How do I upload a package?
+```
+binstar upload package_name
+```
+
+For a complete list of upload options, including specifying a package's channel, availability to other users, and metadata, use	 `binstar upload -h`.
+
+#####Q. How do I install a package from Binstar?
+
+A. To install a conda package, execute the following command:
+```
+conda install --channel https://conda.binstar.org/:REPOSITORY-PATH PACKAGE
+```
+
+Where REPOSITORY-PATH PACKAGE is the path to the package on binstar.org. 
+For example, to install [this package](https://binstar.org/auto/pyxmlsecurity):
+
+```
+conda install -c https://conda.binstar.org/auto pyxmlsecurity
+```
+
+To install this PyPI package, execute the following command:
+
+```
+pip install --index-url pypi.binstar.org/REPOSITORY-PATH/simple PACKAGE
+```
+
+For example, to install [this package](https://binstar.org/pypi/lxml):
+
+```
+pip install -i https://pypi.binstar.org/pypi/simple lxml
+```
+
+You can find additional information about installing conda packages [here](/conda.html#Installing), and additional information about installing PyPI packages [here](/pypi.html#Installing). 
+
+<a id='finding-packages'></a>
+### Finding Packages
+
+#####Q. How do I find a package on Binstar?
+A. You can search [binstar.org](https://binstar.org) for packages by username or package name.  Additionally, you can filter searches to specify only conda or PyPI packages, and you can sort results by upvotes or number of downloads.
 
 {% endblock main %}
-
+</div>
