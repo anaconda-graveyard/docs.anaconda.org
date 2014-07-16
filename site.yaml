@@ -18,7 +18,9 @@ context:
         menu:
             - title: Getting Started
               submenu :
-                - title : Welcome to Binstar!
+                - title : What Is Binstar?
+                  url : index.html
+                - title : What Can You Do With Binstar?
                   url : gettingstarted.html
             - title : Frequently Asked Questions
               submenu :
