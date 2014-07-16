@@ -36,6 +36,8 @@ context:
                   url : channels.html
             - title : Conda Packaging
               submenu :
+                - title : Token Generation
+                  url : "token_gen.html"
                 - title : Authoring Conda Packages
                   url : "conda.html#Authoring"
                 - title : Installing Conda Packages
@@ -50,8 +52,6 @@ context:
               submenu :
                 - title : Command line client
                   url : "build_cli.html"
-                - title : Token Generation
-                  url : "token_gen.html"
                 - title : Build Configuration
                   url : "build_config.html"
                 - title : Continuous Integration
