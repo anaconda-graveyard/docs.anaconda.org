@@ -4,10 +4,199 @@ subtitle: ''
 ---
 {% extends "columns.j2" %}
 
+<div class="faq">
 {% block main %}
 
 <a id="faq"></a>
-###FAQ
+
+1. [General Questions](#general-questions)
+1. [Getting Started](#getting-started)
+1. [Accounts](#accounts)
+1. [Packages](#packages)
+1. [Channels](#channels)
+1. [Tokens](#tokens)
+1. [Using the Binstar client](#using-binstar-client)
+1. [How Do I...](#how-do-i)
+1. [Finding Packages](#finding-packages)
+
+<a id='general-questions'></a>
+### General Questions
+
+
+#####Q. What is Binstar?
+
+A. Binstar is a package management service.  You can read more [here](/index.html).
+
+#####Q. How much does it cost?
+
+A. Binstar is always free for public packages. For information on storage size limits, and on upgrading your account for benefits like private packaging see our [plans and pricing](https://binstar.org/about/plans/). 
+
+#####Q. What is Continuum Analytics?
+
+A. Continuum Analytics is a software development and consulting company based in Austin, TX.  We are committed to the open source community.  You can find out more about us [here](http://continuum.io/about-continuum). 
+
+#####Q. What are Binstar's terms of service? 
+
+A. You can read our terms of service [here](https://binstar.org/about/legal/terms). For any additional questions, please [email us](mailto:support@binstar.org).
+
+
+<a id='getting-started'></a>
+### Getting Started
+
+
+#####Q. How do I get started with Binstar?
+
+A. First, you will need to sign up for a Binstar account [here](https://binstar.org/).  Then install the [Binstar client](https://github.com/binstar/binstar_client), available via conda and pip.  Although you can perform many task from the website, the Binstar client is required to build and upload packages. 
+
+
+
+<a id='accounts'></a>
+###Accounts
+
+#####Q. What kind of account do I have?
+
+A. By default your account is a personal, free account.  This means all packages you upload to Binstar will be public, and you will be the only person with administrative access to your account.
+
+#####Q. How can I upgrade my account? 
+
+A. You can upgrade to a paid account [here](https://binstar.org/settings/billing).  This will allow you to create private packages, as well as increase your storage limit.
+
+#####Q. What is an organization? How is it different from an individual account?
+
+A. An organization is a more robust account, which allows multiple individual users to administer packages, and more granular control of package access by other users.  
+
+<a id='packages'></a>
+###Packages
+
+
+#####Q. What kind of packages does Binstar support?
+
+Binstar supports conda and PyPI packages.
+
+
+#####Q. Who can find and install my packages?
+A. By default, all of your packages are public, and after you upload them to Binstar anyone can search for and download them.  To enable private package uploading, you can [purchase a paid account](https://binstar.org/about/plans/).  For information on searching for public packages, please go [here](/faq.html#finding-packages).
+
+#####Q. How do I build and upload a package?
+A. Please go [here](/faq.html#how-do-i) for instructions on package processing and workflow.
+
+<a id='channels'></a>
+###Channels
+
+#####Q. What is a channel?
+
+A. Channels are one way Binstar helps you control who can access your packages.  When you tag a package as belonging to a specific channel, only users who are listening to that channel will see the package and be able to install it.  
+
+By default, all packages you upload are sent to your `main` channel.  However, you could also have a `dev` channel that only your internal development team can access.  You can upload a package to the `dev` channel, allow other internal users to test it, and then promote it to the `main` channel when it is ready to be released.  You can find more information on channels [here](/channels.html).
+
+
+<a id='tokens'></a>
+### Tokens
+
+#####Q. What is a token?
+A. A token is the mechanism by which you authenticate to the Binstar client.  In addition, you can generate new tokens to give other users specifically scoped access to packages and collections.  You can find more information on tokens [here](/token_gen.html).
+
+<a id='using-binstar-client'></a>
+### Using the Binstar client
+
+#####Q. How do I install the Binstar client?
+A. The Binstar client is available via conda or pip.  You can find installation and setup instructions [here](https://github.com/binstar/binstar_client).
+
+#####Q. What are my login credentials for the Binstar client?
+
+A. Your credentials for the Binstar client will match those you created on [https://binstar.org](https://binstar.org).
+
+
+#####Q. How do I log into the Binstar client? 
+
+A. Once you have configured the Binstar client, simply execute the following command from the shell: 
+```
+binstar login
+```
+
+
+
+#####Q. How can I see what Binstar commands are supported?
+
+```
+binstar -h 
+```
+
+#####Q. How can I find out more about a particular Binstar command (e.g. *auth*)?
+
+```
+binstar auth -h
+```
+
+#####Q. How can I see a list of all available Binstar configuration files?
+
+```
+binstar config --files
+```
+
+#####Q. How can I see a list of all of my Binstar configuration variables?
+
+```
+binstar config --show
+```
+
+#####Q. Where can I find more information about the Binstar client?
+
+A. If you have a question which you cannot answer using Binstar help, please [email us](mailto:support@binstar.org).
+
+
+<a id='how-do-i'></a>
+###How Do I...
+
+#####Q. How do I build a package?
+
+A. Please reference [this guide](/build_cli.html) for step-by-step instructions on building a package.
+
+#####Q. I have built a package using 'conda build', how do I test the package before uploading to Binstar?
+
+A. Specify the '--use-local' option, e.g.  `conda create --use-local -n test ....`
+
+
+#####Q. How do I upload a package?
+```
+binstar upload package_name
+```
+
+For a complete list of upload options, including specifying a package's channel, availability to other users, and metadata, use	 `binstar upload -h`.
+
+#####Q. How do I install a package from Binstar?
+
+A. To install a conda package, execute the following command:
+```
+conda install --channel https://conda.binstar.org/:REPOSITORY-PATH PACKAGE
+```
+
+Where REPOSITORY-PATH PACKAGE is the path to the package on binstar.org. 
+For example, to install [this package](https://binstar.org/auto/pyxmlsecurity):
+
+```
+conda install -c https://conda.binstar.org/auto pyxmlsecurity
+```
+
+To install this PyPI package, execute the following command:
+
+```
+pip install --index-url pypi.binstar.org/REPOSITORY-PATH/simple PACKAGE
+```
+
+For example, to install [this package](https://binstar.org/pypi/lxml):
+
+```
+pip install -i https://pypi.binstar.org/pypi/simple lxml
+```
+
+You can find additional information about installing conda packages [here](/conda.html#Installing), and additional information about installing PyPI packages [here](/pypi.html#Installing). 
+
+<a id='finding-packages'></a>
+### Finding Packages
+
+#####Q. How do I find a package on Binstar?
+A. You can search [binstar.org](https://binstar.org) for packages by username or package name.  Additionally, you can filter searches to specify only conda or PyPI packages, and you can sort results by upvotes or number of downloads.
 
 {% endblock main %}
-
+</div>
