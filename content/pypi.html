@@ -70,5 +70,32 @@ See also the [official pip installer documentation](http://www.pip-installer.org
 
 All packages you author must go to a user account. To create a package go to [binstar.org/new](https://binstar.org/new)
 
+First, create a *recipe* directory by going to the command line and running
+
+    
+    conda skeleton pypi brewer2mpl
+    
+
+You will be asked which source version you would prefer:
+    
+    
+    More than one source version is available for brewer2mpl:
+    0: https://pypi.python.org/packages/source/b/brewer2mpl/brewer2mpl-1.4.tar.gz (19 KB)
+    1: https://pypi.python.org/packages/source/b/brewer2mpl/brewer2mpl-1.4.zip (22 KB)
+    Which version should I use?
+    
+
+Choose the tarball (*0* in the example above)
+
+This will create a recipe directory (which contains a **meta.yaml**, **build.sh** and **build.bat** necessary to build the file with *conda build*)
+
+From outside the recipe directory, run
+    
+    
+    conda build <recipe dir>  
+    
+
+Now your package is available for installation.
+
 See also [authoring packages](author.html) for a general overview.
 {%endblock%}

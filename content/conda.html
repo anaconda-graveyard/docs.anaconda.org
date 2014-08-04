@@ -47,5 +47,92 @@ conda install --channel https://conda.binstar.org/t/$TOKEN/USER PACKAGE
 <a id="Authoring"></a>
 ## Authoring Conda packages
 
+Choose a project repository, for example, *ggplot*
 
+    https://github.com/yhat/ggplot.git
+
+Create a *recipe* directory.  Inside, create a file called **meta.yaml** that has this information:
+
+   
+    package:
+      name: ggplot   
+      version: "0.5.9"
+
+    source:
+      git_url: https://github.com/yhat/ggplot.git
+
+    requirements:
+      build:
+        - python
+        - setuptools
+        - six
+        - pandas
+        - numpy
+        - matplotlib
+        - statsmodels
+        - brewer2mpl
+        - patsy
+        - scipy
+
+      run:
+        - matplotlib
+        - statsmodels
+        - scipy
+        - patsy
+        - brewer2mpl
+        - python
+        - six
+        - pandas
+        - numpy
+
+    test:
+      # Python imports
+      imports:
+        - ggplot
+
+    about:
+      home: https://github.com/yhat/ggplot
+      license: https://github.com/yhat/ggplot/blob/master/LICENSE
+
+**Note**:
+
+For more information on *meta.yaml package files* and conda's build framework, please reference the [conda build documentation](http://conda.pydata.org/docs/build.html).
+
+
+Next you need **build.sh** in this same directory
+
+
+    #!/bin/bash
+
+    $PYTHON setup.py install
+
+    # Add more build steps here, if they are necessary.
+
+    # See
+    # http://docs.continuum.io/conda/build.html
+    # for a list of environment variables that are set during the build process.
+
+
+And a **build.bat**
+
+
+    "%PYTHON%" setup.py install
+    if errorlevel 1 exit 1
+
+    :: Add more build steps here, if they are necessary.
+
+    :: See
+    :: http://docs.continuum.io/conda/build.html
+    :: for a list of environment variables that are set during the build process.
+
+
+From outside the recipe directory, run
+    
+    
+    conda build <recipe dir>  
+    
+
+Your package is now available for installation.
+
+See also [authoring packages](author.html) for a general overview.
 {%endblock%}
