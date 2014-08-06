@@ -59,6 +59,23 @@ context:
                 - title : Continuous Integration
                   url : "continuous_integration.html"
 
+        enterprise_menu:
+            - title: Binstar Onsite
+              submenu :
+                - title : About
+                  url : 'enterprise#install-mongodb'
+            - title: Installing
+              submenu :
+                - title : Install MongoDB
+                  url : 'enterprise/install.html#install-mongodb'
+            - title: Mirrors
+              submenu :
+                - title : Mirror pypi.python.org
+                  url : enterprise/pypi-mirror.html
+            - title: Binstar Client
+              submenu :
+                - title : Configure the binstar command line client
+                  url : enterprise/cli.html
 
 
 simple_copy:
