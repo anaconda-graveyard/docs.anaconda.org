@@ -36,8 +36,20 @@
     {% endblock analytics %}
   </head>
 
-  <body class="{{ resource.meta.id if resource.meta.id else resource.slug }} bs-docs-docs">
+  <body class="{{ resource.meta.id if resource.meta.id else resource.slug }} bs-docs-docs" style="padding-top: 50px;"> 
 
+    <div class="navbar navbar-fixed-top" style="position: absolute;">
+      <div class="navbar-inner">
+        <div class="container" style="width: auto; padding: 0 20px;">
+          <a class="brand" href="/">Binstar Docs</a>
+          <ul class="nav">
+            <li class="{{'' if enterprise_page else 'active'}}"><a href="/">Cloud</a></li>
+            <li class="{{'active' if enterprise_page else ''}}"><a href="/enterprise">Enterprise</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+            
     {% block body %}
 
     <div class="container-fluid" id="top">

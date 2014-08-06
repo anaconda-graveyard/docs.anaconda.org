@@ -1,5 +1,5 @@
 {# Columns template #}
-
+{% set enterprise_page = True %}
 {% extends "base.j2" %}
 
 {% block basecss %}
@@ -20,7 +20,7 @@
 <div class="row-fluid">
   <div class="bs-docs-sidebar" style="padding-top: 50px;">
     {% from "macros.j2" import render_side_bar with context %}
-    {{ render_side_bar(menu) }}
+    {{ render_side_bar(enterprise_menu) }}
   </div>
 
 

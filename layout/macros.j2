@@ -6,9 +6,8 @@
 </ul>
 {%- endmacro %}
 
-{% macro render_side_bar() -%}
+{% macro render_side_bar(menu) -%}
 <ul class="nav nav-list">
-<h3 class="bs-docs-sidenav-heading"><a href="/">Binstar Docs</a></h3>
 {% for menu_item in menu -%}
   {% if menu_item.submenu %}
   <li class="nav-header">{{ menu_item.title }}</li>
