@@ -36,10 +36,10 @@ context:
                   url : author.html
                 - title : Binstar Channels
                   url : channels.html
-            - title : Conda Packaging
-              submenu :
                 - title : Token Generation
                   url : "token_gen.html"
+            - title : Conda Packaging
+              submenu :
                 - title : Authoring Conda Packages
                   url : "conda.html#Authoring"
                 - title : Installing Conda Packages
