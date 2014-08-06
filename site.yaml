@@ -67,7 +67,7 @@ context:
             - title: Installing
               submenu :
                 - title : Install MongoDB
-                  url : 'enterprise/install#install-mongodb'
+                  url : 'enterprise/install.html#install-mongodb'
             - title: Mirrors
               submenu :
                 - title : Mirror pypi.python.org
