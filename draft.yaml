@@ -1,0 +1,4 @@
+extends: site.yaml
+mode: production
+media_url: /draft/media # URL where the media files are served from.
+base_url: /draft/
