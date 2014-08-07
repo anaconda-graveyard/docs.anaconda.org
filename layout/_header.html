@@ -1,0 +1,31 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{site.config.base_url}}">Binstar Docs</a>
+
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                {% macro top_nav_active(suffix) -%}
+                {{'active' if node.source.path.endswith(suffix) else ''}}
+                {%- endmacro %}
+
+                <li class="{{top_nav_active('content')}}">
+                    <a href="{{site.config.base_url}}">Cloud</a>
+                </li>
+                <li class="{{top_nav_active('build')}}">
+                    <a href="{{site.config.base_url}}build/">Build</a>
+                </li>
+                <li class="{{top_nav_active('onsite')}}">
+                    <a href="{{site.config.base_url}}onsite/">OnSite</a>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
