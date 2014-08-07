@@ -21,16 +21,15 @@ from fswrap import File, Folder
 import yaml
 
 
-def is_active(resource, menue_item):
+def is_active(resource, menu_item):
     try:
 
-        url = menue_item.get('url', None)
+        url = menu_item.get('url', None)
         if url is None:
             return False
         if url.endswith('/'):
             url += 'index.html'
         if resource.source.path.endswith(url):
-            print 'menue_item', menue_item
             return 'active'
     except:
             traceback.print_exc()
