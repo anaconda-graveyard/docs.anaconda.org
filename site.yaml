@@ -1,6 +1,7 @@
 mode: development # Use "hyde publish -c prod.yaml to have this automatically switch to production
 media_root: media # Relative path from content folder.
-media_url: media # URL where the media files are served from.
+media_url: /media # URL where the media files are served from.
+base_url: /
 
 plugins:
     - hyde.ext.plugins.meta.MetaPlugin
@@ -16,17 +17,6 @@ context:
             url: "https://binstar.org/"
         #google_analytics_id: UA-40918310-2
         home_url: index.html
-        menu:
-            - title: Getting Started
-              url : 'index.html'
-            - title : Frequently Asked Questions
-              url : 'faq.html'
-            - title : Conda Packaging
-              url : "conda.html"
-            - title : PyPI Packaging
-              url : "pypi.html"
-            - title : Token Generation
-              url : "token_gen.html"
 
 simple_copy:
     - media/js/*

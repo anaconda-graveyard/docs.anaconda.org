@@ -50,11 +50,18 @@
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active">
+                            {% macro top_nav_active(suffix) -%}
+                            {{'active' if node.source.path.endswith(suffix) else ''}}
+                            {%- endmacro %}
+
+                            <li class="{{top_nav_active('content')}}">
                                 <a href="/">Cloud</a>
                             </li>
-                            <li>
-                                <a href="/enterprise">Enterprise</a>
+                            <li class="{{top_nav_active('build')}}">
+                                <a href="/build">Build</a>
+                            </li>
+                            <li class="{{top_nav_active('onsite')}}">
+                                <a href="/onsite">OnSite</a>
                             </li>
                         </ul>
                     </div>
@@ -67,7 +74,7 @@
             <div class="col-xs-3 affix">
                 <nav class="bs-docs-sidebar">
                     {% from "macros.html" import render_side_bar with context %}
-                    {{ render_side_bar() }}
+                    {{ render_side_bar(node.meta.menu) }}
                 </nav>
             </div>
                 <!--Main Content -->
@@ -86,10 +93,7 @@
             src="{{ media_url('js/libs/bootstrap.js') }}"></script>
 
             <script>
-                console.log('hello');
                 $(function() {
-                    console.log('ready');
-
                     $('body').scrollspy({
                         target : '.bs-docs-sidebar',
                         offset : 0

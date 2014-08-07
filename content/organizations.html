@@ -6,17 +6,18 @@ include: true
 sub_items:
  - id: creating-an-organization
    title: Creating an organization
- - id: conda-authoring
-   title: Authoring Conda packages
+ - id: managing-an-organization
+   title: Managing an organization
 
 ---
 
-{% from "macros.j2" import section, subsection %}
+{% from "macros.html" import section, subsection %}
 {% extends "layout.html" %}
 
 {% block main %}
-<a id="Installing"></a>
+
 {% call section('creating-an-organization') %}
+## Creating An Organization
 [Create a new organization](https://binstar.org/new/organization)
 
 {% endcall %}
@@ -54,9 +55,13 @@ All organization owners have full access to the organization settings and all pa
 
 To give other users ownership navigate to the groups settings page and add them:
 
-![Org groups page](media/img/org-groups.png)
+<center>
+<img src="media/img/org-groups.png" alt="Org groups page" style="width: 500px;"/>
+</center>
 
-![Org owners group page](media/img/org-owners.png)
+<center>
+<img src="media/img/org-owners.png" alt="Org owners group page" style="width: 500px;"/>
+</center>
 
 ## Command line client
 

@@ -1,14 +1,24 @@
 ---
 title: Binstar Channels
 
-subtitle: ''
+sub_items:
+ - id: purpose
+   title: The purpose of binstar channels
+ - id: using-channels
+   title: Using Channels
+ - id: uploading
+   title: Uploading
+
 ---
+{% from "macros.html" import section, subsection %}
 {% extends "layout.html" %}
 
 {% block main %}
-<a id="access"></a>
+
+{% call section('purpose') %}
 
 ### Purpose
+
 
 Binstar channels allow you to upload files to your packages and control how they are accessed.
 
@@ -20,7 +30,7 @@ it to the `main` user channel for all users to install.
 
 
 The default channel that all files are put into is `main`. This can be used as a normal channel.
- 
+
 Typically when we are working with conda we would do this:
 
     conda config --add channels http://conda.binstar.org/USER
@@ -30,6 +40,8 @@ To use a binstar specific binstar channel you can do this:
 
     conda config --add channels http://conda.binstar.org/USER/channel/CHANNEL-NAME
 
+{% endcall%}
+{% call section('using-channels') %}
 
 ### Using Channels
 
@@ -53,6 +65,9 @@ Packages don't have to be in both channels.
 </p>
 
 
+{% endcall%}
+{% call section('uploading') %}
+
 ### Uploading
 
 To upload a file to a channel, make sure you are using the binstar client greater or equal to 0.5.1.
@@ -70,5 +85,7 @@ list of channels you want this file to be found in.
 <p class="text-center" style="text-align: center;">
     <img src="media/img/channels-modal.png" class="img-polaroid" width="500px" />
 </p>
+
+{% endcall %}
 
 {%endblock%}

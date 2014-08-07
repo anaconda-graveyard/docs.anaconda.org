@@ -1,14 +1,28 @@
 ---
 title: Installing Packages
 subtitle: ''
+sub_items:
+    - title : Namespaces
+      id: namespaces
+    - title : Channels
+      id: channels
+    - title : Private Packages
+      id: private-packages
+    - title : Create a Package
+      id: create
+    - title : Package Privacy
+      id: privacy
+    - title : Add a file
+      id: add-file
+    - title : Use Cases
+      id: use-cases
 ---
-{% extends "columns.j2" %}
+
+{% from "macros.html" import section, subsection %}
+{% extends "layout.html" %}
 
 {% block main %}
-<a id="access"></a>
-
-## Public Packages
-
+{% call section('namespaces') %}
 ### Namespaces
 
 Packages on binstar are contained withing namespaces.
@@ -25,6 +39,9 @@ You will use the corisponding subdomain designed to work with that package manag
      url [https://**conda**.binstar.org/binstar](https://conda.binstar.org/binstar)
  *  To install **pypi** packages from the binstar user, use the repoistory
     url [https://**pypi**.binstar.org/binstar](https://pypi.binstar.org/binstar)
+
+{% endcall %}
+{% call section('channels') %}
 
 ### Channels
 
@@ -47,11 +64,13 @@ For example the following repositories are equivalent:
  *  [https://**pypi**.binstar.org/binstar/channel/main](https://pypi.binstar.org/binstar/channel/main)
  *  [https://**pypi**.binstar.org/binstar](https://pypi.binstar.org/binstar)
 
+{% endcall %}
+{% call section('private-packages') %}
 
-## Private Packages
+### Private Packages
 
 Packages may also be private. This means that you must explicitly have access to view the package.
-To view and install private packages, you must identify yourself to binstar. 
+To view and install private packages, you must identify yourself to binstar.
 This is done with [access tokens](token_gen.html)
 Once you have generated a token (`<TOKEN>`), you may prefix any repository url with `/t/<TOKEN>`
 
@@ -62,10 +81,48 @@ Note this is just an example, you will not see any extra private packages in the
  *  To install **private pypi** packages from the binstar user, use the repoistory
     url [https://**pypi**.binstar.org/t/&lt;TOKEN&gt;/binstar](https://pypi.binstar.org/binstar)
 
+{% endcall %}
+{% call section('create') %}
+
+
+### Creating a new Package
+
+All packages you author must be created in a user account. To create a package go to [binstar.org/new](https://binstar.org/new)
+
+{% endcall %}
+{% call section('privacy') %}
+
+### Select the privacy access to your package:
+
+You will be prompted with three options:
+
+1. **Personal**: The new package will be hosted on your personal repository, this package will be viewable and installable by anonymous users.
+   Users must add your unique repository url to their package manager's configuration.
+1. **Private**: The new package will be hosted on your personal repository, however you control the list of authorized users that will be able to access or modify this package.
+
+
+{% endcall %}
+{% call section('add-file') %}
+
+### Add a file to your package
+
+To upload files to binstar it is recommended to use the [binstar command line client](https://github.com/binstar/binstar_client)
+
+Run the command:
+
+`binstar upload FILE-NAME`
+
+
+Your package can now be found on your profile page `https://binstar.org/<USERNAME>/<PACKAGE>`
+
+{% endcall %}
+{% call section('use-cases') %}
 
 ## Use Cases
 
  * [You want to install conda packages](conda.html#Author)
  * [You want to install PyPI packages](pypi.html#Author)
+
+{% endcall %}
 
 {%endblock%}
