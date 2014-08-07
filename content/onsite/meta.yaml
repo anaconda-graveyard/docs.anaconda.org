@@ -1,3 +1,7 @@
 menu:
-    - title: Getting Started
+    - title: Installing Binstar OnSite
       url : 'index.html'
+    - title: Client Configuration
+      url : 'configuration.html'
+    - title: Mirroring PyPI
+      url : 'pypi-mirror.html'

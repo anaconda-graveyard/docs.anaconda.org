@@ -1,0 +1,73 @@
+---
+title: Mirroring Pypi
+
+sub_items:
+ - id: mirror-command
+   title: The mirror command
+ - id: configure-pip
+   title: Configure pip
+ - id: whitelist
+   title: Whitelist packages to be mirrored
+ - id: blacklist
+   title: Blacklist packages to be banned
+---
+
+
+{% from "macros.html" import section, subsection %}
+{% extends "layout.html" %}
+
+{% block main %}
+
+{% call section('mirror-command') %}
+### The mirror command
+
+To create a pypi mirror run:
+
+    binstar-sync-pypi --whitelist /etc/binstar/pypi-packages.txt
+
+This will load all of the packages on pypi.python.org into the `~pypi` binstar user account.
+
+To verify that this is working you may open your browser to http://<onsite.binstar.addr>/pypi/~pypi
+
+
+{% endcall%}
+{% call section('configure-pip') %}
+### Configure pip
+
+To configure pip to use this new mirror you must edit your `~/.pip/pip.conf` file:
+
+    [global]
+    index-url = http://<onsite.binstar.ipaddress>:<port>/pypi/~pypi/simple
+
+{% endcall%}
+{% call section('whitelist') %}
+### Whitelist packages to be mirrored
+
+If the argument `--whitelist <filename>` is
+given, then the mirror will only sync packages that are contained
+in the whitelist file.
+
+The file must contain a newline seporated list of packages:
+
+    # This is a comment
+    Flask
+    itsdangerous
+    Jinja2
+    Werkzeug
+    twill
+
+<div class="alert alert-info">
+    PyPI is case sensitive. If you enter the package name wrong. the package will not exist.
+
+</div>
+
+{% endcall%}
+
+{% call section('blacklist') %}
+### Blacklist packages to be banned
+
+{% endcall%}
+
+
+{% endblock main %}
+
