@@ -1,16 +1,28 @@
 ---
 title: Token Generation Process
+sub_items:
+ - id: why-tokens
+   title: Why Tokens?
+ - id: how-to-generate-a-token
+   title: How To Generate a Token
+ - id: reviewing-tokens
+   title: Reviewing Tokens
+ - id: additional-configuration-options
+   title: Additional Configuration Options
 ---
-{% extends "columns.j2" %}
+
+{% from "macros.j2" import section, subsection %}
+{% extends "layout.html" %}
 
 {% block main %}
-<a id="token_gen"></a>
 
-
+{% call section('why-tokens') %}
 ### Why Tokens?
 
 Tokens can be used to make specific private repositories, collections or packages available to other users.  Additionally, the degree of access a token grants is completely configurable at the time of generation.
 
+{% endcall %}
+{% call section('how-to-generate-a-token') %}
 
 ### How To Generate a Token
 
@@ -31,7 +43,7 @@ Once you have successfully installed the binstar client, you can generate a toke
   </code>
 </pre>
 
-This will generate a random, alphanumeric token string, which you can then distribute to fellow binstar users.  
+This will generate a random, alphanumeric token string, which you can then distribute to fellow binstar users.
 
 This sample token provides access to download any of your private conda repositories.   To use the token, simply issue the following command:
 
@@ -40,6 +52,9 @@ This sample token provides access to download any of your private conda reposito
   conda config --add channels https://conda.binstar.org/t/<strong>TokenValue</strong>/
   </code>
 </pre>
+
+{% endcall %}
+{% call section('reviewing-tokens') %}
 
 ### Reviewing Tokens
 
@@ -50,14 +65,16 @@ You can review all tokens generated with your binstar account from the command l
   </code>
 </pre>
 
-Or in your [user settings](https://binstar.org/settings/access) on [http://binstar.org](http://binstar.org).  
+Or in your [user settings](https://binstar.org/settings/access) on [http://binstar.org](http://binstar.org).
 
-Please note: although you can review tokens from the binstar client, for security reasons you can only view the actual token value from your binstar.org account.  
+Please note: although you can review tokens from the binstar client, for security reasons you can only view the actual token value from your binstar.org account.
 
 ### Revoking Tokens
 
 You can revoke a token at any time from your [user settings](https://binstar.org/settings/access).
 
+{% endcall %}
+{% call section('additional-configuration-options') %}
 
 ### Additional Configuration Options
 <dl class="switches">
@@ -72,5 +89,7 @@ You can revoke a token at any time from your [user settings](https://binstar.org
 </dl>
 
 Use the binstar auth -h option for additional configuration information.
+
+{% endcall %}
 
 {% endblock %}

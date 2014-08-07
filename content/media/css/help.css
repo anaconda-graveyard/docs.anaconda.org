@@ -33,15 +33,9 @@
 }
 
 .bs-docs-sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 240px;
-  overflow-y: scroll;
   text-shadow: 0 1px 0 #fff;
-  background-color: #f5f5f5;
-  box-shadow: inset -1px 0 0 #e5e5e5;
+  /*background-color: #f5f5f5;*/
+  /*box-shadow: inset -1px 0 0 #e5e5e5;*/
 }
 
 /* Nav: first level */
@@ -64,7 +58,7 @@
   font-weight: 500;
   color: #274d95;
   background-color: transparent;
-  border-right: 1px solid #274d95;
+  border-right: 10px solid #274d95;
 }
 
 /* Nav: second level (shown on .active) */
@@ -134,7 +128,7 @@
 pre {
   margin: 20px 0;
   }
-pre.short {  
+pre.short {
   width: 70%;
 }
 dl.switches {

@@ -7,6 +7,7 @@ plugins:
     - hyde.ext.plugins.auto_extend.AutoExtendPlugin
     - hyde.ext.plugins.syntext.SyntextPlugin
     - hyde.ext.plugins.textlinks.TextlinksPlugin
+    - myplugin.MyPlugin
 context:
     data:
         site_title: Binstar Documentation
@@ -14,52 +15,18 @@ context:
             name: Continuum Analytics
             url: "https://binstar.org/"
         #google_analytics_id: UA-40918310-2
-        home_url: gettingstarted.html
+        home_url: index.html
         menu:
             - title: Getting Started
-              submenu :
-                - title : What Is Binstar?
-                  url : index.html
-                - title : What Can You Do With Binstar?
-                  url : gettingstarted.html
+              url : 'index.html'
             - title : Frequently Asked Questions
-              submenu :
-                - title : FAQ
-                  url : faq.html
-            - title: Overview
-              submenu :
-                - title : Overview
-                  url : index.html
-                - title : Installing Packages
-                  url : access.html
-                - title : Authoring Packages
-                  url : author.html
-                - title : Binstar Channels
-                  url : channels.html
-                - title : Token Generation
-                  url : "token_gen.html"
+              url : 'faq.html'
             - title : Conda Packaging
-              submenu :
-                - title : Authoring Conda Packages
-                  url : "conda.html#Authoring"
-                - title : Installing Conda Packages
-                  url : "conda.html#Installing"
+              url : "conda.html"
             - title : PyPI Packaging
-              submenu :
-                - title : Authoring PyPI Packages
-                  url : "pypi.html#Authoring"
-                - title : Installing PyPI Packages
-                  url : "pypi.html#Installing"
-            - title: Binstar Build
-              submenu :
-                - title : Command line client
-                  url : "build_cli.html"
-                - title : Build Configuration
-                  url : "build_config.html"
-                - title : Continuous Integration
-                  url : "continuous_integration.html"
-
-
+              url : "pypi.html"
+            - title : Token Generation
+              url : "token_gen.html"
 
 simple_copy:
     - media/js/*

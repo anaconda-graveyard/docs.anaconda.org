@@ -1,0 +1,18 @@
+---
+hello: world
+
+---
+
+OK
+<div>
+    {{site.content}}
+    {{site.content.__dict__.keys()}}
+    {{site.content.source.path|count}}
+    <dl>
+    {% for resource in node.resources %}
+    <dt>{{resource.source_file.path[site.content.source.path|count + 1:]}}</dt>
+    <dd>{{resource.meta}}</dd>
+    {% endfor %}
+    </dl>
+
+</div>

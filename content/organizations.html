@@ -1,14 +1,26 @@
 ---
 title: Binstar Organizations
 subtitle: ''
+
+include: true
+sub_items:
+ - id: creating-an-organization
+   title: Creating an organization
+ - id: conda-authoring
+   title: Authoring Conda packages
+
 ---
-{% extends "columns.j2" %}
+
+{% from "macros.j2" import section, subsection %}
+{% extends "layout.html" %}
 
 {% block main %}
 <a id="Installing"></a>
-## Creating an organization
-
+{% call section('creating-an-organization') %}
 [Create a new organization](https://binstar.org/new/organization)
+
+{% endcall %}
+{% call section('managing-an-organization') %}
 
 ## Managing an organization
 
@@ -55,5 +67,6 @@ To upload packages to your org account *'OrgName'* from the command line you mus
     your-personal-account's Password: ******
     $ binstar upload -u OrgName ... package.tar
 
+{% endcall %}
 
 {% endblock %}

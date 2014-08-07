@@ -1,11 +1,20 @@
 ---
-title: PyPI Packages
+title: PyPI Packaging
 subtitle: ''
+
+include: true
+sub_items:
+ - id: pypi-installing
+   title: Installing PyPI packages
+ - id: pypi-authoring
+   title: Authoring PyPI packages
 ---
-{% extends "columns.j2" %}
+{% from "macros.j2" import section, subsection %}
+{% extends "layout.html" %}
 
 {% block main %}
-<a id="Installing"></a>
+{% call section('pypi-installing') %}
+
 ## Installing PyPI packages
 
 The basic way to install a package from binstar is using pip:
@@ -64,11 +73,15 @@ Appending options like `--extra-index-url` or `--index-url` can be written as:
 
 See also the [official pip installer documentation](http://www.pip-installer.org/en/latest/configuration.html)
 
+{% endcall %}
+{% call section('pypi-authoring') %}
 
-<a id="Authoring"></a>
 ## Authoring PyPI packages
 
 All packages you author must go to a user account. To create a package go to [binstar.org/new](https://binstar.org/new)
 
 See also [authoring packages](author.html) for a general overview.
+
+{% endcall %}
+
 {%endblock%}

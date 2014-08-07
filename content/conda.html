@@ -1,11 +1,21 @@
 ---
-title: Conda Packages
+title: Conda Packaging
 subtitle: ''
+
+include: true
+sub_items:
+ - id: conda-installing
+   title: Installing Conda packages
+ - id: conda-authoring
+   title: Authoring Conda packages
+
 ---
-{% extends "columns.j2" %}
+{% from "macros.j2" import section, subsection %}
+{% extends "layout.html" %}
 
 {% block main %}
-<a id="Installing"></a>
+{% call section('conda-installing') %}
+
 ## Installing Conda packages
 
 The basic way to install a package from binstar is using conda:
@@ -43,9 +53,12 @@ conda install --channel https://conda.binstar.org/t/$TOKEN/<USER> <PACKAGE>
 
 ### Modify your conda RC file
 
+{% endcall %}
+{% call section('conda-authoring') %}
 
-<a id="Authoring"></a>
 ## Authoring Conda packages
+
+{% endcall %}
 
 
 {%endblock%}

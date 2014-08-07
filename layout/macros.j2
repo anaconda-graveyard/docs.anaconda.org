@@ -7,17 +7,42 @@
 {%- endmacro %}
 
 {% macro render_side_bar() -%}
-<ul class="nav nav-list">
-<h3 class="bs-docs-sidenav-heading"><a href="/">Binstar Docs</a></h3>
-{% for menu_item in menu -%}
-  {% if menu_item.submenu %}
-  <li class="nav-header">{{ menu_item.title }}</li>
-    {% for sub_item in menu_item.submenu %}
-    <li><a href="{{ sub_item.url }}">{{ sub_item.title }}</a></li>
-    {% endfor %}
-  {% else %}
-  <li><a href="{{ menu_item.url }}">{{ menu_item.title }}</a></li>
-  {% endif %}
+
+<ul class="nav">
+{% for menue_item in menu %}
+  <li class="{{ site.is_active(resource,menue_item) }}">
+    <a href="{{ menue_item['url'] }}">{{ menue_item['title'] }}</a>
+    
+    <ul class="nav">
+    {% if site.is_active(resource,menue_item) %}
+    {%   for sub_item in resource.meta.sub_items %}
+        <li><a href="#{{ sub_item.id }}" data-target="#{{ sub_item.id }}" >{{ sub_item.title }}</a></li>
+    {%   endfor %}
+    {% endif %}
+    </ul>
+  </li>
 {% endfor %}
 </ul>
+
+{%- endmacro %}
+
+
+{% macro section(id) -%}
+
+<section id="{{ id }}" style="padding-top: 71px; margin-top: -71px;">
+{%    filter markdown %}
+{{    caller() }}
+{%    endfilter %}
+</section>
+
+{%- endmacro %}
+
+{% macro subsection(id) -%}
+
+<div id="{{ id }}">
+{%    filter markdown %}
+{{    caller() }}
+{%    endfilter %}
+</div>
+
 {%- endmacro %}
