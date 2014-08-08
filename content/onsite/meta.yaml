@@ -1,6 +1,8 @@
 menu:
     - title: Installing Binstar On-Site
       url : 'index.html'
+    - title: Server Maintinance
+      url : 'maintenance.html'
     - title: Client Configuration
       url : 'configuration.html'
     - title: Mirroring PyPI

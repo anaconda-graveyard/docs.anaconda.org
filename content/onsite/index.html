@@ -8,8 +8,6 @@ sub_items:
     title: Requirements
   - id: install-mongodb
     title: Install MongoDB
-  - id: update-iptables
-    title: Update IPTables
   - id: log-output
     title: Log the output to Continuum
   - id: create-binstar-user
@@ -20,8 +18,6 @@ sub_items:
     title: Install Binstar
   - id: configure-binstar
     title: Configure the Binstar server
-  - id: maintenance
-    title: Maintenance and Configuration
 ---
 
 {% from "macros.html" import section, subsection %}
@@ -61,28 +57,6 @@ Because the MongoDB instance must be running before the Binstar server can be st
 
 {% endcall %}
 
-{% call section('update-iptables')%}
-
-### Update IPTables
-
-In order to make your On-site Binstar installation available to your users, you will need to configure your IPTables.  If you wish to run On-site Binstar on a non-standard port, you may need to alter this configuration accordingly:
-
-	sudo iptables -t nat -F
-
-	# HTTP
-	iptables -A INPUT -p tcp -m tcp --dport 8080 -j ACCEPT
-
-	# HTTPS
-	iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
-
-	# Save IPTables
-	sudo service iptables save
-
-	# Restart IPTables
-	sudo service iptables restart
-
-{% endcall %}
-
 {% call section('log-output') %}
 ### Log the output to Continuum
 
@@ -99,16 +73,24 @@ First, confirm the machine has access to Loggly:
 	# Should print '1'
 	curl --connect-timeout 10 logs-01.loggly.com:514 2>&1  | grep "Empty reply from server" | wc -l
 
+These values will be given to you when you purchase on-site binstar:
 
-Add the file /etc/rsyslog.d/22-loggly.conf with the following content:
+ *  `LOG_TOKEN`: This will be given to you when you purchase
+ *  `CUSTOMER_NAME`: This
+
+Add the file `/etc/rsyslog.d/22-loggly.conf` with the following content:
 
 	$ cat > /etc/rsyslog.d/22-loggly.conf <<'EOF'
 	# Define the template used for sending logs to Loggly. Do not change this format.
-	$template LogglyFormat,"<%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% %procid% %msgid% [b6c51421-e072-4843-8436-215ec2ffcf9e@41058] %msg%"
+	$template LogglyFormat,"<%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% %procid% %msgid% [LOG_TOKEN@41058 TAG=\"CUSTOMER_NAME\"] %msg%"
 
 	# Send messages to Loggly over TCP using the template.
 	*.*             @@logs-01.loggly.com:514;LogglyFormat
 	EOF
+
+<div class="alert alert-warning">
+    You must replace the `LOG_TOKEN` and `CUSTOMER_NAME` values from the text above.
+</div>
 
 Now restart your rsyslog process:
 
@@ -124,7 +106,7 @@ It is recommended although not required that you create a binstar user at this t
 
 	sudo useradd binstar
 	sudo mkdir -m 0770 /etc/binstar
-	sudo chown binstar:binstar /etc/binstar
+	sudo chown -R binstar:binstar /etc/binstar
 
 At this point, you can transition to the binstar user account, as you will not need root access for any of the remaining steps:
 
@@ -216,29 +198,5 @@ You can now start and restart the Binstar server with the following commands:
 	supervisorctl restart all
 
 {% endcall %}
-{% call section('maintenance')%}
-Maintenance and Configuration Concerns
---------------------------------------
 
-### Run On-site Binstar on an Alternate Port
-
-
-You  may wish to run your server on a port other than 8080.  To do so, you will need to adjust the above instructions for the following items:
-
-- adjust port numbers in [iptables configuration](#update-iptables)
-- specify port in supervisord.conf file
-
-
-### Start On-site Binstar When the Machine Boots
-
-If you wish to automatically start the Binstar instance whenever the machine is rebooted, you can do this by configuring your init.d file to run the supervisord command.
-
-### Recommended General Maintenance
-
-
-- regular updates of the binstar-server package via conda
-- configuring database backups
-- configuring file system backups
-- reviewing error logs
-{% endcall %}
 {%endblock%}
