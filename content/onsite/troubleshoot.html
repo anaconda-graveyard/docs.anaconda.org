@@ -1,0 +1,38 @@
+---
+title: Trouble Shoot
+
+# These are the nave items that are going
+# to be active when this page is active
+sub_items:
+ - id: firewall
+   title: I can not connect to the binstar server
+---
+
+
+{% from "macros.html" import section, subsection %}
+{# You must always extend "layout.html" #}
+{% extends "layout.html" %}
+
+{# All of the site content can go in the main block #}
+{% block main %}
+
+{# Use a section so that the scroll-spy can link to the items in the "sub_items" above #}
+{% call section('firewall') %}
+### I can not connect to the binstar server on port X
+
+Check if your ip table rules are blocking your ports:
+
+    iptables -L -n
+
+If you see a rule blocking a port your are using then you must allow the port
+
+    sudo iptables -t nat -F
+    sudo iptables -A INPUT -p tcp -m tcp --dport <PORT> -j ACCEPT
+    sudo service iptables save
+    sudo service iptables restart
+
+
+{% endcall%}
+
+{% endblock main %}
+

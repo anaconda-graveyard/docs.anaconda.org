@@ -1,6 +1,8 @@
 menu:
     - title: Installing Binstar On-Site
       url : 'index.html'
+    - title: Trouble Shoot your binstar installation
+      url : 'troubleshoot.html'
     - title: Server Maintinance
       url : 'maintenance.html'
     - title: Client Configuration
