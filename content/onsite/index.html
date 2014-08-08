@@ -92,7 +92,7 @@ Add the file `/etc/rsyslog.d/22-loggly.conf` with the following content:
 
 	$ cat > /etc/rsyslog.d/22-loggly.conf <<'EOF'
 	# Define the template used for sending logs to Loggly. Do not change this format.
-	$template LogglyFormat,"<%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% %procid% %msgid% [LOG_TOKEN@41058 TAG=\"CUSTOMER_NAME\"] %msg%"
+	$template LogglyFormat,"<%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% %procid% %msgid% [LOG_TOKEN@41058 tag=\"CUSTOMER_NAME\"] %msg%"
 
 	# Send messages to Loggly over TCP using the template.
 	*.*             @@logs-01.loggly.com:514;LogglyFormat
