@@ -26,9 +26,12 @@ sub_items:
 {% block main %}
 ## Installing On-site Binstar
 
-Much as Anaconda Server allows you to maintain a private Anaconda repository, On-site Binstar installation allows you to create and maintain a private version of [binstar.org](http://binstar.org) for easy creation and sharing of custom conda and PyPI packages within your organization.
+On-site Binstar installation allows you to create and maintain a private version of [binstar.org](https://binstar.org)
+for easy creation and sharing of custom conda and PyPI packages within your organization.
 
-The following instructions will guide you through the process of installing and configuring your On-site Binstar installation.  If you have any questions about this process, please contact your sales representative for additional assistance.
+The following instructions will guide you through the process of installing and
+configuring your On-site Binstar installation.  If you have any questions about this process,
+please contact your sales representative for additional assistance.
 
 
 {% call section('requirements')%}
@@ -36,10 +39,13 @@ The following instructions will guide you through the process of installing and 
 
 * root access
 * network connectivity
-* an On-site Binstar installation token (this will be provided to you by your sales representative at the time of purchase).
+* an On-site Binstar installation token (this will be provided to you by your sales representative
+at the time of purchase).
 
 
-This installation guide is grouped into three components: steps that must be performed with root access, steps that should be performed as the binstar user, and maintenance and configurable aspects of the installation which you may wish to customize.
+This installation guide is grouped into three components: steps that must be performed with root access,
+steps that should be performed as the binstar user, and maintenance and configurable aspects of the
+installation which you may wish to customize.
 
 {% endcall %}
 
@@ -49,9 +55,12 @@ Perform as Root
 {% call section('install-mongodb')%}
 ### Install MongoDB
 
-See the [official installation guide](http://docs.mongodb.org/manual/installation/) for installation instructions for your platform.  Once you have successfully installed and started MongoDB, you can proceed with your installation.
+See the [official installation guide](http://docs.mongodb.org/manual/installation/) for installation
+instructions for your platform.  Once you have successfully installed and started MongoDB,
+you can proceed with your installation.
 
-Because the MongoDB instance must be running before the Binstar server can be started, you will likely want to configure MongoDB to run automatically on machine startup:
+Because the MongoDB instance must be running before the Binstar server can be started, you will likely
+want to configure MongoDB to run automatically on machine startup:
 
 	sudo chkconfig mongod on
 
@@ -63,7 +72,8 @@ Because the MongoDB instance must be running before the Binstar server can be st
 
 Please note: This step is optional, but highly recommended.
 
-The following command will log activity from your server to our Loggly records so we can better support your On-site Binstar installation.
+The following command will log activity from your server to our Loggly records so we can better support
+your On-site Binstar installation.
 
 First, confirm the machine has access to Loggly:
 
@@ -108,7 +118,8 @@ It is recommended although not required that you create a binstar user at this t
 	sudo mkdir -m 0770 /etc/binstar
 	sudo chown -R binstar:binstar /etc/binstar
 
-At this point, you can transition to the binstar user account, as you will not need root access for any of the remaining steps:
+At this point, you can transition to the binstar user account,
+as you will not need root access for any of the remaining steps:
 
 	sudo su - binstar
 
@@ -127,13 +138,16 @@ Download and install Miniconda, which will give you access to the conda command:
 	curl 'http://repo.continuum.io/miniconda/Miniconda-3.5.5-Linux-x86_64.sh' > Miniconda.sh
 	bash Miniconda.sh
 
-By default, Miniconda will install in the directory from which you execute the installer; you have the option to override this configuration and choose a different directory if you wish.  Upon successfully completing the installation, you will be prompted to add the install location to your path:
+By default, Miniconda will install in the directory from which you execute the installer;
+you have the option to override this configuration and choose a different directory if you wish.
+Upon successfully completing the installation, you will be prompted to add the install location to your path:
 
 	Do you wish the installer to prepend the Miniconda install location
 	to PATH in your /home/binstar/.bashrc ? [yes|no]
 	[no] >>> yes
 
-You must answer "yes" to ensure Miniconda will be added to your path variable.  You will also need to open a new terminal session or refresh your ~/.bashrc file for this change to take effect.
+You must answer "yes" to ensure Miniconda will be added to your path variable.
+You will also need to open a new terminal session or refresh your ~/.bashrc file for this change to take effect.
 
 {% endcall %}
 
@@ -141,10 +155,11 @@ You must answer "yes" to ensure Miniconda will be added to your path variable.  
 ### Install Binstar
 
 
-In order to install On-site Binstar, you will need to execute the cas-installer tool using the custom On-site Binstar token provided to you by your sales representative at the time of purchase:
+In order to install On-site Binstar, you will need to execute the cas-installer tool
+using the custom On-site Binstar token provided to you by your sales representative at the time of purchase:
 
-	conda config --add channels http://conda.binstar.org/t/<TOKEN>/binstar
-	conda install -c https://conda.binstar.org/t/<TOKEN>/binstar binstar-server
+	conda config --add channels https://conda.binstar.org/t/<TOKEN>/binstar
+	conda install binstar-server
 
 {% endcall %}
 
