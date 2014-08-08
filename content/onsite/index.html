@@ -73,16 +73,24 @@ First, confirm the machine has access to Loggly:
 	# Should print '1'
 	curl --connect-timeout 10 logs-01.loggly.com:514 2>&1  | grep "Empty reply from server" | wc -l
 
+These values will be given to you when you purchase on-site binstar:
 
-Add the file /etc/rsyslog.d/22-loggly.conf with the following content:
+ *  `LOG_TOKEN`: This will be given to you when you purchase
+ *  `CUSTOMER_NAME`: This
+
+Add the file `/etc/rsyslog.d/22-loggly.conf` with the following content:
 
 	$ cat > /etc/rsyslog.d/22-loggly.conf <<'EOF'
 	# Define the template used for sending logs to Loggly. Do not change this format.
-	$template LogglyFormat,"<%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% %procid% %msgid% [b6c51421-e072-4843-8436-215ec2ffcf9e@41058] %msg%"
+	$template LogglyFormat,"<%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% %procid% %msgid% [LOG_TOKEN@41058 TAG=\"CUSTOMER_NAME\"] %msg%"
 
 	# Send messages to Loggly over TCP using the template.
 	*.*             @@logs-01.loggly.com:514;LogglyFormat
 	EOF
+
+<div class="alert alert-warning">
+    You must replace the `LOG_TOKEN` and `CUSTOMER_NAME` values from the text above.
+</div>
 
 Now restart your rsyslog process:
 
