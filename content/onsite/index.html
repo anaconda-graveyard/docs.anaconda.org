@@ -20,8 +20,6 @@ sub_items:
     title: Install Binstar
   - id: configure-binstar
     title: Configure the Binstar server
-  - id: maintenance
-    title: Maintenance and Configuration
 ---
 
 {% from "macros.html" import section, subsection %}
@@ -216,29 +214,5 @@ You can now start and restart the Binstar server with the following commands:
 	supervisorctl restart all
 
 {% endcall %}
-{% call section('maintenance')%}
-Maintenance and Configuration Concerns
---------------------------------------
 
-### Run On-site Binstar on an Alternate Port
-
-
-You  may wish to run your server on a port other than 8080.  To do so, you will need to adjust the above instructions for the following items:
-
-- adjust port numbers in [iptables configuration](#update-iptables)
-- specify port in supervisord.conf file
-
-
-### Start On-site Binstar When the Machine Boots
-
-If you wish to automatically start the Binstar instance whenever the machine is rebooted, you can do this by configuring your init.d file to run the supervisord command.
-
-### Recommended General Maintenance
-
-
-- regular updates of the binstar-server package via conda
-- configuring database backups
-- configuring file system backups
-- reviewing error logs
-{% endcall %}
 {%endblock%}

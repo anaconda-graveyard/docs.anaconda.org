@@ -1,0 +1,54 @@
+---
+title: Installing Binstar On-Site
+
+include: true
+weight: 0
+sub_items:
+  - id: ports
+    title: Run On-site Binstar on an Alternate Port
+  - id: boot
+    title: Start On-site Binstar When the Machine Boots
+  - id: general
+    title: Recommended General Maintenance
+---
+
+{% from "macros.html" import section, subsection %}
+{% extends "layout.html" %}
+
+{% block main %}
+
+Maintenance and Configuration Concerns
+--------------------------------------
+
+{% call section('ports') %}
+
+### Run On-site Binstar on an Alternate Port
+
+
+You  may wish to run your server on a port other than 8080.  To do so, you will need to adjust the above instructions for the following items:
+
+- adjust port numbers in [iptables configuration](#update-iptables)
+- specify port in supervisord.conf file
+
+
+{% endcall %}
+{% call section('boot') %}
+
+### Start On-site Binstar When the Machine Boots
+
+If you wish to automatically start the Binstar instance whenever the machine is rebooted, you can do this by configuring your init.d file to run the supervisord command.
+
+{% endcall %}
+{% call section('General') %}
+
+### Recommended General Maintenance
+
+
+- regular updates of the binstar-server package via conda
+- configuring database backups
+- configuring file system backups
+- reviewing error logs
+
+{% endcall %}
+
+{%endblock%}
