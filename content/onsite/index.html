@@ -8,8 +8,6 @@ sub_items:
     title: Requirements
   - id: install-mongodb
     title: Install MongoDB
-  - id: update-iptables
-    title: Update IPTables
   - id: log-output
     title: Log the output to Continuum
   - id: create-binstar-user
@@ -56,28 +54,6 @@ See the [official installation guide](http://docs.mongodb.org/manual/installatio
 Because the MongoDB instance must be running before the Binstar server can be started, you will likely want to configure MongoDB to run automatically on machine startup:
 
 	sudo chkconfig mongod on
-
-{% endcall %}
-
-{% call section('update-iptables')%}
-
-### Update IPTables
-
-In order to make your On-site Binstar installation available to your users, you will need to configure your IPTables.  If you wish to run On-site Binstar on a non-standard port, you may need to alter this configuration accordingly:
-
-	sudo iptables -t nat -F
-
-	# HTTP
-	iptables -A INPUT -p tcp -m tcp --dport 8080 -j ACCEPT
-
-	# HTTPS
-	iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
-
-	# Save IPTables
-	sudo service iptables save
-
-	# Restart IPTables
-	sudo service iptables restart
 
 {% endcall %}
 
