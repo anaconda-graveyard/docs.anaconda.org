@@ -33,6 +33,8 @@ The following instructions will guide you through the process of installing and
 configuring your On-site Binstar installation.  If you have any questions about this process,
 please contact your sales representative for additional assistance.
 
+<strong>Please note:</strong> some commands may vary slightly by distribution.  These instructions are written for a Red Hat distribution.  
+
 
 {% call section('requirements')%}
 ### Requirements
@@ -70,7 +72,7 @@ want to configure MongoDB to run automatically on machine startup:
 ### Log the output to Continuum
 
 
-Please note: This step is optional, but highly recommended.
+<strong>Please note:</strong> This step is optional, but highly recommended.
 
 The following command will log activity from your server to our Loggly records so we can better support
 your On-site Binstar installation.
@@ -114,7 +116,7 @@ Now restart your rsyslog process:
 
 It is recommended although not required that you create a binstar user at this time:
 
-	sudo useradd binstar
+	sudo useradd -m binstar
 	sudo mkdir -m 0770 /etc/binstar
 	sudo chown -R binstar:binstar /etc/binstar
 
@@ -146,8 +148,8 @@ Upon successfully completing the installation, you will be prompted to add the i
 	to PATH in your /home/binstar/.bashrc ? [yes|no]
 	[no] >>> yes
 
-You must answer "yes" to ensure Miniconda will be added to your path variable.
-You will also need to open a new terminal session or refresh your ~/.bashrc file for this change to take effect.
+<strong>Please note:</strong> you must answer "yes" to ensure Miniconda will be added to your path variable.
+You will also need to open a new terminal session or run the <code>source ~/.bashrc</code> command for this change to take effect.
 
 {% endcall %}
 
@@ -161,6 +163,10 @@ using the custom On-site Binstar token provided to you by your sales representat
 	conda config --add channels https://conda.binstar.org/t/<TOKEN>/binstar
 	conda install binstar-server
 
+<div class="alert alert-warning">
+    You must replace the `TOKEN` value in the above command with the token provided to you by your sales representative.
+</div>
+
 {% endcall %}
 
 {% call section('configure-binstar')%}
@@ -173,18 +179,18 @@ Initialize the Binstar server instance, and indicate the desired filepath for pa
 	binstar-config --init
 	binstar-config --set fs_storage_root /etc/binstar/package-storage
 
-Note: You may change the /package-storage directory to any location that is accessible by the binstar user.
+Note: You may change the <code>/package-storage</code> directory to any location that is accessible by the binstar user.
 
 
-Create your initial On-site Binstar superuser:
+Create your initial On-site Binstar superuser, <em>being sure to update this command to include your desired email address and password</em>:
 
-	binstar-create-user --username "<username>" --password "<password>" --superuser
+	binstar-create-user --username "superuser" --password "yourpassword"  --email "your@email.com" --superuser
 
 Run the On-site Binstar server installation:
 
 	binstar-server --port 8080
 
-You should now see a working, private installation of binstar.org when you visit <IP>:8080.
+You should now see a working, private installation of binstar.org when you visit <a href="http://localhost:8080">http://localhost:8080</a>.
 
 Finally, you may wish to automatically restart your On-site Binstar installation if the instance fails or errors.
 
