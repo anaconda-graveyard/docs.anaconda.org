@@ -33,7 +33,7 @@ The following instructions will guide you through the process of installing and
 configuring your On-site Binstar installation.  If you have any questions about this process,
 please contact your sales representative for additional assistance.
 
-<strong>Please note:</strong> some commands may vary slightly by distribution.  These instructions are written for a Red Hat distribution.  
+<strong>Please note:</strong> some commands may vary slightly by distribution.  These instructions are written for a Red Hat distribution.
 
 
 {% call section('requirements')%}
@@ -62,9 +62,11 @@ instructions for your platform.  Once you have successfully installed and starte
 you can proceed with your installation.
 
 Because the MongoDB instance must be running before the Binstar server can be started, you will likely
-want to configure MongoDB to run automatically on machine startup:
+want to configure MongoDB to run automatically on machine startup.
 
-	sudo chkconfig mongod on
+To make sure mongo is running run:
+
+    mongo --eval 'db.serverStatus().ok'
 
 {% endcall %}
 
@@ -179,7 +181,7 @@ Initialize the Binstar server instance, and indicate the desired filepath for pa
 	binstar-config --init
 	binstar-config --set fs_storage_root /etc/binstar/package-storage
 
-Note: You may change the <code>/package-storage</code> directory to any location that is accessible by the binstar user.
+Note: You may change the `/etc/binstar/package-storage` directory to any location that is accessible by the binstar user.
 
 
 Create your initial On-site Binstar superuser, <em>being sure to update this command to include your desired email address and password</em>:
