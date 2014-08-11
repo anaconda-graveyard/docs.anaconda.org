@@ -3,13 +3,13 @@ title: Mirroring Pypi
 
 sub_items:
  - id: mirror-command
-   title: The mirror command
+   title: The Mirror Command
  - id: configure-pip
    title: Configure pip
  - id: whitelist
-   title: Whitelist packages to be mirrored
+   title: Whitelist Packages to be Mirrored
  - id: blacklist
-   title: Blacklist packages to be banned
+   title: Blacklist Packages to be Banned
 ---
 
 
@@ -19,9 +19,9 @@ sub_items:
 {% block main %}
 
 {% call section('mirror-command') %}
-### The mirror command
+### The Mirror Command
 
-To create a pypi mirror run:
+To create a PyPI mirror run:
 
     binstar-sync-pypi --whitelist /etc/binstar/pypi-packages.txt
 
@@ -41,13 +41,13 @@ To configure pip to use this new mirror you must edit your `~/.pip/pip.conf` fil
 
 {% endcall%}
 {% call section('whitelist') %}
-### Whitelist packages to be mirrored
+### Whitelist Packages to be Mirrored
 
 If the argument `--whitelist <filename>` is
 given, then the mirror will only sync packages that are contained
 in the whitelist file.
 
-The file must contain a newline seporated list of packages:
+The file must contain a newline separated list of packages:
 
     # This is a comment
     Flask
@@ -64,7 +64,7 @@ The file must contain a newline seporated list of packages:
 {% endcall%}
 
 {% call section('blacklist') %}
-### Blacklist packages to be banned
+### Blacklist Packages to be Banned
 
 {% endcall%}
 

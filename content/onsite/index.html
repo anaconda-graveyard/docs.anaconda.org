@@ -9,7 +9,7 @@ sub_items:
   - id: install-mongodb
     title: Install MongoDB
   - id: log-output
-    title: Log the output to Continuum
+    title: Log the Output to Continuum
   - id: create-binstar-user
     title: Create the Binstar User
   - id: install-miniconda
@@ -17,14 +17,14 @@ sub_items:
   - id: install-binstar
     title: Install Binstar
   - id: configure-binstar
-    title: Configure the Binstar server
+    title: Configure the Binstar Server
 ---
 
 {% from "macros.html" import section, subsection %}
 {% extends "layout.html" %}
 
 {% block main %}
-## Installing On-site Binstar
+## Installing On-Site Binstar
 
 On-site Binstar installation allows you to create and maintain a private version of [binstar.org](https://binstar.org)
 for easy creation and sharing of custom conda and PyPI packages within your organization.
@@ -46,7 +46,7 @@ at the time of purchase).
 
 
 This installation guide is grouped into three components: steps that must be performed with root access,
-steps that should be performed as the binstar user, and maintenance and configurable aspects of the
+steps that should be performed as the Binstar user, and maintenance and configurable aspects of the
 installation which you may wish to customize.
 
 {% endcall %}
@@ -71,7 +71,7 @@ To make sure mongo is running run:
 {% endcall %}
 
 {% call section('log-output') %}
-### Log the output to Continuum
+### Log the Output to Continuum
 
 
 <strong>Please note:</strong> This step is optional, but highly recommended.
@@ -87,16 +87,16 @@ First, confirm the machine has access to Loggly:
 	# Should print '1'
 	curl --connect-timeout 10 logs-01.loggly.com:514 2>&1  | grep "Empty reply from server" | wc -l
 
-These values will be given to you when you purchase on-site binstar:
+These values will be given to you when you purchase On-site Binstar: 
 
- *  `LOG_TOKEN`: This will be given to you when you purchase
- *  `CUSTOMER_NAME`: This
+ *  `LOG_TOKEN`
+ *  `PRODUCT_NAME`
 
 Add the file `/etc/rsyslog.d/22-loggly.conf` with the following content:
 
 	$ cat > /etc/rsyslog.d/22-loggly.conf <<'EOF'
 	# Define the template used for sending logs to Loggly. Do not change this format.
-	$template LogglyFormat,"<%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% %procid% %msgid% [LOG_TOKEN@41058 tag=\"CUSTOMER_NAME\"] %msg%"
+	$template LogglyFormat,"<%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% %procid% %msgid% [LOG_TOKEN@41058 tag=\"PRODUCT_NAME\"] %msg%"
 
 	# Send messages to Loggly over TCP using the template.
 	*.*             @@logs-01.loggly.com:514;LogglyFormat
@@ -116,13 +116,13 @@ Now restart your rsyslog process:
 ### Create the Binstar user
 
 
-It is recommended although not required that you create a binstar user at this time:
+It is recommended although not required that you create a Binstar user at this time:
 
 	sudo useradd -m binstar
 	sudo mkdir -m 0770 /etc/binstar
 	sudo chown -R binstar:binstar /etc/binstar
 
-At this point, you can transition to the binstar user account,
+At this point, you can transition to the Binstar user account,
 as you will not need root access for any of the remaining steps:
 
 	sudo su - binstar
@@ -172,7 +172,7 @@ using the custom On-site Binstar token provided to you by your sales representat
 {% endcall %}
 
 {% call section('configure-binstar')%}
-### Configure the Binstar server
+###  Configure the Binstar Server
 
 
 
@@ -181,7 +181,7 @@ Initialize the Binstar server instance, and indicate the desired filepath for pa
 	binstar-config --init
 	binstar-config --set fs_storage_root /etc/binstar/package-storage
 
-Note: You may change the `/etc/binstar/package-storage` directory to any location that is accessible by the binstar user.
+Note: You may change the `/etc/binstar/package-storage` directory to any location that is accessible by the Binstar user.
 
 
 Create your initial On-site Binstar superuser, <em>being sure to update this command to include your desired email address and password</em>:
