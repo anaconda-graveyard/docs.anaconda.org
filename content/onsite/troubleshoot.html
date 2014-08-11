@@ -5,7 +5,7 @@ title: Trouble Shoot
 # to be active when this page is active
 sub_items:
  - id: firewall
-   title: I can not connect to the binstar server
+   title: I Cannot Connect to the Binstar Server
 ---
 
 
@@ -18,10 +18,10 @@ sub_items:
 
 {# Use a section so that the scroll-spy can link to the items in the "sub_items" above #}
 {% call section('firewall') %}
-### I can not connect to the binstar server on port X
+### I Cannot Connect to the Binstar Server On Port X
 
 This could be because you are behind a firewall.
-Check if your ip table rules are blocking your ports:
+Check if your iptables rules are blocking your ports:
 
     iptables -L -n
 

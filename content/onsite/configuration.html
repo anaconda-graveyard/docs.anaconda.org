@@ -1,5 +1,5 @@
 ---
-title: Client configurations
+title: Client Configuration
 
 sub_items:
  - id: binstar-cli
@@ -19,9 +19,9 @@ sub_items:
 {% call section('binstar-cli') %}
 ### Binstar Client
 
-Set your local conda configuration to point to your onsite binstar server.
-This is need to correctly upload your conda build packages to your onsite binstar
-installation.
+Set your local conda configuration to point to your On-site Binstar server. 
+
+This is need to correctly upload your conda build packages to your On-site Binstar installation.
 
 ```
 binstar config --set url http://<onsite.binstar.ipaddress>:<port>/api
@@ -32,7 +32,7 @@ binstar config --set url http://<onsite.binstar.ipaddress>:<port>/api
 {% call section('conda-installer') %}
 ### Conda Installer
 
-To install conda packages from your onsite binstar installation add your onsite binstar channel to your
+To install conda packages from your On-site Binstar installation add your On-site Binstar channel to your
 `~/.condarc` configuration file.
 
 ```
@@ -43,7 +43,7 @@ conda config --add channels http://<onsite.binstar.ipaddress>:<port>/conda/<bins
 {% call section('pip-installer') %}
 ### pip Installer
 
-To install pypi packages from your onsite binstar installation add your onsite binstar channel to your
+To install pypi packages from your On-site Binstar installation add your On-site Binstar channel to your
 `~/.pip/pip.conf` configuration file.
 
 Edit the file and add an `extra-index-url` entry to the global config section:
