@@ -24,7 +24,6 @@ sub_items:
 {% extends "layout.html" %}
 
 {% block main %}
-## Installing On-Site Binstar
 
 On-site Binstar installation allows you to create and maintain a private version of [binstar.org](https://binstar.org)
 for easy creation and sharing of custom conda and PyPI packages within your organization.
@@ -87,7 +86,7 @@ First, confirm the machine has access to Loggly:
 	# Should print '1'
 	curl --connect-timeout 10 logs-01.loggly.com:514 2>&1  | grep "Empty reply from server" | wc -l
 
-These values will be given to you when you purchase On-site Binstar: 
+These values will be given to you when you purchase On-site Binstar:
 
  *  `LOG_TOKEN`
  *  `PRODUCT_NAME`
