@@ -87,7 +87,7 @@ First, confirm the machine has access to Loggly:
 	# Should print '1'
 	curl --connect-timeout 10 logs-01.loggly.com:514 2>&1  | grep "Empty reply from server" | wc -l
 
-These values will be given to you when you purchase On-site Binstar: 
+These values will be given to you when you purchase On-site Binstar:
 
  *  `LOG_TOKEN`
  *  `PRODUCT_NAME`
@@ -166,7 +166,7 @@ using the custom On-site Binstar token provided to you by your sales representat
 	conda install binstar-server
 
 <div class="alert alert-warning">
-    You must replace the `INSTALL_TOKEN` value in the above command with the token provided to you by your sales representative. 
+    You must replace the `INSTALL_TOKEN` value in the above command with the token provided to you by your sales representative.
 </div>
 
 {% endcall %}
@@ -194,32 +194,23 @@ Run the On-site Binstar server installation:
 
 You should now see a working, private installation of binstar.org when you visit <a href="http://localhost:8080">http://localhost:8080</a>.
 
-Finally, you may wish to automatically restart your On-site Binstar installation if the instance fails or errors.
+Finally, you may wish to automatically restart your On-site Binstar installation if the instance fails or errors and on reboot:
 
 Create a supervisord instance:
 
-	mkdir -p $HOME/miniconda/etc/
-	echo_supervisord_conf > $HOME/miniconda/etc/supervisord.conf
+    binstar-install-supervisord-config.sh
 
-Add the following lines to the supervisord.conf file you just created:
+To test that the config script ran correctly run:
 
-	[program:binstar-server]
-	command=binstar-server
-	stdout_logfile=syslog
-	stderr_logfile=syslog
+    supervisorctl status
 
-	[program:binstar-worker]
-	command=mtq-worker -c binstar.tasks.worker high default low
-	stdout_logfile=syslog
-	stderr_logfile=syslog
+You should see somthing like:
 
-You can now start and restart the Binstar server with the following commands:
+    binstar-server                   RUNNING    pid 8828, uptime 0:00:14
+    binstar-worker                   RUNNING    pid 8827, uptime 0:00:14
 
-	#starts binstar server
-	supervisord
-	#restarts binstar server
-	supervisorctl restart all
 
 {% endcall %}
 
 {%endblock%}
+
