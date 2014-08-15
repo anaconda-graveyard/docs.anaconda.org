@@ -127,12 +127,43 @@ And a **build.bat**
 
 
 From outside the recipe directory, run
-    
-    
-    conda build <recipe dir>  
-    
 
-Your package is now available for installation.
+    
+    conda build RECIPE-DIR
+
+You may see this message after the package is successfully built
+
+    # If you want to upload this package to binstar.org later, type:
+    #
+    # $ binstar upload /Users/foo/anaconda/conda-bld/osx-64/ggplot-0.6.5-np18py27_0.tar.bz2
+    #
+    # To have conda build upload to binstar automatically, use
+    # $ conda config --set binstar_upload yes
+    
+All packages built in this way are placed in a subdirectory of Anaconda's *conda-bld* directory.
+
+If you do not choose to set binstar_upload to yes by default, you may now upload your package using the command
+* binstar upload REPOSITORY-PATH/PACKAGE.tar.bz2 *
+
+
+    $ binstar upload /Users/foo/anaconda/conda-bld/ggplot-0.6.5-np18py27_0.tar.bz2
+    
+    Using binstar api site http://api.alpha.binstar.org
+    detecting package type ...
+    conda
+    extracting package attributes for upload ...
+    done
+
+    Uploading file USER/ggplot/0.6.5/osx-64/ggplot-0.6.5-np18py27_0.tar.bz2 ... 
+     uploaded 6712 of 6712Kb: 100.00% ETA: 0.0 minutes
+
+
+    Upload(s) Complete
+
+    Package located at:
+    http://alpha.binstar.org/USER/ggplot
+
+Your package is now available at *http://alpha.binstar.org/USER/PACKAGE*.
 
 See also [authoring packages](author.html) for a general overview.
 {%endblock%}
