@@ -70,32 +70,46 @@ See also the [official pip installer documentation](http://www.pip-installer.org
 
 All packages you author must go to a user account. To create a package go to [binstar.org/new](https://binstar.org/new)
 
-First, create a *recipe* directory by going to the command line and running
+First, choose a package repository and navigate to it form the command line.  For the purposes of this example, we'll use the [Bokeh Plotting Library](https://github.com/ContinuumIO/bokeh).  
 
-    
-    conda skeleton pypi brewer2mpl
-    
+Once there, run the following command
 
-You will be asked which source version you would prefer:
-    
-    
-    More than one source version is available for brewer2mpl:
-    0: https://pypi.python.org/packages/source/b/brewer2mpl/brewer2mpl-1.4.tar.gz (19 KB)
-    1: https://pypi.python.org/packages/source/b/brewer2mpl/brewer2mpl-1.4.zip (22 KB)
-    Which version should I use?
-    
+    $ python setup.py sdist
+    got version from git {'version': '0.5.2-49-gf5a107a-dirty', 'full': 'f5a107a6af9240540da9cbd7080ad3a684e8ec0d-dirty'}
+    running check
 
-Choose the tarball (*0* in the example above)
+    reading manifest template 'MANIFEST.in'
+    writing manifest file 'MANIFEST'
+    creating bokeh-0.5.2-49-gf5a107a-dirty
+    creating bokeh-0.5.2-49-gf5a107a-dirty/bokeh
+    creating bokeh-0.5.2-49-gf5a107a-dirty/bokeh/_templates
+    creating bokeh-0.5.2-49-gf5a107a-dirty/bokeh/charts
 
-This will create a recipe directory (which contains a **meta.yaml**, **build.sh** and **build.bat** necessary to build the file with *conda build*)
+    ...
 
-From outside the recipe directory, run
-    
-    
-    conda build <recipe dir>  
-    
+    creating dist
+    Creating tar archive
+    removing 'bokeh-0.5.2-49-gf5a107a-dirty' (and everything under it)
 
-Now your package is available for installation.
+Your package has now been built as a source tarball and is ready to be uploaded.
+
+    $ binstar upload --user USERNAME bokeh/dist/package.tar.gz 
+    Using binstar api site http://api.alpha.binstar.org
+    detecting package type ...
+    pypi
+    extracting package attributes for upload ...
+    done
+
+    Uploading file USER/bokeh/0.5.2-49-gf5a107a-dirty/bokeh-0.5.2-49-gf5a107a-dirty.tar.gz ... 
+    uploaded 14574 of 14574Kb: 100.00% ETA: 0.0 minutes
+
+
+    Upload(s) Complete
+
+    Package located at:
+    http://alpha.binstar.org/USER/bokeh
+    
+Your package is now available at *http://alpha.binstar.org/USER/PACKAGE*.
 
 See also [authoring packages](author.html) for a general overview.
 {%endblock%}
