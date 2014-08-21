@@ -1,11 +1,20 @@
 ---
-title: PyPI Packages
+title: PyPI Packaging
 subtitle: ''
+
+include: true
+sub_items:
+ - id: pypi-installing
+   title: Installing PyPI packages
+ - id: pypi-authoring
+   title: Authoring PyPI packages
 ---
-{% extends "columns.j2" %}
+{% from "macros.html" import section, subsection %}
+{% extends "layout.html" %}
 
 {% block main %}
-<a id="Installing"></a>
+{% call section('pypi-installing') %}
+
 ## Installing PyPI packages
 
 The basic way to install a package from binstar is using pip:
@@ -19,7 +28,7 @@ Where **REPOSITORY-PATH** may be one of the following:
 1.  A **username**, this allows installation of packages from a user repository:
     `pip install --index-url pypi.binstar.org/USER/simple PACKAGE`
     <br><br>
-    <div class="alert">**Note:**<br> the **pypi** user contains a full up to date mirror of [pypi.python.org](pypi.python.org)
+    <div class="alert">**Note:**<br> the **pypi** user contains a full up to date mirror of [pypi.python.org](https://pypi.python.org)
         <br>
         e.g. <code>[pypi.binstar.org/pypi](https://pypi.binstar.org/pypi)</code>
     </div>
@@ -64,8 +73,9 @@ Appending options like `--extra-index-url` or `--index-url` can be written as:
 
 See also the [official pip installer documentation](http://www.pip-installer.org/en/latest/configuration.html)
 
+{% endcall %}
+{% call section('pypi-authoring') %}
 
-<a id="Authoring"></a>
 ## Authoring PyPI packages
 
 All packages you author must go to a user account. To create a package go to [binstar.org/new](https://binstar.org/new)
@@ -112,4 +122,7 @@ Your package has now been built as a source tarball and is ready to be uploaded.
 Your package is now available at *http://alpha.binstar.org/USER/PACKAGE*.
 
 See also [authoring packages](author.html) for a general overview.
+
+{% endcall %}
+
 {%endblock%}

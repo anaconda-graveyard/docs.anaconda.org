@@ -1,7 +1,7 @@
 ---
 title: Continuous Integration
 ---
-{% extends "columns.j2" %}
+{% extends "layout.html" %}
 
 {% block main %}
 <a id="Installing"></a>
@@ -21,38 +21,41 @@ For the following example, we will use the user `sean` and a base project `testc
 
 From your [settings page](https://binstar.org/settings/admin) enable binstar to access your github account.
 
-![Continuous Integration Settings](media/img/ci-login.png)
+<center>
+<img src="../media/img/ci-login.png" alt="Continuous Integration Settings" style="width: 500px;"/>
+</center>
 
 ### Select the github repository
 
 You must navigate to your binstar package's continuous integration settings page. the url will be somthing like this: `https://binstar.org/sean/testci/settings/ci` In your case you will need to replace `sean/testci` with your package.
 
-
-![Continuous Integration Settings](media/img/ci-settings.png)
+<center>
+<img src="../media/img/ci-settings.png" alt="Continuous Integration Settings" style="width: 500px;"/>
+</center>
 
 The fields:
 
 *   **Repository**: The github repository you want to build. In this case it is [srossross/testci](https://github.com/srossross/testci)
 *   **Run tests only on these branches**: A [regex](http://docs.python.org/2/library/re.html#regular-expression-syntax)
     that matches the git [refspec](http://git-scm.com/book/en/Git-Internals-The-Refspec)
-    you want to be build. **Note**: that this refspec is only tested, no build_targets will be uploaded  
-*   **Run full build on these branches or tags**: A [regex](http://docs.python.org/2/library/re.html#regular-expression-syntax) 
-    that matches the branches or tags that match this refspec will also upload distribution files to binstar using binstar upload.  These are the files which will be `conda` and `pip` installable. 
+    you want to be build. **Note**: that this refspec is only tested, no build_targets will be uploaded
+*   **Run full build on these branches or tags**: A [regex](http://docs.python.org/2/library/re.html#regular-expression-syntax)
+    that matches the branches or tags that match this refspec will also upload distribution files to binstar using binstar upload.  These are the files which will be `conda` and `pip` installable.
 
 ### Add .binstar.yml file to your repository
 
 
 
-In order for Binstar to build your project, 
+In order for Binstar to build your project,
 you need add a `.binstar.yml` file to the root of your repository.
-To do this run `binstar-build init` in the root repository commit the file and push to the github repository. 
-See all of the [.binstar.yml configuration](/build_config.html) options. 
+To do this run `binstar-build init` in the root repository commit the file and push to the github repository.
+See all of the [.binstar.yml configuration](build_config.html) options.
 
-If **.binstar.yml** is not in the repository, is misspelled, or is not valid YAML, 
+If **.binstar.yml** is not in the repository, is misspelled, or is not valid YAML,
 this will show up in your [dashboard](http://alpha.binstar.org/dashboard) as a build error.
 
 A simple .binstar.yaml example:
- 
+
     project: testci
     script:
         - echo "Hello Binstar CI!"
@@ -67,11 +70,11 @@ Binstar allows to you submit private `keyfiles` which will be copied to the buil
 
 To do this run the command:
 
-    binstar-build keyfile user/package 'remote-filename' --upload local-filename  
+    binstar-build keyfile user/package 'remote-filename' --upload local-filename
 
-#### Keyfile Example: 
+#### Keyfile Example:
 
-Using [boto](http://boto.readthedocs.org/) as an example of a project which needs valid credentials for CI testing, we first create a test user credential file named `boto.config`. Here are the contents of that file: 
+Using [boto](http://boto.readthedocs.org/) as an example of a project which needs valid credentials for CI testing, we first create a test user credential file named `boto.config`. Here are the contents of that file:
 
     # File boto.config
     [Credentials]
@@ -81,11 +84,11 @@ Using [boto](http://boto.readthedocs.org/) as an example of a project which need
 
 
 We can now run:
-    
+
     binstar-build keyfile sean/testci '~/.boto' --upload ./boto.config
 
-This first uploads the contents of ./boto.config to the binstar package `sean/testci` 
-and tells binstar that it should download the contents of the file 
+This first uploads the contents of ./boto.config to the binstar package `sean/testci`
+and tells binstar that it should download the contents of the file
 `boto.config` on the build machine as the file `~/.boto` for all builds of `testci`
 
 To view the keyfiles for this build run:

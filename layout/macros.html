@@ -1,0 +1,48 @@
+{% macro render_main_menu() -%}
+<ul class="nav">
+{% for menu_item in menu -%}
+  <li{% if menu_item.url == resource.url or menu_item.active %} class="active"{% endif %}><a href="{{ menu_item.url }}">{{ menu_item.title }}</a></li>
+{%- endfor %}
+</ul>
+{%- endmacro %}
+
+{% macro render_side_bar(menu) -%}
+
+<ul class="nav">
+{% for menu_item in menu %}
+  <li class="{{ site.is_active(resource, menu_item) }}">
+    <a href="{{ menu_item['url'] }}">{{ menu_item['title'] }}</a>
+
+    <ul class="nav">
+    {% if site.is_active(resource, menu_item) %}
+    {%   for sub_item in resource.meta.sub_items %}
+        <li><a href="#{{ sub_item.id }}" data-target="#{{ sub_item.id }}" >{{ sub_item.title }}</a></li>
+    {%   endfor %}
+    {% endif %}
+    </ul>
+  </li>
+{% endfor %}
+</ul>
+
+{%- endmacro %}
+
+
+{% macro section(id) -%}
+
+<section id="{{ id }}" style="padding-top: 71px; margin-top: -71px;">
+{%    filter markdown %}
+{{    caller() }}
+{%    endfilter %}
+</section>
+
+{%- endmacro %}
+
+{% macro subsection(id) -%}
+
+<div id="{{ id }}">
+{%    filter markdown %}
+{{    caller() }}
+{%    endfilter %}
+</div>
+
+{%- endmacro %}
