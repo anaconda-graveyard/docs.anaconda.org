@@ -70,5 +70,76 @@ See also the [official pip installer documentation](http://www.pip-installer.org
 
 All packages you author must go to a user account. To create a package go to [binstar.org/new](https://binstar.org/new)
 
+First, choose a package repository to upload.  For the purposes of this example, we'll use a small example package located in the [binstar_client repository](https://github.com/Binstar/binstar_client/tree/master/example-packages/pypi).
+
+You will need to begin by cloning the repository from the command line
+
+    $ git clone git@github.com:Binstar/binstar_client.git
+    Cloning into 'binstar_client'...
+    remote: Counting objects: 1561, done.
+    remote: Total 1561 (delta 0), reused 0 (delta 0)
+    Receiving objects: 100% (1561/1561), 304.19 KiB | 0 bytes/s, done.
+    Resolving deltas: 100% (980/980), done.
+    Checking connectivity... done.
+
+This will create a **binstar_client** directory where you ran the command.  Navigate into the example package
+directory and you will be ready to begin
+
+    $ cd binstar_client/example-packages/pypi/
+
+*Note:* If you are using windows, you will need to run the command **chdir** in place of **cd**
+
+Once there, run the following command
+
+    $ python setup.py sdist
+    running sdist
+    running egg_info
+    creating test_package34.egg-info
+    writing requirements to test_package34.egg-info/requires.txt
+    writing test_package34.egg-info/PKG-INFO
+    writing top-level names to test_package34.egg-info/top_level.txt
+    writing dependency_links to test_package34.egg-info/dependency_links.txt
+    writing manifest file 'test_package34.egg-info/SOURCES.txt'
+    reading manifest file 'test_package34.egg-info/SOURCES.txt'
+    writing manifest file 'test_package34.egg-info/SOURCES.txt'
+    warning: sdist: standard file not found: should have one of README, README.rst, README.txt
+
+    running check
+    creating test_package34-0.3.1
+    creating test_package34-0.3.1/package1
+    creating test_package34-0.3.1/test_package34.egg-info
+    making hard links in test_package34-0.3.1...
+    hard linking setup.py -> test_package34-0.3.1
+    hard linking package1/__init__.py -> test_package34-0.3.1/package1
+    hard linking test_package34.egg-info/PKG-INFO -> test_package34-0.3.1/test_package34.egg-info
+    hard linking test_package34.egg-info/SOURCES.txt -> test_package34-0.3.1/test_package34.egg-info
+    hard linking test_package34.egg-info/dependency_links.txt -> test_package34-0.3.1/test_package34.egg-info
+    hard linking test_package34.egg-info/requires.txt -> test_package34-0.3.1/test_package34.egg-info
+    hard linking test_package34.egg-info/top_level.txt -> test_package34-0.3.1/test_package34.egg-info
+    Writing test_package34-0.3.1/setup.cfg
+    creating dist
+    Creating tar archive
+    removing 'test_package34-0.3.1' (and everything under it)
+
+Your package has now been built as a source tarball and is ready to be uploaded.
+
+    $ binstar upload --user USERNAME bokeh/dist/package.tar.gz 
+    Using binstar api site http://api.alpha.binstar.org
+    detecting package type ...
+    pypi
+    extracting package attributes for upload ...
+    done
+
+    Uploading file USER/test-package34/0.3.1/test_package34-0.3.1.tar.gz ... 
+     uploaded 3 of 3Kb: 100.00% ETA: 0.0 minutes
+
+
+    Upload(s) Complete
+
+    Package located at:
+    http://alpha.binstar.org/USER/test-package34
+    
+Your package is now available at *http://alpha.binstar.org/USER/PACKAGE*.
+
 See also [authoring packages](author.html) for a general overview.
 {%endblock%}
