@@ -5,66 +5,6 @@ subtitle: ''
 {% extends "columns.j2" %}
 
 {% block main %}
-<a id="Installing"></a>
-## Installing PyPI packages
-
-The basic way to install a package from binstar is using pip:
-
-```
-pip install --index-url pypi.binstar.org/REPOSITORY-PATH/simple PACKAGE
-```
-
-Where **REPOSITORY-PATH** may be one of the following:
-
-1.  A **username**, this allows installation of packages from a user repository:
-    `pip install --index-url pypi.binstar.org/USER/simple PACKAGE`
-    <br><br>
-    <div class="alert">**Note:**<br> the **pypi** user contains a full up to date mirror of [pypi.python.org](pypi.python.org)
-        <br>
-        e.g. <code>[pypi.binstar.org/pypi](https://pypi.binstar.org/pypi)</code>
-    </div>
-
-
-1.  A **user channel**, this allows installation of packages from a collection of packages a user has put together:
-    ```
-    pip install --index-url pypi.binstar.org/USER/channel/channel-NAME/simple PACKAGE
-    ```
-
-    The **main** channel is the default channel:
-    `pypi.binstar.org/USER/channel/main/simple` is equivalent to `pypi.binstar.org/USER/simple`
-
-
-
-## Installing Private Packages
-
-All urls (except for the public repository) can be prefixed with `/t/$TOKEN` to access private packages.
-
-    TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
-    pip install --index-url pypi.binstar.org/t/$TOKEN/USER/simple PACKAGE
-
-### Modify your piprc file
-
-pip allows you to set all command line option defaults in a standard ini style config file.
-
-The names and locations of the configuration files vary slightly across platforms.
-
- * On Unix and Mac OS X the configuration file is: `$HOME/.pip/pip.conf`
- * On Windows, the configuration file is: `%HOME%\pip\pip.ini`
-
-
-Appending options like `--extra-index-url` or `--index-url` can be written as:
-
-    [global]
-    extra-index-url =
-        http://pypi.binstar.org/user/simple
-
-    [install]
-    extra-index-url =
-        http://pypi.binstar.org/user2/simple
-
-See also the [official pip installer documentation](http://www.pip-installer.org/en/latest/configuration.html)
-
-
 <a id="Authoring"></a>
 ## Authoring PyPI packages
 
@@ -75,49 +15,26 @@ First, choose a package repository to upload.  For the purposes of this example,
 You will need to begin by cloning the repository from the command line
 
     $ git clone git@github.com:Binstar/binstar_client.git
-    Cloning into 'binstar_client'...
-    remote: Counting objects: 1561, done.
-    remote: Total 1561 (delta 0), reused 0 (delta 0)
-    Receiving objects: 100% (1561/1561), 304.19 KiB | 0 bytes/s, done.
-    Resolving deltas: 100% (980/980), done.
-    Checking connectivity... done.
 
-This will create a **binstar_client** directory where you ran the command.  Navigate into the example package
+This will create a **binstar_client** directory where you ran the command.  Navigate into the *example-packages*
 directory and you will be ready to begin
 
     $ cd binstar_client/example-packages/pypi/
 
-*Note:* If you are using windows, you will need to run the command **chdir** in place of **cd**
+<br>
+<div class="alert">**Note:**<br> If you are using Windows, you will need to run the command **chdir** in place of **cd**
+<br>
+</div>
+<br>
+
 
 Once there, run the following command
 
     $ python setup.py sdist
     running sdist
-    running egg_info
-    creating test_package34.egg-info
-    writing requirements to test_package34.egg-info/requires.txt
-    writing test_package34.egg-info/PKG-INFO
-    writing top-level names to test_package34.egg-info/top_level.txt
-    writing dependency_links to test_package34.egg-info/dependency_links.txt
-    writing manifest file 'test_package34.egg-info/SOURCES.txt'
-    reading manifest file 'test_package34.egg-info/SOURCES.txt'
-    writing manifest file 'test_package34.egg-info/SOURCES.txt'
-    warning: sdist: standard file not found: should have one of README, README.rst, README.txt
 
-    running check
-    creating test_package34-0.3.1
-    creating test_package34-0.3.1/package1
-    creating test_package34-0.3.1/test_package34.egg-info
-    making hard links in test_package34-0.3.1...
-    hard linking setup.py -> test_package34-0.3.1
-    hard linking package1/__init__.py -> test_package34-0.3.1/package1
-    hard linking test_package34.egg-info/PKG-INFO -> test_package34-0.3.1/test_package34.egg-info
-    hard linking test_package34.egg-info/SOURCES.txt -> test_package34-0.3.1/test_package34.egg-info
-    hard linking test_package34.egg-info/dependency_links.txt -> test_package34-0.3.1/test_package34.egg-info
-    hard linking test_package34.egg-info/requires.txt -> test_package34-0.3.1/test_package34.egg-info
-    hard linking test_package34.egg-info/top_level.txt -> test_package34-0.3.1/test_package34.egg-info
-    Writing test_package34-0.3.1/setup.cfg
-    creating dist
+    ...
+
     Creating tar archive
     removing 'test_package34-0.3.1' (and everything under it)
 
@@ -141,5 +58,31 @@ Your package has now been built as a source tarball and is ready to be uploaded.
     
 Your package is now available at *http://alpha.binstar.org/USER/PACKAGE*.
 
-See also [authoring packages](author.html) for a general overview.
+## Installing PyPI packages
+
+The basic way to install a package from binstar is using pip.  For the following, we will use the package we authored in the examples above:
+
+```
+pip install --index-url https://pypi.binstar.org/REPOSITORY-PATH/simple test-package34
+```
+
+Where **REPOSITORY-PATH** may be one of the following:
+
+1.  A **username**, this allows installation of packages from a user repository:
+    `pip install --index-url https://pypi.binstar.org/USER/simple test-package34`
+    <br><br>
+    <div class="alert">**Note:**<br> the **pypi** user contains a full up to date mirror of [pypi.python.org](pypi.python.org)
+        <br>
+        e.g. <code>[pypi.binstar.org/pypi](https://pypi.binstar.org/pypi)</code>
+    </div>
+
+
+2.  A **user channel**, this allows installation of packages from a collection of packages a user has put together:
+    ```
+    pip install --index-url https://pypi.binstar.org/USER/channel/channel-NAME/ test-package34
+    ```
+
+    The **main** channel is the default channel:
+    `https://pypi.binstar.org/USER/channel/main/simple` is equivalent to `https://pypi.binstar.org/USER/simple`
+
 {%endblock%}
