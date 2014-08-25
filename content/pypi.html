@@ -85,4 +85,33 @@ Where **REPOSITORY-PATH** may be one of the following:
     The **main** channel is the default channel:
     `https://pypi.binstar.org/USER/channel/main/simple` is equivalent to `https://pypi.binstar.org/USER/simple`
 
+## Installing Private Packages
+
+All urls (except for the public repository) can be prefixed with `/t/$TOKEN` to access private packages.
+
+    TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
+    pip install --index-url pypi.binstar.org/t/$TOKEN/USER/simple test-package34
+
+### Modify your piprc file
+
+pip allows you to set all command line option defaults in a standard ini style config file.
+
+The names and locations of the configuration files vary slightly across platforms.
+
+ * On Unix and Mac OS X the configuration file is: `$HOME/.pip/pip.conf`
+ * On Windows, the configuration file is: `%HOME%\pip\pip.ini`
+
+
+Appending options like `--extra-index-url` or `--index-url` can be written as:
+
+    [global]
+    extra-index-url =
+        http://pypi.binstar.org/user/simple
+
+    [install]
+    extra-index-url =
+        http://pypi.binstar.org/user2/simple
+
+See also the [official pip installer documentation](https://pip.pypa.io/en/latest/user_guide.html#installing-packages)
+
 {%endblock%}
