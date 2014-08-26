@@ -20,13 +20,13 @@ sub_items:
 The basic way to install a package from binstar is using pip:
 
 ```
-pip install --index-url pypi.binstar.org/REPOSITORY-PATH/simple PACKAGE
+pip install --index-url https://pypi.binstar.org/REPOSITORY-PATH/simple PACKAGE
 ```
 
 Where **REPOSITORY-PATH** may be one of the following:
 
 1.  A **username**, this allows installation of packages from a user repository:
-    `pip install --index-url pypi.binstar.org/USER/simple PACKAGE`
+    `pip install --index-url https://pypi.binstar.org/USER/simple PACKAGE`
     <br><br>
     <div class="alert">**Note:**<br> the **pypi** user contains a full up to date mirror of [pypi.python.org](https://pypi.python.org)
         <br>
@@ -36,11 +36,11 @@ Where **REPOSITORY-PATH** may be one of the following:
 
 1.  A **user channel**, this allows installation of packages from a collection of packages a user has put together:
     ```
-    pip install --index-url pypi.binstar.org/USER/channel/channel-NAME/simple PACKAGE
+    pip install --index-url https://pypi.binstar.org/USER/channel/channel-NAME/simple PACKAGE
     ```
 
     The **main** channel is the default channel:
-    `pypi.binstar.org/USER/channel/main/simple` is equivalent to `pypi.binstar.org/USER/simple`
+    `https://pypi.binstar.org/USER/channel/main/simple` is equivalent to `https://pypi.binstar.org/USER/simple`
 
 
 
@@ -49,7 +49,7 @@ Where **REPOSITORY-PATH** may be one of the following:
 All urls (except for the public repository) can be prefixed with `/t/$TOKEN` to access private packages.
 
     TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
-    pip install --index-url pypi.binstar.org/t/$TOKEN/USER/simple PACKAGE
+    pip install --index-url https://pypi.binstar.org/t/$TOKEN/USER/simple PACKAGE
 
 ### Modify your piprc file
 
