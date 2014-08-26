@@ -58,24 +58,33 @@ Navigate to your build queue to edit the properties from there you may:
 
  *  Modify the list of platforms your queue supports
  *  Give other users access to build on your queue
+ 
+    <div class="alert alert-danger">
+    <strong>Warning:</strong> If you do this, these users may run arbitrary scripts on make sure that
+    they are trusted 
+    </div>
  *  Set the queue as default
  *  View the list of running workers
 
 {% endcall %}
 {% call section('adding-a-worker') %}
+
 # Add a build worker to process jobs on your queue 
 
 First you must install binstar-build version 0.6.0 or greater
 
     conda install -c binstar-build
     
-Now you must log in to binstar:
+You only need to do this step once, 
+if you have already done this on another machine point your browser to
+your [settings/access](https://binstar.org/settings/access) page and copy your **binstar-workers** token
+to the `~/binstar.token` file on the build-machine:
 
-    binstar login
+    binstar auth --create --name build-workers --scopes api:build-worker > ~/binstar.token
 
 Once this is complete run the worker, this will start a worker process that runs forever. 
     
-    binstar-build worker <QUEUE-NAME>
+    binstar-build -t $(<~/binstar.token) worker <QUEUE-NAME>
     
 You may want to run this process under a service like [supervisord](http://supervisord.org/) 
 to ensure that it runns forever 
@@ -84,7 +93,7 @@ to ensure that it runns forever
 {% call section('test-your-queue') %}
 # Test your build queue
 
-From any machine (prefrebly not your build worker machine) submit a binstar build with the 
+From any machine (prefrebly not on your build worker machine) submit a binstar build with the 
 `--queue` option.
 
     binstar-build submit <path-to-your-test-job> --queue <QUEUE-NAME> 
