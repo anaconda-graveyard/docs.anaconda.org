@@ -152,31 +152,21 @@ Run the On-site Binstar server installation:
 
 You should now see a working, private installation of binstar.org when you visit <a href="http://localhost:8080">http://localhost:8080</a>.
 
-Finally, you may wish to automatically restart your On-site Binstar installation if the instance fails or errors.
+Finally, you may wish to automatically restart your On-site Binstar installation if the instance fails or errors and on reboot:
 
 Create a supervisord instance:
 
-	mkdir -p $HOME/miniconda/etc/
-	echo_supervisord_conf > $HOME/miniconda/etc/supervisord.conf
+    binstar-install-supervisord-config.sh
 
-Add the following lines to the supervisord.conf file you just created:
+To test that the config script ran correctly run:
 
-	[program:binstar-server]
-	command=binstar-server
-	stdout_logfile=syslog
-	stderr_logfile=syslog
+    supervisorctl status
 
-	[program:binstar-worker]
-	command=mtq-worker -c binstar.tasks.worker high default low
-	stdout_logfile=syslog
-	stderr_logfile=syslog
+You should see somthing like:
 
-You can now start and restart the Binstar server with the following commands:
+    binstar-server                   RUNNING    pid 8828, uptime 0:00:14
+    binstar-worker                   RUNNING    pid 8827, uptime 0:00:14
 
-	#starts binstar server
-	supervisord
-	#restarts binstar server
-	supervisorctl restart all
 
 {% endcall %}
 
@@ -206,3 +196,4 @@ Remember to replace Replace `/full/path/to/` with the actual path to the `binsta
 {% endcall %}
 
 {%endblock%}
+
