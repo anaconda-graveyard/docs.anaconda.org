@@ -4,11 +4,12 @@ title: Binstar Build Queues
 sub_items:
  - id: purpose
    title: Purpose
- - id: conda-authoring
-   title: Authoring Conda packages
-
-
+ - id: adding-a-queue
+   title: Add a build queue to your account
+ - id: adding-a-worker
+   title: Add a build worker
 ---
+{% from "macros.html" import section, subsection %}
 {% extends "layout.html" %}
 
 {% block main %}
@@ -16,10 +17,77 @@ sub_items:
 {% call section('purpose') %}
 # Purpose
 
-Binstar provides a default queue that is mannaged by continuum analytics for the public. 
-The default build queue 
+Binstar provides a default public queue that is mannaged by continuum analytics. 
 
-The purpose 
+The the prurpose of the binstar build queue is to allow any user to add a build worker for their 
+organization or user account. User build queues are private and the owner can controll who may build 
+on their queue.
+
+<div class="alert alert-warning">
+<strong>Note:</strong> you should already be confortable submitting jobs to binstar build before creating a new build qeueu
+</div>
+
+{% endcall %}
+{% call section('adding-a-queue') %}
+# Add a build queue to your account
+
+In your browser navigate to 
+[https://alpha.binstar.org/settings/build-queue](https://alpha.binstar.org/settings/build-queue) 
+And select "New Queue"
+
+<center>
+<img src="../media/img/add-a-queue.png" alt="Org Dashboard Dropdown" style="width: 75%;" align="middle"/>
+</center>
+
+Once there, you will be prompted to fill out the following form:
+
+<center>
+<img src="../media/img/new-queue.png" alt="Org Dashboard Dropdown" style="width: 75%;" align="middle"/>
+</center>
+
+ *  **Name**: must be a unique name, your queue name will always be prefixed with `build-<your-username>-`
+ *  **Platforms**: must be a comma seporated list of platforms you plan on running build workers from.
+    The currenlty supported platforms are `osx-64`, `linux-64` and `linux-32`
+ * **Default**: The if seleceded, all build jobs submitted to your account will go to this queue 
+   unless otherwise specified
+ 
+
+## Modify the build queue
+
+Navigate to your build queue to edit the properties from there you may:
+
+ *  Modify the list of platforms your queue supports
+ *  Give other users access to build on your queue
+ *  Set the queue as default
+ *  View the list of running workers
+
+{% endcall %}
+{% call section('adding-a-worker') %}
+# Add a build worker to process jobs on your queue 
+
+First you must install binstar-build version 0.6.0 or greater
+
+    conda install -c binstar-build
+    
+Now you must log in to binstar:
+
+    binstar login
+
+Once this is complete run the worker, this will start a worker process that runs forever. 
+    
+    binstar-build worker <QUEUE-NAME>
+    
+You may want to run this process under a service like [supervisord](http://supervisord.org/) 
+to ensure that it runns forever 
+
+{% endcall %}
+{% call section('test-your-queue') %}
+# Test your build queue
+
+From any machine (prefrebly not your build worker machine) submit a binstar build with the 
+`--queue` option.
+
+    binstar-build submit <path-to-your-test-job> --queue <QUEUE-NAME> 
 
 {% endcall %}
 

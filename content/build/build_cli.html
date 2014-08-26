@@ -1,11 +1,30 @@
 ---
 title: Binstar Build
 subtitle: 'Command line interface'
+
+sub_items:
+ - id: getting-started
+   title: Getting started
+ - id: create-a-package
+   title: Create a package
+ - id: binstar-yml
+   title: Add .binstar.yml file to your build directory
+ - id: submit
+   title: Submit your build
+ - id: monitor
+   title: Monitor your build
+ - id: faq
+   title: Frequently asked questions
+
 ---
+{% from "macros.html" import section, subsection %}
+
 {% extends "layout.html" %}
 
 {% block main %}
 <a id="Installing"></a>
+
+{% call section('getting-started') %}
 
 ## Getting Started
 
@@ -23,6 +42,9 @@ Check out these examples if you learn by doing:
  * [Example conda package](https://github.com/Binstar/binstar_client/tree/feature/build/test/conda)
  * [Binstar config documentation](build_config.html)
 
+{% endcall %}
+{% call section('create-a-package') %}
+
 ### Step 1: Create a package
 
 If you are not familiar with binstar create a package first.
@@ -31,6 +53,9 @@ This will be the namespace or the context of the build.
     binstar package --create USERNAME/conda_build_test
 
 Replace `USERNAME` with your username.
+
+{% endcall %}
+{% call section('binstar-yml') %}
 
 ### Step 2: Add .binstar.yml file to your build directory
 
@@ -46,6 +71,9 @@ See the [.binstar.yml](build_config.html) documentation for more details. Here i
     script:
       - conda build .
     build_targets: conda
+
+{% endcall %}
+{% call section('submit') %}
 
 ### Step 3: Submit your build
 
@@ -68,6 +96,9 @@ Or you can do a dry run to check that your .binstar.yml file is OK.
 This command packs the entire directory containing the .binstar.yaml file and uploads it to binstar.
 You build is now in the build queue.
 
+{% endcall %}
+{% call section('monitor') %}
+
 ### Step 4: Monitor your build
 
 #### List all of your builds for this package
@@ -86,6 +117,9 @@ You build is now in the build queue.
 
 The `-f` option behaves exactly like the linux `tail -f` command
 
+{% endcall %}
+{% call section('faq') %}
+
 ## Look at the binstar-build --help option
 
 Go ahead
@@ -93,5 +127,8 @@ Go ahead
 ## Enable continuous integration
 
 [See the CI docs](continuous_integration.html)
+
+
+{% endcall %}
 
 {% endblock %}
