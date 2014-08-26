@@ -70,48 +70,6 @@ To make sure mongo is running run:
 
 {% endcall %}
 
-{% call section('log-output') %}
-### Log the Output to Continuum
-
-
-<strong>Please note:</strong> This step is optional, but highly recommended.
-
-The following command will log activity from your server to our Loggly records so we can better support
-your On-site Binstar installation.
-
-First, confirm the machine has access to Loggly:
-
-	# Should return a succcess
-	ping -c 5 -W 5 logs-01.loggly.com
-
-	# Should print '1'
-	curl --connect-timeout 10 logs-01.loggly.com:514 2>&1  | grep "Empty reply from server" | wc -l
-
-These values will be given to you when you purchase On-site Binstar: 
-
- *  `LOG_TOKEN`
- *  `PRODUCT_NAME`
-
-Add the file `/etc/rsyslog.d/22-loggly.conf` with the following content:
-
-	$ cat > /etc/rsyslog.d/22-loggly.conf <<'EOF'
-	# Define the template used for sending logs to Loggly. Do not change this format.
-	$template LogglyFormat,"<%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% %procid% %msgid% [LOG_TOKEN@41058 tag=\"PRODUCT_NAME\"] %msg%"
-
-	# Send messages to Loggly over TCP using the template.
-	*.*             @@logs-01.loggly.com:514;LogglyFormat
-	EOF
-
-<div class="alert alert-warning">
-    You must replace the `LOG_TOKEN` and `CUSTOMER_NAME` values from the text above.
-</div>
-
-Now restart your rsyslog process:
-
-	sudo service rsyslog restart
-
-{% endcall %}
-
 {% call section('create-binstar-user')%}
 ### Create the Binstar user
 
@@ -166,7 +124,7 @@ using the custom On-site Binstar token provided to you by your sales representat
 	conda install binstar-server
 
 <div class="alert alert-warning">
-    You must replace the `INSTALL_TOKEN` value in the above command with the token provided to you by your sales representative. 
+    You must replace the `INSTALL_TOKEN` value in the above command with the token provided to you by your sales representative.
 </div>
 
 {% endcall %}
@@ -219,6 +177,31 @@ You can now start and restart the Binstar server with the following commands:
 	supervisord
 	#restarts binstar server
 	supervisorctl restart all
+
+{% endcall %}
+
+{% call section('log-output') %}
+### Log the Output to Continuum
+
+<strong>Please note:</strong> This step is optional, but highly recommended.
+
+This step rquires **sudo**:
+
+    sudo binstar-centralized-logging.sh --product-name PRODUCT_NAME
+
+If you need to swutch out of the binstar user to perform this step record the full path to the logging script with:
+
+    which binstar-centralized-logging.sh
+
+run:
+
+    sudo /full/path/to/binstar-centralized-logging.sh --product-name PRODUCT_NAME
+
+Remember to replace Replace `/full/path/to/` with the actual path to the `binstar-centralized-logging.sh`
+
+<div class="alert alert-warning">
+    You must replace `PRODUCT_NAME` from the text above.
+</div>
 
 {% endcall %}
 
