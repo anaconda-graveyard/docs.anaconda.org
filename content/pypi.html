@@ -27,11 +27,13 @@ Where **REPOSITORY-PATH** may be one of the following:
 
 1.  A **username**, this allows installation of packages from a user repository:
     `$ pip install --index-url https://pypi.binstar.org/USER/simple PACKAGE`
-    <br><br>
-    <div class="alert">**Note:**<br> the **pypi** user contains a full up to date mirror of [pypi.python.org](https://pypi.python.org)
-        <br>
-        e.g. <code>[pypi.binstar.org/pypi](https://pypi.binstar.org/pypi)</code>
-    </div>
+
+    **Note:** the **pypi** user contains a full up to date mirror of [pypi.python.org](https://pypi.python.org)
+
+    So if you want to use it, then please run:
+
+
+    `$ pip install --index-url https://pypi.binstar.org/pypi/simple PACKAGE`
 
 1.  A **user channel**, this allows installation of packages from a collection of packages a user has put together:
     ```
@@ -82,7 +84,7 @@ Therefore:
 
     $ cd ~/
     $ git clone https://github.com/mitsuhiko/flask
-    $ cd flask
+    $ cd flask/
 
 Once there, run the following command:
 
@@ -109,6 +111,7 @@ Your package has now been successfully built as a source tarball and is ready to
 
     $ ls -al dist/
     -rw-rw-r--.  1 irritum irritum 560688 Aug 27 09:51 Flask-0.11-dev-20140827.tar.gz
+
     $ binstar -t ${TOKEN} upload dist/Flask-0.11-dev-20140827.tar.gz
     detecting package type ...
     pypi
@@ -147,7 +150,7 @@ In this case you have to install missing dependencies, just like that:
 
     $ pip install -i https://pypi.binstar.org/pypi/simple werkzeug>=0.7
 
-In above case we use binstar's `pypi` mirror of [official PyPI](https://pypi.python.org/pypi).
+In above command we use binstar's `pypi` mirror of [official PyPI](https://pypi.python.org/pypi).
 You can also use official site if you want to:
 
     $ pip install werkzeug
@@ -210,6 +213,8 @@ And finally:
         ...
     Successfully installed flask
     Cleaning up...
+
+Our package is appropriately installed in our system.
 
 See also [authoring packages](author.html) for a general overview.
 
