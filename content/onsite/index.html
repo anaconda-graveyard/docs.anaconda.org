@@ -8,16 +8,14 @@ sub_items:
     title: Requirements
   - id: install-mongodb
     title: Install MongoDB
-  - id: log-output
-    title: Log the Output to Continuum
   - id: create-binstar-user
     title: Create the Binstar User
-  - id: install-miniconda
-    title: Install Miniconda
   - id: install-binstar
     title: Install Binstar
   - id: configure-binstar
     title: Configure the Binstar Server
+  - id: log-output
+    title: Log the Output to Continuum
 ---
 
 {% from "macros.html" import section, subsection %}
@@ -58,7 +56,7 @@ Perform as Root
 ### Install MongoDB
 
 See the [official installation guide](http://docs.mongodb.org/manual/installation/) for installation
-instructions for your platform.  Once you have successfully installed and started MongoDB,
+instructions for your platform.  Once you have successfully installed and <strong>started</strong> MongoDB,
 you can proceed with your installation.
 
 Because the MongoDB instance must be running before the Binstar server can be started, you will likely
@@ -90,32 +88,8 @@ as you will not need root access for any of the remaining steps:
 Perform as Binstar User
 -----------------------
 
-{% call section('install-miniconda')%}
-
-### Install Miniconda
-
-
-Download and install Miniconda, which will give you access to the conda command:
-
-	curl 'http://repo.continuum.io/miniconda/Miniconda-3.5.5-Linux-x86_64.sh' > Miniconda.sh
-	bash Miniconda.sh
-
-By default, Miniconda will install in the directory from which you execute the installer;
-you have the option to override this configuration and choose a different directory if you wish.
-Upon successfully completing the installation, you will be prompted to add the install location to your path:
-
-	Do you wish the installer to prepend the Miniconda install location
-	to PATH in your /home/binstar/.bashrc ? [yes|no]
-	[no] >>> yes
-
-<strong>Please note:</strong> you must answer "yes" to ensure Miniconda will be added to your path variable.
-You will also need to open a new terminal session or run the <code>source ~/.bashrc</code> command for this change to take effect.
-
-{% endcall %}
-
 {% call section('install-binstar')%}
 ### Install Binstar
-
 
 In order to install On-site Binstar, you will need to execute the cas-installer tool
 using the custom On-site Binstar token provided to you by your sales representative at the time of purchase:
@@ -127,12 +101,16 @@ using the custom On-site Binstar token provided to you by your sales representat
     You must replace the `INSTALL_TOKEN` value in the above command with the token provided to you by your sales representative.
 </div>
 
+Download the binstar installation script from 
+Run the binstar-server install script:
+	
+	bash binstar-installer-1.4.2-8-Linux-x86_64.sh
+
+
 {% endcall %}
 
 {% call section('configure-binstar')%}
 ###  Configure the Binstar Server
-
-
 
 Initialize the Binstar server instance, and indicate the desired filepath for package storage:
 
@@ -156,7 +134,7 @@ Finally, you may wish to automatically restart your On-site Binstar installation
 
 Create a supervisord instance:
 
-    binstar-install-supervisord-config.sh
+    bash binstar-install-supervisord-config.sh
 
 To test that the config script ran correctly run:
 

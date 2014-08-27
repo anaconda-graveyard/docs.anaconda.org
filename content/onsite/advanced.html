@@ -80,6 +80,65 @@ If you already have a mongodb server running you can connect to it by setting th
 See the [mongodb uri connection str](http://docs.mongodb.org/manual/reference/connection-string/)
 manual for more information.
 
+
+{% endcall %}
+{% call section('ldap') %}
+### Enable Binstar LDAP
+
+#### Verify LDAP functionality
+
+Pull in git repo flask-ldap-login
+
+    git clone https://github.com/ContinuumIO/flask-ldap-login
+
+Change to the examples directory 
+
+    cd examples/
+
+Edit the *direct_bind.py* file and update your LDAP settings
+
+    LDAP = {
+      'URI': 'ldap://ldap.company.com',
+
+      # Bind directly to this base DN.
+      'BIND_DN': 'uid=%(username)s,ou=People,dc=company,dc=com',
+
+      # Map ldap keys into application specific keys
+      'KEY_MAP': {
+          'name':'cn',
+          'company': 'o',
+          'location':'l',
+          'email': 'mail',
+          },
+
+      # LDAP connection options
+      'OPTIONS': {
+                  'OPT_PROTOCOL_VERSION': 3,
+                  }
+    }
+
+Run the flask-ldap-login-check command to verify LDAP connectivity
+
+    flask-ldap-login-check examples.direct_bind:app --username 'me' --password 'super secret'
+
+
+#### Configure Binstar to use LDAP
+
+Once the flask ldap check has successfully run, add the LDAP configureation you edited in the *direct_bind.py* file to the end your */etc/binstar/config.yaml* file.
+
+    vi /etc/binstar/config.yaml
+
+Now restart the Binstar server to apply changes
+
+    supervisorctl restart all
+
+Open your browser and browse to your local binstar server installation:
+
+    http://local.binstar.srv
+
+You should now be able to log in using your LDAP credentials
+
+
 {% endcall %}
 
 {% endblock main %}
