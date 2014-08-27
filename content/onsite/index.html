@@ -24,7 +24,6 @@ sub_items:
 {% extends "layout.html" %}
 
 {% block main %}
-## Installing On-Site Binstar
 
 On-site Binstar installation allows you to create and maintain a private version of [binstar.org](https://binstar.org)
 for easy creation and sharing of custom conda and PyPI packages within your organization.
@@ -69,7 +68,6 @@ To make sure mongo is running run:
     mongo --eval 'db.serverStatus().ok'
 
 {% endcall %}
-
 {% call section('create-binstar-user')%}
 ### Create the Binstar user
 
