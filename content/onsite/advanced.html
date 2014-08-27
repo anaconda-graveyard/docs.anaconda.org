@@ -1,0 +1,86 @@
+---
+#
+# Note: that due to a restriction with hyde
+#       you must edit the meta.yaml file in this
+#       directory to include this template in the
+#       table of contents
+#
+
+title: Advanced Install options
+
+# These are the nave items that are going
+# to be active when this page is active
+sub_items:
+ - id: https
+   title: Enable https
+ - id: standard-ports
+   title: Using Standard Ports
+ - id: connect-to-existing-mongodb
+   title: Connect to an Existing MongoDB Database
+---
+
+
+{% from "macros.html" import section, subsection %}
+{# You must always extend "layout.html" #}
+{% extends "layout.html" %}
+
+{# All of the site content can go in the main block #}
+{% block main %}
+
+{# Use a section so that the scroll-spy can link to the items in the "sub_items" above #}
+{% call section('https') %}
+### Enable https
+
+First you must have an ssl `*.cert` file and an ssl `*.key` file.
+If you want to test this functionality you can always [create a self-signed certificate](http://www.selfsignedcertificate.com/)
+
+    binstar-config --set ssl_options.keyfile /home/binstar/localhost.key
+    binstar-config --set ssl_options.certfile /home/binstar/localhost.cert
+    binstar-config --set port 8443
+    binstar-config --set redirect_http_port 8080
+
+
+Now you must restart your server
+
+    supervisorctl restart all
+
+
+{% endcall%}
+
+{% call section('standard-ports') %}
+
+### Using Standard Ports
+
+The easiest way to use standard ports is to redirect traffic from
+the standard ports 80 and 443 to the Binstar server ports
+
+
+#### HTTP
+
+    sudo iptables -t nat -F
+    sudo iptables -t nat -A OUTPUT -d localhost -p tcp --dport 80 -j REDIRECT --to-ports 8080
+    sudo iptables -t nat -I PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+#### HTTPS
+
+If you are using https you must also redirect traffic from 443 to 8443
+
+    sudo iptables -t nat -A OUTPUT -d localhost -p tcp --dport 443 -j REDIRECT --to-ports 8443
+    sudo iptables -t nat -I PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 8443
+
+
+{% endcall %}
+{% call section('connect-to-existing-mongodb') %}
+### Connect to an Existing MongoDB Database
+
+If you already have a mongodb server running you can connect to it by setting the MONGO_URL config variable
+
+    binstar-config --set MONGO_URL 'mongodb://<hostname>'
+
+See the [mongodb uri connection str](http://docs.mongodb.org/manual/reference/connection-string/)
+manual for more information.
+
+{% endcall %}
+
+{% endblock main %}
+

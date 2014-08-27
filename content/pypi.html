@@ -4,54 +4,116 @@ subtitle: ''
 
 include: true
 sub_items:
- - id: pypi-installing
-   title: Installing PyPI packages
- - id: pypi-authoring
+ - id: authoring
    title: Authoring PyPI packages
+ - id: installing
+   title: Installing PyPI packages
+ - id: installing-private
+   title: Installing Private packages
+ - id: piprc
+   title: Modify your pypirc file
+
 ---
 {% from "macros.html" import section, subsection %}
 {% extends "layout.html" %}
 
 {% block main %}
-{% call section('pypi-installing') %}
+
+<a id="Authoring"></a>
+{% call section('authoring') %}
+## Authoring PyPI packages
+
+All packages you author must go to a user account. There are two ways to create a package
+
+1. Go to [binstar.org/new](https://binstar.org/new)
+
+2. Or, using the binstar command line client, run the command `binstar package --create USERNAME/PACKAGENAME`
+
+First, choose a package repository to upload.  For the purposes of this example, we'll use a small example package located in the [binstar_client repository](https://github.com/Binstar/binstar_client/tree/master/example-packages/pypi).
+
+You will need to begin by cloning the repository from the command line
+
+    $ git clone git@github.com:Binstar/binstar_client.git
+
+This will create a **binstar_client** directory where you ran the command.  Navigate into the `binstar_client/example-packages/pypi/` directory and you will be ready to begin
+
+    $ cd binstar_client/example-packages/pypi/
+
+
+**Note:** If you are using Windows, you will need to run the command **chdir** in place of **cd**
+
+
+
+Once there, run the following command
+
+    $ python setup.py sdist
+    running sdist
+
+    ...
+
+    Creating tar archive
+    removing 'test_package34-0.3.1' (and everything under it)
+
+Your package has now been built as a source tarball and is ready to be uploaded.
+
+    $ binstar upload --user USERNAME binstar_client/example-packages/pypi/dist/test_package34-0.3.1.tar.gz
+    Using binstar api site http://api.alpha.binstar.org
+    detecting package type ...
+    pypi
+    extracting package attributes for upload ...
+    done
+
+    Uploading file USER/test-package34/0.3.1/test_package34-0.3.1.tar.gz ... 
+     uploaded 3 of 3Kb: 100.00% ETA: 0.0 minutes
+
+
+    Upload(s) Complete
+
+    Package located at:
+    http://alpha.binstar.org/USER/test-package34
+    
+Your package is now available at `http://alpha.binstar.org/USER/PACKAGE`
+
+{% endcall %}
+{% call section('installing') %}
 
 ## Installing PyPI packages
 
-The basic way to install a package from binstar is using pip:
+The basic way to install a package from binstar is using pip.  For the following, we will use the package we authored in the examples above:
 
 ```
-pip install --index-url pypi.binstar.org/REPOSITORY-PATH/simple PACKAGE
+pip install --index-url https://pypi.binstar.org/REPOSITORY-PATH/simple test-package34
 ```
 
 Where **REPOSITORY-PATH** may be one of the following:
 
 1.  A **username**, this allows installation of packages from a user repository:
-    `pip install --index-url pypi.binstar.org/USER/simple PACKAGE`
-    <br><br>
-    <div class="alert">**Note:**<br> the **pypi** user contains a full up to date mirror of [pypi.python.org](https://pypi.python.org)
-        <br>
-        e.g. <code>[pypi.binstar.org/pypi](https://pypi.binstar.org/pypi)</code>
-    </div>
+    `pip install --index-url https://pypi.binstar.org/USER/simple test-package34`
+    
+    **Note:** the **pypi** user contains a full up to date mirror of [pypi.python.org](https://pypi.python.org)
+    e.g. [pypi.binstar.org/pypi](https://pypi.binstar.org/pypi)
 
 
-1.  A **user channel**, this allows installation of packages from a collection of packages a user has put together:
+2.  A **user channel**, this allows installation of packages from a collection of packages a user has put together:
     ```
-    pip install --index-url pypi.binstar.org/USER/channel/channel-NAME/simple PACKAGE
+    pip install --index-url https://pypi.binstar.org/USER/channel/channel-NAME/ test-package34
     ```
 
     The **main** channel is the default channel:
-    `pypi.binstar.org/USER/channel/main/simple` is equivalent to `pypi.binstar.org/USER/simple`
+    `https://pypi.binstar.org/USER/channel/main/simple` is equivalent to `https://pypi.binstar.org/USER/simple`
 
-
-
+{% endcall %}
+{% call section('installing-private') %}
 ## Installing Private Packages
 
 All urls (except for the public repository) can be prefixed with `/t/$TOKEN` to access private packages.
 
     TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
-    pip install --index-url pypi.binstar.org/t/$TOKEN/USER/simple PACKAGE
+    pip install --index-url https://pypi.binstar.org/t/$TOKEN/USER/simple test-package34
 
-### Modify your piprc file
+{% endcall %}
+{% call section('piprc') %}
+## Modify your piprc file
 
 pip allows you to set all command line option defaults in a standard ini style config file.
 
@@ -71,17 +133,6 @@ Appending options like `--extra-index-url` or `--index-url` can be written as:
     extra-index-url =
         http://pypi.binstar.org/user2/simple
 
-See also the [official pip installer documentation](http://www.pip-installer.org/en/latest/configuration.html)
-
+See also the [official pip installer documentation](https://pip.pypa.io/en/latest/user_guide.html#installing-packages)
 {% endcall %}
-{% call section('pypi-authoring') %}
-
-## Authoring PyPI packages
-
-All packages you author must go to a user account. To create a package go to [binstar.org/new](https://binstar.org/new)
-
-See also [authoring packages](author.html) for a general overview.
-
-{% endcall %}
-
 {%endblock%}
