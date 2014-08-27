@@ -94,7 +94,7 @@ Where **REPOSITORY-PATH** may be one of the following:
 All urls (except for the public repository) can be prefixed with `/t/$TOKEN` to access private packages.
 
     TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
-    pip install --index-url pypi.binstar.org/t/$TOKEN/USER/simple test-package34
+    pip install --index-url https://pypi.binstar.org/t/$TOKEN/USER/simple test-package34
 
 ### Modify your piprc file
 
