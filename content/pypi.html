@@ -17,39 +17,38 @@ sub_items:
 
 ## Installing PyPI packages
 
-The basic way to install a package from binstar is using pip:
+The basic way to install a package from [binstar.org](https://binstar.org/) is using pip:
 
 ```
-pip install --index-url pypi.binstar.org/REPOSITORY-PATH/simple PACKAGE
+$ pip install --index-url https://pypi.binstar.org/REPOSITORY-PATH/simple PACKAGE
 ```
 
 Where **REPOSITORY-PATH** may be one of the following:
 
 1.  A **username**, this allows installation of packages from a user repository:
-    `pip install --index-url pypi.binstar.org/USER/simple PACKAGE`
-    <br><br>
-    <div class="alert">**Note:**<br> the **pypi** user contains a full up to date mirror of [pypi.python.org](https://pypi.python.org)
-        <br>
-        e.g. <code>[pypi.binstar.org/pypi](https://pypi.binstar.org/pypi)</code>
-    </div>
+    `$ pip install --index-url https://pypi.binstar.org/USER/simple PACKAGE`
 
+    **Note:** the **pypi** user contains a full up to date mirror of [pypi.python.org](https://pypi.python.org)
+
+    So if you want to use it, then please run:
+
+
+    `$ pip install --index-url https://pypi.binstar.org/pypi/simple PACKAGE`
 
 1.  A **user channel**, this allows installation of packages from a collection of packages a user has put together:
     ```
-    pip install --index-url pypi.binstar.org/USER/channel/channel-NAME/simple PACKAGE
+    $ pip install --index-url https://pypi.binstar.org/USER/channel/channel-NAME/simple PACKAGE
     ```
 
     The **main** channel is the default channel:
-    `pypi.binstar.org/USER/channel/main/simple` is equivalent to `pypi.binstar.org/USER/simple`
-
-
+    `https://pypi.binstar.org/USER/channel/main/simple` is equivalent to `https://pypi.binstar.org/USER/simple`
 
 ## Installing Private Packages
 
 All urls (except for the public repository) can be prefixed with `/t/$TOKEN` to access private packages.
 
-    TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
-    pip install --index-url pypi.binstar.org/t/$TOKEN/USER/simple PACKAGE
+    $ TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
+    $ pip install --index-url https://pypi.binstar.org/t/$TOKEN/USER/simple PACKAGE
 
 ### Modify your piprc file
 
@@ -59,7 +58,6 @@ The names and locations of the configuration files vary slightly across platform
 
  * On Unix and Mac OS X the configuration file is: `$HOME/.pip/pip.conf`
  * On Windows, the configuration file is: `%HOME%\pip\pip.ini`
-
 
 Appending options like `--extra-index-url` or `--index-url` can be written as:
 
@@ -78,7 +76,145 @@ See also the [official pip installer documentation](http://www.pip-installer.org
 
 ## Authoring PyPI packages
 
-All packages you author must go to a user account. To create a package go to [binstar.org/new](https://binstar.org/new)
+First, choose a repository you would like to built package for.
+For the purposes of this example, we'll use the [Flask](https://github.com/mitsuhiko/flask).
+
+Therefore:
+
+
+    $ cd ~/
+    $ git clone https://github.com/mitsuhiko/flask
+    $ cd flask/
+
+Once there, run the following command:
+
+
+    $ python setup.py sdist
+    running sdist
+    running egg_info
+    writing requirements to Flask.egg-info/requires.txt
+    writing Flask.egg-info/PKG-INFO
+    writing top-level names to Flask.egg-info/top_level.txt
+    writing dependency_links to Flask.egg-info/dependency_links.txt
+    writing entry points to Flask.egg-info/entry_points.txt
+    reading manifest file 'Flask.egg-info/SOURCES.txt'
+    reading manifest template 'MANIFEST.in'
+    ...
+    hard linking flask/testsuite/test_apps/subdomaintestmodule/__init__.py -> Flask-0.11-dev-20140827/flask/testsuite/test_apps/subdomaintestmodule
+    hard linking flask/testsuite/test_apps/subdomaintestmodule/static/hello.txt -> Flask-0.11-dev-20140827/flask/testsuite/test_apps/subdomaintestmodule/static
+    copying setup.cfg -> Flask-0.11-dev-20140827
+    Writing Flask-0.11-dev-20140827/setup.cfg
+    Creating tar archive
+    removing 'Flask-0.11-dev-20140827' (and everything under it)
+
+Your package has now been successfully built as a source tarball and is ready to be uploaded.
+
+    $ ls -al dist/
+    -rw-rw-r--.  1 irritum irritum 560688 Aug 27 09:51 Flask-0.11-dev-20140827.tar.gz
+
+    $ binstar -t ${TOKEN} upload dist/Flask-0.11-dev-20140827.tar.gz
+    detecting package type ...
+    pypi
+    extracting package attributes for upload ...
+    done
+
+    Uploading file USERNAME/Flask/0.11-dev-20140827/Flask-0.11-dev-20140827.tar.gz ... 
+     uploaded 549 of 549Kb: 100.00% ETA: 0.0 minutes
+
+
+     Upload(s) Complete
+
+     Package located at:
+     https://binstar.org/USERNAME/Flask
+
+Your package is now available at *http://binstar.org/USERNAME/Flask*.
+
+Because this package is built as `dev` version you need to add `--pre` option if you want to
+install it (normally you omit mentioned option), just like that:
+
+    $ pip install --pre --index-url https://pypi.binstar.org/USERNAME/simple Flask
+
+Of course if your system doesn't meet requirements for `Flask` package, then you will get:
+
+    Downloading/unpacking flask
+      Downloading Flask-0.11-dev-20140827.tar.gz (560kB): 560kB downloaded
+        Running setup.py (path:/tmp/pip_build_irritum/flask/setup.py) egg_info for package flask
+        ...
+    Downloading/unpacking Werkzeug>=0.7 (from flask)
+      Could not find any downloads that satisfy the requirement Werkzeug>=0.7 (from flask)
+      Cleaning up...
+      No distributions at all found for Werkzeug>=0.7 (from flask)
+      Storing debug log for failure in /home/irritum/.pip/pip.log
+
+In this case you have to install missing dependencies, just like that:
+
+    $ pip install -i https://pypi.binstar.org/pypi/simple werkzeug>=0.7
+
+In above command we use binstar's `pypi` mirror of [official PyPI](https://pypi.python.org/pypi).
+You can also use official site if you want to:
+
+    $ pip install werkzeug
+
+Anyway, after successfull installation of `werkzeug` run initial pip command once again:
+
+    $ pip install --pre --index-url https://pypi.binstar.org/USERNAME/simple Flask
+    Downloading/unpacking flask
+      Downloading Flask-0.11-dev-20140825.tar.gz (560kB): 560kB downloaded
+        Running setup.py (path:/tmp/pip_build_irritum/flask/setup.py) egg_info for package flask
+        ...
+      Downloading/unpacking Jinja2>=2.4 (from flask)
+        Could not find any downloads that satisfy the requirement Jinja2>=2.4 (from flask)
+        Cleaning up...
+        No distributions at all found for Jinja2>=2.4 (from flask)
+
+So, now you need to install `Jinja2` dependency:
+
+    $ pip install -i https://pypi.binstar.org/pypi/simple jinja2>=2.4
+
+Then one more time launch pip:
+
+    $ pip install --pre --index-url https://pypi.binstar.org/USERNAME/simple Flask
+    Downloading/unpacking flask
+      Downloading Flask-0.11-dev-20140827.tar.gz (560kB): 560kB downloaded
+        Running setup.py (path:/tmp/pip_build_irritum/flask/setup.py) egg_info for package flask
+        ...
+    Downloading/unpacking itsdangerous>=0.21 (from flask)
+      Could not find any downloads that satisfy the requirement itsdangerous>=0.21 (from flask)
+      Cleaning up...
+      No distributions at all found for itsdangerous>=0.21 (from flask)
+      Storing debug log for failure in /home/irritum/.pip/pip.log
+
+Here we have another missing dependency - `itsdangerous` package. We need to fix it:
+
+    $ pip install -i https://pypi.binstar.org/pypi/simple itsdangerous>=0.21
+
+Now repeat the initial pip command once again, to get this:
+
+    $ pip install --pre --index-url https://pypi.binstar.org/USERNAME/simple Flask
+    Downloading/unpacking flask
+      Downloading Flask-0.11-dev-20140827.tar.gz (560kB): 560kB downloaded
+        Running setup.py (path:/tmp/pip_build_irritum/flask/setup.py) egg_info for package flask
+        ...
+    Downloading/unpacking click>=2.0 (from flask)
+      Could not find any downloads that satisfy the requirement click>=2.0 (from flask)
+      Cleaning up...
+      No distributions at all found for click>=2.0 (from flask)
+
+Its another missing dependency, so you need to run:
+
+    $ pip install -i https://pypi.binstar.org/pypi/simple click>=2.0
+
+And finally:
+
+    $ pip install --pre --index-url https://pypi.binstar.org/USERNAME/simple Flask
+    Downloading/unpacking flask
+      Downloading Flask-0.11-dev-20140827.tar.gz (560kB): 560kB downloaded
+        Running setup.py (path:/tmp/pip_build_irritum/flask/setup.py) egg_info for package flask
+        ...
+    Successfully installed flask
+    Cleaning up...
+
+Our package is appropriately installed in our system.
 
 See also [authoring packages](author.html) for a general overview.
 
