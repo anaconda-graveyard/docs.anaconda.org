@@ -3,7 +3,7 @@ VERSION=`python -c "print '$COMMIT_HASH'.split()[-1][:8]"`
 BUCKET="docs.binstar.org"
 
 # git tag "$VERSION"
-hyde gen
+hyde gen -r -c prod.yaml
 
 s3cmd -c ~/.s3cfg sync --recursive deploy/ s3://"$BUCKET"/
 

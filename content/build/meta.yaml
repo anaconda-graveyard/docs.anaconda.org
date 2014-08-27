@@ -1,0 +1,9 @@
+menu:
+  - title: Build Framework Overview
+    url : index.html
+  - title: Command line build client
+    url : build_cli.html
+  - title: Build Configuration
+    url : build_config.html
+  - title: Continuous Integration
+    url : continuous_integration.html

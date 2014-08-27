@@ -1,33 +1,42 @@
 ---
-title: Conda Packages
+title: Conda Packaging
 subtitle: ''
+
+sub_items:
+ - id: conda-installing
+   title: Installing Conda packages
+ - id: conda-authoring
+   title: Authoring Conda packages
+
 ---
-{% extends "columns.j2" %}
+{% from "macros.html" import section, subsection %}
+{% extends "layout.html" %}
 
 {% block main %}
-<a id="Installing"></a>
+{% call section('conda-installing') %}
+
 ## Installing Conda packages
 
 The basic way to install a package from binstar is using conda:
 
 ```
-conda install --channel https://conda.binstar.org/:REPOSITORY-PATH PACKAGE
+conda install --channel https://conda.binstar.org/<REPOSITORY-PATH> <PACKAGE>
 ```
 
 Where **REPOSITORY-PATH** may be one of the following:
 
 1. A **username**, this allows installation of packages from a user repository:
    ```
-   conda install --channel https://conda.binstar.org/USER PACKAGE
+   conda install --channel https://conda.binstar.org/<USER> <PACKAGE>
    ```
 
 1.  A **user channel**, this allows installation of packages from a collection of packages a user has put together:
     ```
-    conda install --channel https://conda.binstar.org/collections/:username/channel/:channel-name PACKAGE
+    conda install --channel https://conda.binstar.org/<USER>/channel/<CHANNEL-NAME> <PACKAGE>
     ```
 
     The **main** channel is the default channel:
-    `https://conda.binstar.org/USER/channel/main` is equivalent to `https://conda.binstar.org/USER`
+    `https://conda.binstar.org/<USER>/channel/main` is equivalent to `https://conda.binstar.org/<USER>`
 
 
 ## Installing Private Packages
@@ -35,17 +44,20 @@ Where **REPOSITORY-PATH** may be one of the following:
 All urls can be prefixed with `/t/$TOKEN` to access private packages.
 
 ```
-TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
+TOKEN=$(binstar auth --create --name <YOUR-TOKEN-NAME>)
 ```
 ```
-conda install --channel https://conda.binstar.org/t/$TOKEN/USER PACKAGE
+conda install --channel https://conda.binstar.org/t/$TOKEN/<USER> <PACKAGE>
 ```
 
 ### Modify your conda RC file
 
+{% endcall %}
+{% call section('conda-authoring') %}
 
-<a id="Authoring"></a>
 ## Authoring Conda packages
+
+{% endcall %}
 
 
 {%endblock%}
