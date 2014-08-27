@@ -8,7 +8,11 @@ subtitle: ''
 <a id="Authoring"></a>
 ## Authoring PyPI packages
 
-All packages you author must go to a user account. To create a package go to [binstar.org/new](https://binstar.org/new)
+All packages you author must go to a user account. There are two ways to create a package
+
+1. Go to [binstar.org/new](https://binstar.org/new)
+
+2. Or, using the binstar command line client, run the command `binstar package --create USERNAME/PACKAGENAME`
 
 First, choose a package repository to upload.  For the purposes of this example, we'll use a small example package located in the [binstar_client repository](https://github.com/Binstar/binstar_client/tree/master/example-packages/pypi).
 
@@ -16,7 +20,7 @@ You will need to begin by cloning the repository from the command line
 
     $ git clone git@github.com:Binstar/binstar_client.git
 
-This will create a **binstar_client** directory where you ran the command.  Navigate into the *example-packages*
+This will create a **binstar_client** directory where you ran the command.  Navigate into the `example-packages`
 directory and you will be ready to begin
 
     $ cd binstar_client/example-packages/pypi/
@@ -56,7 +60,7 @@ Your package has now been built as a source tarball and is ready to be uploaded.
     Package located at:
     http://alpha.binstar.org/USER/test-package34
     
-Your package is now available at *http://alpha.binstar.org/USER/PACKAGE*.
+Your package is now available at `http://alpha.binstar.org/USER/PACKAGE`
 
 ## Installing PyPI packages
 
