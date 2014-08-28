@@ -3,18 +3,116 @@ title: Conda Packaging
 subtitle: ''
 
 sub_items:
- - id: conda-installing
-   title: Installing Conda packages
  - id: conda-authoring
    title: Authoring Conda packages
-
+ - id: conda-installing
+   title: Installing Conda packages
+ - id: conda-installing-private
+   title: Installing private packages
+ - id: condarc
+   title: Modify your .condarc file
 ---
+
 {% from "macros.html" import section, subsection %}
 {% extends "layout.html" %}
 
 {% block main %}
-{% call section('conda-installing') %}
 
+{% call section('conda-authoring') %}
+<a id='authoring'></a>
+## Authoring Conda packages
+
+Before proceed you have to install mandatory toolset if they are missing in your system:
+
+    $ conda install binstar
+    $ conda install conda-build
+
+The next step is to choose a repository you would like to built package for.
+For the purposes of this example, we'll use the [conda_gc_test](https://github.com/Binstar/binstar_client/tree/master/example-packages/conda).
+
+Therefore:
+
+
+    $ cd ~/
+    $ git clone https://github.com/Binstar/binstar_client
+    $ cd binstar_client/example-packages/conda/
+
+
+In this directory we can see two required files:
+[meta.yaml](https://github.com/Binstar/binstar_client/blob/master/example-packages/conda/meta.yaml)
+and
+[build.sh](https://github.com/Binstar/binstar_client/blob/master/example-packages/conda/build.sh)
+(for Linux or Mac) or **bld.bat** (for Windows). From that moment we are ready
+to build our package:
+
+
+    $ cd ../
+    $ conda build conda/
+
+    BUILD START: conda_gc_test
+    Package: conda_gc_test-1.2.1-py27_3
+    no source
+    + echo Building
+    Building
+    number of files: 0
+    BUILD END: conda_gc_test-1.2.1-py27_3
+    Nothing to test for: conda_gc_test-1.2.1-py27_3
+    # If you want to upload this package to binstar.org later, type:
+    #
+    # $ binstar upload /home/USERNAME/anaconda/conda-bld/linux-64/conda_gc_test-1.2.1-py27_3.tar.bz2
+    #
+    # To have conda build upload to binstar automatically, use
+    # $ conda config --set binstar_upload yes
+
+
+All packages built in this way are placed in a subdirectory of [Anaconda's](https://store.continuum.io/cshop/anaconda/) *conda-bld* directory.
+You can check of your **root** directory installation by typing:
+
+
+    $ conda info
+
+
+If you do not choose to set `binstar_upload` to `yes` by default, you may now upload your package manually:
+
+    $ binstar login
+    $ Username: USERNAME
+    $ USERNAME's Password:
+    $ login successful
+    $ binstar upload /home/USERNAME/anaconda/conda-bld/linux64/conda_gc_test-1.2.1-py27_3.tar.bz2
+
+    detecting package type ...
+    conda
+    extracting package attributes for upload ...
+    done
+
+    Uploading file USERNAME/conda_gc_test/1.2.1/linux-64/conda_gc_test-1.2.1-py27_3.tar.bz2 ... 
+     uploaded 3 of 3Kb: 100.00% ETA: 0.0 minutes
+
+
+    Upload(s) Complete
+
+    Package located at:
+    https://binstar.org/USERNAME/conda_gc_test
+
+
+If you have previously generated `TOKEN` (check [Token Generation](token_gen.html)) then you may run upload process also in this way:
+
+    $ binstar -t ${TOKEN} upload /home/USERNAME/anaconda/conda-bld/linux64/conda_gc_test-1.2.1-py27_3.tar.bz2
+
+
+**Note**:
+
+For more information on overall conda's build framework, please read:
+
+1.  [conda build documentation](http://conda.pydata.org/docs/build.html).
+1.  [conda build tutorials](http://conda.pydata.org/docs/build_tutorials.html).
+
+Moreover, please consider sharing of your own conda recipes with community and make a pull request
+to official [conda-recipes repository](https://github.com/conda/conda-recipes).
+
+{% endcall %}
+{% call section('conda-installing') %}
+<a id='conda-installing'></a>
 ## Installing Conda packages
 
 The basic way to install a package from [binstar.org](https://binstar.org/) is using `conda`:
@@ -39,185 +137,97 @@ Where **REPOSITORY-PATH** may be one of the following:
 
     `https://conda.binstar.org/USERNAME/channel/main` is equivalent to `https://conda.binstar.org/USERNAME`.
 
+    **Note**:
+
+    All binstar `urls` can omit `https://conda.binstar.org/` part.
+    So, above installation command can be easily write in short form:
+
+        $ conda install --channel USERNAME PACKAGE
+
+    Or if you would like to specified channel as well:
+
+        $ conda install --channel USERNAME/channel/CHANNELNAME PACKAGE
+
+So now, if You would like to install before uploaded package, please run:
+
+
+    $ conda install --channel USERNAME conda_gc_test
+
+        The following packages will be downloaded:
+
+        package                    |            build
+        ---------------------------|-----------------
+        conda_gc_test-1.2.1        |           py27_3          807 B  USERNAME
+
+    The following NEW packages will be INSTALLED:
+
+        conda_gc_test: 1.2.1-py27_3 USERNAME
+
+    Proceed ([y]/n)? y
+
+    Fetching packages ...
+    conda_gc_test- 100% |######################################################| Time: 0:00:00 119.89 kB/s
+    Extracting packages ...
+    [      COMPLETE      ] |###################################################| 100%
+    Linking packages ...
+    [      COMPLETE      ] |###################################################| 100%
+
+That's it.
+
+
+{% endcall %}
+{% call section('conda-installing-private') %}
+<a id='conda-installing-private'></a>
 ## Installing Private Packages
 
-All urls can be prefixed with `/t/$TOKEN` to access private packages.
+Please generate your `TOKEN` if you don't have one at least:
 
     $ TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
+
+To use private packages you have to prefixed all urls with `/t/$TOKEN`:
+
     $ conda install --channel https://conda.binstar.org/t/$TOKEN/USERNAME PACKAGE
 
+
+**Note**:
+
+Of course above installation command might be easily written in short form:
+
+    $ conda install --channel /t/$TOKEN/USERNAME PACKAGE
+
+
+And once again if certain channel is specified, the short form is:
+
+    $ conda install --channel /t/$TOKEN/USERNAME/channel/CHANNELNAME PACKAGE
+
+
+{% endcall %}
+{% call section('condarc') %}
+<a id='condarc'></a>
 ### Modify your conda RC file
 
-Conda allows you to set all command line option defaults in standard yaml style file.
+Conda keeps own configuration in yaml style file.
 
 The names and locations of the configuration files vary slightly across platforms.
 
  * On Unix and Mac OS X the configuration file is: `$HOME/.condarc`
  * On Windows, the configuration file is: `%HOME%\condarc`
 
-Appending options like `--channel https://conda.binstar.org/USERNAME` can be written as:
+The preferable way to modify default conda settings is to use its `config` subcommand.
+For example to add your own binstar acount to be known by conda, you should run:
+
+    $ conda config --add channels http://conda.binstar.org/USERNAME
 
 
-    channels:
-        - defaults
-        - https://conda.binstar.org/USERNAME
+Again, then short version:
+
+    $ conda config --add channels USERNAME
+
 
 See also the [customization of .condarc file section](http://conda.pydata.org/docs/faq.html#customization).
 
-{% endcall %}
-{% call section('conda-authoring') %}
-
-## Authoring Conda packages
-
-Before proceed you have to install mandatory toolset:
-
-    $ conda install conda-build
-
-
-The next step is to choose a repository you would like to built package for.
-For the purposes of this example, we'll use the [ggplot](https://github.com/yhat/ggplot.git).
-
-Therefore:
-
-
-    $ cd ~/
-    $ mkdir ggplot-recipe
-    $ cd ggplot-recipe/
-
-
-Inside, create a file called **meta.yaml** that has this information:
-
-
-    package:
-      name: ggplot
-      version: "0.5.9"
-
-    source:
-      git_url: https://github.com/yhat/ggplot.git
-
-    requirements:
-      build:
-        - python
-        - setuptools
-        - six
-        - pandas
-        - numpy
-        - matplotlib
-        - statsmodels
-        - brewer2mpl
-        - patsy
-        - scipy
-
-      run:
-        - matplotlib
-        - statsmodels
-        - scipy
-        - patsy
-        - brewer2mpl
-        - python
-        - six
-        - pandas
-        - numpy
-
-    test:
-      # Python imports
-      imports:
-        - ggplot
-
-    about:
-      home: https://github.com/yhat/ggplot
-      license: https://github.com/yhat/ggplot/blob/master/LICENSE
-
-**Note**:
-
-For more information on *meta.yaml* package files and overall conda's build framework,
-please reference the [conda build documentation](http://conda.pydata.org/docs/build.html).
-
-
-Next you need **build.sh** in this same directory with below content (this is for Linux and Mac):
-
-
-    #!/bin/bash
-
-    ${PYTHON} setup.py install || exit 1
-
-    # Add more build steps here, if they are necessary.
-
-    # See
-    # http://docs.continuum.io/conda/build.html
-    # for a list of environment variables that are set during the build process.
-
-
-And a **build.bat** with content (this is for Windows):
-
-
-    "%PYTHON%" setup.py install
-    if errorlevel 1 exit 1
-
-    :: Add more build steps here, if they are necessary.
-
-    :: See
-    :: http://docs.continuum.io/conda/build.html
-    :: for a list of environment variables that are set during the build process.
-
-
-At this time we are ready to build our package, to do so we need to type:
-
-
-    $ cd ../
-    $ conda build ggplot-recipe/
-
-
-You may see this message after the package is successfully built:
-
-    # If you want to upload this package to binstar.org later, type:
-    #
-    # $ binstar upload /home/irritum/anaconda/conda-bld/linux-64/ggplot-0.6.5-np18py27_0.tar.bz2
-    #
-    # To have conda build upload to binstar automatically, use
-    # $ conda config --set binstar_upload yes
-
-All packages built in this way are placed in a subdirectory of [Anaconda's](https://store.continuum.io/cshop/anaconda/) *conda-bld* directory.
-You can check of your root directory installation by typing:
-
-
-    $ conda info
-
-If you do not choose to set `binstar_upload` to `yes` by default, you may now upload your package manually:
-
-
-    $ binstar -t ${TOKEN} upload /home/irritum/anaconda/conda-bld/linux64/ggplot-0.6.5-np18py27_0.tar.bz2
-
-    Using binstar api site http://api.binstar.org
-    detecting package type ...
-    conda
-    extracting package attributes for upload ...
-    done
-
-    Uploading file /home/irritum/anaconda/conda-bld/linux-64/ggplot/0.6.5/osx-64/ggplot-0.6.5-np18py27_0.tar.bz2 ... 
-     uploaded 6712 of 6712Kb: 100.00% ETA: 0.0 minutes
-
-
-    Upload(s) Complete
-
-    Package located at:
-    http://binstar.org/irritum/ggplot
-
-Your package is now available at *http://binstar.org/USERNAME/ggplot*.
-
-**Note**:
-
-Please consider sharing with your own conda recipes with community and make a pull request
-to official [conda-recipes repository](https://github.com/conda/conda-recipes).
-
-
-So now, if You would like to install just uploaded package, please run:
-
-
-    $ conda install --channel https://conda.binstar.org/USERNAME ggplot
-
-See also [authoring packages](author.html) for a general overview.
 
 {% endcall %}
+
 
 {%endblock%}
