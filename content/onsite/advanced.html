@@ -17,6 +17,8 @@ sub_items:
    title: Using Standard Ports
  - id: connect-to-existing-mongodb
    title: Connect to an Existing MongoDB Database
+ - id: ldap
+   title: Enable LDAP or Active Directory Support
 ---
 
 
@@ -83,13 +85,17 @@ manual for more information.
 
 {% endcall %}
 {% call section('ldap') %}
-### Enable Binstar LDAP
+### Enable LDAP or Active Directory Support
 
-#### Verify LDAP functionality
+#### Verify LDAP/AD functionality
 
 Pull in git repo flask-ldap-login
 
     git clone https://github.com/ContinuumIO/flask-ldap-login
+
+Install flask-ldap-login
+
+    python setup.py install
 
 Change to the examples directory 
 
@@ -98,10 +104,15 @@ Change to the examples directory
 Edit the *direct_bind.py* file and update your LDAP settings
 
     LDAP = {
-      'URI': 'ldap://ldap.company.com',
+      # Replace with company LDAP server
+      'URI': 'ldap://<ldap.company.com>',
 
-      # Bind directly to this base DN.
-      'BIND_DN': 'uid=%(username)s,ou=People,dc=company,dc=com',
+      # Replace with your company Base DN
+      # Bind directly to this Base DN.
+      'BIND_DN': '<uid=%(username)s,ou=People,dc=company,dc=com>',
+
+      # Windows AD example: cn=%(username)s,cn=users,dc=compan,dc=com
+      # Linux LDAP example: uid=%(username)s,ou=People,dc=company,dc=com
 
       # Map ldap keys into application specific keys
       'KEY_MAP': {
@@ -117,16 +128,53 @@ Edit the *direct_bind.py* file and update your LDAP settings
                   }
     }
 
-Run the flask-ldap-login-check command to verify LDAP connectivity
+Run the flask-ldap-login-check command to verify LDAP/AD connectivity
+*Note: For Active Directory use cn name for username i.e. --username 'Buck Rogers'*
 
-    flask-ldap-login-check examples.direct_bind:app --username 'me' --password 'super secret'
+    flask-ldap-login-check examples.direct_bind:app --username 'me' --password 'supersecret'
+
+To enable a secure **TLS** connection you need to add the following inside your LDAP configuration section of `/etc/binstar/config.yaml`:
+    
+    LDAP={  ....
+
+          'START_TLS': True,
+          'OPTIONS': { 'OPT_PROTOCOL_VERSION': 3,
+                       'OPT_X_TLS_DEMAND', True,
+                       'OPT_X_TLS_REQUIRE_CERT': 'OPT_X_TLS_NEVER',
+                       'OPT_X_TLS_CACERTFILE', '/path/to/certfile')
+                      }
+            ....
+          }
 
 
-#### Configure Binstar to use LDAP
+#### Configure Binstar to use LDAP/AD
 
-Once the flask ldap check has successfully run, add the LDAP configureation you edited in the *direct_bind.py* file to the end your */etc/binstar/config.yaml* file.
+Once the flask ldap check has successfully run, add the LDAP configureation you edited in the *direct_bind.py* file to the end your */etc/binstar/config.yaml* file. Change the **"="** to **":"**
 
-    vi /etc/binstar/config.yaml
+    LDAP: {
+      # Replace with company LDAP server
+      'URI': 'ldap://<ldap.company.com>',
+
+      # Replace with your company Base DN
+      # Bind directly to this Base DN.
+      'BIND_DN': '<uid=%(username)s,ou=People,dc=company,dc=com>',
+
+      # Windows AD example: cn=%(username)s,cn=users,dc=compan,dc=com
+      # Linux LDAP example: uid=%(username)s,ou=People,dc=company,dc=com
+
+      # Map ldap keys into application specific keys
+      'KEY_MAP': {
+          'name':'cn',
+          'company': 'o',
+          'location':'l',
+          'email': 'mail',
+          },
+
+      # LDAP connection options
+      'OPTIONS': {
+                  'OPT_PROTOCOL_VERSION': 3,
+                  }
+    }
 
 Now restart the Binstar server to apply changes
 
@@ -134,12 +182,11 @@ Now restart the Binstar server to apply changes
 
 Open your browser and browse to your local binstar server installation:
 
-    http://local.binstar.srv
+    http://<local.binstar.srv>
 
 You should now be able to log in using your LDAP credentials
 
 
 {% endcall %}
-
 {% endblock main %}
 
