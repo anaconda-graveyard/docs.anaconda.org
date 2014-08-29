@@ -22,7 +22,6 @@ sub_items:
 {% extends "layout.html" %}
 
 {% block main %}
-## Installing On-Site Binstar
 
 On-site Binstar installation allows you to create and maintain a private version of [binstar.org](https://binstar.org)
 for easy creation and sharing of custom conda and PyPI packages within your organization.
@@ -67,7 +66,6 @@ To make sure mongo is running run:
     mongo --eval 'db.serverStatus().ok'
 
 {% endcall %}
-
 {% call section('create-binstar-user')%}
 ### Create the Binstar user
 
@@ -157,7 +155,7 @@ This step rquires **sudo**:
 
     sudo binstar-centralized-logging.sh --product-name PRODUCT_NAME
 
-If you need to swutch out of the binstar user to perform this step record the full path to the logging script with:
+If you need to switch out of the binstar user to perform this step record the full path to the logging script with:
 
     which binstar-centralized-logging.sh
 

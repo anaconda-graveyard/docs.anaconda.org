@@ -4,10 +4,15 @@ subtitle: ''
 
 include: true
 sub_items:
- - id: pypi-installing
-   title: Installing PyPI packages
- - id: pypi-authoring
+ - id: authoring
    title: Authoring PyPI packages
+ - id: installing
+   title: Installing PyPI packages
+ - id: installing-private
+   title: Installing Private packages
+ - id: piprc
+   title: Modify your pypirc file
+
 ---
 {% from "macros.html" import section, subsection %}
 {% extends "layout.html" %}
@@ -15,6 +20,7 @@ sub_items:
 {% block main %}
 
 <a id="Authoring"></a>
+{% call section('authoring') %}
 ## Authoring PyPI packages
 
 All packages you author must go to a user account. There are two ways to create a package
@@ -68,6 +74,9 @@ Your package has now been built as a source tarball and is ready to be uploaded.
     
 Your package is now available at `http://alpha.binstar.org/USER/PACKAGE`
 
+{% endcall %}
+{% call section('installing') %}
+
 ## Installing PyPI packages
 
 The basic way to install a package from binstar is using pip.  For the following, we will use the package we authored in the examples above:
@@ -93,6 +102,8 @@ Where **REPOSITORY-PATH** may be one of the following:
     The **main** channel is the default channel:
     `https://pypi.binstar.org/USER/channel/main/simple` is equivalent to `https://pypi.binstar.org/USER/simple`
 
+{% endcall %}
+{% call section('installing-private') %}
 ## Installing Private Packages
 
 All urls (except for the public repository) can be prefixed with `/t/$TOKEN` to access private packages.
@@ -100,7 +111,9 @@ All urls (except for the public repository) can be prefixed with `/t/$TOKEN` to 
     TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
     pip install --index-url https://pypi.binstar.org/t/$TOKEN/USER/simple test-package34
 
-### Modify your piprc file
+{% endcall %}
+{% call section('piprc') %}
+## Modify your piprc file
 
 pip allows you to set all command line option defaults in a standard ini style config file.
 
@@ -121,5 +134,5 @@ Appending options like `--extra-index-url` or `--index-url` can be written as:
         http://pypi.binstar.org/user2/simple
 
 See also the [official pip installer documentation](https://pip.pypa.io/en/latest/user_guide.html#installing-packages)
-
+{% endcall %}
 {%endblock%}

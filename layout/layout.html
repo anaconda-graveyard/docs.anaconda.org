@@ -37,7 +37,13 @@
             </div>
                 <!--Main Content -->
                 <div class="col-xs-offset-3 col-xs-9">
+                <div class="page-header" style="border-bottom: 10px solid #333;">
+                  <h1>{{resource.meta.title}}
+                      <small>{{resource.meta.description}}</small>
+                  </h1>
+                </div>
                 {% filter markdown -%}
+
                 {% block main %}
                 {% endblock %}
                 {%- endfilter %}
