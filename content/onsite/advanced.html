@@ -18,7 +18,11 @@ sub_items:
  - id: connect-to-existing-mongodb
    title: Connect to an Existing MongoDB Database
  - id: ldap
-   title: Enable LDAP or Active Directory Support
+   title: Enable LDAP Directory Support
+ - id: ad
+   title: Enable Active Directory Support
+ - id: tls
+   title: Enable TLS Security on LDAP/Active Directory
 ---
 
 
@@ -87,7 +91,6 @@ manual for more information.
 {% call section('ldap') %}
 ### Enable LDAP or Active Directory Support
 
-
 #### Configure Binstar to use LDAP
 
 Open the binstar configuration file */etc/binstar/config.yaml* file and add the following configuration to enable LDAP support:
@@ -125,6 +128,8 @@ Open your browser and browse to your local binstar server installation:
 
 You should now be able to log in using your LDAP credentials
 
+{% endcall %}
+{% call section('ad') %}
 ### Configure Binstar to use Active Directory
 
 Open the binstar configuration file */etc/binstar/config.yaml* file in an editor and add the following configuration to enable Active Directory support:
@@ -176,7 +181,9 @@ Open your browser and browse to your local binstar server installation:
 
     http://<local.binstar.srv>
 
-### LDAP/Active Directory TLS security configuration
+{% endcall %}
+{% call section('tls') %}
+### Enable TLS on LDAP/Active Directory
 
 To enable a secure **TLS** connection you need to add the following inside your LDAP configuration section of `/etc/binstar/config.yaml`:
     
