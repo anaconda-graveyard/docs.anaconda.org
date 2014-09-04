@@ -112,7 +112,8 @@ Open the binstar configuration file */etc/binstar/config.yaml* file and add the 
           },
     }
 
-Update the URI with the location of your ldap server and BIND_DN with the values specific to your ldap server.
+Update the **URI** with the location of your LDAP server and **BIND_DN** with the values specific to your LDAP server.
+Change the **KEY_MAP** keys with the associated values for your LDAP server.
 
 Run the flask-ldap-login-check command to verify LDAP connectivity
 
@@ -157,11 +158,13 @@ Open the binstar configuration file */etc/binstar/config.yaml* file in an editor
             'name':'cn',
             'company': 'o',
             'location':'l',
-            'email': 'mail',
+            'email': 'userPrincipalName',
             },
     }
 
-Update the *URI* <ldap.server.url> with the location of your Active Directory server, *BIND_DN* with the values specific to your Active Directory server and the *BIND_AUTH* with the password of the user specified in the *BIND_DN*.
+Update the *URI* <ldap.server.url> with the location of your Active Directory server, *BIND_DN* with the values specific to your Active Directory server and the *BIND_AUTH* with the password of the user specified in the *BIND_DN*. Change the **KEY_MAP** keys with the associated values from your Active Directory server.
+
+
 
 Now restart the Binstar server to apply changes
 
