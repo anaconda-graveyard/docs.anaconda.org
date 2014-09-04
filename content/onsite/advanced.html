@@ -17,6 +17,12 @@ sub_items:
    title: Using Standard Ports
  - id: connect-to-existing-mongodb
    title: Connect to an Existing MongoDB Database
+ - id: ldap
+   title: Enable LDAP Directory Support
+ - id: ad
+   title: Enable Active Directory Support
+ - id: tls
+   title: Enable TLS Security on LDAP/Active Directory
 ---
 
 
@@ -80,7 +86,121 @@ If you already have a mongodb server running you can connect to it by setting th
 See the [mongodb uri connection str](http://docs.mongodb.org/manual/reference/connection-string/)
 manual for more information.
 
-{% endcall %}
 
+{% endcall %}
+{% call section('ldap') %}
+### Enable LDAP or Active Directory Support
+
+#### Configure Binstar to use LDAP
+
+Open the binstar configuration file */etc/binstar/config.yaml* file and add the following configuration to enable LDAP support:
+
+    LDAP: {
+      # Replace with company LDAP server
+      'URI': 'ldap://<ldap.company.com>',
+
+      # Replace <uid=%(username)s,ou=People,dc=company,dc=com> with your company specific LDAP Bind/Base DN
+      # Bind directly to this Base DN.
+      'BIND_DN': '<uid=%(username)s,ou=People,dc=company,dc=com>',
+
+      # Map ldap keys into application specific keys
+      'KEY_MAP': {
+          'name':'cn',
+          'company': 'o',
+          'location':'l',
+          'email': 'mail',
+          },
+    }
+
+Update the **URI** with the location of your LDAP server and **BIND_DN** with the values specific to your LDAP server.
+Change the **KEY_MAP** keys with the associated values for your LDAP server.
+
+Run the flask-ldap-login-check command to verify LDAP connectivity
+
+    flask-ldap-login-check binstar.wsgi:app --username '<ldapUser>' --password '<ldapUserPassword>'
+
+Now restart the Binstar server to apply changes
+
+    supervisorctl restart all
+
+Open your browser and browse to your local binstar server installation:
+
+    http://<local.binstar.srv>
+
+You should now be able to log in using your LDAP credentials
+
+{% endcall %}
+{% call section('ad') %}
+### Configure Binstar to use Active Directory
+
+Open the binstar configuration file */etc/binstar/config.yaml* file in an editor and add the following configuration to enable Active Directory support:
+
+    LDAP : {
+        'URI': 'ldap://<ldap.server.url>',
+
+        # This BIND_DN/BIND_PASSORD default to '', this is shown here for 
+        # demonstrative purposes. To enable Autorized Bind, insert the AD
+        # BIND_DN and BIND_AUTH password for and authorized AD user.
+        #
+        #e.g. 'BIND_DN': '<cn=Authorized User,cn=users,dc=company,dc=local>',
+        #e.g. 'BIND_AUTH': '<AuthUsrPassword>',
+       
+        # The values '' perform an anonymous bind so we may use search/bind method
+        'BIND_DN': '',
+        'BIND_AUTH': '',
+
+        # Adding the USER_SEARCH field tells the flask-ldap-login that we
+        # are using the search/bind method
+        'USER_SEARCH': {'base': '<cn=users,dc=company,dc=local>', 'filter': 'sAMAccountName=%(username)s'},
+
+        # Map ldap keys into application specific keys
+        'KEY_MAP': {
+            'name':'cn',
+            'company': 'o',
+            'location':'l',
+            'email': 'userPrincipalName',
+            },
+    }
+
+Update the *URI* <ldap.server.url> with the location of your Active Directory server, *BIND_DN* with the values specific to your Active Directory server and the *BIND_AUTH* with the password of the user specified in the *BIND_DN*. Change the **KEY_MAP** keys with the associated values from your Active Directory server.
+
+
+
+Now restart the Binstar server to apply changes
+
+    supervisorctl restart all
+
+Run the flask-ldap-login-check command to verify Active Directory connectivity
+
+    flask-ldap-login-check binstar.wsgi:app --username '<adUser>' --password '<adUserPassword>'
+
+You should get a response similare to the following:
+
+    [binstar.server] Started Site
+    Got userdata for adUser
+    {'company': None, 'email': None, 'location': None, 'name': 'AD User'}
+
+Open your browser and browse to your local binstar server installation:
+
+    http://<local.binstar.srv>
+
+{% endcall %}
+{% call section('tls') %}
+### Enable TLS on LDAP/Active Directory
+
+To enable a secure **TLS** connection you need to add the following inside your LDAP configuration section of `/etc/binstar/config.yaml`:
+    
+    LDAP={  ....
+
+          'START_TLS': True,
+          'OPTIONS': { 'OPT_PROTOCOL_VERSION': 3,
+                       'OPT_X_TLS_DEMAND', True,
+                       'OPT_X_TLS_REQUIRE_CERT': 'OPT_X_TLS_NEVER',
+                       'OPT_X_TLS_CACERTFILE', '/path/to/certfile')
+                      }
+            ....
+          }
+
+{% endcall %}
 {% endblock main %}
 
