@@ -1,13 +1,4 @@
 menu:
-    - title: Installing Binstar On-Site
+    - title: Onsite
       url : 'index.html'
-    - title: Advanced Install options
-      url : 'advanced.html'
-    - title: Trouble Shoot Your On-Site Binstar installation
-      url : 'troubleshoot.html'
-    - title: Server Maintenance
-      url : 'maintenance.html'
-    - title: Client Configuration
-      url : 'configuration.html'
-    - title: Mirroring PyPI
-      url : 'pypi-mirror.html'
+    
