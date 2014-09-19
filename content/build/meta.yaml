@@ -7,3 +7,5 @@ menu:
     url : build_config.html
   - title: Continuous Integration
     url : continuous_integration.html
+  - title: Build Queues
+    url : build_queues.html
