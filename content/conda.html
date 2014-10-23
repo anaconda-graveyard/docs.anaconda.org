@@ -95,7 +95,7 @@ If you do not choose to set `binstar_upload` to `yes` by default, you may now up
     https://binstar.org/USERNAME/conda_gc_test
 
 
-If you have a previously generated `TOKEN` (check [Token Generation](token_gen.html)) then you may also run the upload process in this way:
+If you have a previously generated `TOKEN` (check [Token Generation](token_gen.html)) then you may also run the upload process this way:
 
     $ binstar -t ${TOKEN} upload /home/USERNAME/anaconda/conda-bld/linux64/conda_gc_test-1.2.1-py27_3.tar.bz2
 
@@ -139,7 +139,7 @@ Where **REPOSITORY-PATH** may be one of the following:
 
     **Note**:
 
-    All binstar `urls` can omit `https://conda.binstar.org/` part.
+    All binstar `urls` can omit `https://conda.binstar.org/`.
     So, the above installation command can be easily written in short form:
 
         $ conda install --channel USERNAME PACKAGE
@@ -148,7 +148,7 @@ Where **REPOSITORY-PATH** may be one of the following:
 
         $ conda install --channel USERNAME/channel/CHANNELNAME PACKAGE
 
-So now, if You would like to install before uploaded package, please run:
+So now, if You would like to install a previously uploaded package, please run:
 
 
     $ conda install --channel USERNAME conda_gc_test
@@ -191,7 +191,7 @@ To use private packages you have to prefix all urls with `/t/$TOKEN`:
 
 **Note**:
 
-Of course above installation command might be easily written in short form:
+Of course the above installation command can be easily written in short form:
 
     $ conda install --channel /t/$TOKEN/USERNAME PACKAGE
 
@@ -206,7 +206,7 @@ And once again if a certain channel is specified, the short form is:
 <a id='condarc'></a>
 ### Modify your conda RC file
 
-Conda keeps own configuration in yaml style file.
+Conda keeps it's own configuration in a yaml style file.
 
 The names and locations of the configuration files vary slightly across platforms.
 
