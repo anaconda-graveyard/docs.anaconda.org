@@ -22,12 +22,12 @@ sub_items:
 <a id='authoring'></a>
 ## Authoring Conda packages
 
-Before proceed you have to install mandatory toolset if they are missing in your system:
+Before proceeding you have to install the mandatory toolset if it is not already on your system:
 
     $ conda install binstar
     $ conda install conda-build
 
-The next step is to choose a repository you would like to built package for.
+The next step is to choose the repository you would like to build the package for.
 For the purposes of this example, we'll use the [conda_gc_test](https://github.com/Binstar/binstar_client/tree/master/example-packages/conda).
 
 Therefore:
@@ -66,7 +66,7 @@ to build our package:
 
 
 All packages built in this way are placed in a subdirectory of [Anaconda's](https://store.continuum.io/cshop/anaconda/) *conda-bld* directory.
-You can check of your **root** directory installation by typing:
+You can check your **root** directory installation by typing:
 
 
     $ conda info
@@ -95,20 +95,20 @@ If you do not choose to set `binstar_upload` to `yes` by default, you may now up
     https://binstar.org/USERNAME/conda_gc_test
 
 
-If you have previously generated `TOKEN` (check [Token Generation](token_gen.html)) then you may run upload process also in this way:
+If you have a previously generated `TOKEN` (check [Token Generation](token_gen.html)) then you may also run the upload process this way:
 
     $ binstar -t ${TOKEN} upload /home/USERNAME/anaconda/conda-bld/linux64/conda_gc_test-1.2.1-py27_3.tar.bz2
 
 
 **Note**:
 
-For more information on overall conda's build framework, please read:
+For more information on conda's overall build framework, please read:
 
 1.  [conda build documentation](http://conda.pydata.org/docs/build.html).
 1.  [conda build tutorials](http://conda.pydata.org/docs/build_tutorials.html).
 
-Moreover, please consider sharing of your own conda recipes with community and make a pull request
-to official [conda-recipes repository](https://github.com/conda/conda-recipes).
+Moreover, please consider sharing your own conda recipes with the community and make a pull request
+to the official [conda-recipes repository](https://github.com/conda/conda-recipes).
 
 {% endcall %}
 {% call section('conda-installing') %}
@@ -139,16 +139,16 @@ Where **REPOSITORY-PATH** may be one of the following:
 
     **Note**:
 
-    All binstar `urls` can omit `https://conda.binstar.org/` part.
-    So, above installation command can be easily write in short form:
+    All binstar `urls` can omit `https://conda.binstar.org/`.
+    So, the above installation command can be easily written in short form:
 
         $ conda install --channel USERNAME PACKAGE
 
-    Or if you would like to specified channel as well:
+    Or if you would like to specify a channel as well:
 
         $ conda install --channel USERNAME/channel/CHANNELNAME PACKAGE
 
-So now, if You would like to install before uploaded package, please run:
+So now, if You would like to install a previously uploaded package, please run:
 
 
     $ conda install --channel USERNAME conda_gc_test
@@ -184,19 +184,19 @@ Please generate your `TOKEN` if you don't have one at least:
 
     $ TOKEN=$(binstar auth --create --name YOUR-TOKEN-NAME)
 
-To use private packages you have to prefixed all urls with `/t/$TOKEN`:
+To use private packages you have to prefix all urls with `/t/$TOKEN`:
 
     $ conda install --channel https://conda.binstar.org/t/$TOKEN/USERNAME PACKAGE
 
 
 **Note**:
 
-Of course above installation command might be easily written in short form:
+Of course the above installation command can be easily written in short form:
 
     $ conda install --channel /t/$TOKEN/USERNAME PACKAGE
 
 
-And once again if certain channel is specified, the short form is:
+And once again if a certain channel is specified, the short form is:
 
     $ conda install --channel /t/$TOKEN/USERNAME/channel/CHANNELNAME PACKAGE
 
@@ -206,12 +206,12 @@ And once again if certain channel is specified, the short form is:
 <a id='condarc'></a>
 ### Modify your conda RC file
 
-Conda keeps own configuration in yaml style file.
+Conda keeps it's own configuration in a yaml style file.
 
 The names and locations of the configuration files vary slightly across platforms.
 
  * On Unix and Mac OS X the configuration file is: `$HOME/.condarc`
- * On Windows, the configuration file is: `%HOME%\condarc`
+ * On Windows, the configuration file is: `%HOME%\.condarc`
 
 The preferable way to modify default conda settings is to use its `config` subcommand.
 For example to add your own binstar acount to be known by conda, you should run:
@@ -219,7 +219,7 @@ For example to add your own binstar acount to be known by conda, you should run:
     $ conda config --add channels http://conda.binstar.org/USERNAME
 
 
-Again, then short version:
+Again, the short version:
 
     $ conda config --add channels USERNAME
 
