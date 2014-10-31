@@ -115,7 +115,7 @@ code .userdefined {
 }
 .sidenav > .nav {
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding-bottom: 80px;
   background-color: #f8f8f8;
 }
@@ -406,13 +406,3 @@ section pre code, .method-example code {
   border-bottom: none;
 }
 
-
-/* ::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 7px;
-}
-::-webkit-scrollbar-thumb {
-    border-radius: 0px;
-    background-color: rgba(0,0,0,.5);
-    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
-} */

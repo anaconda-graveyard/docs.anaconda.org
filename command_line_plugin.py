@@ -47,7 +47,7 @@ class CommandLinePlugin(Plugin):
             text = re.sub(pattern, repl, text)
         return Plugin.text_resource_complete(self, resource, text)
 
-    def page_header(self, template, resource, title):
+    def page_header(self, template, resource, title, h=2):
         result = resource.add_index(title)
         filename = template._TemplateReference__context.name
 
@@ -55,10 +55,10 @@ class CommandLinePlugin(Plugin):
         branch = self.site.config.context.data.get('branch', 'master')
 
         url = '%s/edit/%s/content/%s' % (repo, branch, filename)
-        result += '<h2>%s' % title
-        result += '<small class="pull-right"><a href="%s">' % url
-        result += '<span class="glyphicon glyphicon-pencil"><span>edit</a>'
-        result += '</small></h2>'
+        result += '<h%i>%s' % (h, title)
+        result += '<small class="pull-right"><a title="Edit on Github" href="%s">' % url
+        result += '<span class="glyphicon glyphicon-pencil"><span></a>'
+        result += '</small></h%i>' % h
         return result
 
 

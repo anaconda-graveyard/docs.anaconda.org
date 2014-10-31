@@ -1,8 +1,15 @@
-{%- macro section(title) -%}
+{%- macro section(title, other=None) -%}
+{%- if other -%}
+{{page_header(other, resource, title, 1)}}
+{%- else -%}
 {{resource.add_index(title)}}
-<section>
 {%- filter markdown -%}
 # {{title}}
+{%- endfilter -%}
+{%- endif -%}
+
+<section>
+{%- filter markdown -%}
 {{caller()}}
 {%- endfilter -%}
 </section>

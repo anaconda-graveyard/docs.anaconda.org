@@ -4,7 +4,7 @@
 
 {% block single_page_content %}
 
-{% call section('Welcome') %}
+{% call section('Welcome', self) %}
 
 {% call subsection('What Is Binstar?')%}
 
@@ -19,7 +19,12 @@ Hosting of freely available software will remain free for individuals and organi
 
 {% call subsection('Contributing to the docs') %}
 
-This documentation is hosted on [github](https://github.com/Binstar/docs.binstar.org).  If you believe there is an omission or error in the documentation, please fork the repository and submit a pull request.
+This documentation is hosted on [github](https://github.com/Binstar/docs.binstar.org).  
+If you believe there is an omission or error in the documentation, 
+please fork the repository and submit a pull request.
+
+You should also be able to do this by clicking on the <span style="font-size: 150%" class="glyphicon glyphicon-pencil"></span> icon
+within the docs  
 
 {% endcall %}
 
