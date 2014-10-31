@@ -1,48 +1,60 @@
-{% macro render_main_menu() -%}
-<ul class="nav">
-{% for menu_item in menu -%}
-  <li{% if menu_item.url == resource.url or menu_item.active %} class="active"{% endif %}><a href="{{ menu_item.url }}">{{ menu_item.title }}</a></li>
-{%- endfor %}
-</ul>
-{%- endmacro %}
-
-{% macro render_side_bar(menu) -%}
-
-<ul class="nav">
-{% for menu_item in menu %}
-  <li class="{{ site.is_active(resource, menu_item) }}">
-    <a href="{{ menu_item['url'] }}">{{ menu_item['title'] }}</a>
-
-    <ul class="nav">
-    {% if site.is_active(resource, menu_item) %}
-    {%   for sub_item in resource.meta.sub_items %}
-        <li><a href="#{{ sub_item.id }}" data-target="#{{ sub_item.id }}" >{{ sub_item.title }}</a></li>
-    {%   endfor %}
-    {% endif %}
-    </ul>
-  </li>
-{% endfor %}
-</ul>
-
-{%- endmacro %}
-
-
-{% macro section(id) -%}
-
-<section id="{{ id }}" style="padding-top: 71px; margin-top: -71px;">
-{%    filter markdown %}
-{{    caller() }}
-{%    endfilter %}
+{%- macro section(title) -%}
+{{resource.add_index(title)}}
+<section>
+{%- filter markdown -%}
+# {{title}}
+{{caller()}}
+{%- endfilter -%}
 </section>
+{%- endmacro -%}
+
+{%- macro subsection(title) -%}
+{{resource.add_subindex(title)}}
+<div class="sub-section">
+{%- filter markdown -%}
+### {{title}}
+{{caller() }}
+{%- endfilter -%}
+</div>
+{%- endmacro -%}
+
+{% macro command_line_method(title, cmdline, description='') -%}
+
+<div class="method">
+  {{resource.add_index(title)}}
+  <div class="method-section">
+    <div class="method-description">
+      <h2>{{title}}</h2>
+      {{description}}
+
+    </div>
+    <div class="method-example">
+        <h4 class="cmdline-title">{{cmdline}}</h4>
+        <pre><code>{{command_line_help(cmdline)}}</code></pre>
+    </div>
+  </div>
+  
+  {% if caller %}
+  {{caller()}}  
+  {% endif %}
+
+</div>
+
 
 {%- endmacro %}
 
-{% macro subsection(id) -%}
+{% macro command_line_section(title, cmdline) -%}
 
-<div id="{{ id }}">
-{%    filter markdown %}
-{{    caller() }}
-{%    endfilter %}
-</div>
+  {{resource.add_subsubindex(title)}}
+  <div class="method-section">
+    <div class="method-description">
+      {{caller()}}
+    </div>
+    <div class="method-example">
+        <h4 class="cmdline-title">{{cmdline}}</h4>
+        <pre><code>{{command_line_help(cmdline)}}</code></pre>
+    </div>
+  </div>
+
 
 {%- endmacro %}

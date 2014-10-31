@@ -8,15 +8,19 @@ plugins:
     - hyde.ext.plugins.auto_extend.AutoExtendPlugin
     - hyde.ext.plugins.syntext.SyntextPlugin
     - hyde.ext.plugins.textlinks.TextlinksPlugin
-    - myplugin.MyPlugin
+    - command_line_plugin.CommandLinePlugin
+
 context:
     data:
+        repo: https://github.com/binstar/docs.binstar.org
+        imports: 
+          - binstar
         site_title: Binstar Documentation
         author:
             name: Continuum Analytics
             url: "https://binstar.org/"
-        #google_analytics_id: UA-40918310-2
         home_url: index.html
+        brand: Binstar
 
 simple_copy:
     - media/js/*

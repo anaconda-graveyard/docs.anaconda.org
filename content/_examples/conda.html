@@ -1,0 +1,121 @@
+{% from "macros.html" import command_line_method, command_line_section with context %}
+
+{% section %}
+
+{{resource.add_index('Conda Packages')}}
+## Conda packages
+
+{{resource.add_subindex('Uploading a Conda package')}}
+#### Uploading a package
+
+{% endsection %}
+
+
+{% section %}
+
+This example describes how to build and upload a [conda](http://conda.pydata.org/) package to binstar.
+Before proceeding you have to install the mandatory toolset if it is not already on your system
+
+{% example %}
+
+	conda install binstar
+	conda install conda-build
+	
+{% endsection %}
+
+
+{% section %}
+
+The next step is to choose the repository you would like to build the package for.
+For the purposes of this example, we'll use the a simple
+<a href="https://github.com/Binstar/binstar/tree/master/example-packages/conda">conda test package</a>
+
+{% example %}
+
+	git clone https://github.com/Binstar/binstar
+	cd binstar/example-packages/conda/
+	    
+{% endsection %}
+
+
+{% section %}
+  
+In this directory we can see two required files:
+<a href="https://github.com/Binstar/binstar/blob/master/example-packages/conda/meta.yaml">meta.yaml</a>
+and
+<a href="https://github.com/Binstar/binstar/blob/master/example-packages/conda/build.sh">build.sh</a>
+(for Linux or Mac) or bld.bat (for Windows). 
+To build our package we are first goint to turn automatic binstar 
+uploading off and then run the conda build command.
+    
+  
+{% example %}
+
+    conda config --set binstar_upload no
+    conda build .
+  
+{% endsection %}
+
+{% section %}
+
+All packages built in this way are placed in a subdirectory of 
+[Anaconda's](https://store.continuum.io/cshop/anaconda/) *conda-bld* directory.
+You can check where the resulting file was placed with the `--output` option.
+
+{% example %}
+
+    conda build . --output
+
+{% endsection %}
+
+{% section %}
+
+You may now upload your package manually with [binstar upload](cli.html#Upload)
+
+{% example %}
+
+    binstar login
+    binstar upload #userdefined{/path/to/conda-package.tar.bz2}
+
+{% endsection %}
+
+{% section %}
+
+For more information on conda's overall build framework, please read:
+
+  * [conda build documentation](http://conda.pydata.org/docs/build.html)
+  * [conda build tutorials](http://conda.pydata.org/docs/build_tutorials.html)
+
+  
+{% endsection %}
+
+{% section %}
+
+{{resource.add_subindex('Installing a conda package')}}
+#### Installing a conda package  
+  
+{% endsection %}
+{% section %}
+
+In order to install conda pcakages on binstar you need to add a binstar channel to your conda condfig.
+
+Since conda is aware of binstar `sean` is a shortform of [https://conda.bintar.org/sean](https://conda.bintar.org/sean)   
+   
+{% example %}
+
+    conda config --add channels #userdefined{sean} 
+
+{% endsection %}
+
+{% section %}
+
+Now you will be able to install public conda packages from seans binatar account. 
+Lets try to install the [testci package](https://binstar.org/sean/testci)   
+
+
+{% example %}
+
+    conda install #userdefined{testci}
+
+{% endsection %}
+

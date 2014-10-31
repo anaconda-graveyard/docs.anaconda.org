@@ -1,0 +1,17 @@
+{% set page_id = 'cli' %}
+{% extends "layout.html" %}
+{% from "macros.html" import section, sub_section, panel %}
+
+{%- block title -%}
+Command Refrence • Binstar
+{%- endblock -%}
+
+{%- block content %}
+
+<div id="methods">
+{% include "_cli/binstar.html" with context %}
+{% include "_cli/binstar-build.html" with context %}
+</div>
+
+
+{% endblock -%}

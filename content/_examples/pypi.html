@@ -1,0 +1,98 @@
+{% from "macros.html" import command_line_method, command_line_section with context %}
+
+{% section %}
+
+{{resource.add_index('PyPI Packages')}}
+### PyPI packages
+
+{{resource.add_subindex('Uploading a PyPI package')}}
+#### Uploading a PyPI package
+
+{% endsection %}
+
+
+{% section %}
+
+First, you must have a pypi package to upload.  For the purposes of this example, 
+if you don't have one you can use a small example package located in the 
+[binstar repository](https://github.com/Binstar/binstar/tree/master/example-packages/pypi).
+
+You will need to begin by cloning the repository from the command line.
+
+{% example %}
+
+    git clone git@github.com:Binstar/binstar.git
+    cd binstar/example-packages/pypi/
+
+
+{% endsection %}
+
+
+{% section %}
+
+
+Now you can create your pypi package with the `setup.py` script.
+
+{% example %}
+
+
+    python setup.py sdist
+
+
+{% endsection %}
+
+
+{% section %}
+
+Your package has now been built as a source tarball and is ready to be uploaded.
+
+{% example %}
+
+    binstar upload /dist/*.tar.gz
+
+{% endsection %}
+{% section %}
+    
+Your package is now available at `http://alpha.binstar.org/USERNAME/PACKAGE`
+
+{% endsection %}
+
+
+{% section %}
+
+{{resource.add_subindex('Installing a pypi package')}}
+#### Installing a pypi package
+  
+{% endsection %}
+
+
+{% section %}
+The best way to install a pypi package is using pip. 
+For the following, we will use the package we authored in the examples above.
+
+
+{% example %}
+
+    pip install --extra-index-url https://pypi.binstar.org/#userdefined{USERNAME}/simple #userdefined{pypi-test-package}
+    
+{% endsection %}
+
+{% section %}
+
+{{resource.add_subindex('Installing Private Packages')}}
+#### Installing Private Packages  
+  
+{% endsection %}
+
+{% section %}
+
+All binstar urls can be prefixed with `/t/$TOKEN` to access private packages.
+
+{% example %}
+
+    TOKEN=$(binstar auth --create --name #userdefined{YOUR-TOKEN-NAME})
+    pip install --index-url https://pypi.binstar.org/t/$TOKEN/#userdefined{USERNAME}/simple #userdefined{test-package}
+
+{% endsection %}
+
+

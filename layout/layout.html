@@ -1,72 +1,52 @@
+{%from "_header.html" import header with context %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        {% block starthead %}{% endblock starthead %}
-        <meta charset="{{ resource.meta.charset }}">
-        <title>{% block title %}{{ resource.meta.title }}{% endblock %} | {{ site_title }}</title>
+        <meta charset="utf-8">
         <meta name="description" content="{{ resource.meta.description }}">
-        <meta name="author" content="{{ resource.meta.author }}">
-
-        <link rel="shortcut icon" href="//binstar-static-prod.s3.amazonaws.com/latest/img/apple-touch-icon.png">
-
-        {# Le HTML5 shim, for IE6-8 support of HTML elements #}
+        
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
-        <link rel="stylesheet" type="text/css" href="//binstar-static-prod.s3.amazonaws.com/latest/css/binstar.css">
-        <link href="{{ media_url('css/help.css') }}" rel="stylesheet">
-        <link href="{{ media_url('css/style.css') }}" rel="stylesheet">
-
+        <link href="{{ media_url('bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ media_url('style.css') }}" rel="stylesheet">
+        <title>{%block title%}{{site_title}}{%endblock%}</title>
     </head>
-
-    <body>
-
-
-        <div class="wrapper">
-            <!-- Top Navbar -->
-            {% include "_header.html" with context %}
-
-            <div class="container-fluid  clearfix">
-                <!--Side Nav Bar -->
-            <div class="col-xs-3 affix">
-                <nav class="bs-docs-sidebar">
-                    {% from "macros.html" import render_side_bar with context %}
-                    {{ render_side_bar(node.meta.menu) }}
-                </nav>
-            </div>
-                <!--Main Content -->
-                <div class="col-xs-offset-3 col-xs-9">
-                <div class="page-header" style="border-bottom: 10px solid #333;">
-                  <h1>{{resource.meta.title}}
-                      <small>{{resource.meta.description}}</small>
-                  </h1>
-                </div>
-                {% filter markdown -%}
-
-                {% block main %}
-                {% endblock %}
-                {%- endfilter %}
-                </div>
-
-            </div>
-
-            <script type="text/javascript"
-            src="{{ media_url('js/libs/jquery-1.7.2.js') }}"></script>
-            <script type="text/javascript"
-            src="{{ media_url('js/libs/bootstrap.js') }}"></script>
-
-            <script>
-                $(function() {
-                    $('body').scrollspy({
-                        target : '.bs-docs-sidebar',
-                        offset : 0
-                    });
-
-                });
-
-            </script>
-        </div > <!-- class="wrapper" -->
-        {% include "_footer.html" %}
+    <body data-spy="scroll" data-target="#sidenav">
+    
+    {% block body %}
+    
+    {{header(page_id)}}
+    
+    <script>document.getElementById('topNav').style.display = 'none';</script>
+    
+    <div class="content-wrapper clearfix">
+    {%-    block content -%}
+      <div class="col-sm-12 single-page">
+      {%-  filter markdown -%}
+      {%-      block single_page_content -%}
+      {%-      endblock -%}
+      {%- endfilter -%}
+      </div>
+    
+    {%-    endblock -%}
+    </div> <!-- content -->
+    
+    <div class="navigation">
+      {% include "_left_cols.html" with context %}
+    </div> <!-- navigation -->
+    
+    {% endblock %}
+    
+    {% block scripts %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ media_url('bootstrap/js/bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ media_url('script.js') }}"></script>
+    {% endblock %}
+    
+    {% include "_footer.html" %}
+    <div id="modalBG"></div>
     </body>
+
 </html>

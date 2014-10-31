@@ -1,0 +1,51 @@
+{% from "macros.html" import section with context %}
+
+{% section %}
+
+{{resource.add_index('Using Binstar Tokens')}}
+## Using Binstar Tokens
+
+Tokens can be used to make specific private repositories, collections or packages available to other users.  
+Additionally, the degree of access a token grants is completely configurable at the time of generation.
+
+{% endsection %}
+{% section %}
+
+{{resource.add_subindex('How To Generate a Token')}}
+### How To Generate a Token
+
+At present, tokens can only be generated using the binstar client.  
+The binstar client can be installed and configured like the following:
+
+{% example %}
+
+
+### &nbsp;
+
+    binstar login
+
+{% endsection %}
+{% section %}
+
+Once you have successfully installed the binstar client, 
+you can generate a token via the following command:
+
+This will generate a random, alphanumeric token string, which you can then distribute to fellow binstar users.
+
+{% example %}
+
+    binstar auth --create --name #userdefined{YOUR-TOKEN-NAME} --scopes 'repos conda:download'
+
+{% endsection %}
+{% section %}
+
+
+This sample token provides access to download any of your private conda repositories.   
+To use the token, simply issue the following command:
+
+{% example %}
+
+    conda config --add channels https://conda.binstar.org/t/#userdefined{TOKEN}/#userdefined{USERNAME}
+
+{% endsection %}
+

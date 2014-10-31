@@ -1,0 +1,261 @@
+  <div class="method">
+    <a id="authentication" name="authentication" class="section-anchor">&nbsp;</a>
+    <div class="method-section">
+      <div class="method-description">
+
+        <h3>Authentication</h3>
+
+        <p>
+          You authenticate to the Stripe API by providing one of your
+          API keys in the request. You can manage your API keys from
+          your <a href="https://dashboard.stripe.com/account">account</a>.
+          You can have multiple API keys active at one time. Your API
+          keys carry many privileges, so be sure to keep them secret!
+        </p>
+
+
+      </div>
+      <div class="method-example">
+
+        <code class="method-request">
+          <span class="prompt"></span><span class="lang lang-curl"><span
+            class="highlight_js bash">curl
+              https://api.stripe.com/v1/charges \ -u
+              sk_test_BQokikJOvBiI2HlWgH4olfQ2:</span></span><span
+            class="lang lang-ruby"><span
+            class="highlight_js ruby"><span class="keyword">require</span>
+              <span class="string">"stripe"</span> <span
+              class="constant">Stripe</span>.api_key = <span
+              class="string">"sk_test_BQokikJOvBiI2HlWgH4olfQ2"</span></span></span><span
+            class="lang lang-python"><span
+            class="highlight_js python"><span class="keyword">import</span>
+              stripe stripe.api_key = <span class="string">"sk_test_BQokikJOvBiI2HlWgH4olfQ2"</span></span></span><span
+            class="lang lang-php"><span class="highlight_js php"><span
+              class="keyword">require_once</span>(<span class="string">'./lib/Stripe.php'</span>);
+              Stripe::setApiKey(<span class="string">"sk_test_BQokikJOvBiI2HlWgH4olfQ2"</span>);</span></span><span
+            class="lang lang-java"><span
+            class="highlight_js java">Stripe.apiKey = <span
+              class="string">"sk_test_BQokikJOvBiI2HlWgH4olfQ2"</span>;
+          </span></span><span class="lang lang-node"><span
+            class="highlight_js javascript"><span class="keyword">var</span>
+              stripe = require(<span class="string">"stripe"</span>)( <span
+              class="string">"sk_test_BQokikJOvBiI2HlWgH4olfQ2"</span>
+              );</span></span><span class="lang lang-go"><span
+            class="highlight_js go undefined">stripe.Key =
+              "sk_test_BQokikJOvBiI2HlWgH4olfQ2"</span></span>
+        </code>
+        <p>
+kk
+        </p>
+
+        <p>A sample test API key has been provided in all the
+          examples on the page, so you can test out any example right
+          away.</p>
+        <p></p>
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="method">
+    <a id="errors" name="errors" class="section-anchor">&nbsp;</a>
+    <div class="method-section">
+      <div class="method-description">
+        <h2>Errors</h2>
+        <p>Stripe uses conventional HTTP response codes to indicate
+          success or failure of an API request. In general, codes in the
+          2xx range indicate success, codes in the 4xx range indicate an
+          error that resulted from the provided information (e.g. a
+          required parameter was missing, a charge failed, etc.), and
+          codes in the 5xx range indicate an error with Stripe's
+          servers.</p>
+
+        <p>Not all errors map cleanly onto HTTP response codes,
+          however. When a request is valid but does not complete
+          successfully (e.g. a card is declined), we return a 402 error
+          code.</p>
+
+        <div class="method-list method-attr">
+          <h6>Attributes</h6>
+          <dl>
+            <dt>type</dt>
+            <dd>
+              <span>The type of error returned. Can be <code>invalid_request_error</code>,
+                <code>api_error</code>, or <code>card_error</code>. <!-- Card errors are the most common type of error you should expect to handle. They result when the user enters a card that can't be charged for some reason. Invalid request errors arise when your request has invalid parameters. API errors cover any other type of problem (e.g. a temporary problem with Stripe's servers) and should turn up only very infrequently. --></span>
+            </dd>
+            <div class="clearfix"></div>
+            <dt>message</dt>
+            <dd>
+              <span>A human-readable message giving more details
+                about the error. For card errors, these messages can be
+                shown to your users.</span>
+            </dd>
+            <div class="clearfix"></div>
+            <dt>code</dt>
+            <dd>
+              optional <span>For card errors, a short string from
+                amongst those listed on the right describing the kind of
+                card error that occurred.</span>
+            </dd>
+            <div class="clearfix"></div>
+            <dt>param</dt>
+            <dd>
+              optional <span>The parameter the error relates to
+                if the error is parameter-specific. You can use this to
+                display a message near the correct form field, for
+                example.</span>
+            </dd>
+            <div class="clearfix"></div>
+          </dl>
+        </div>
+
+      </div>
+      <div class="method-example">
+
+        <div class="part">
+          <h3>HTTP Status Code Summary</h3>
+          <ul>
+            <li><strong>200</strong> OK - Everything worked as
+              expected.</li>
+            <li><strong>400</strong> Bad Request - Often missing a
+              required parameter.</li>
+            <li><strong>401</strong> Unauthorized - No valid API
+              key provided.</li>
+            <li><strong>402</strong> Request Failed - Parameters
+              were valid but request failed.</li>
+            <li><strong>404</strong> Not Found - The requested item
+              doesn't exist.</li>
+            <li><strong>500, 502, 503, 504</strong> Server errors -
+              something went wrong on Stripe's end.</li>
+          </ul>
+        </div>
+
+        <div class="part">
+          <h3>Errors</h3>
+
+          <div class="table">
+            <h6>Types</h6>
+            <table>
+              <tbody>
+                <tr>
+                  <td>invalid_request_error</td>
+                  <td>Invalid request errors arise when your
+                    request has invalid parameters.</td>
+                </tr>
+                <tr>
+                  <td>api_error</td>
+                  <td>API errors cover any other type of problem
+                    (e.g. a temporary problem with Stripe's servers) and
+                    should turn up only very infrequently.</td>
+                </tr>
+                <tr>
+                  <td>card_error</td>
+                  <td>Card errors are the most common type of error
+                    you should expect to handle. They result when the
+                    user enters a card that can't be charged for some
+                    reason.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table">
+            <h6>Codes</h6>
+            <table>
+              <tbody>
+                <tr>
+                  <td>incorrect_number</td>
+                  <td>The card number is incorrect.</td>
+                </tr>
+                <tr>
+                  <td>invalid_number</td>
+                  <td>The card number is not a valid credit card
+                    number.</td>
+                </tr>
+                <tr>
+                  <td>invalid_expiry_month</td>
+                  <td>The card's expiration month is invalid.</td>
+                </tr>
+                <tr>
+                  <td>invalid_expiry_year</td>
+                  <td>The card's expiration year is invalid.</td>
+                </tr>
+                <tr>
+                  <td>invalid_cvc</td>
+                  <td>The card's security code is invalid.</td>
+                </tr>
+                <tr>
+                  <td>expired_card</td>
+                  <td>The card has expired.</td>
+                </tr>
+                <tr>
+                  <td>incorrect_cvc</td>
+                  <td>The card's security code is incorrect.</td>
+                </tr>
+                <tr>
+                  <td>incorrect_zip</td>
+                  <td>The card's zip code failed validation.</td>
+                </tr>
+                <!--<tr>
+              <td>incorrect_address</td>
+              <td>The card's address failed validation.</td>
+            </tr>-->
+                <tr>
+                  <td>card_declined</td>
+                  <td>The card was declined.</td>
+                </tr>
+                <tr>
+                  <td>missing</td>
+                  <td>There is no card on a customer that is being
+                    charged.</td>
+                </tr>
+                <tr>
+                  <td>processing_error</td>
+                  <td>An error occurred while processing the card.</td>
+                </tr>
+                <tr>
+                  <td>rate_limit</td>
+                  <td>An error occurred due to requests hitting the
+                    API too quickly. Please <a
+                    href="https://support.stripe.com/email">let us
+                      know</a> if you're consistently running into this
+                    error.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p>
+              CVC validation and zip validation can be enabled/disabled
+              in your <a href="https://dashboard.stripe.com/account">settings</a>.
+            </p>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="method-section">
+      <div class="method-description">
+
+        <h3>Handling errors</h3>
+
+        <p class="lang-curl lang-php lang-java lang-ruby lang-python">
+          Our API bindings can raise exceptions for many reasons, such
+          as a failed charge, invalid parameters, authentication errors,
+          and network unavailability. We recommend always trying to
+          gracefully handle exceptions from our API.</p>
+
+        <p class="lang-node lang-go">Our API bindings can produce
+          errors for many reasons, such as a failed charge, invalid
+          parameters, authentication errors, and network unavailability.
+        </p>
+
+      </div>
+    </div>
+
+
+  </div>

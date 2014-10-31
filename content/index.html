@@ -1,25 +1,13 @@
----
-title: Getting Started
-
-include: true
-weight: 0
-sub_items:
-  - id: what-is-binstar
-    title: What is Binstar?
-  - id: contributing
-    title: Contributing
----
-
-
-{% from "macros.html" import section, subsection %}
+{% set page_id = 'index' %}
+{% from "macros.html" import section, subsection with context %}
 {% extends "layout.html" %}
 
+{% block single_page_content %}
 
-{% block main %}
+{% call section('Welcome') %}
 
-{% call section('what-is-binstar')%}
+{% call subsection('What Is Binstar?')%}
 
-### What is Binstar?
 Binstar is a package management service which allows you to host software packages of all kinds.  Binstar is designed to make software development, release, and maintenance easy for you by providing broad package-management support. Binstar allows for both <strong>public</strong> and <strong>private</strong> package repositories, as well as package channels, providing a flexible and scalable service for groups and organizations of all sizes. Binstar is a [Continuum Analytics](http://continuum.io) product.
 
 Binstar is an evolving service and we welcome your [feedback](mailto:support@binstar.org) and
@@ -29,15 +17,15 @@ Hosting of freely available software will remain free for individuals and organi
 
 {% endcall %}
 
-{% call section('contributing') %}
-
-### Contributing to the docs
+{% call subsection('Contributing to the docs') %}
 
 This documentation is hosted on [github](https://github.com/Binstar/docs.binstar.org).  If you believe there is an omission or error in the documentation, please fork the repository and submit a pull request.
 
 {% endcall %}
 
+{%- endcall -%}
 
+{%- include "_description/packages.html" with context -%}
+{%- include "_description/organizations.html" with context -%}
 
-{% endblock main %}
-
+{%- endblock -%}

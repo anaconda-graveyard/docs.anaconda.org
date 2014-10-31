@@ -1,35 +1,15 @@
----
-title: Frequently Asked Questions
-subtitle: ''
 
-include: true
-sub_items:
-    - title : General Questsions
-      id: 'faq-general-questions'
-    - title : Getting Started
-      id: 'faq-getting-started'
-    - title : Accounts
-      id: 'faq-accounts'
-    - title : Packages
-      id: 'faq-packages'
-    - title : Channels
-      id: 'faq-channels'
-    - title : Tokens
-      id: 'faq-tokens'
-    - title : Using the Binstar client
-      id : 'faq-using-binstar-client'
-    - title : How Do I...
-      id : 'faq-how-do-i'
-    - title : Finding Packages
-      id : 'faq-finding-packages'
+{% set page_id = 'faq' %}
 
----
-{% from "macros.html" import section, subsection %}
 {% extends "layout.html" %}
+{% from "macros.html" import section with context %}
 
-{% block main %}
+{% block content %}
+<div class="col-sm-12">
 
-{% call section('faq-general-questions') %}
+<h1>Frequently Asked Questions</h1>
+
+{% call section('General Questions') %}
 
 ### General Questions
 
@@ -52,7 +32,7 @@ A. You can read our terms of service [here](https://binstar.org/about/legal/term
 
 {% endcall %}
 
-{% call section('faq-getting-started') %}
+{% call section('Getting Started') %}
 
 ### Getting Started
 
@@ -63,7 +43,7 @@ A. First, you will need to sign up for a Binstar account [here](https://binstar.
 
 {% endcall %}
 
-{% call section('faq-accounts') %}
+{% call section('Accounts') %}
 
 ###Accounts
 
@@ -81,7 +61,7 @@ A. An organization is a more robust account, which allows multiple individual us
 
 {% endcall %}
 
-{% call section('faq-packages') %}
+{% call section('Packages') %}
 
 ###Packages
 
@@ -99,7 +79,7 @@ A. Please go [here](/faq.html#how-do-i) for instructions on package processing a
 
 {% endcall %}
 
-{% call section('faq-channels') %}
+{% call section('Channels') %}
 
 ###Channels
 
@@ -112,7 +92,7 @@ By default, all packages you upload are sent to your `main` channel.  However, y
 
 {% endcall %}
 
-{% call section('faq-tokens') %}
+{% call section('Tokens') %}
 
 ### Tokens
 
@@ -121,7 +101,7 @@ A. A token is the mechanism by which you authenticate to the Binstar client.  In
 
 {% endcall %}
 
-{% call section('faq-using-binstar-client') %}
+{% call section('Using the Binstar client') %}
 
 ### Using the Binstar client
 
@@ -173,7 +153,7 @@ A. If you have a question which you cannot answer using Binstar help, please [em
 
 {% endcall %}
 
-{% call section('faq-how-do-i') %}
+{% call section('How Do I...') %}
 
 ###How Do I...
 
@@ -223,7 +203,7 @@ You can find additional information about installing conda packages [here](/cond
 
 {% endcall %}
 
-{% call section('faq-finding-packages') %}
+{% call section('Finding Packages') %}
 
 ### Finding Packages
 
@@ -232,4 +212,5 @@ A. You can search [binstar.org](https://binstar.org) for packages by username or
 
 {% endcall %}
 
-{% endblock main %}
+</div>
+{% endblock %}

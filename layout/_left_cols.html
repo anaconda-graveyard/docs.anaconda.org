@@ -1,0 +1,17 @@
+
+{%- macro nav(index, level=0) %}
+  <ul class="nav nav{{level}}">
+    {% for title, anchor, subindex in index %}
+    <li "{{'active' if loop.first}}"><a href="#{{anchor}}">{{title}}</a>
+    {% if subindex %}
+      {{nav(subindex, level+1)}}
+    {%- endif -%}
+    </li>
+    {% endfor %}
+  </ul>
+
+{% endmacro -%}
+
+<div id="sidenav" class="sidenav hidden-xs affix">
+  {{nav(resource.xindex)}}
+</div>

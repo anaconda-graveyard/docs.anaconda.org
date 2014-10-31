@@ -1,0 +1,31 @@
+{% from "macros.html" import section with context %}
+
+{% section %}
+{{page_header(self, resource, 'Development Cycle')}}
+
+{% endsection %}
+{% section %}
+{{resource.add_subindex('Using channels for test dev and production')}}
+## Using channels for test dev and production
+
+Binstar channels allow you to upload files to your packages and control how they are accessed.
+
+With binstar channels you can upload a file to a specific channel,
+but only users listening to that channel will be able to install it. 
+This is particularly usefull for moving a package thru a development and testing flow.
+You can upload a file to a `testing` channel, and when you or your team are satisfied that it 
+is a release stable release, you can push it to `dev` and then to  `main` where all 
+users will be able to install it.
+{% endsection %}
+{% section %}
+
+Lets start with a conda package, if you don't have one, use our example conda package.
+
+{% example %}
+
+    git clone https://github.com/Binstar/binstar
+    cd binstar/example-packages/conda/
+    conda config --set binstar_upload no
+    conda build .
+
+{% endsection %}

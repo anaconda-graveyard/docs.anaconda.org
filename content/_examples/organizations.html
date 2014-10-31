@@ -1,0 +1,47 @@
+{% from "macros.html" import command_line_method, command_line_section with context %}
+
+{% section %}
+{{resource.add_index('Organizations')}}
+## Organizations
+
+{% endsection %}
+
+{% section %}
+{{resource.add_subindex('Add an owner')}}
+### Add another owner to your organization
+
+All organization owners have full access to the organization settings and all packages
+
+To give other users ownership, first navigate to the groups settings page. 
+The page url will be `https://binstar.org/organization/#userdefined{ORGANIZATION}/settings/groups`
+ 
+{% example %}
+### &nbsp;
+
+![Org groups page](media/img/org-groups.png)
+
+{% endsection %}
+
+{% section %}
+
+ 
+{% example %}
+### &nbsp;
+
+![Org owners page](media/img/org-owners.png)
+
+{% endsection %}
+
+{% section %}
+{{resource.add_subindex('Upload a Package to an Oorganization')}}
+
+### Upload a Package to an Oorganization
+ 
+To upload a package to an organization, use the `-u/--user` option
+
+{% example %}
+### &nbsp;
+
+    binstar upload --user #userdefined{USERNAME} #userdefined{package.tar.bz2}
+
+{% endsection %}
