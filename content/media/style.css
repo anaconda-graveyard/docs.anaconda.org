@@ -1,3 +1,4 @@
+
 html, body {
   height: 100%;
 }
@@ -123,15 +124,16 @@ code .userdefined {
 .sidenav ul.nav > li > a {
   border: 1px solid  #f8f8f8;
   border-right: 1px solid  #dadfe5;
-  border-left: 10px solid  #f8f8f8;
+  /* border-left: 10px solid  #f8f8f8; */
 }
 
 .sidenav ul.nav > li.active > a {
   background-color: white; 
   color: black;
   border: 1px solid  #dadfe5;
-  border-left: 10px solid  #dadfe5;
+  /* border-left: 10px solid  #dadfe5; */
   border-right: none;
+  background: -webkit-linear-gradient(right, white, #F3F6FA);
 }
 
 .nav0 {
@@ -165,6 +167,12 @@ ul.nav.nav2 > li > a {
   padding: 1px 3px;
 }
 
+section pre code {
+    background-color: #292e33;
+    padding: 10px;
+    box-shadow: 1px 10px 10px #1D2024 inset;
+}
+
 .method-description code {
   background-color: inherit;
   text-shadow: 1px 1px 4px #f9f2f4;
@@ -190,7 +198,7 @@ ul.nav.nav2 > li > a {
   .method-example {
     background-color: #292e33;
     padding: 10px;
-    box-shadow: 1px 10px 10px black inset;
+    box-shadow: 1px 10px 10px #1D2024 inset;
   }
   
   
@@ -233,8 +241,7 @@ div#methods {
 }
 
 div#methods {
-  -webkit-box-shadow: #0f131a -1px 0 0, rgba(0, 0, 0, 0.05) 1px 0 2px
-    inset;
+  -webkit-box-shadow: #0f131a -1px 0 0, rgba(0, 0, 0, 0.05) 1px 0 2px inset;
   -moz-box-shadow: #0f131a -1px 0 0, rgba(0, 0, 0, 0.05) 1px 0 2px inset;
   -ms-box-shadow: #0f131a -1px 0 0, rgba(0, 0, 0, 0.05) 1px 0 2px inset;
   -o-box-shadow: #0f131a -1px 0 0, rgba(0, 0, 0, 0.05) 1px 0 2px inset;
@@ -357,7 +364,7 @@ img.expanded {
 
 
 
-.method-example code {
+section pre code, .method-example code {
   color: #dae4f2;
   display: block;
   font-family: monospace;

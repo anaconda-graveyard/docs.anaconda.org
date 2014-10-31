@@ -23,6 +23,28 @@ This documentation is hosted on [github](https://github.com/Binstar/docs.binstar
 
 {% endcall %}
 
+
+{% call subsection('Getting started') %}
+    
+If you want to [author packages](examples.html#CondaPackages) or 
+[access private package](examples.html#UsingBinstarTokens) you will first need to 
+[create an account](https://binstar.org/account/register) on 
+[binstar.org](https://binstar.org)
+
+Now you will need to install the command line client:
+
+    conda install -c binstar binstar
+     # OR
+    pip install binstar
+
+Once you have done that, make sure you can login:
+
+    binstar login
+    binstar whoami
+
+{% endcall -%}
+
+
 {%- endcall -%}
 
 {%- include "_description/packages.html" with context -%}

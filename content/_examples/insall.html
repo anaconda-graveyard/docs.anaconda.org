@@ -1,0 +1,34 @@
+{% from "macros.html" import command_line_method, command_line_section with context %}
+
+{% section %}
+{{page_header(self, resource, 'Installing the binstar command')}}
+
+{% endsection %}
+{% section %}
+To install binstar with [conda](http://conda.pydata.org/)
+{% example %}
+
+    conda install -c binstar binstar binstar-build
+    
+{% endsection %}
+
+{% section %}
+
+To install binstar with [pip](https://pip.pypa.io/en/latest/)
+
+{% example %}
+
+    pip install binstar binstar-build
+    
+{% endsection %}
+
+{% section %}
+
+Or from source
+
+{% example %}
+
+    pip install git+https://github.com/binstar/binstar
+    pip install git+https://github.com/binstar/binstar-build
+    
+{% endsection %}

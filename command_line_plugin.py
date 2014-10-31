@@ -48,14 +48,14 @@ class CommandLinePlugin(Plugin):
         return Plugin.text_resource_complete(self, resource, text)
 
     def page_header(self, template, resource, title):
-        resource.add_index('Development Cycle')
+        result = resource.add_index(title)
         filename = template._TemplateReference__context.name
 
         repo = self.site.config.context.data.repo
         branch = self.site.config.context.data.get('branch', 'master')
 
         url = '%s/edit/%s/content/%s' % (repo, branch, filename)
-        result = '<h2>%s' % title
+        result += '<h2>%s' % title
         result += '<small class="pull-right"><a href="%s">' % url
         result += '<span class="glyphicon glyphicon-pencil"><span>edit</a>'
         result += '</small></h2>'

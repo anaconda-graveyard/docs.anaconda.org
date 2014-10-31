@@ -1,9 +1,7 @@
 {% from "macros.html" import command_line_method, command_line_section with context %}
 
 {% section %}
-
-{{resource.add_index('Conda Packages')}}
-## Conda packages
+{{page_header(self, resource, 'Conda Packages')}}
 
 {{resource.add_subindex('Uploading a Conda package')}}
 #### Uploading a package

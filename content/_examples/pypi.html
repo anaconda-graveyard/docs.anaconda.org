@@ -1,9 +1,7 @@
 {% from "macros.html" import command_line_method, command_line_section with context %}
 
 {% section %}
-
-{{resource.add_index('PyPI Packages')}}
-### PyPI packages
+{{page_header(self, resource, 'PyPI packages')}}
 
 {{resource.add_subindex('Uploading a PyPI package')}}
 #### Uploading a PyPI package

@@ -5,7 +5,7 @@
 
 {% endsection %}
 {% section %}
-{{resource.add_subindex('Using channels for test dev and production')}}
+{{resource.add_subindex('Using channels for testing and production')}}
 ## Using channels for test dev and production
 
 Binstar channels allow you to upload files to your packages and control how they are accessed.
@@ -13,19 +13,68 @@ Binstar channels allow you to upload files to your packages and control how they
 With binstar channels you can upload a file to a specific channel,
 but only users listening to that channel will be able to install it. 
 This is particularly usefull for moving a package thru a development and testing flow.
-You can upload a file to a `testing` channel, and when you or your team are satisfied that it 
-is a release stable release, you can push it to `dev` and then to  `main` where all 
-users will be able to install it.
+
+In this example we will show you how to use a `test` channel, 
+So that you can upload files without affecting your production quality packages. 
+Without a `--channel` argument the default channel is `main`
+
 {% endsection %}
 {% section %}
 
 Lets start with a conda package, if you don't have one, use our example conda package.
+Before you build the package edit version the `meta.yaml` file in `binstar/example-packages/conda/` to be 2.0  
 
 {% example %}
 
     git clone https://github.com/Binstar/binstar
     cd binstar/example-packages/conda/
+    vim meta.yaml # Bump Version
     conda config --set binstar_upload no
     conda build .
 
 {% endsection %}
+{% section %}
+
+You may now upload your package manually with [binstar upload](cli.html#Upload). 
+
+You will use the `--channel` option to tell the upload not to put it into your `main` 
+channel where all users will be able to install it. 
+ 
+{% example %}
+
+    binstar upload #userdefined{/path/to/conda-package-2.0.tar.bz2} --channel #userdefined{test}
+
+{% endsection %}
+
+{% section %}
+
+You will notice now that even when you search your conda `main` channel, 
+you won't see the `2.0` version of the test package. This is because you have to tell conda 
+to look in your new `test` channel
+ 
+{% example %}
+
+    #No 2.0 results
+    conda search --override -c #userdefined{USERNAME} #userdefined{conda-package}
+    
+    #Your 2.0 package is here!
+    conda search --override -c #userdefined{USERNAME}/channel/#userdefined{test} #userdefined{conda-package}
+
+{% endsection %}
+
+{% section %}
+
+You can give the channel `#userdefined{USERNAME}/channel/test` to your testers. 
+Once they finish testing you may will then want to copy the `test` packages back to your `main`
+channel. 
+ 
+You can also manage your package channels on the web page: `https://binstar.org/#userdefined{USERNAME}/#userdefined{conda-package}`
+{% example %}
+
+    binstar channel --copy #userdefined{test} main
+
+	#Now version 2.0 is in your main chanel
+	conda search --override -c #userdefined{USERNAME} #userdefined{conda-package}
+
+{% endsection %}
+
