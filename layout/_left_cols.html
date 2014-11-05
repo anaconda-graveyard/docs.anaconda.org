@@ -1,14 +1,22 @@
 
+  
 {%- macro nav(index, level=0) %}
+  {%- if level < 2 -%}
   <ul class="nav nav{{level}}">
+  {%- endif -%}
+  
     {% for title, anchor, subindex in index %}
-    <li "{{'active' if loop.first}}"><a href="#{{anchor}}">{{title}}</a>
+    <li class="item{{level}} {{'active' if level==0 and loop.first}}"><a href="#{{anchor}}">{{title}}</a>
     {% if subindex %}
       {{nav(subindex, level+1)}}
     {%- endif -%}
     </li>
     {% endfor %}
+
+  {%- if level < 2 -%}
   </ul>
+  {%- endif -%}
+
 
 {% endmacro -%}
 

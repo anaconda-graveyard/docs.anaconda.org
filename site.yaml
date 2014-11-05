@@ -21,7 +21,20 @@ context:
             name: Continuum Analytics
             url: "https://binstar.org/"
         home_url: index.html
-        brand: Binstar
+        brand: Binstar Docs
+        pages:
+          - name: Examples
+            url: examples.html
+            id: examples
+          - name: Command Refrence
+            url: cli.html
+            id: cli
+          - name: Build Refrence
+            url: build-config.html
+            id: build-config
+          - name: FAQ
+            url: faq.html
+            id: faq
 
 simple_copy:
     - media/js/*

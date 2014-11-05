@@ -1,47 +1,30 @@
-{% from "macros.html" import command_line_method, command_line_section with context %}
+{% from "macros.html" import json_command_line_method, section, subsection with context %}
 
-{{command_line_method('Binstar-Build', 'binstar-build -h')}}
+<section>
 
-<div class="method">
-{% section %}
-{{resource.add_subindex('Submitting Builds')}}
-### Submitting Builds
-{% endsection %}
+<div class="sub-section">
 
 
-{% call command_line_section('submit', 'binstar-build submit -h') %}
-    <h4>binstar-build submit</h4>
-    <!--  Add more auth docs -->
-{% endcall %}
-{% call command_line_section('save', 'binstar-build save -h') %}
-    <h4>binstar-build save</h4>
-    <!--  Add more auth docs -->
-{% endcall %}
-
-{% call command_line_section('trigger', 'binstar-build trigger -h') %}
-    <h4>binstar-build trigger</h4>
-    <!--  Add more auth docs -->
-{% endcall %}
-
-{% section %}
-{{resource.add_subindex('Hosting Build machines')}}
-### Hosting Build machines
-{% endsection %}
-
-{% call command_line_section('queue', 'binstar-build queue -h') %}
-    <h4>binstar-build queue</h4>
-    <!--  Add more auth docs -->
-{% endcall %}
-{% call command_line_section('worker', 'binstar-build worker -h') %}
-    <h4>binstar-build worker</h4>
-    <!--  Add more auth docs -->
-{% endcall %}
-{% call command_line_section('docker-worker', 'binstar-build docker-worker -h') %}
-    <h4>binstar-build docker-worker</h4>
-    <!--  Add more auth docs -->
-{% endcall %}
-
-
-
+{{json_command_line_method('Binstar-Build', 'binstar-build --json-help' , 1, self)}}
 
 </div>
+
+{%   call subsection('Submitting Builds') %}
+   
+{{json_command_line_method('submit', 'binstar-build submit --json-help' , 3)}}
+{{json_command_line_method('save', 'binstar-build save --json-help' , 3)}}
+{{json_command_line_method('trigger', 'binstar-build trigger --json-help' , 3)}}
+
+{%   endcall  %}
+
+{%   call subsection('Hosting Build machines') %}
+
+{{json_command_line_method('queue', 'binstar-build queue --json-help' , 3)}}
+{{json_command_line_method('worker', 'binstar-build worker --json-help' , 3)}}
+{{json_command_line_method('docker-worker', 'binstar-build docker-worker --json-help' , 3)}}
+
+{%   endcall  %}
+
+
+</section>
+

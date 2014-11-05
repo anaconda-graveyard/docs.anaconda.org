@@ -118,45 +118,69 @@ code .userdefined {
   overflow-y: auto;
   padding-bottom: 80px;
   background-color: #f8f8f8;
+  border-right: 1px solid #dadfe5;
 }
 
+/* 
+.sidenav ul.nav > li.active > a:after {
+  
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  
+  content: "\e080";
+  float: right;
+  margin-right: right;
+  
+}
+ */
+.sidenav ul.nav.nav0 > li.active > a {
+  background: #428bca;
+  color: white;
+}
 
 .sidenav ul.nav > li > a {
-  border: 1px solid  #f8f8f8;
-  border-right: 1px solid  #dadfe5;
-  /* border-left: 10px solid  #f8f8f8; */
+  border: none;
+  border-top: 1px solid  #f8f8f8;
+  border-bottom: 1px solid  #f8f8f8;
+}
+.sidenav ul.nav > li.active > a {
+  border-top: 1px solid  #dadfe5;
+  border-bottom: 1px solid  #dadfe5;
 }
 
-.sidenav ul.nav > li.active > a {
+.sidenav ul.nav.nav1 > li.active > a {
   background-color: white; 
   color: black;
-  border: 1px solid  #dadfe5;
-  /* border-left: 10px solid  #dadfe5; */
-  border-right: none;
-  background: -webkit-linear-gradient(right, white, #F3F6FA);
 }
 
 .nav0 {
   font-weight: normal;
 }
 
-li > ul.nav.nav2 {
+li li.item2 {
   display: none;
 }
 
-li.active ul.nav.nav2 {
+
+li.active li.item2 {
   display: inherit;
 }
 
 ul.nav.nav1 > li > a {
-  padding: 3px 25px;
+  padding: 5px 10px 5px 25px;
   font-size: 90%;
   font-weight: 300;
   
 }
 
-ul.nav.nav2 > li > a {
-  padding: 2px 35px;
+ul.nav.nav1 li.item2 > a {
+  padding: 2px 10px 2px 40px;
   font-size: 90%;
 }
 
@@ -170,7 +194,6 @@ ul.nav.nav2 > li > a {
 section pre code {
     background-color: #292e33;
     padding: 10px;
-    box-shadow: 1px 10px 10px #1D2024 inset;
 }
 
 .method-description code {
@@ -220,6 +243,18 @@ a.section-anchor:focus {
   box-shadow: 0px 10px 10px black;
 }
 
+section pre code, .method-example code {
+  color: #dae4f2;
+  display: block;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.7em;
+  white-space: pre;
+  white-space: -o-pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
 
 @media (min-width: 992px){
   
@@ -364,18 +399,6 @@ img.expanded {
 
 
 
-section pre code, .method-example code {
-  color: #dae4f2;
-  display: block;
-  font-family: monospace;
-  font-size: 12px;
-  line-height: 1.7em;
-  white-space: pre;
-  white-space: -o-pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
 
 .method-example {
   color: #dae4f2;
@@ -406,3 +429,55 @@ section pre code, .method-example code {
   border-bottom: none;
 }
 
+
+dl.dl-multiline.dl-horizontal dt {
+    overflow-x: initial;
+    text-overflow: initial;
+    white-space: initial;
+}
+
+
+.cli-group-title {
+  border-bottom: 1px solid white;
+  margin-bottom: 15px; 
+}
+
+.arguments {
+  padding: 10px 10px;
+}
+
+.sub-section h3 {
+  border-bottom: 2px solid #dadfe5;
+  padding-bottom: 10px;
+}
+
+.sub-section h4 {
+  border-bottom: 1px solid #dadfe5;
+  padding-bottom: 10px;
+}
+
+.sub-command {
+    padding-bottom: 20px;
+}
+
+dl.dl-horizontal.dl-lg dt {
+  width: 220px;
+}
+dl.dl-horizontal.dl-lg dd {
+  margin-left: 240px;
+}
+
+.file {
+  margin-top: 10px;
+}
+.file .title {
+  font-family: monospace;
+  padding: 5px;
+  background: #dae4f2;
+  color: black;
+  text-shadow: none;
+  
+}
+.file .highlight {
+  border: 1px solid #dae4f2;
+}

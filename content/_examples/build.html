@@ -1,0 +1,114 @@
+{% from "macros.html" import section with context %}
+
+{% section %}
+{{page_header(self, resource, 'Binstar Build')}}
+
+
+{% endsection %}
+{% section %}
+{{resource.add_subindex('Submit your first build')}}
+{% endsection %}
+
+{% section %}
+#### Create a package
+{% endsection %}
+{% section %}
+
+If you are not familiar with binstar, create a package first.
+This will be the namespace or the context of the build.
+
+{% example %}
+    
+    mkdir conda_build_test
+    cd conda_build_test
+    binstar package --create #userdefined{USERNAME}/conda_build_test
+
+{% endsection %}
+
+
+{% section %}
+
+#### Create a build config
+{% endsection %}
+{% section %}
+
+To add `.binstar.yml` file to your working directory by running `binstar-build init` in your
+working directory.
+
+
+<div class="alert alert-info">
+ <strong>Note:</strong> This should be the same directory as your `meta.yaml` file if you are building a conda package.
+</div>
+
+Once this is complte you should be able to submit your first 
+build that will print `This is my binstar build!`
+
+{% example %}
+    
+    binstar-build init
+    binstar-build submit .
+    binstar-build tail -f #userdefined{USERNAME}/conda_build_test #userdefined{1}
+
+{% endsection %}
+
+
+
+{% section %}
+#### Create conda package
+{% endsection %}
+{% section %}
+
+Lets create a conda package to show that binstar build can do some actual work.
+
+You need to add a `meta.yaml` file and modify your `.binstar.yml` file so it contains the following keys:
+
+{% example %}
+<div class="file">
+<span class="title">.binstar.yml</span>
+{% syntax yaml %}
+package: conda_build_test
+script:
+  - conda build .
+build_targets: conda
+{% endsyntax %}    
+</div>
+
+<div class="file">
+<span class="title">meta.yaml</span>
+{% syntax yaml %}
+package:
+  name: conda_build_test
+  version: 0.0.1
+build: 
+  number: 1
+  script: 
+    - echo "This is my binstar build with conda"
+requirements:
+  run:
+    - python
+about:
+  summary: This is a binstar build test!
+{% endsyntax %}    
+</div>
+
+{% endsection %}
+
+
+{% section %}
+#### Submit your conda build
+{% endsection %}
+{% section %}
+
+Once your have created the `meta.yaml` file you can test that your conda 
+build runs locally with [conda build](http://conda.pydata.org/docs/build.html)
+
+Submitting this build is the same as the first:
+
+{% example %}
+
+    conda build .
+    binstar-build submit .
+    binstar-build tail -f #userdefined{USERNAME}/conda_build_test #userdefined{2}
+
+{% endsection %}
+

@@ -25,6 +25,16 @@
 </div>
 {%- endmacro -%}
 
+{%- macro subsubsection(title) -%}
+{{resource.add_subsubindex(title)}}
+<div class="sub-sub-section">
+{%- filter markdown -%}
+#### {{title}}
+{{caller() }}
+{%- endfilter -%}
+</div>
+{%- endmacro -%}
+
 {% macro command_line_method(title, cmdline, description='') -%}
 
 <div class="method">
@@ -47,6 +57,71 @@
 
 </div>
 
+
+{%- endmacro %}
+
+{% macro option_string(action) -%}
+{{ '<span class="text-muted"> / </span>'.join(action['option_strings']) }}
+{% if action['metavar'] %}
+{{action['metavar']}}
+{% endif %}
+{% endmacro -%}
+
+{% macro json_command_line_method(title, cmdline, level=1, other=None) -%}
+<div class="sub-command">
+
+{%set help_data = json_command_line_help(cmdline) %}
+{{resource.add_index(title, level)}}
+<h{{level+1}}>{{title}}
+
+{%- if other -%}
+<small class="pull-right">{{edit(other)}}</small>
+{%- endif -%}
+
+<br><small>{{help_data['description']}}</small>
+
+
+</h{{level+1}}>
+
+<div class="arguments">
+{% for group in help_data['groups'] %}
+<div class="cli-group-title">
+  <strong>{{group['title']}}:</strong>
+  {% if group['description'] %}
+  {% filter markdown %}
+  {{group['description']}}
+  {% endfilter %}
+  {% endif %}
+</div>
+  
+  <dl class="dl-horizontal dl-multiline">
+  {%   for action in group['actions'] %}
+  <dt>{{option_string(action)}}<dt>
+  <dd>{{action['help'] or ''}}<dd>
+  {%     if  action['action'] == 'parsers' %}
+  {%        for key,value in action['choices'].items()|sort %}
+  <dt><a href="#{{key.title()}}">{{key}}</a><dt>
+  <dd>{{value or ''}}<dd>
+  {%        endfor %}
+  {%     endif %}
+  {%   endfor %}
+  </dl>
+{% endfor %}
+</div>
+
+<div class="description">
+{% if help_data['epilog'] %}
+{%   filter markdown %}
+{{help_data['epilog']}}
+{%   endfilter %}
+{% endif %}
+</div>
+
+{% if caller %}
+{{caller()}}  
+{% endif %}
+
+</div>
 
 {%- endmacro %}
 

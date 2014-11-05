@@ -15,11 +15,12 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-js-collapse" id="docs-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="{{'active' if page_id=='examples'}}"><a href="{{content_url('examples.html')}}">Examples</a></li>
-        <li class="{{'active' if page_id=='cli'}}"><a href="{{content_url('cli.html')}}">Command Refrence</a></li>
-        <li class="{{'active' if page_id=='faq'}}"><a href="{{content_url('faq.html')}}">FAQ</a></li>
+        {% for page in pages %}
+            <li class="{{'active' if page_id==page.id}}"><a href="{{content_url(page.url)}}">{{page.name}}</a></li>
+        {% endfor %}
       </ul>
       <ul class="nav navbar-nav navbar-right">
+         <li ><a href="https://binstar.org"><i class="glyphicon glyphicon-share-alt"></i> Go to binstar.org</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

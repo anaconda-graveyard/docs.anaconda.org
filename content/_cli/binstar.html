@@ -1,69 +1,29 @@
-{% from "macros.html" import command_line_method, command_line_section with context %}
+{% from "macros.html" import json_command_line_method, section, subsection with context %}
 
+<section>
 
-{{command_line_method('Binstar', 'binstar -h')}}
-
-<div class="method">
-  <div class="method-section">
-    <div class="method-description">
-      <h3>Authentication {{resource.add_subindex('Authentication')}}</h3>
-    </div>
-  </div>
-
-  {% call command_line_section('auth', 'binstar auth -h') %}
-      <h4>binstar auth</h4>
-      <!--  Add more auth docs -->
-  {% endcall %}
-  {% call command_line_section('login', 'binstar login -h') %}
-    <h4>binstar login</h4>
-    <!--  Add more login docs -->
-  {% endcall %}
-
-  {% call command_line_section('whoami', 'binstar whoami -h') %}
-    <h4>binstar whoami</h4>
-    <!--  Add more logout docs -->
-  {% endcall %}
+<div class="sub-section">
+{{json_command_line_method('Binstar', 'binstar --json-help' , 1, self)}}
 </div>
+
+{%   call subsection('Authentication') %}
+   
+{{ json_command_line_method('auth', 'binstar auth --json-help', 3) }}
+{{ json_command_line_method('login', 'binstar login --json-help', 3) }}
+{{ json_command_line_method('whoami', 'binstar whoami --json-help', 3) }}
+
+{%   endcall  %}
+{%   call subsection('Informational') %}
+
+{{ json_command_line_method('show', 'binstar show --json-help', 3) }}
+{{ json_command_line_method('search', 'binstar search --json-help', 3) }}
   
-<div class="method">
-  {{resource.add_subindex('Informational')}}
-  <div class="method-section">
-    <div class="method-description">
-      <h3>Informational</h3>
-    </div>
-  </div>
+{%   endcall  %}
+{%   call subsection('Managing Packages') %}
 
-  {% call command_line_section('show', 'binstar show -h') %}
-      <h4>binstar show</h4>
-      <!--  Add more auth docs -->
-  {% endcall %}
-  {% call command_line_section('search', 'binstar search -h') %}
-      <h4>binstar search</h4>
-      <!--  Add more search docs -->
-  {% endcall %}
+{{ json_command_line_method('package', 'binstar package --json-help', 3) }}
+{{ json_command_line_method('upload', 'binstar upload --json-help', 3) }}
+{{ json_command_line_method('channel', 'binstar channel --json-help', 3) }}
 
-</div>
-  
-<div class="method">
-  {{resource.add_subindex('Packages')}}
-  <div class="method-section">
-    <div class="method-description">
-      <h3>Managing Packages</h3>
-    </div>
-  </div>
-
-  {% call command_line_section('package', 'binstar package -h') %}
-      <h4>binstar package</h4>
-      <!--  Add more auth docs -->
-  {% endcall %}
-
-  {% call command_line_section('upload', 'binstar upload -h') %}
-      <h4>binstar upload</h4>
-      <!--  Add more auth docs -->
-  {% endcall %}
-  {% call command_line_section('channel', 'binstar channel -h') %}
-      <h4>binstar channel</h4>
-      <!--  Add more channel docs -->
-  {% endcall %}
-
-</div>
+{%   endcall  %}
+</section>
