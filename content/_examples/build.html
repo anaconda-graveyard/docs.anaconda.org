@@ -7,6 +7,7 @@
 {% endsection %}
 {% section %}
 {{resource.add_subindex('Submit your first build')}}
+### Submit your first build
 {% endsection %}
 
 {% section %}
@@ -112,3 +113,74 @@ Submitting this build is the same as the first:
 
 {% endsection %}
 
+{% section %}
+#### Install your new conda package
+{% endsection %}
+{% section %}
+By default binstar puts all new packages in a `dev` channel in your account.
+see [using channels for testing and production](#UsingChannelsForTestingAndProduction)
+for a more in depth example on how to use channels.
+
+{% example %}
+
+    conda install -c #userdefined{USERNAME}/channel/dev conda_build_test
+
+{% endsection %}
+
+
+{% section %}
+{{resource.add_subindex('Submit a build from github')}}
+### Submit a build from github
+{% endsection %}
+
+{% section %}
+#### Create a git repo 
+
+Let's use the package you have created inthe [submit your first build](SubmitYourFirstBuild) example.
+First [create a new github repository](https://github.com/new).
+You will then need to push the files to github.
+
+{% example %}
+First:
+<a class="btn btn-xs btn-success" href="https://github.com/new">create a new github repository</a> 
+
+	git init
+	git add * .binstar.yml
+	git commit -m "first commit"
+	git remote add origin https://github.com/#userdefined{GITHUB_USERNAME}/conda_build_test.git
+	git push -u origin master
+
+{% endsection %}
+
+{% section %}
+#### Submit the build 
+
+Once the package source is pushed to github you can submit a build via a github url.
+
+{% example %}
+
+    binstar-build submit https://github.com/#userdefined{GITHUB_USERNAME}/conda_build_test
+
+{% endsection %}
+
+
+{% section %}
+{{resource.add_subindex('Save and Trigger Your Builds')}}
+### Save and Trigger Your Builds
+{% endsection %}
+{% section %}
+
+Once you have [submitted a build from github](#SubmitABuildFromGithub) 
+you may want to save your build configuration. Especially if you are using 
+[extra options]({{content_url('cli.html')}}#Submit)
+like `-p`, `--sub-dir`, `--channel`, `--queue` or `--email`
+
+You can [save]({{content_url('cli.html')}}#Save) these options to binstar.org 
+and [save]({{content_url('cli.html')}}#Trigger) them later.
+
+{% example %}
+
+	binstar-build save -p #userdefined{USERNAME}/conda_build_test https://github.com/#userdefined{GITHUB_USERNAME}/conda_build_test --channel dev
+	binstar-build trigger #userdefined{USERNAME}/conda_build_test
+
+{% endsection %}
