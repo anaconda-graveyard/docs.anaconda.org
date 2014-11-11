@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse navbar-js-collapse" id="docs-navbar-collapse-1">
       <ul class="nav navbar-nav">
         {% for page in pages %}
-            <li class="{{'active' if page_id==page.id}}"><a href="{{content_url(page.url)}}">{{page.name}}</a></li>
+            <li class="{{'active' if page_id==page.id}}"><a href="{{page.url if page.url.startswith('http://') else content_url(page.url) }}">{{page.name}}</a></li>
         {% endfor %}
       </ul>
       <ul class="nav navbar-nav navbar-right">

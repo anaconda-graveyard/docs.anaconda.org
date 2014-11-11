@@ -35,6 +35,9 @@ context:
           - name: FAQ
             url: faq.html
             id: faq
+          - name: OnSite
+            url: http://docs.continuum.io/anaconda-server/index.html
+            id: null
 
 simple_copy:
     - media/js/*
