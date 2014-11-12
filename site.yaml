@@ -26,10 +26,10 @@ context:
           - name: Examples
             url: examples.html
             id: examples
-          - name: Command Refrence
+          - name: Command Reference
             url: cli.html
             id: cli
-          - name: Build Refrence
+          - name: Build Reference
             url: build-config.html
             id: build-config
           - name: FAQ
