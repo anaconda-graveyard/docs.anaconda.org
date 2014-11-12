@@ -50,8 +50,10 @@ channel where all users will be able to install it.
 
 You will notice now that even when you search your conda `main` channel, 
 you won't see the `2.0` version of the test package. This is because you have to tell conda 
-to look in your new `test` channel
- 
+to look in your new `test` channel.
+
+The `--override` argument is telling conda not to use any channels in your `~/.condarc` file.  
+
 {% example %}
 
     #No 2.0 results
