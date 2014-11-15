@@ -255,11 +255,13 @@ You should see an active webhook at the end of this process.
 {% endsection %}
 {% section %}
 
-Now to test that the web hook is correct you can trigger a build by pushing an 
-empty commit.
+Now, test that the web hook is correct by pushing an empty commit.
 
-To debug webhook, first try submitting your build again with [binstar trigger](#SaveAndTriggerYourBuilds)
-If that works, then you can go to github and inspect the webhook requests and responses.  
+To debug webhooks, first submit your build again with [binstar trigger](#SaveAndTriggerYourBuilds)
+This should highlight the issue with tour build. 
+
+If `binstar trigger` works, but the webhook still does not - 
+Go to github and inspect the webhook requests and responses.
 
 {% example %}
 
