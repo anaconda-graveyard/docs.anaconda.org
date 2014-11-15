@@ -43,7 +43,7 @@ class CommandLinePlugin(Plugin):
 
         return text
 
-    USERDEFINED = (r'#userdefined{(.+?)}', r'<span class="userdefined">\1</span>')
+    USERDEFINED = (r'[#\~]userdefined[{:\(](.+?)[}:\)]', r'<span class="userdefined">\1</span>')
 
     POST_REPLACEMENT_MACROS = [USERDEFINED]
 

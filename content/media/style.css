@@ -89,7 +89,7 @@ pre code {
     white-space: pre;
 }
 
-code .userdefined {
+figure .userdefined, code .userdefined {
   color: rgb(184, 255, 143);
 }
 
