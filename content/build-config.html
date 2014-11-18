@@ -54,8 +54,8 @@ For the `after_script` tag the environment variable,
 {%     endcall %}
 {%     call subsubsection('after_success and after_failure') %}
 
-One of these tags is run after the [script*](#script) tags and will only 
-run if the build is a success or failure. Build errors are not caught.  
+if you use the after_success or after_failure tags,
+one of them will run after the [script](#script) tags depending on if the build was a success or a failure. Build errors are not caught.  
 
 {% syntax yaml %}
 after_success:
@@ -137,7 +137,7 @@ The items in the `env` tag describe one axis of the [build matrix](#BuildMatrix)
 {%     endcall %}
 
 {%   endcall %}
-{%   call subsection('Bulid Matrix') %}
+{%   call subsection('Build Matrix') %}
 
 When you submit one `.binstar.yml` file many sub-builds are launched.  This is because of the
 [platform](#Platform), [engine](#Engine) and [env](#Env) tags.
@@ -171,7 +171,7 @@ The following configuration will run 8 sub builds:
 
 {%     call subsubsection('Multiple build Matrices') %}
 
-Some times it is not the best to define one large build matrix,
+Sometimes it is not the best to define one large build matrix,
 for example if you running a build on Windows, the matrix:
 
 {% syntax yaml %}
