@@ -45,10 +45,10 @@ For example the following repositories are equivalent:
 
 Packages may also be private. This means that you must explicitly have access to view the package.
 To view and install private packages, you must identify yourself to binstar.
-This is done with [access tokens](token_gen.html)
+This is done with [access tokens](token_gen.html).
 Once you have generated a token (`<TOKEN>`), you may prefix any repository url with `/t/<TOKEN>`
 
-Note this is just an example, you will not see any extra private packages in the binstar **user namespace**
+Note: this is just an example. You will not see any extra private packages in the binstar **user namespace**.
 
  *  To install **private conda** packages from the binstar user, use the repository
      url [https://**conda**.binstar.org/t/&lt;TOKEN&gt;/binstar](https://conda.binstar.org/binstar)
@@ -59,22 +59,22 @@ Note this is just an example, you will not see any extra private packages in the
 {% call subsection('Creating a new Package') %}
 
 
-All packages you author must be created in a user account. To create a package go to [binstar.org/new](https://binstar.org/new)
+All packages you author must be created in a user account. To create a package go to [binstar.org/new](https://binstar.org/new).
 
 {% endcall %}
 {% call subsection('Select the privacy access to your package') %}
 
 You will be prompted with two options:
 
-1. **Personal**: The new package will be hosted on your personal repository, this package will be viewable and installable by anonymous users.
+1. **Personal**: The new package will be hosted on your personal repository. This package will be viewable and installable by anonymous users.
    Users must add your unique repository url to their package manager's configuration.
-1. **Private**: The new package will be hosted on your personal repository, however you control the list of authorized users that will be able to access or modify this package.
+1. **Private**: The new package will be hosted on your personal repository; however, you control the list of authorized users that will be able to access or modify this package.
 
 
 {% endcall %}
 {% call subsection('Add a file to your package') %}
 
-To upload files to binstar it is recommended to use the [binstar command line client](cli.html#Binstar)
+To upload files to binstar it is recommended to use the [binstar command line client](cli.html#Binstar).
 
 Run the command:
 
