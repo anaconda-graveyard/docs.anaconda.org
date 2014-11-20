@@ -147,15 +147,15 @@ The build matrix is formed by combining `[platform * engine * env]` to get the s
 The following configuration will run 8 sub builds:
 
 {% syntax yaml %}
-    platform:
-      - linux-32
-      - linux-64
-    engine:
-      - python=2
-      - python=3
-    env:
-      - CXX=g++
-      - CXX=clang++
+platform:
+  - linux-32
+  - linux-64
+engine:
+  - python=2
+  - python=3
+env:
+  - CXX=g++
+  - CXX=clang++
 {% endsyntax %}
 
 
