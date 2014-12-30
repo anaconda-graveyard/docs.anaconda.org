@@ -13,7 +13,7 @@ plugins:
 context:
     data:
         repo: https://github.com/binstar/docs.binstar.org
-        branch: two-page-layout
+        branch: master
         imports: 
           - binstar
         site_title: Binstar Documentation
