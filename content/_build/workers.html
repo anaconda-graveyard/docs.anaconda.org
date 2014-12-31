@@ -1,0 +1,38 @@
+{% from "macros.html" import section, subsection, subsubsection with context %}
+
+{% call section('Build Workers', self) %}
+
+Binstar build workers allow you to run your builds on your own machines. 
+A build worker can run on any machine that supports bash (posix) or batch (win32). 
+
+You will need to 
+[install the build cli](/examples.html#InstallingTheBinstarCommand) 
+to run this example.
+{%   call subsection('Create a build queue') %}
+
+The first thing you will need to do is create a build queue. 
+Build queues are used to as a container to direct builds you have submitted
+to the build workers you will create. Presently, when you submit a job the default build queue is
+named `binstar/public`.
+
+To create your queue run:
+{%   syntax bash %}
+binstar-build queue --create USERNAME/QUEUENAME
+{%   endsyntax %}
+
+You should replace `USERNAME` with your username and `QUEUENAME` with an alphanumeric name of your choice.
+ 
+{%   endcall %}
+
+{%   call subsection('Launching a build worker') %}
+
+By default a build worker will run builds submitted to your  
+
+{% syntax bash %}
+binstar-build worker USERNAME/QUEUENAME
+{% endsyntax %}
+
+{%   endcall %}
+
+
+{% endcall %}
