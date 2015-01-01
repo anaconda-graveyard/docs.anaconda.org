@@ -2,12 +2,24 @@
 
 {% call section('Build Workers', self) %}
 
-Binstar build workers allow you to run your builds on your own machines. 
-A build worker can run on any machine that supports bash (posix) or batch (win32). 
+This section contains an advanced topic, 
+if you have not done so pleaes read thru 
+[how to submit your first build](/examples.html#SubmitYourFirstBuild) 
+binstar.org also comes with free linux-64 workers so if you only need to 
+use those then you are allready set.
 
-You will need to 
+Binstar build workers allow you to run your builds on your own machines. 
+A build worker can run on any machine that supports bash (posix) or batch (win32).
+ 
+All binstar.org accounts allow you to attach one free worker. 
+If you need more workers you will need to [create a binstar
+organization](/#CreatingAnOrganization) and [Upgrade to a paid plan](/#PaidPlans).
+
+
+To follow along, you will need to 
 [install the build cli](/examples.html#InstallingTheBinstarCommand) 
-to run this example.
+
+
 {%   call subsection('Create a build queue') %}
 
 The first thing you will need to do is create a build queue. 
@@ -21,16 +33,67 @@ binstar-build queue --create USERNAME/QUEUENAME
 {%   endsyntax %}
 
 You should replace `USERNAME` with your username and `QUEUENAME` with an alphanumeric name of your choice.
+
+By default a build worker will run builds submitted to your `binstar/public` you may change this one of two ways.
+
+ 1. Use the `--queue` option for the `binstar-build` [submit, save or trigger](cli.html#SubmittingBuilds) commands  
+    eg.
+    {% syntax bash %}
+    binstar-build submit ./my-build --queue USERNAME/QUEUENAME
+    {% endsyntax %}
+ 1. Set your default queue. 
+    This will affect all builds for your account. 
+    Navigate your browser to [binstar.org/settings/build-queue](https://binstar.org/settings/build-queue)
+    and select **Set as Default** 
  
 {%   endcall %}
+{%   call subsection('Share your build queue') %}
 
-{%   call subsection('Launching a build worker') %}
+Any build queues you create allow you to control who may submit jobs to it. 
+By default only the org owners will be able to submit jobs.
 
-By default a build worker will run builds submitted to your  
+To share access to your queue:
+
+ 1. Navigate your browser to [binstar.org/settings/build-queue](https://binstar.org/settings/build-queue)
+ 1. Select the owner of the queue in the owner drop-down in the top right corner of the settings page.
+ 1. Click on the <i class="glyphicon glyphicon-pencil"></i> icon of the queue you want to share.
+ 1. Add the user by name or (individual accounts) or by group (organization accounts).
+
+
+{%   endcall %}
+
+{%   call subsection('Launching a Build Worker') %}
+
+The basic build worker runs on your machine (linux, osx or windows) as the current user 
+(see [security considerations](#SecurityConsiderations)) 
+and accepts jobs from the build queue that you specify. 
 
 {% syntax bash %}
 binstar-build worker USERNAME/QUEUENAME
 {% endsyntax %}
+
+Thats it!  When you submit a job to your queue, your new build worker will pick it up and build it. 
+
+{%   endcall %}
+
+{%   call subsection('Executing Builds in a Docker Container') %}
+
+{% syntax bash %}
+docker pull binstar/linux-64
+binstar-build docker-worker USERNAME/QUEUENAME --image binstar/linux-64
+{% endsyntax %}
+
+{%   endcall %}
+
+{%   call subsection('Security Considerations') %}
+
+{%       call subsubsection('Build-Queue Tokens') %}
+
+{%       endcall %}
+
+{%       call subsubsection('Create a binstar user account') %}
+
+{%       endcall %}
 
 {%   endcall %}
 
