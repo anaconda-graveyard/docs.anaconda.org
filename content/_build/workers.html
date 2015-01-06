@@ -3,10 +3,10 @@
 {% call section('Build Workers', self) %}
 
 This section contains an advanced topic, 
-if you have not done so pleaes read thru 
+if you have not done so please read through
 [how to submit your first build](/examples.html#SubmitYourFirstBuild) 
 binstar.org also comes with free linux-64 workers so if you only need to 
-use those then you are allready set.
+use those then you are already set.
 
 Binstar build workers allow you to run your builds on your own machines. 
 A build worker can run on any machine that supports bash (posix) or batch (win32).
@@ -50,7 +50,7 @@ By default a build worker will run builds submitted to your `binstar/public` you
 {%   call subsection('Share your build queue') %}
 
 Any build queues you create allow you to control who may submit jobs to it. 
-By default only the org owners will be able to submit jobs.
+By default only the organization owners will be able to submit jobs.
 
 To share access to your queue:
 
@@ -76,26 +76,60 @@ Thats it!  When you submit a job to your queue, your new build worker will pick 
 
 {%   endcall %}
 
-{%   call subsection('Executing Builds in a Docker Container') %}
-
-{% syntax bash %}
-docker pull binstar/linux-64
-binstar-build docker-worker USERNAME/QUEUENAME --image binstar/linux-64
-{% endsyntax %}
-
-{%   endcall %}
 
 {%   call subsection('Security Considerations') %}
 
-{%       call subsubsection('Build-Queue Tokens') %}
+There are a few security considerations when launching a build worker.
+Remember the build worker runs user defined build scripts from the jobs that are submitted to it.
+
+You must:
+
+ 1. Consider who you are sharing your build queue with.
+ 1. The `binstar-build worker` builds are permanent, make sure users can not accidentally 
+    Change the state of your build machine.
+
+{%       call subsubsection('Build-Worker Tokens') %}
+
+The first thing that you will want to do is remove your full login credentials from the worker.
+Otherwise build scripts would have the power to manage your binstar account to do this you need to create a token.
+
+
+{% syntax bash %}
+# Create a token with a limited scope and put it into the file ~/.binstar.token
+binstar auth --create -n "My Build Token" --scopes "build:worker" --out ~/.binstar.token
+
+# Log out of your binstar account so build scripts can not use your credentials
+binstar logout
+
+# Launch the worker again with the new token as your credentials 
+binstar-build -t ~/.binstar.token worker USERNAME/QUEUENAME
+
+{% endsyntax %}
+
+The same token value can be used for all of the workers in the queue.
 
 {%       endcall %}
 
 {%       call subsubsection('Create a binstar user account') %}
 
+Another security consideration you will want to consider is to 
+create a new user account on your machine.
+Remember to remove all passwords or user accounts then run your `binstar-build -t ~/.binstar.token worker`
+from your new user account.
+
 {%       endcall %}
+
+
 
 {%   endcall %}
 
+{%   call subsection('Executing Builds in a Docker Container') %}
+
+{%     syntax bash %}
+docker pull binstar/linux-64
+binstar-build docker-worker USERNAME/QUEUENAME --image binstar/linux-64
+{%     endsyntax %}
+
+{%   endcall %}
 
 {% endcall %}
