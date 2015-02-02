@@ -47,6 +47,21 @@ By default a build worker will run builds submitted to your `binstar/public` you
     and select **Set as Default** 
  
 {%   endcall %}
+
+{%   call subsection('Launching a Build Worker') %}
+
+The basic build worker runs on your machine (linux, osx or windows) as the current user 
+(see [security considerations](#SecurityConsiderations)) 
+and accepts jobs from the build queue that you specify. 
+
+{% syntax bash %}
+binstar-build worker USERNAME/QUEUENAME
+{% endsyntax %}
+
+Thats it!  When you submit a job to your queue, your new build worker will pick it up and build it. 
+
+{%   endcall %}
+
 {%   call subsection('Share your build queue') %}
 
 Any build queues you create allow you to control who may submit jobs to it. 
@@ -62,19 +77,6 @@ To share access to your queue:
 
 {%   endcall %}
 
-{%   call subsection('Launching a Build Worker') %}
-
-The basic build worker runs on your machine (linux, osx or windows) as the current user 
-(see [security considerations](#SecurityConsiderations)) 
-and accepts jobs from the build queue that you specify. 
-
-{% syntax bash %}
-binstar-build worker USERNAME/QUEUENAME
-{% endsyntax %}
-
-Thats it!  When you submit a job to your queue, your new build worker will pick it up and build it. 
-
-{%   endcall %}
 
 
 {%   call subsection('Security Considerations') %}
