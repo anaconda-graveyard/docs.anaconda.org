@@ -4,9 +4,10 @@
 
 {%   call subsection('Build Config File')%}
 
-The build config is a file in the root directory named `.binstar.yml`
-In the yaml file there are a number of tags that you can use to control how
-your build is run. Every tag is optional and all tags can be written as a single command or a list
+Each package you build will have a build config file in its root directory named `.binstar.yml`.  If you are not already familiar with the build, process, please begin by reading this guide on 
+[how to submit your first build](/examples.html#SubmitYourFirstBuild).
+
+This yaml file contains a a number of tags with which you can control the way your build is run. Every tag is optional, and all tags can be written as a single command or as a list.
 
 {% syntax yaml %}
 tag: single_command
@@ -17,7 +18,7 @@ tag:
 {% endsyntax %}
 
 
-{%     call subsubsection('script') %}
+{% call subsubsection('script') %}
 
 Define the main script to run on the build machine:
 
@@ -25,7 +26,7 @@ Define the main script to run on the build machine:
     script: echo "hello world!"
 {% endsyntax %}
 
-Script may also be a list:
+Script may also be a list: 
 
 {% syntax yaml %}
 script:
@@ -33,8 +34,8 @@ script:
   - another_command
 {% endsyntax %}
 
-{%     endcall %}
-{%     call subsubsection('before_script and after_script') %}
+{% endcall %}
+{% call subsubsection('before_script and after_script') %}
 
 You can also define scripts to be run before and after the main script:
 
@@ -50,8 +51,8 @@ For the `after_script` tag the environment variable,
 {%     endcall %}
 {%     call subsubsection('after_success and after_failure') %}
 
-if you use the after_success or after_failure tags,
-one of them will run after the [script](#script) tags depending on if the build was a success or a failure. Build errors are not caught.  
+If you use the after_success or after_failure tags,
+one or other of them will run after the [script](#script) tags depending on if the build was a success or a failure. **Build errors are not caught**.  
 
 {% syntax yaml %}
 after_success:
@@ -81,9 +82,28 @@ build_targets: /opt/anaconda/my-package.tar.bz2
 {%     endcall %}
 {%     call subsubsection('platform') %}
 
-Right now this selects the machine type you want to run your build on. 
-You can check what platforms that are available to run on with the [binstar-build queue]({{content_url('cli.html')}}#Queue) command. 
-By default only `linux-64` is available.   
+This selects the platform for which you wish to build your packages. 
+
+**Please note:** by default only `linux-64` build-workers are available for public use on binstar.org.   You can [add your own build workers](#LaunchingABuildWorker) if you need access to additional platforms.
+
+To see which platforms are available to you, issue the [binstar-build queue]({{content_url('cli.html')}}#Queue) command:  
+{% syntax bash %}
+$ binstar-build queue
+Using binstar api site https://api.binstar.org
+
+build/binstar/public           []
+ + Worker hostname:docker-2        platform:linux-64        dist:centos         
+   - Id 54b57d3ee1dad10a4987f6cd
+   - Last seen 5 seconds ago
+   - binstar-build v0.10.3 (binstar v0.10.1)
+ + Worker hostname:docker-2        platform:linux-64        dist:centos         
+   - Id 54b989d1e1dad10da34074d6
+   - Last seen 10 seconds ago
+   - binstar-build v0.10.3 (binstar v0.10.1)
+
+{% endsyntax %}
+
+The binstar-build cli has the capacity to support the following platforms: 
 
 {% syntax yaml %}
 platform:
@@ -96,11 +116,11 @@ platform:
 {% endsyntax %}
 
 
-The items in the `platform` tag describe one axis of the [build matrix](#BuildMatrix)
+The items in the `platform` tag describe one axis of the [build matrix](#BuildMatrix).
 
-{%     endcall %}
+{% endcall %}
 
-{%     call subsubsection('engine') %}
+{% call subsubsection('engine') %}
 
 Sets the initial conda packages you want to build with:
 
@@ -112,9 +132,9 @@ engine:
 
 
 Note that the first item `python=2 nodejs=0.10` is not a list.
-In this build item the both packages python and nodejs will be available.
+In this build item both packages python and nodejs will be available.
 
-The items in the `engine` tag describe one axis of the [build matrix](#BuildMatrix)
+The items in the `engine` tag describe one axis of the [build matrix](#BuildMatrix).
  
 {%     endcall %}
 {%     call subsubsection('env') %}
@@ -128,7 +148,7 @@ env:
 {% endsyntax %}
 
 
-The items in the `env` tag describe one axis of the [build matrix](#BuildMatrix)
+The items in the `env` tag describe one axis of the [build matrix](#BuildMatrix).
 
 {%     endcall %}
 
@@ -182,8 +202,8 @@ script:
     build.sh
 {% endsyntax %}
 
-Would not work the build items with `platform: linux-32 env: MSVC=2008` and `platform: linux-32 env: MSVC=2010` don't make sense:
-You can concatenate the sub-builds using [yaml document separators](http://yaml.org/spec/1.0/#id2489959).
+would not work, because the configuration `platform: linux-32 env: MSVC=2008` and `platform: linux-32 env: MSVC=2010` don't make sense.  
+Instead, you can concatenate sub-builds using [yaml document separators](http://yaml.org/spec/1.0/#id2489959).
 
 Yaml documents are separated by `---`.
 
