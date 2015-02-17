@@ -1,0 +1,140 @@
+{% from "macros.html" import section, subsection, subsubsection with context %}
+
+{% call section('Build Workers', self) %}
+
+This section contains advanced information on configuring builds on the [binstar.org](http://binstar.org)
+platform. If you are not already familiar with the build process, please begin by reading this guide on 
+[how to submit your first build](/examples.html#SubmitYourFirstBuild).
+
+Please note that binstar-build defaults to the linux-64 platform, and that [binstar.org](http://binstar.org)provides free linux-64 workers.  If you do **not** need to build for other platforms, you can complete package builds using only [binstar.org](http://binstar.org). Further, all binstar.org accounts allow you to 
+attach one free worker. If you need more workers or workers on other platforms, you will need to [create a binstar organization](/#CreatingAnOrganization) and [upgrade to a paid plan](/#PaidPlans).
+
+Binstar build workers allow you to run your builds
+on your own machines. A build worker can run on any
+machine that supports bash (posix) or batch (win32).
+
+To follow along with this tutorial, you will need to
+ [install the build cli](/examples.html#InstallingTheBinstarCommand). 
+
+
+{% call subsection('Create a Build Queue') %}
+
+The first thing you will need to do is create a build queue. 
+Build queues are used to as a container to direct builds you have submitted
+to the build workers you will create. At present, when you submit a job the default build queue is `binstar/public`.
+
+To create your queue run:
+
+{% syntax bash %}
+	binstar-build queue --create USERNAME/QUEUENAME
+{% endsyntax %}
+
+Where `USERNAME` is your [binstar.org](http://binstar.org) 
+username and `QUEUENAME` is an alphanumeric name of your choice.  For more information about configuring your build queues, please go [here](#/ConfiguringBuildQueues).
+ 
+{% endcall %}
+
+{% call subsection('Launching a Build Worker') %}
+
+Before you can begin using the queue you created, you will need to attach a build-worker to the queue.   The basic build worker runs on your machine (Linux, OS-X or Windows) as the current user 
+(see [security considerations](#SecurityConsiderations)) 
+and accepts jobs from the build queue that you specify. 
+
+{% syntax bash %}
+	binstar-build worker USERNAME/QUEUENAME
+{% endsyntax %}
+
+That's it!  You can now submit a job to your queue and your new build worker will pick it up and build it:
+
+{% syntax bash %}
+    binstar-build submit ./my-build --queue USERNAME/QUEUENAME
+{% endsyntax %}
+
+**Please note** that you must leave your build worker process running in order to submit builds to it.  You may wish to attach build workers to your queue using a nohup command or similar.
+
+{% endcall %}
+
+
+{% call subsection('Configuring Build Queues') %}
+By default your build worker will run builds on your `binstar/public` queue; you may change this one of two ways:
+
+ 1. Use the `--queue` option when issuing a `binstar-build` [submit, save or trigger](cli.html#SubmittingBuilds) command, e.g.
+    {% syntax bash %}
+    binstar-build save ./my-build --queue USERNAME/QUEUENAME
+    {% endsyntax %}
+ 1. Specify a default queue for your build workers.  
+    This will affect all builds for your account. 
+    You can do this by visiting [binstar.org/settings/build-queue](https://binstar.org/settings/build-queue)
+    and clicking the **Set as Default** option for whichever queue you would like to use.
+
+{% call subsubsection('Share your build queue') %}
+
+Once a build queue is created, you can control who may submit jobs to it. For build queues associated with an organization rather than an individual user, the default behavior is that only organization owners may submit jobs to the queue.
+
+To share access to your queue:
+
+ 1. Navigate your browser to [binstar.org/settings/build-queue](https://binstar.org/settings/build-queue)
+ 	1. If you are an owner in multiple organizations, be sure to select the correct one in the drop-down in the upper right corner of the page.
+ 1. Click on the <i class="glyphicon glyphicon-pencil"></i> icon of the queue you want to share.
+ 1. Add the user by name (individual accounts) or by group (organization accounts).
+
+{% endcall %}
+
+{% endcall %}
+{% call subsection('Security Considerations') %}
+
+Because build workers run on your machine, using the current user account, there are a few security considerations associated with launching a build worker.  Remember the build worker runs user-defined build scripts from the jobs that are submitted to it.
+
+We recommend you:
+
+ 1. Consider who you are giving access to your build queue.
+ 1. The `binstar-build worker` builds are permanent, make sure users can not accidentally 
+    change the state of your build machine.
+
+{% call subsubsection('Build-Worker Tokens') %}
+
+The first thing that you will want to do is remove your full login credentials from the worker.
+Otherwise build scripts would have the power to manage your binstar.org account.
+
+To do this you need to create a token.
+
+{% syntax bash %}
+	# Create a token with a limited scope and put it into the file ~/.binstar.token
+	binstar auth --create -n "My Build Token" --scopes "build:worker" --out ~/.binstar.token
+
+	# Log out of your binstar account so build scripts can not use your credentials
+	binstar logout
+
+	# Launch the worker again with the new token as your credentials 
+	binstar-build -t ~/.binstar.token worker USERNAME/QUEUENAME
+{% endsyntax %}
+
+The same token value can be used for all of the workers in the queue.
+{% endcall %}
+
+{% endcall %}
+
+{% call subsubsection('Create a binstar user account') %}
+
+Another security consideration you will want to consider is to
+create a new user account on your machine. Remember to remove 
+all passwords or user accounts then run your 
+`binstar-build -t ~/.binstar.token worker` from your new user account.
+
+{% endcall %}
+
+
+{% call subsection('Executing Builds in a Docker Container') %}
+
+The binstar-build cli includes the ability to build in a docker container::
+
+{% syntax bash %}
+	docker pull binstar/linux-64
+	binstar-build docker-worker USERNAME/QUEUENAME --image binstar/linux-64
+{% endsyntax %}
+
+{% endcall %}
+
+
+
+{% endcall %}
