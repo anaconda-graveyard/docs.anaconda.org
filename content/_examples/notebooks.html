@@ -1,0 +1,24 @@
+{% from "macros.html" import command_line_method, command_line_section with context %}
+
+{% section %}
+{{page_header(self, resource, 'Upload notebooks')}}
+
+{{resource.add_subindex('Uploading an IPython notebook')}}
+#### Uploading an IPython notebook
+
+{% endsection %}
+
+
+{% section %}
+
+This example describes how to upload an
+[IPython notebook](http://ipython.org/notebook.html) to binstar.org
+
+You can visit `http://notebooks.binstar.org/<USERNAME>/my-notebook`
+to see a HTML version of your notebook.
+
+{% example %}
+
+  binstar upload -p my-notebook my-notebook.ipynb
+
+{% endsection %}
