@@ -3,7 +3,7 @@
 {% section %}
 {{page_header(self, resource, 'Using Binstar Tokens')}}
 
-You can use tokens to control access to private repositories, collections, or packages on Binstar.   
+You can use tokens to control access to private repositories, collections, or packages on Binstar.
 Additionally, the degree of access a token grants is completely configurable at the time of generation.
 
 {% endsection %}
@@ -12,7 +12,7 @@ Additionally, the degree of access a token grants is completely configurable at 
 {{resource.add_subindex('How To Generate a Token')}}
 ### How To Generate a Token
 
-At present, tokens can only be generated using the binstar client.  
+At present, tokens can only be generated using the binstar client.
 The binstar client can be installed and configured like the following:
 
 {% example %}
@@ -25,7 +25,7 @@ The binstar client can be installed and configured like the following:
 {% endsection %}
 {% section %}
 
-Once you have successfully installed the binstar client, 
+Once you have successfully installed the binstar client,
 you can generate a token via the following command:
 
 This will generate a random, alphanumeric token string, which you can then distribute to fellow binstar users.
@@ -38,12 +38,12 @@ This will generate a random, alphanumeric token string, which you can then distr
 {% section %}
 
 
-This sample token provides access to download any of your private conda repositories.   
+This sample token provides access to download any of your private conda repositories.
 To use the token, simply issue the following command:
 
 {% example %}
 
-    conda config --add channels https://conda.binstar.org/t/#userdefined{TOKEN}/#userdefined{USERNAME}
+    conda config --add channels https://conda.anaconda.org/t/#userdefined{TOKEN}/#userdefined{USERNAME}
 
 {% endsection %}
 
