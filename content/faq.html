@@ -12,19 +12,19 @@
 {% call section('General Questions') %}
 
 
-#####Q. What is Binstar?
+#####Q. What is Anaconda.org?
 
-A. Binstar is a package management service.  You can read more [here](/index.html).
+A. Anaconda.org is a package management service.  You can read more [here](/index.html).
 
 #####Q. How much does it cost?
 
-A. Binstar is always free for public packages. For information on storage size limits and on upgrading your account for benefits like private packaging, see our [plans and pricing](https://anaconda.org/about/plans/).
+A. Anaconda.org is always free for public packages. For information on storage size limits and on upgrading your account for benefits like private packaging, see our [plans and pricing](https://anaconda.org/about/plans/).
 
 #####Q. What is Continuum Analytics?
 
 A. Continuum Analytics is a software development and consulting company based in Austin, TX.  We are committed to the open source community.  You can find out more about us [here](http://continuum.io/about-continuum).
 
-#####Q. What are Binstar's terms of service?
+#####Q. What are Anaconda.org's terms of service?
 
 A. You can read our terms of service [here](https://anaconda.org/about/legal/terms). For any additional questions, please [email us](mailto:support@anaconda.org).
 
@@ -35,9 +35,9 @@ A. You can read our terms of service [here](https://anaconda.org/about/legal/ter
 ### Getting Started
 
 
-#####Q. How do I get started with Binstar?
+#####Q. How do I get started with Anaconda.org?
 
-A. First, you will need to sign up for a Binstar account [here](https://anaconda.org/).  Then install the [Binstar client](https://github.com/binstar/binstar_client), available via conda and pip.  Although you can perform many task from the website, the Binstar client is required to build and upload packages.
+A. First, you will need to sign up for a Anaconda.org account [here](https://anaconda.org/).  Then install the [Binstar client](https://github.com/binstar/binstar_client), available via conda and pip.  Although you can perform many task from the website, the Binstar client is required to build and upload packages.
 
 {% endcall %}
 
@@ -47,7 +47,7 @@ A. First, you will need to sign up for a Binstar account [here](https://anaconda
 
 #####Q. What kind of account do I have?
 
-A. By default your account is a personal, free account.  All packages you upload to Binstar will be public, and you will be the only person with administrative access to your account.
+A. By default your account is a personal, free account.  All packages you upload to Anaconda.org will be public, and you will be the only person with administrative access to your account.
 
 #####Q. How can I upgrade my account?
 
@@ -64,13 +64,13 @@ A. An organization is a more robust account, which allows multiple individual us
 ###Packages
 
 
-#####Q. What kind of packages does Binstar support?
+#####Q. What kind of packages does Anaconda.org support?
 
-A. Binstar supports conda and PyPI packages.
+A. Anaconda.org supports conda and PyPI packages.
 
 
 #####Q. Who can find and install my packages?
-A. By default, all of your packages are public, and after you upload them to Binstar anyone can search for and download them.  To enable private package uploading, you can [purchase a paid account](https://anaconda.org/about/plans/).  For information on searching for public packages, please go [here](/faq.html#finding-packages).
+A. By default, all of your packages are public, and after you upload them to Anaconda.org anyone can search for and download them.  To enable private package uploading, you can [purchase a paid account](https://anaconda.org/about/plans/).  For information on searching for public packages, please go [here](/faq.html#finding-packages).
 
 #####Q. How do I build and upload a package?
 A. Please go [here](/faq.html#how-do-i) for instructions on package processing and workflow.
@@ -83,7 +83,7 @@ A. Please go [here](/faq.html#how-do-i) for instructions on package processing a
 
 #####Q. What is a channel?
 
-A. Channels are one way Binstar helps you control who can access your packages.  When you tag a package as belonging to a specific channel, only users who are listening to that channel will see the package and be able to install it.
+A. Channels are one way Anaconda.org helps you control who can access your packages.  When you tag a package as belonging to a specific channel, only users who are listening to that channel will see the package and be able to install it.
 
 By default, all packages you upload are sent to your `main` channel.  However, you could also have a `dev` channel that only your internal development team can access.  You can upload a package to the `dev` channel, allow other internal users to test it, and then promote it to the `main` channel when it is ready to be released.  You can find more information on channels [here](/channels.html).
 
@@ -159,7 +159,7 @@ A. If you have a question which you cannot answer using Binstar help, please [em
 
 A. Please reference [this guide](/build_cli.html) for step-by-step instructions on building a package.
 
-#####Q. I have built a package using 'conda build', how do I test the package before uploading to Binstar?
+#####Q. I have built a package using 'conda build', how do I test the package before uploading to Anaconda.org?
 
 A. Specify the '--use-local' option, e.g.  `conda create --use-local -n test ....`
 
@@ -171,7 +171,7 @@ binstar upload package_name
 
 For a complete list of upload options, including specifying a package's channel, availability to other users, and metadata, use	 `binstar upload -h`.
 
-#####Q. How do I install a package from Binstar?
+#####Q. How do I install a package from Anaconda.org?
 
 A. To install a conda package, execute the following command:
 ```
@@ -205,7 +205,7 @@ You can find additional information about installing conda packages [here](/cond
 
 ### Finding Packages
 
-#####Q. How do I find a package on Binstar?
+#####Q. How do I find a package on Anaconda.org?
 A. You can search [anaconda.org](https://anaconda.org) for packages by username or package name.  Additionally, you can filter searches to specify only conda or PyPI packages, and you can sort results by upvotes or number of downloads.
 
 {% endcall %}
