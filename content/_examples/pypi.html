@@ -11,8 +11,8 @@
 
 {% section %}
 
-First, you must have a PyPI package to upload.  For the purposes of this example, 
-if you don't have one you can use a small example package located in the 
+First, you must have a PyPI package to upload.  For the purposes of this example,
+if you don't have one you can use a small example package located in the
 [binstar repository](https://github.com/Binstar/binstar/tree/master/example-packages/pypi).
 
 You will need to begin by cloning the repository from the command line.
@@ -50,8 +50,8 @@ Your package has now been built as a source tarball and is ready to be uploaded.
 
 {% endsection %}
 {% section %}
-    
-Your package is now available at `http://binstar.org/USERNAME/PACKAGE`
+
+Your package is now available at `http://anaconda.org/USERNAME/PACKAGE`
 
 {% endsection %}
 
@@ -60,26 +60,26 @@ Your package is now available at `http://binstar.org/USERNAME/PACKAGE`
 
 {{resource.add_subindex('Installing a PyPI package')}}
 #### Installing a PyPI package
-  
+
 {% endsection %}
 
 
 {% section %}
-The best way to install a PyPI package is using pip. 
+The best way to install a PyPI package is using pip.
 For the following, we will use the package we authored in the examples above.
 
 
 {% example %}
 
-    pip install --extra-index-url https://pypi.binstar.org/#userdefined{USERNAME}/simple #userdefined{pypi-test-package}
-    
+    pip install --extra-index-url https://pypi.anaconda.org/#userdefined{USERNAME}/simple #userdefined{pypi-test-package}
+
 {% endsection %}
 
 {% section %}
 
 {{resource.add_subindex('Installing Private Packages')}}
-#### Installing Private Packages  
-  
+#### Installing Private Packages
+
 {% endsection %}
 
 {% section %}
@@ -89,7 +89,7 @@ All binstar urls can be prefixed with `/t/$TOKEN` to access private packages.
 {% example %}
 
     TOKEN=$(binstar auth --create --name #userdefined{YOUR-TOKEN-NAME})
-    pip install --index-url https://pypi.binstar.org/t/$TOKEN/#userdefined{USERNAME}/simple #userdefined{test-package}
+    pip install --index-url https://pypi.anaconda.org/t/$TOKEN/#userdefined{USERNAME}/simple #userdefined{test-package}
 
 {% endsection %}
 

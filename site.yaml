@@ -12,14 +12,14 @@ plugins:
 
 context:
     data:
-        repo: https://github.com/binstar/docs.binstar.org
+        repo: https://github.com/binstar/docs.anaconda.org
         branch: master
-        imports: 
+        imports:
           - binstar
         site_title: Binstar Documentation
         author:
             name: Continuum Analytics
-            url: "https://binstar.org/"
+            url: "https://anaconda.org/"
         home_url: index.html
         brand: Binstar Docs
         pages:

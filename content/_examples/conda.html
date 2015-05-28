@@ -18,7 +18,7 @@ Before proceeding you have to install the mandatory toolset if it is not already
 
 	conda install binstar
 	conda install conda-build
-	
+
 {% endsection %}
 
 
@@ -32,31 +32,31 @@ For the purposes of this example, we'll use a simple
 
 	git clone https://github.com/Binstar/binstar
 	cd binstar/example-packages/conda/
-	    
+
 {% endsection %}
 
 
 {% section %}
-  
+
 In this directory we can see two required files:
 <a href="https://github.com/Binstar/binstar/blob/master/example-packages/conda/meta.yaml">meta.yaml</a>
 and
 <a href="https://github.com/Binstar/binstar/blob/master/example-packages/conda/build.sh">build.sh</a>
-(for Linux or Mac) or bld.bat (for Windows). 
-To build our package we are first going to turn automatic binstar 
+(for Linux or Mac) or bld.bat (for Windows).
+To build our package we are first going to turn automatic binstar
 uploading off and then run the conda build command.
-    
-  
+
+
 {% example %}
 
     conda config --set binstar_upload no
     conda build .
-  
+
 {% endsection %}
 
 {% section %}
 
-All packages built in this way are placed in a subdirectory of 
+All packages built in this way are placed in a subdirectory of
 [Anaconda's](https://store.continuum.io/cshop/anaconda/) *conda-bld* directory.
 You can check where the resulting file was placed with the `--output` option.
 
@@ -84,31 +84,31 @@ For more information on conda's overall build framework, please read:
   * [conda build documentation](http://conda.pydata.org/docs/build.html)
   * [conda build tutorials](http://conda.pydata.org/docs/build_tutorials.html)
 
-  
+
 {% endsection %}
 
 {% section %}
 
 {{resource.add_subindex('Installing a conda package')}}
-#### Installing a conda package  
-  
+#### Installing a conda package
+
 {% endsection %}
 {% section %}
 
 In order to install conda packages from binstar you need to add a binstar channel to your conda config.
 
-Conda knows how to interact with binstar.  Specifying the channel `sean` translates to [https://conda.binstar.org/sean](https://conda.binstar.org/sean)
+Conda knows how to interact with binstar.  Specifying the channel `sean` translates to [https://conda.anaconda.org/sean](https://conda.anaconda.org/sean)
 
 {% example %}
 
-    conda config --add channels #userdefined{sean} 
+    conda config --add channels #userdefined{sean}
 
 {% endsection %}
 
 {% section %}
 
-Now you will be able to install public conda packages from sean's binstar account. 
-Let's try to install the [testci package](https://binstar.org/sean/testci)   
+Now you will be able to install public conda packages from sean's binstar account.
+Let's try to install the [testci package](https://anaconda.org/sean/testci)
 
 
 {% example %}

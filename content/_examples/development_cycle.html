@@ -11,18 +11,18 @@
 Binstar channels allow you to upload files to your packages and control how they are accessed.
 
 With binstar channels you can upload a file to a specific channel,
-but only users listening to that channel will be able to install it. 
+but only users listening to that channel will be able to install it.
 This is particularly useful for moving a package through a development and testing flow.
 
-In this example we will show you how to use a `test` channel, 
-So that you can upload files without affecting your production quality packages. 
+In this example we will show you how to use a `test` channel,
+So that you can upload files without affecting your production quality packages.
 Without a `--channel` argument the default channel is `main`
 
 {% endsection %}
 {% section %}
 
 Lets start with a conda package, if you don't have one, use our example conda package.
-Before you build the package edit version the `meta.yaml` file in `binstar/example-packages/conda/` to be 2.0  
+Before you build the package edit version the `meta.yaml` file in `binstar/example-packages/conda/` to be 2.0
 
 {% example %}
 
@@ -35,11 +35,11 @@ Before you build the package edit version the `meta.yaml` file in `binstar/examp
 {% endsection %}
 {% section %}
 
-Now, upload your test package to binstar using the [binstar upload](cli.html#Upload) command. 
+Now, upload your test package to binstar using the [binstar upload](cli.html#Upload) command.
 
-You used the `--channel` option to tell the upload not to put it into your `main` 
-channel where all users will be able to install it. 
- 
+You used the `--channel` option to tell the upload not to put it into your `main`
+channel where all users will be able to install it.
+
 {% example %}
 
     binstar upload #userdefined{/path/to/conda-package-2.0.tar.bz2} --channel #userdefined{test}
@@ -48,17 +48,17 @@ channel where all users will be able to install it.
 
 {% section %}
 
-You will notice now that even when you search your conda `main` channel, 
-you won't see the `2.0` version of the test package. This is because you have to tell conda 
+You will notice now that even when you search your conda `main` channel,
+you won't see the `2.0` version of the test package. This is because you have to tell conda
 to look in your new `test` channel.
 
-The `--override` argument is telling conda not to use any channels in your `~/.condarc` file.  
+The `--override` argument is telling conda not to use any channels in your `~/.condarc` file.
 
 {% example %}
 
     #No 2.0 results
     conda search --override -c #userdefined{USERNAME} #userdefined{conda-package}
-    
+
     #Your 2.0 package is here!
     conda search --override -c #userdefined{USERNAME}/channel/#userdefined{test} #userdefined{conda-package}
 
@@ -66,11 +66,11 @@ The `--override` argument is telling conda not to use any channels in your `~/.c
 
 {% section %}
 
-You can give the channel `#userdefined{USERNAME}/channel/test` to your testers. 
+You can give the channel `#userdefined{USERNAME}/channel/test` to your testers.
 Once they finish testing you may then want to copy the `test` packages back to your `main`
-channel. 
- 
-You can also manage your package channels on the web page: `https://binstar.org/#userdefined{USERNAME}/#userdefined{conda-package}`
+channel.
+
+You can also manage your package channels on the web page: `https://anaconda.org/#userdefined{USERNAME}/#userdefined{conda-package}`
 {% example %}
 
     binstar channel --copy #userdefined{test} main
