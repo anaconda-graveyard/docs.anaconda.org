@@ -3,20 +3,20 @@
 {%- call section('Packages', self) -%}
 {% call subsection('Namespaces') %}
 
-Packages on [binstar.org](http://binstar.org) are contained within namespaces.
+Packages on [anaconda.org](http://anaconda.org) are contained within namespaces.
 Each user and organization has their own namespace, called a **user namespace**  where they may host packages.
 
 You can view the packages in a user or organization's namespace by navigating to their user page.
-For example, the [binstar](https://binstar.org/binstar) user namespace contains the binstar user's packages.
+For example, the [binstar](https://anaconda.org/binstar) user namespace contains the binstar user's packages.
 
 
-Please note that supported package managers <em>([conda](conda.html) and [pypi](pypi.html))</em> have 
+Please note that supported package managers <em>([conda](conda.html) and [pypi](pypi.html))</em> have
 corresponding subdomains which must be observed in order to interact with the packages:
 
  *  To install **conda** packages from the binstar user, use the repository
-     url [https://**conda**.binstar.org/binstar](https://conda.binstar.org/binstar)
+     url [https://**conda**.anaconda.org/binstar](https://conda.anaconda.org/binstar)
  *  To install **pypi** packages from the binstar user, use the repository
-    url [https://**pypi**.binstar.org/binstar](https://pypi.binstar.org/binstar)
+    url [https://**pypi**.anaconda.org/binstar](https://pypi.anaconda.org/binstar)
 
 {% endcall %}
 {% call subsection('Channels') %}
@@ -25,20 +25,20 @@ Furthermore each file within a package may be tagged in zero or more [channels](
 this allows package authors to upload files for development or testing purposes without
 affecting non-development users.
 
-If you navigate to  [https://**pypi**.binstar.org/binstar](https://pypi.binstar.org/binstar) you will see a channel
+If you navigate to  [https://**pypi**.anaconda.org/binstar](https://pypi.anaconda.org/binstar) you will see a channel
 dropdown listing all the available channels in this user namespace.
 
 For example all of the pypi packages tagged as 'dev' can be shown here:
 
- *  [https://pypi.binstar.org/binstar/channel/dev](https://pypi.binstar.org/binstar/channel/dev)
+ *  [https://pypi.anaconda.org/binstar/channel/dev](https://pypi.anaconda.org/binstar/channel/dev)
 
 The default channel is the **main** channel.
 If a file is tagged in the **main** channel then the channel name may be omitted from the url
 
 For example the following repositories are equivalent:
 
- *  [https://**pypi**.binstar.org/binstar/channel/main](https://pypi.binstar.org/binstar/channel/main)
- *  [https://**pypi**.binstar.org/binstar](https://pypi.binstar.org/binstar)
+ *  [https://**pypi**.anaconda.org/binstar/channel/main](https://pypi.anaconda.org/binstar/channel/main)
+ *  [https://**pypi**.anaconda.org/binstar](https://pypi.anaconda.org/binstar)
 
 {% endcall %}
 {% call subsection('Private Packages') %}
@@ -51,15 +51,15 @@ Once you have generated a token (`<TOKEN>`), you may prefix any repository url w
 Note: this is just an example. You will not see any extra private packages in the binstar **user namespace**.
 
  *  To install **private conda** packages from the binstar user, use the repository
-     url [https://**conda**.binstar.org/t/&lt;TOKEN&gt;/binstar](https://conda.binstar.org/binstar)
+     url [https://**conda**.anaconda.org/t/&lt;TOKEN&gt;/binstar](https://conda.anaconda.org/binstar)
  *  To install **private pypi** packages from the binstar user, use the repository
-    url [https://**pypi**.binstar.org/t/&lt;TOKEN&gt;/binstar](https://pypi.binstar.org/binstar)
+    url [https://**pypi**.anaconda.org/t/&lt;TOKEN&gt;/binstar](https://pypi.anaconda.org/binstar)
 
 {% endcall %}
 {% call subsection('Creating a new Package') %}
 
 
-All packages you author must be created in a user account. To create a package go to [binstar.org/new](https://binstar.org/new).
+All packages you author must be created in a user account. To create a package go to [anaconda.org/new](https://anaconda.org/new).
 
 {% endcall %}
 {% call subsection('Select the privacy access to your package') %}
@@ -81,7 +81,7 @@ Run the command:
 `binstar upload FILE-NAME`
 
 
-Your package can now be found on your profile page `https://binstar.org/<USERNAME>/<PACKAGE>`
+Your package can now be found on your profile page `https://anaconda.org/<USERNAME>/<PACKAGE>`
 
 {% endcall %}
 {% call subsection('Use Cases') %}

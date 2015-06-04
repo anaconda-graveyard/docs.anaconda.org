@@ -4,7 +4,7 @@
 
 {%   call subsection('Build Config File')%}
 
-Each package you build will have a build config file in its root directory named `.binstar.yml`.  If you are not already familiar with the build, process, please begin by reading this guide on 
+Each package you build will have a build config file in its root directory named `.binstar.yml`.  If you are not already familiar with the build, process, please begin by reading this guide on
 [how to submit your first build](/examples.html#SubmitYourFirstBuild).
 
 This yaml file contains a a number of tags with which you can control the way your build is run. Every tag is optional, and all tags can be written as a single command or as a list.
@@ -26,7 +26,7 @@ Define the main script to run on the build machine:
     script: echo "hello world!"
 {% endsyntax %}
 
-Script may also be a list: 
+Script may also be a list:
 
 {% syntax yaml %}
 script:
@@ -44,15 +44,15 @@ before_script: some_command
 after_script:  another_command
 {% endsyntax %}
 
-For the `after_script` tag the environment variable, 
-[BINSTAR_BUILD_RESULT](#EnvironmentVariables) will be made available as either *success* or *failure*  
+For the `after_script` tag the environment variable,
+[BINSTAR_BUILD_RESULT](#EnvironmentVariables) will be made available as either *success* or *failure*
 
 
 {%     endcall %}
 {%     call subsubsection('after_success and after_failure') %}
 
 If you use the after_success or after_failure tags,
-one or other of them will run after the [script](#script) tags depending on if the build was a success or a failure. **Build errors are not caught**.  
+one or other of them will run after the [script](#script) tags depending on if the build was a success or a failure. **Build errors are not caught**.
 
 {% syntax yaml %}
 after_success:
@@ -65,14 +65,14 @@ after_failure:
 {%     endcall %}
 {%     call subsubsection('build_targets') %}
 
-These files will be upload to your binstar package. 
-These are files that will be uploaded to binstar with 
+These files will be upload to your binstar package.
+These are files that will be uploaded to binstar with
 [binstar upload]({{content_url('cli.html')}}#Upload)
 
 You may use the key words `conda` or `pypi`
 
     build_targets: conda
-    
+
 Or a file or glob of files:
 
 {% syntax yaml %}
@@ -82,28 +82,28 @@ build_targets: /opt/anaconda/my-package.tar.bz2
 {%     endcall %}
 {%     call subsubsection('platform') %}
 
-This selects the platform for which you wish to build your packages. 
+This selects the platform for which you wish to build your packages.
 
-**Please note:** by default only `linux-64` build-workers are available for public use on binstar.org.   You can [add your own build workers](#LaunchingABuildWorker) if you need access to additional platforms.
+**Please note:** by default only `linux-64` build-workers are available for public use on anaconda.org.   You can [add your own build workers](#LaunchingABuildWorker) if you need access to additional platforms.
 
-To see which platforms are available to you, issue the [binstar-build queue]({{content_url('cli.html')}}#Queue) command:  
+To see which platforms are available to you, issue the [binstar-build queue]({{content_url('cli.html')}}#Queue) command:
 {% syntax bash %}
 $ binstar-build queue
-Using binstar api site https://api.binstar.org
+Using binstar api site https://api.anaconda.org
 
 build/binstar/public           []
- + Worker hostname:docker-2        platform:linux-64        dist:centos         
+ + Worker hostname:docker-2        platform:linux-64        dist:centos
    - Id 54b57d3ee1dad10a4987f6cd
    - Last seen 5 seconds ago
    - binstar-build v0.10.3 (binstar v0.10.1)
- + Worker hostname:docker-2        platform:linux-64        dist:centos         
+ + Worker hostname:docker-2        platform:linux-64        dist:centos
    - Id 54b989d1e1dad10da34074d6
    - Last seen 10 seconds ago
    - binstar-build v0.10.3 (binstar v0.10.1)
 
 {% endsyntax %}
 
-The binstar-build cli has the capacity to support the following platforms: 
+The binstar-build cli has the capacity to support the following platforms:
 
 {% syntax yaml %}
 platform:
@@ -135,7 +135,7 @@ Note that the first item `python=2 nodejs=0.10` is not a list.
 In this build item both packages python and nodejs will be available.
 
 The items in the `engine` tag describe one axis of the [build matrix](#BuildMatrix).
- 
+
 {%     endcall %}
 {%     call subsubsection('env') %}
 
@@ -202,7 +202,7 @@ script:
     build.sh
 {% endsyntax %}
 
-would not work, because the configuration `platform: linux-32 env: MSVC=2008` and `platform: linux-32 env: MSVC=2010` don't make sense.  
+would not work, because the configuration `platform: linux-32 env: MSVC=2008` and `platform: linux-32 env: MSVC=2010` don't make sense.
 Instead, you can concatenate sub-builds using [yaml document separators](http://yaml.org/spec/1.0/#id2489959).
 
 Yaml documents are separated by `---`.
