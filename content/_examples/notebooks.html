@@ -12,13 +12,21 @@
 {% section %}
 
 This example describes how to upload an
-[IPython notebook](http://ipython.org/notebook.html) to binstar.org
+[IPython notebook](http://ipython.org/notebook.html) to anaconda.org
 
-You can visit `http://notebooks.binstar.org/<USERNAME>/my-notebook`
+You can visit `http://notebooks.anaconda.org/<USERNAME>/my-notebook`
 to see a HTML version of your notebook.
 
 {% example %}
 
-  binstar upload -p my-notebook my-notebook.ipynb
+  binstar notebook upload my-notebook.ipynb
+
+{% endsection %}
+
+You can also download your notebook from anaconda.org with:
+
+{% example %}
+
+  binstar notebook download username/my-notebook
 
 {% endsection %}
