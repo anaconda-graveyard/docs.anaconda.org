@@ -13,13 +13,13 @@
 
 First, you must have a PyPI package to upload.  For the purposes of this example,
 if you don't have one you can use a small example package located in the
-[binstar repository](https://github.com/Binstar/binstar/tree/master/example-packages/pypi).
+[binstar repository](https://github.com/Anaconda-Server/binstar/tree/master/example-packages/pypi).
 
 You will need to begin by cloning the repository from the command line.
 
 {% example %}
 
-    git clone git@github.com:Binstar/binstar.git
+    git clone git@github.com:Anaconda-Server/binstar.git
     cd binstar/example-packages/pypi/
 
 
@@ -92,5 +92,3 @@ All binstar urls can be prefixed with `/t/$TOKEN` to access private packages.
     pip install --index-url https://pypi.anaconda.org/t/$TOKEN/#userdefined{USERNAME}/simple #userdefined{test-package}
 
 {% endsection %}
-
-
