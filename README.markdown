@@ -8,13 +8,13 @@ There is only one domain for this site - docs.binstar.org - but there is a "test
 Please use the pull request format to submit changes and corrections to the site.
 
 ## Running This Site Locally
-Pull a copy of the website from github binstar/docs.binstar.org.git
+Pull a copy of the website from github Anaconda-Server/docs.anaconda.org.git
 ```
 # Clone to local machine and switch to master or dev branch
-$ git clone git@github.com:binstar/docs.binstar.org.git
+$ git clone git@github.com:Anaconda-Server/docs.anaconda.org.git
 $ git checkout master
 ```
-We use the Hyde engine which uses django template structure for creating pages. 
+We use the Hyde engine which uses django template structure for creating pages.
 ```
 $ conda install hyde
 ```
@@ -25,10 +25,10 @@ You will have to generate the static content that comprises the site at least on
 
 This will generate static content, stored in the 'deploy' directory.
 
-After making changes you can view the updated content one of three ways: 
+After making changes you can view the updated content one of three ways:
 * **```hyde gen ```** - recommended for minor changes - will regenerate sections of site where a diff indicates changes.
 * **```hyde gen --regen```** - recommended for significant changes and/or the addition of new media assets to the site - will regenerate entire site.
-* or add the **```?regen```** querystring to the page url in your browser window,  - recommended for localized changes - will update only that specific page. 
+* or add the **```?regen```** querystring to the page url in your browser window,  - recommended for localized changes - will update only that specific page.
 
 
 To serve the site locally & review your changes, from the root of the website repo execute from the command line:
@@ -72,6 +72,6 @@ Review your changes at http://docs.binstar.org/draft/
 
 ### Submitting a PR:
 
-1) From https://github.com/Binstar/docs.binstar.org/, select the branch you created from the branches dropdown menu. 
+1) From https://github.com/Anaconda-Server/docs.anaconda.org/, select the branch you created from the branches dropdown menu.
 2) Select the 'Pull Request' option.
 3) Include a meaningful message and @-tag whomever should review/merge your changes.

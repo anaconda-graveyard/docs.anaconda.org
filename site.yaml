@@ -12,7 +12,7 @@ plugins:
 
 context:
     data:
-        repo: https://github.com/binstar/docs.anaconda.org
+        repo: https://github.com/Anaconda-Server/docs.anaconda.org
         branch: master
         imports:
           - binstar

@@ -1,0 +1,32 @@
+{% from "macros.html" import command_line_method, command_line_section with context %}
+
+{% section %}
+{{page_header(self, resource, 'Upload notebooks')}}
+
+{{resource.add_subindex('Uploading an IPython notebook')}}
+#### Uploading an IPython notebook
+
+{% endsection %}
+
+
+{% section %}
+
+This example describes how to upload an
+[IPython notebook](http://ipython.org/notebook.html) to anaconda.org
+
+You can visit `http://notebooks.anaconda.org/<USERNAME>/my-notebook`
+to see a HTML version of your notebook.
+
+{% example %}
+
+  binstar notebook upload my-notebook.ipynb
+
+{% endsection %}
+
+You can also download your notebook from anaconda.org with:
+
+{% example %}
+
+  binstar notebook download username/my-notebook
+
+{% endsection %}
