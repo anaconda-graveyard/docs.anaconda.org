@@ -16,12 +16,12 @@ context:
         branch: master
         imports:
           - binstar
-        site_title: Binstar Documentation
+        site_title: anaconda.org documentation
         author:
             name: Continuum Analytics
             url: "https://anaconda.org/"
         home_url: index.html
-        brand: Binstar Docs
+        brand: Anaconda.org docs
         pages:
           - name: Examples
             url: examples.html
