@@ -37,8 +37,15 @@ username and `QUEUENAME` is an alphanumeric name of your choice.  For more infor
 {% call subsection('Launching a Build Worker') %}
 
 Before you can begin using the queue you created, you will need to attach a build-worker to the queue.   The basic build worker runs on your machine (Linux, OS-X or Windows) as the current user
-(see [security considerations](#SecurityConsiderations))
-and accepts jobs from the build queue that you specify.
+(see [security considerations](#SecurityConsiderations)) and accepts jobs from the build queue that you specify. 
+
+In order to avoid the build-worker waiting on user input for conda commands, conda must be configured not to prompt for confirmation. Run the following command to set the configuration correctly:
+
+{% syntax bash %}
+        conda config --set always_yes true
+{% endsyntax %}
+
+Next, launch the build-worker with:
 
 {% syntax bash %}
 	binstar-build worker USERNAME/QUEUENAME
