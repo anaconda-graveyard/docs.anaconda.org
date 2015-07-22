@@ -44,7 +44,7 @@ For example the following repositories are equivalent:
 {% call subsection('Private Packages') %}
 
 Packages may also be private. This means that you must explicitly have access to view the package.
-To view and install private packages, you must identify yourself to binstar.
+To view and install private packages, you must identify yourself to anaconda.org.
 This is done with [access tokens](token_gen.html).
 Once you have generated a token (`<TOKEN>`), you may prefix any repository url with `/t/<TOKEN>`
 
@@ -74,11 +74,11 @@ You will be prompted with two options:
 {% endcall %}
 {% call subsection('Add a file to your package') %}
 
-To upload files to binstar it is recommended to use the [binstar command line client](cli.html#Binstar).
+To upload files to anaconda.org it is recommended to use the [conda-server command line client](cli.html#Binstar).
 
 Run the command:
 
-`binstar upload FILE-NAME`
+`conda server upload FILE-NAME`
 
 
 Your package can now be found on your profile page `https://anaconda.org/<USERNAME>/<PACKAGE>`
@@ -91,4 +91,3 @@ Your package can now be found on your profile page `https://anaconda.org/<USERNA
 
 {% endcall -%}
 {%- endcall  -%}
-
