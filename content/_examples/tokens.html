@@ -1,9 +1,9 @@
 {% from "macros.html" import section with context %}
 
 {% section %}
-{{page_header(self, resource, 'Using Binstar Tokens')}}
+{{page_header(self, resource, 'Using anaconda.org Tokens')}}
 
-You can use tokens to control access to private repositories, collections, or packages on Binstar.
+You can use tokens to control access to private repositories, collections, or packages on anaconda.org.
 Additionally, the degree of access a token grants is completely configurable at the time of generation.
 
 {% endsection %}
@@ -12,27 +12,27 @@ Additionally, the degree of access a token grants is completely configurable at 
 {{resource.add_subindex('How To Generate a Token')}}
 ### How To Generate a Token
 
-At present, tokens can only be generated using the binstar client.
-The binstar client can be installed and configured like the following:
+At present, tokens can only be generated using the conda-server client.
+The conda-server client can be installed and configured like the following:
 
 {% example %}
 
 
 ### &nbsp;
 
-    binstar login
+    conda server login
 
 {% endsection %}
 {% section %}
 
-Once you have successfully installed the binstar client,
+Once you have successfully installed the conda-server client,
 you can generate a token via the following command:
 
-This will generate a random, alphanumeric token string, which you can then distribute to fellow binstar users.
+This will generate a random, alphanumeric token string, which you can then distribute to fellow anaconda.org users.
 
 {% example %}
 
-    binstar auth --create --name #userdefined{YOUR-TOKEN-NAME} --scopes 'repos conda:download'
+    conda server auth --create --name #userdefined{YOUR-TOKEN-NAME} --scopes 'repos conda:download'
 
 {% endsection %}
 {% section %}
@@ -46,4 +46,3 @@ To use the token, simply issue the following command:
     conda config --add channels https://conda.anaconda.org/t/#userdefined{TOKEN}/#userdefined{USERNAME}
 
 {% endsection %}
-
