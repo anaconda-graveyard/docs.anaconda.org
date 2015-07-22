@@ -1,7 +1,7 @@
 {% from "macros.html" import section with context %}
 
 {% section %}
-{{page_header(self, resource, 'Anaconda.org Build')}}
+{{page_header(self, resource, 'Builds in Anaconda.org')}}
 
 {% endsection %}
 {% section %}
@@ -14,14 +14,14 @@
 {% endsection %}
 {% section %}
 
-If you are not familiar with binstar, create a package first.
+If you are not familiar with conda-server, create a package first.
 This will be the namespace or the context of the build.
 
 {% example %}
 
     mkdir conda_build_test
     cd conda_build_test
-    binstar package --create #userdefined{USERNAME}/conda_build_test
+    conda server package --create #userdefined{USERNAME}/conda_build_test
 
 {% endsection %}
 
@@ -116,7 +116,7 @@ Submitting this build is the same as the first:
 #### Install your new conda package
 {% endsection %}
 {% section %}
-By default binstar puts all new packages in a `dev` channel in your account.
+By default anaconda.org puts all new packages in a `dev` channel in your account.
 see [using channels for testing and production](#UsingChannelsForTestingAndProduction)
 for a more in depth example on how to use channels.
 
@@ -216,7 +216,7 @@ Click "Edit". The fields we care about for enabling continuous integration are:
 <dl class="dl-horizontal">
 <dt>branches to test<dt>
 <dd> This is a python regex describing what branches should trigger builds in `test-only` mode.
-No files will be uploaded to binstar.
+No files will be uploaded to anaconda.org.
 <dd>
 <dt>branches to upload<dt>
 <dd>
@@ -229,7 +229,7 @@ No files will be uploaded to binstar.
     </div>
 <dd>
 <dt>Add Webhook<dt>
-<dd>If checked binstar will adds a
+<dd>If checked anaconda.org will adds a
   <a href="https://developer.github.com/webhooks/">github webhook</a> with the value
   <a href="https://api.anaconda.org/github-hook">https://api.anaconda.org/github-hook</a>
   to your github package.
@@ -256,10 +256,10 @@ You should see an active webhook at the end of this process.
 
 Now, test that the web hook is correct by pushing an empty commit.
 
-To debug webhooks, first submit your build again with [binstar trigger](#SaveAndTriggerYourBuilds)
+To debug webhooks, first submit your build again with [conda-server trigger](#SaveAndTriggerYourBuilds)
 This should highlight the issue with tour build.
 
-If `binstar trigger` works, but the webhook still does not -
+If `conda server trigger` works, but the webhook still does not -
 Go to github and inspect the webhook requests and responses.
 
 {% example %}
