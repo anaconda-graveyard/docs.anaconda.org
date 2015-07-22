@@ -11,12 +11,12 @@
 
 {% section %}
 
-This example describes how to build and upload a [conda](http://conda.pydata.org/) package to binstar.
+This example describes how to build and upload a [conda](http://conda.pydata.org/) package to anaconda.org.
 Before proceeding you have to install the mandatory toolset if it is not already on your system
 
 {% example %}
 
-	conda install binstar
+	conda install conda-server
 	conda install conda-build
 
 {% endsection %}
@@ -30,8 +30,8 @@ For the purposes of this example, we'll use a simple
 
 {% example %}
 
-	git clone https://github.com/Anaconda-Server/binstar
-	cd binstar/example-packages/conda/
+	git clone https://github.com/Anaconda-Server/conda-server
+	cd conda-server/example-packages/conda/
 
 {% endsection %}
 
@@ -39,11 +39,11 @@ For the purposes of this example, we'll use a simple
 {% section %}
 
 In this directory we can see two required files:
-<a href="https://github.com/Anaconda-Server/binstar/blob/master/example-packages/conda/meta.yaml">meta.yaml</a>
+<a href="https://github.com/Anaconda-Server/conda-server/blob/master/example-packages/conda/meta.yaml">meta.yaml</a>
 and
-<a href="https://github.com/Anaconda-Server/binstar/blob/master/example-packages/conda/build.sh">build.sh</a>
+<a href="https://github.com/Anaconda-Server/conda-server/blob/master/example-packages/conda/build.sh">build.sh</a>
 (for Linux or Mac) or bld.bat (for Windows).
-To build our package we are first going to turn automatic binstar
+To build our package we are first going to turn automatic conda-server
 uploading off and then run the conda build command.
 
 
@@ -68,12 +68,12 @@ You can check where the resulting file was placed with the `--output` option.
 
 {% section %}
 
-Now, upload your test package to binstar using the [binstar upload](cli.html#Upload) command.
+Now, upload your test package to anaconda.org using the [conda server upload](cli.html#Upload) command.
 
 {% example %}
 
-    binstar login
-    binstar upload #userdefined{/path/to/conda-package.tar.bz2}
+    conda server login
+    conda server upload #userdefined{/path/to/conda-package.tar.bz2}
 
 {% endsection %}
 
@@ -95,9 +95,9 @@ For more information on conda's overall build framework, please read:
 {% endsection %}
 {% section %}
 
-In order to install conda packages from binstar you need to add a binstar channel to your conda config.
+In order to install conda packages from anaconda.org you need to add a anaconda.org channel to your conda config.
 
-Conda knows how to interact with binstar.  Specifying the channel `sean` translates to [https://conda.anaconda.org/sean](https://conda.anaconda.org/sean)
+Conda knows how to interact with anaconda.org. Specifying the channel `sean` translates to [https://conda.anaconda.org/sean](https://conda.anaconda.org/sean)
 
 {% example %}
 
@@ -107,7 +107,7 @@ Conda knows how to interact with binstar.  Specifying the channel `sean` transla
 
 {% section %}
 
-Now you will be able to install public conda packages from sean's binstar account.
+Now you will be able to install public conda packages from sean's anaconda.org account.
 Let's try to install the [testci package](https://anaconda.org/sean/testci)
 
 
