@@ -27,4 +27,8 @@
 {{ json_command_line_method('channel', 'conda server channel --json-help', 3) }}
 
 {%   endcall  %}
+
+{%   call subsection('Managing Notebooks') %}
+{{ json_command_line_method('notebook', 'conda server notebook --json-help', 3) }}
+{%   endcall  %}
 </section>
