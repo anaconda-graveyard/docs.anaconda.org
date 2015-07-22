@@ -37,7 +37,7 @@ A. You can read our terms of service [here](https://anaconda.org/about/legal/ter
 
 #####Q. How do I get started with Anaconda.org?
 
-A. First, you will need to sign up for a Anaconda.org account [here](https://anaconda.org/).  Then install the [Binstar client](https://github.com/binstar/binstar_client), available via conda and pip.  Although you can perform many task from the website, the Binstar client is required to build and upload packages.
+A. First, you will need to sign up for a Anaconda.org account [here](https://anaconda.org/).  Then install the [conda-server client](https://github.com/Anaconda-Server/conda-server), available via conda and pip.  Although you can perform many task from the website, the conda-server client is required to build and upload packages.
 
 {% endcall %}
 
@@ -95,58 +95,56 @@ By default, all packages you upload are sent to your `main` channel.  However, y
 ### Tokens
 
 #####Q. What is a token?
-A. A token is the mechanism by which you authenticate to the Binstar client.  In addition, you can generate new tokens to give other users specifically scoped access to packages and collections.  You can find more information on tokens [here](/token_gen.html).
+A. A token is the mechanism by which you authenticate to the conda-server client.  In addition, you can generate new tokens to give other users specifically scoped access to packages and collections.  You can find more information on tokens [here](/token_gen.html).
 
 {% endcall %}
 
-{% call section('Using the Binstar client') %}
+{% call section('Using the conda-server client') %}
 
-### Using the Binstar client
+### Using the conda-server client
 
-#####Q. How do I install the Binstar client?
-A. The Binstar client is available via conda or pip.  You can find installation and setup instructions [here](https://github.com/Anaconda-Server/binstar_client).
+#####Q. How do I install the conda-server client?
+A. The conda-server client is available via conda or pip.  You can find installation and setup instructions [here](https://github.com/Anaconda-Server/conda-server).
 
-#####Q. What are my login credentials for the Binstar client?
+#####Q. What are my login credentials for the conda-server client?
 
-A. Your credentials for the Binstar client will match those you created on [https://anaconda.org](https://anaconda.org).
+A. Your credentials for the conda-server client will match those you created on [https://anaconda.org](https://anaconda.org).
 
 
-#####Q. How do I log into the Binstar client?
+#####Q. How do I log into the conda-server client?
 
-A. Once you have configured the Binstar client, simply execute the following command from the shell:
+A. Once you have configured the conda-server client, simply execute the following command from the shell:
 ```
-binstar login
-```
-
-
-
-#####Q. How can I see what Binstar commands are supported?
-
-```
-binstar -h
+conda server login
 ```
 
-#####Q. How can I find out more about a particular Binstar command (e.g. *auth*)?
+#####Q. How can I see what conda-server commands are supported?
 
 ```
-binstar auth -h
+conda server -h
 ```
 
-#####Q. How can I see a list of all available Binstar configuration files?
+#####Q. How can I find out more about a particular conda-server command (e.g. *auth*)?
 
 ```
-binstar config --files
+conda server auth -h
 ```
 
-#####Q. How can I see a list of all of my Binstar configuration variables?
+#####Q. How can I see a list of all available conda-server configuration files?
 
 ```
-binstar config --show
+conda server config --files
 ```
 
-#####Q. Where can I find more information about the Binstar client?
+#####Q. How can I see a list of all of my conda-server configuration variables?
 
-A. If you have a question which you cannot answer using Binstar help, please [email us](mailto:support@anaconda.org).
+```
+conda server config --show
+```
+
+#####Q. Where can I find more information about the conda-server client?
+
+A. If you have a question which you cannot answer using anaconda.org help, please [email us](mailto:support@anaconda.org).
 
 
 {% endcall %}
@@ -166,10 +164,10 @@ A. Specify the '--use-local' option, e.g.  `conda create --use-local -n test ...
 
 #####Q. How do I upload a package?
 ```
-binstar upload package_name
+conda server upload package_name
 ```
 
-For a complete list of upload options, including specifying a package's channel, availability to other users, and metadata, use	 `binstar upload -h`.
+For a complete list of upload options, including specifying a package's channel, availability to other users, and metadata, use	 `conda server upload -h`.
 
 #####Q. How do I install a package from Anaconda.org?
 
