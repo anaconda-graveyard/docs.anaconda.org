@@ -1,33 +1,29 @@
 {% from "macros.html" import command_line_method, command_line_section with context %}
 
 {% section %}
-{{page_header(self, resource, 'Installing the binstar command')}}
 
-{% endsection %}
-{% section %}
-
-
-To install binstar with [pip](https://pip.pypa.io/en/latest/)
-
-<div class="alert alert-danger">
-Please install binstar using pip.
-The conda version is not as recent and does not support all platforms and python versions.
-</div>
-{% example %}
-
-    pip install binstar binstar-build
+{{page_header(self, resource, 'Installing the conda-server cli')}}
 
 {% endsection %}
 
 {% section %}
 
-To install binstar with [conda](http://conda.pydata.org/)
+To install conda-server with [conda](http://conda.pydata.org/)
 {% example %}
 
-    conda install -c binstar binstar binstar-build
+    conda install -c binstar conda-server binstar-build
 
 {% endsection %}
 
+{% section %}
+
+To install conda-server with [pip](https://pip.pypa.io/en/latest/)
+
+{% example %}
+
+    pip install conda-server binstar-build
+
+{% endsection %}
 
 {% section %}
 
@@ -35,7 +31,7 @@ Or from source
 
 {% example %}
 
-    pip install git+https://github.com/Anaconda-Server/binstar
-    pip install git+https://github.com/Anaconda-Server/binstar-build
+    pip install git+https://github.com/Anaconda-Server/conda-server
+    pip install git+https://github.com/Anaconda-Server/conda-server-build
 
 {% endsection %}
