@@ -13,14 +13,14 @@
 
 First, you must have a PyPI package to upload.  For the purposes of this example,
 if you don't have one you can use a small example package located in the
-[binstar repository](https://github.com/Anaconda-Server/binstar/tree/master/example-packages/pypi).
+[conda-server repository](https://github.com/Anaconda-Server/conda-server/tree/master/example-packages/pypi).
 
 You will need to begin by cloning the repository from the command line.
 
 {% example %}
 
-    git clone git@github.com:Anaconda-Server/binstar.git
-    cd binstar/example-packages/pypi/
+    git clone git@github.com:Anaconda-Server/conda-server.git
+    cd conda-server/example-packages/pypi/
 
 
 {% endsection %}
@@ -46,7 +46,7 @@ Your package has now been built as a source tarball and is ready to be uploaded.
 
 {% example %}
 
-    binstar upload dist/*.tar.gz
+    conda server upload dist/*.tar.gz
 
 {% endsection %}
 {% section %}
@@ -84,11 +84,11 @@ For the following, we will use the package we authored in the examples above.
 
 {% section %}
 
-All binstar urls can be prefixed with `/t/$TOKEN` to access private packages.
+All anaconda.org urls can be prefixed with `/t/$TOKEN` to access private packages.
 
 {% example %}
 
-    TOKEN=$(binstar auth --create --name #userdefined{YOUR-TOKEN-NAME})
+    TOKEN=$(conda server auth --create --name #userdefined{YOUR-TOKEN-NAME})
     pip install --index-url https://pypi.anaconda.org/t/$TOKEN/#userdefined{USERNAME}/simple #userdefined{test-package}
 
 {% endsection %}
