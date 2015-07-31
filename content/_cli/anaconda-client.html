@@ -1,0 +1,34 @@
+{% from "macros.html" import json_command_line_method, section, subsection with context %}
+
+<section>
+
+<div class="sub-section">
+{{json_command_line_method('conda-server', 'anaconda --json-help' , 1, self)}}
+</div>
+
+{% call subsection('Authentication') %}
+
+{{ json_command_line_method('auth', 'anaconda auth --json-help', 3) }}
+{{ json_command_line_method('login', 'anaconda login --json-help', 3) }}
+{{ json_command_line_method('whoami', 'anaconda whoami --json-help', 3) }}
+
+{%   endcall  %}
+{%   call subsection('Informational') %}
+
+{{ json_command_line_method('show', 'anaconda show --json-help', 3) }}
+{{ json_command_line_method('search', 'anaconda search --json-help', 3) }}
+{{ json_command_line_method('config', 'anaconda config --json-help', 3) }}
+
+{%   endcall  %}
+{%   call subsection('Managing Packages') %}
+
+{{ json_command_line_method('package', 'anaconda package --json-help', 3) }}
+{{ json_command_line_method('upload', 'anaconda upload --json-help', 3) }}
+{{ json_command_line_method('channel', 'anaconda channel --json-help', 3) }}
+
+{%   endcall  %}
+
+{%   call subsection('Managing Notebooks') %}
+{{ json_command_line_method('notebook', 'anaconda notebook --json-help', 3) }}
+{%   endcall  %}
+</section>
