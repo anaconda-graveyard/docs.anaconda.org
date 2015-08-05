@@ -22,12 +22,12 @@ Without a `--channel` argument the default channel is `main`
 {% section %}
 
 Lets start with a conda package, if you don't have one, use our example conda package.
-Before you build the package edit version the `meta.yaml` file in `conda-server/example-packages/conda/` to be 2.0
+Before you build the package edit version the `meta.yaml` file in `anaconda-client/example-packages/conda/` to be 2.0
 
 {% example %}
 
-    git clone https://github.com/Anaconda-Server/conda-server
-    cd conda-server/example-packages/conda/
+    git clone https://github.com/Anaconda-Server/anaconda-client
+    cd anaconda-client/example-packages/conda/
     vim meta.yaml # Bump Version
     conda config --set binstar_upload no
     conda build .
@@ -35,14 +35,14 @@ Before you build the package edit version the `meta.yaml` file in `conda-server/
 {% endsection %}
 {% section %}
 
-Now, upload your test package to anaconda.org using the [conda-server upload](cli.html#Upload) command.
+Now, upload your test package to anaconda.org using the [anaconda-client upload](cli.html#Upload) command.
 
 You used the `--channel` option to tell the upload not to put it into your `main`
 channel where all users will be able to install it.
 
 {% example %}
 
-    conda server upload #userdefined{/path/to/conda-package-2.0.tar.bz2} --channel #userdefined{test}
+    anaconda upload #userdefined{/path/to/conda-package-2.0.tar.bz2} --channel #userdefined{test}
 
 {% endsection %}
 
@@ -73,7 +73,7 @@ channel.
 You can also manage your package channels on the web page: `https://anaconda.org/#userdefined{USERNAME}/#userdefined{conda-package}`
 {% example %}
 
-    conda server channel --copy #userdefined{test} main
+    anaconda channel --copy #userdefined{test} main
 
 	#Now version 2.0 is in your main channel
 	conda search --override -c #userdefined{USERNAME} #userdefined{conda-package}

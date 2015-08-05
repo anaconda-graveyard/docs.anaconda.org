@@ -46,7 +46,7 @@ Your package has now been built as a source tarball and is ready to be uploaded.
 
 {% example %}
 
-    conda server upload dist/*.tar.gz
+    anaconda upload dist/*.tar.gz
 
 {% endsection %}
 {% section %}
@@ -88,7 +88,7 @@ All anaconda.org urls can be prefixed with `/t/$TOKEN` to access private package
 
 {% example %}
 
-    TOKEN=$(conda server auth --create --name #userdefined{YOUR-TOKEN-NAME})
+    TOKEN=$(anaconda auth --create --name #userdefined{YOUR-TOKEN-NAME})
     pip install --index-url https://pypi.anaconda.org/t/$TOKEN/#userdefined{USERNAME}/simple #userdefined{test-package}
 
 {% endsection %}

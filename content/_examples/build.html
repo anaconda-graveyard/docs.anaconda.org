@@ -14,14 +14,14 @@
 {% endsection %}
 {% section %}
 
-If you are not familiar with conda-server, create a package first.
+If you are not familiar with anaconda-client, create a package first.
 This will be the namespace or the context of the build.
 
 {% example %}
 
     mkdir conda_build_test
     cd conda_build_test
-    conda server package --create #userdefined{USERNAME}/conda_build_test
+    anaconda package --create #userdefined{USERNAME}/conda_build_test
 
 {% endsection %}
 
@@ -256,10 +256,10 @@ You should see an active webhook at the end of this process.
 
 Now, test that the web hook is correct by pushing an empty commit.
 
-To debug webhooks, first submit your build again with [conda-server trigger](#SaveAndTriggerYourBuilds)
+To debug webhooks, first submit your build again with [anaconda-client trigger](#SaveAndTriggerYourBuilds)
 This should highlight the issue with tour build.
 
-If `conda server trigger` works, but the webhook still does not -
+If `anaconda trigger` works, but the webhook still does not -
 Go to github and inspect the webhook requests and responses.
 
 {% example %}
