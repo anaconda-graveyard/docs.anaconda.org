@@ -64,7 +64,7 @@ The docs.anaconda.org site is housed in an S3 bucket.  In order to deploy to thi
 
 1. Install s3cmd from this [site](http://s3tools.org/download)
   * **Note**: if you are using a conda environment to build/deploy, remember to install s3cmd into this environment.
-2. For S3 credentials, see the Documentation team or the Anaconda Server team.
+2. For S3 credentials, email it-help@continuum.io.
 3. To configure your s3cmd instance, issue the following command:
 
   ```
