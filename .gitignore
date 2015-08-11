@@ -3,3 +3,4 @@ mynewsite/
 .hyde_deps
 .s3cfg
 *.pyc
+.settings
