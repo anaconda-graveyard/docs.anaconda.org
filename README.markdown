@@ -1,6 +1,6 @@
 ## Test vs. Production
 
-There is only one domain for this site - docs.binstar.org - but there is a "test" site located at docs.binstar.org/draft/.  Before being deployed to the primary domain, changes should be deployed to this area of the site.  This can be done by running the /scripts/deploydraft.sh script.
+There is only one domain for this site - docs.anaconda.org - but there is a "test" site located at docs.anaconda.org/draft/.  Before being deployed to the primary domain, changes should be deployed to this area of the site.  This can be done by running the /scripts/deploydraft.sh script.
 
 
 ## Site Change Process
@@ -58,6 +58,24 @@ $ git pull
 $ git push
 ```
 
+## Deploying to S3
+
+The docs.anaconda.org site is housed in an S3 bucket.  In order to deploy to this bucket, you need the `sc3md` tool, relevant S3 credentials, and an appropriate `s3cfg` configuration file.
+
+1. Install s3cmd from this [site](http://s3tools.org/download)
+  * **Note**: if you are using a conda environment to build/deploy, remember to install s3cmd into this environment.
+2. For S3 credentials, see the Documentation team or the Anaconda Server team.
+3. To configure your s3cmd instance, issue the following command:
+
+  ```
+  s3cmd --configure
+  ```
+
+Complete the prompts which follow using the S3 credentials you've received from the Documentation or AS team.  At a minimum you must supply an Access Key & a Secret Key; you may configure additional variables and options as desired.
+
+After you have installed & configured the s3cmd tool, you will be able to perform publishes to the S3 bucket.
+
+
 ### Deploying to the draft site:
 
 ```
@@ -67,8 +85,18 @@ cd scripts
 ./deploydraft.sh
 ```
 
-Review your changes at http://docs.binstar.org/draft/
+Review your changes at http://docs.anaconda.org/draft/
 
+### Deploying to the production site:
+
+```
+# Navigate to the 'scripts' directory:
+cd scripts
+# Execute the 'deploy.sh' bash script:
+./deploy.sh
+```
+
+Review your changes at http://docs.anaconda.org/
 
 ### Submitting a PR:
 
