@@ -1,6 +1,6 @@
 COMMIT_HASH=`git show --quiet | head -n1`
 VERSION=`python -c "print '$COMMIT_HASH'.split()[-1][:8]"`
-BUCKET="docs-anaconda-org"
+BUCKET="docs.anaconda.org"
 
 # git tag "$VERSION"
 hyde gen -r -c draft.yaml
