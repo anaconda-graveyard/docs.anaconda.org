@@ -10,8 +10,10 @@ The process for editing docs.anaconda.org contains a few steps. Overview: clone 
 
 If you do not already have a GitHub working directory, go to your home directory and make one.
 
-``cd``
-``mkdir githubwork``
+```
+cd
+mkdir githubwork
+```
 
 Go to your GitHub working directory:
 
@@ -27,8 +29,10 @@ This creates a local copy of this repository. You only need to do this once, but
 
 Enter the repository and make sure the master branch is selected:
 
-``cd ~/githubwork/docs.anaconda.org``
-``git checkout master``
+```
+cd ~/githubwork/docs.anaconda.org
+git checkout master
+```
 
 Make a new branch, replacing make-some-change with a branch name that describes the change you are making:
 
@@ -64,7 +68,7 @@ Run the Hyde server on port 8080:
 
 Now open a browser and go to the URL ``http://localhost:8080`` to review the changes.
 
-*NOTE:* If you get an error check to make sure you are in the root of the repository and check to make sure you installed Hyde correctly.
+**NOTE:** If you get an error check to make sure you are in the root of the repository and check to make sure you installed Hyde correctly.
 
 Each time you make changes, you will want to regenerate the Hyde content and review the changes in a browser. There are three ways to regenerate the content.
 
@@ -94,8 +98,10 @@ Now you should be able to use the deploydraft.sh and deploy.sh scripts.
 
 Go to the root directory of the website repository and run the deploydraft.sh script:
 
-``cd ~/githubwork/docs.anaconda.org``
-``./scripts/deploydraft.sh``
+```
+cd ~/githubwork/docs.anaconda.org
+./scripts/deploydraft.sh
+```
 
 Review your changes at http://docs.anaconda.org/draft/ .
 
@@ -125,9 +131,11 @@ Push your new branch to GitHub:
 
 Once your changes are merged into the master branch on GitHub, update your local copy:
 
-``cd ~/githubwork/docs.anaconda.org``
-``git checkout master``
-``git pull``
+```
+cd ~/githubwork/docs.anaconda.org
+git checkout master
+git pull
+```
 
 Regenerate the content with Hyde:
 
@@ -135,7 +143,9 @@ Regenerate the content with Hyde:
 
 Go to the root directory of the website repository and run the deploy.sh script:
 
-``cd ~/githubwork/docs.anaconda.org``
-``./scripts/deploy.sh``
+```
+cd ~/githubwork/docs.anaconda.org
+./scripts/deploy.sh
+```
 
 Review your changes at http://docs.anaconda.org/ .
