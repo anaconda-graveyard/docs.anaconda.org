@@ -40,7 +40,7 @@ Make a new branch, replacing make-some-change with a branch name that describes 
 
 ## Make your changes:
 
-Use local editors to change the docs files as necessary.
+Use local editors to change the docs files as necessary. Edit the source files in the content directory, not the Hyde output files in the deploy directory.
 
 ## Test your changes locally with Hyde:
 
