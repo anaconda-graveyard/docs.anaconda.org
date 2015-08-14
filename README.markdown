@@ -1,105 +1,141 @@
-## Test vs. Production
+## Overview
 
-There is only one domain for this site - docs.anaconda.org - but there is a "test" site located at docs.anaconda.org/draft/.  Before being deployed to the primary domain, changes should be deployed to this area of the site.  This can be done by running the /scripts/deploydraft.sh script.
+There is only one domain for this site - docs.anaconda.org - but there is a "test" site located at docs.anaconda.org/draft/.
 
+Although some parts of the continuum.io site have traditionally been pushed to a test server each Tuesday and to the main server each Thursday, any contributor is welcome to deploy changes to docs.anaconda.org/draft and to docs.anaconda.org at any time.
 
-## Site Change Process
+The process for editing docs.anaconda.org contains a few steps. Overview: clone this repository locally, create a new branch, make your changes, test them locally with Hyde, run deploydraft.sh to push the changes to docs.anaconda.org/draft, once you're satisfied with them push your new branch to GitHub, make a pull request, and merge your new branch into the master branch, then run deploy.sh to push your changes to docs.anaconda.org.
 
-Please use the pull request format to submit changes and corrections to the site.
+## Clone this repository locally:
 
-## Running This Site Locally
-Pull a copy of the website from github Anaconda-Server/docs.anaconda.org.git
-```
-# Clone to local machine and switch to master or dev branch
-$ git clone git@github.com:Anaconda-Server/docs.anaconda.org.git
-$ git checkout master
-```
+If you do not already have a GitHub working directory, go to your home directory and make one.
+
+``cd``
+``mkdir githubwork``
+
+Go to your GitHub working directory:
+
+``cd ~/githubwork``
+
+Clone the repository:
+
+``git clone git@github.com:Anaconda-Server/docs.anaconda.org.git``
+
+This creates a local copy of this repository. You only need to do this once, but all the following steps will be done each time you make a new change.
+
+## Create a new branch:
+
+Enter the repository and make sure the master branch is selected:
+
+``cd ~/githubwork/docs.anaconda.org``
+``git checkout master``
+
+Make a new branch, replacing make-some-change with a branch name that describes the change you are making:
+
+``git checkout -b make-some-change``
+
+## Make your changes:
+
+Use local editors to change the docs files as necessary.
+
+## Test your changes locally with Hyde:
+
 We use the Hyde engine which uses django template structure for creating pages.
-```
-$ conda install hyde
-```
 
-You will have to generate the static content that comprises the site at least once on installation:
+The first time you use it, you will need to install Hyde:
 
-**``` hyde gen ```**.
+``conda install hyde``
+
+You will have to run Hyde to generate the static content that comprises the site at least once:
+
+``hyde gen``
 
 This will generate static content, stored in the 'deploy' directory.
 
-After making changes you can view the updated content one of three ways:
-* **```hyde gen ```** - recommended for minor changes - will regenerate sections of site where a diff indicates changes.
-* **```hyde gen --regen```** - recommended for significant changes and/or the addition of new media assets to the site - will regenerate entire site.
-* or add the **```?regen```** querystring to the page url in your browser window,  - recommended for localized changes - will update only that specific page.
+To review the changes in a browser, we run Hyde as a local web server.
 
+Go to the root of the website repository, which contains the site.yaml file and the deploy directory:
 
-To serve the site locally & review your changes, from the root of the website repo execute from the command line:
-```
-$ hyde serve -p 8080
-```
-You can then view the changes locally by opening your browser and going to **http://localhost:8080**.
+``cd ~/githubwork/docs.anaconda.org``
 
-**Note:** If you get an error try check to make sure you are in the root of the repository or check to make sure you installed Hyde correctly.
+Run the Hyde server on port 8080:
 
-## Making Changes to the Site
+``hyde serve -p 8080``
 
-After your changes are complete, you can push them to github on a new branch, deploy them to the 'draft' site for review, and submit a PR:
+Now open a browser and go to the URL ``http://localhost:8080`` to review the changes.
 
-### Pushing to Github on a New Branch:
+*NOTE:* If you get an error check to make sure you are in the root of the repository and check to make sure you installed Hyde correctly.
 
-```
-# Create a new branch
-git checkout -b content/adding-examples
-# Add your changed files to this new branch
-$ git add /content/_examples/new_page.html
-# Including a meaningful commit message
-$ git commit -m 'adding more examples'
-# Pull in any changes since you last pulled
-$ git pull
-# Push your branch to github.
-$ git push
-```
+Each time you make changes, you will want to regenerate the Hyde content and review the changes in a browser. There are three ways to regenerate the content.
 
-## Deploying to S3
+1) When the Hyde server is running, you can load a page in a browser window with ``?regen`` added to the end of the URL. This is a "querystring" that tells Hyde to regenerate that specific page, and this method is recommended for localized changes.
 
-The docs.anaconda.org site is housed in an S3 bucket.  In order to deploy to this bucket, you need the `sc3md` tool, relevant S3 credentials, and an appropriate `s3cfg` configuration file.
+2) You can shut down the Hyde server with control-c in the terminal window, run ``hyde gen``, and restart the hyde server with ``hyde serve -p 8080``. This regenerates sections of the site where a diff indicates changes, and is recommended for minor changes.
 
-1. Install s3cmd from this [site](http://s3tools.org/download)
-  * **Note**: if you are using a conda environment to build/deploy, remember to install s3cmd into this environment.
-2. For S3 credentials, email it-help@continuum.io.
-3. To configure your s3cmd instance, issue the following command:
+3) You can shut down the Hyde server with control-c in the terminal window, run ``hyde gen --regen``, and restart the hyde server with ``hyde serve -p 8080``. This regenerates the entire site and is recommended for significant changes and/or the addition of new media assets to the site. If in doubt, you can always use this method.
 
-  ```
-  s3cmd --configure
-  ```
+Once you are satisfied with your changes, close the browser and shut down the Hyde server with control-c in the terminal window.
 
-Complete the prompts which follow using the S3 credentials you've received from the Documentation or AS team.  At a minimum you must supply an Access Key & a Secret Key; you may configure additional variables and options as desired.
+## Run deploydraft.sh to push the changes to docs.anaconda.org/draft
 
-After you have installed & configured the s3cmd tool, you will be able to perform publishes to the S3 bucket.
+docs.anaconda.org (including docs.anaconda.org/draft) is hosted on Amazon Simple Storage Service (S3) buckets. When it was first set up the bucket was named docs.anaconda.org. However, we have since learned that bucket names containing periods can only work with http and not https. A new bucket named docs-anaconda-org was created, but as of 2015 Aug 13 we have not yet successfully migrated to it and are currently using docs.anaconda.org and http only for both uploading and downloading. This means that when you run ``s3cmd --configure`` you will have to set the "Use HTTPS Protocol" option to no.
 
+To deploy to the S3 bucket, you need the `s3cmd` tool, relevant S3 credentials, and an appropriate `s3cfg` configuration file.
 
-### Deploying to the draft site:
+Run ``conda install s3cmd``.
 
-```
-# Navigate to the 'scripts' directory:
-cd scripts
-# Execute the 'deploydraft.sh' bash script:
-./deploydraft.sh
-```
+For S3 credentials, email it-help at continuum.io. They are different for each user and not shared with a group, and they are the same as the Access Key and Secret Key used for Amazon Web Services (AWS).
 
-Review your changes at http://docs.anaconda.org/draft/
+You will need gnupg (also known as gpg). MacPorts is a good way to install it on OS X. A .pkg file is available at http://guide.macports.org/#installing.macports . After installing, close and re-open your terminal, then run ``sudo port selfupdate`` then ``sudo port install gnupg`` and then ``type gpg`` and copy the path that shows the location of gpg.
 
-### Deploying to the production site:
+To configure your s3cmd instance and create the s3cfg file, run ``s3cmd --configure`` and complete the prompts, using your S3 credentials as the Access Key and Secret Key. Leave the "Encryption password" blank. For "Path to GPG program" paste the path you found with ``type gpg``. Set "Use HTTPS Protocol" to "No". Leave "HTTP Proxy server name" blank.
 
-```
-# Navigate to the 'scripts' directory:
-cd scripts
-# Execute the 'deploy.sh' bash script:
-./deploy.sh
-```
+Now you should be able to use the deploydraft.sh and deploy.sh scripts.
 
-Review your changes at http://docs.anaconda.org/
+Go to the root directory of the website repository and run the deploydraft.sh script:
 
-### Submitting a PR:
+``cd ~/githubwork/docs.anaconda.org``
+``./scripts/deploydraft.sh``
+
+Review your changes at http://docs.anaconda.org/draft/ .
+
+## Push your new branch to GitHub
+
+Add the new files to the staging area to be committed until ``git status`` shows that all added or modified files are staged:
+
+``git add newfile.html``
+
+Commit the changes and write a meaningful commit message:
+
+``git commit``
+
+Push your new branch to GitHub:
+
+``git push origin make-some-change``
+
+## Make a pull request, and merge your new branch into the master branch
 
 1) From https://github.com/Anaconda-Server/docs.anaconda.org/, select the branch you created from the branches dropdown menu.
+
 2) Select the 'Pull Request' option.
+
 3) Include a meaningful message and @-tag whomever should review/merge your changes.
+
+## Run deploy.sh to push your changes to docs.anaconda.org
+
+Once your changes are merged into the master branch on GitHub, update your local copy:
+
+``cd ~/githubwork/docs.anaconda.org``
+``git checkout master``
+``git pull``
+
+Regenerate the content with Hyde:
+
+``hyde gen --regen``
+
+Go to the root directory of the website repository and run the deploy.sh script:
+
+``cd ~/githubwork/docs.anaconda.org``
+``./scripts/deploy.sh``
+
+Review your changes at http://docs.anaconda.org/ .
