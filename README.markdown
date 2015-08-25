@@ -25,6 +25,13 @@ Clone the repository:
 
 This creates a local copy of this repository. You only need to do this once, but all the following steps will be done each time you make a new change.
 
+## Install dependencies
+
+```
+conda env create
+source activate docs.anaconda.org
+```
+
 ## Create a new branch:
 
 Enter the repository and make sure the master branch is selected:
@@ -45,10 +52,6 @@ Use local editors to change the docs files as necessary. Edit the source files i
 ## Test your changes locally with Hyde:
 
 We use the Hyde engine which uses django template structure for creating pages.
-
-The first time you use it, you will need to install Hyde:
-
-``conda install hyde``
 
 You will have to run Hyde to generate the static content that comprises the site at least once:
 
