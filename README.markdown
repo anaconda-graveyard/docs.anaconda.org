@@ -46,9 +46,12 @@ Use local editors to change the docs files as necessary. Edit the source files i
 
 We use the Hyde engine which uses django template structure for creating pages.
 
-The first time you use it, you will need to install Hyde:
+The first time you use it, you will need to install Hyde and anaconda-client:
 
-``conda install hyde``
+```
+conda install hyde
+conda install anaconda-client
+```
 
 You will have to run Hyde to generate the static content that comprises the site at least once:
 
