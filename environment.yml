@@ -1,0 +1,9 @@
+name: docs.anaconda.org
+dependencies:
+- anaconda-client
+- hyde
+- python=2.7
+- s3cmd
+channels:
+- binstar
+
