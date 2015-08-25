@@ -4,7 +4,7 @@ There is only one domain for this site - docs.anaconda.org - but there is a "tes
 
 Although some parts of the continuum.io site have traditionally been pushed to a test server each Tuesday and to the main server each Thursday, any contributor is welcome to deploy changes to docs.anaconda.org/draft and to docs.anaconda.org at any time.
 
-The process for editing docs.anaconda.org contains a few steps. Overview: clone this repository locally, create a new branch, make your changes, test them locally with Hyde, run deploydraft.sh to push the changes to docs.anaconda.org/draft, once you're satisfied with them push your new branch to GitHub, make a pull request, and merge your new branch into the master branch, then run deploy.sh to push your changes to docs.anaconda.org.
+The process for editing docs.anaconda.org contains a few steps. Overview: clone this repository locally, install dependencies, create a new branch, make your changes, test them locally with Hyde, run deploydraft.sh to push the changes to docs.anaconda.org/draft, once you're satisfied with them push your new branch to GitHub, make a pull request, and merge your new branch into the master branch, then run deploy.sh to push your changes to docs.anaconda.org.
 
 ## Clone this repository locally:
 
@@ -25,7 +25,7 @@ Clone the repository:
 
 This creates a local copy of this repository. You only need to do this once, but all the following steps will be done each time you make a new change.
 
-## Install dependencies
+## Install dependencies:
 
 ```
 conda env create
@@ -89,7 +89,7 @@ docs.anaconda.org (including docs.anaconda.org/draft) is hosted on Amazon Simple
 
 To deploy to the S3 bucket, you need the `s3cmd` tool, relevant S3 credentials, and an appropriate `s3cfg` configuration file.
 
-Run ``conda install s3cmd``.
+The `s3cmd` tool was installed when you created the environment.
 
 For S3 credentials, email it-help at continuum.io. They are different for each user and not shared with a group, and they are the same as the Access Key and Secret Key used for Amazon Web Services (AWS).
 
