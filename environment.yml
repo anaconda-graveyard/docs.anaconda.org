@@ -1,9 +1,9 @@
 name: docs.anaconda.org
 dependencies:
 - anaconda-client
+- anaconda-build
 - hyde
 - python=2.7
 - s3cmd
 channels:
 - binstar
-
