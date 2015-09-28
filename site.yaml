@@ -21,7 +21,7 @@ context:
             name: Continuum Analytics
             url: "https://anaconda.org/"
         home_url: index.html
-        brand: Anaconda.org docs
+        brand: Anaconda Cloud docs
         pages:
           - name: Examples
             url: examples.html
