@@ -6,7 +6,7 @@ This section contains advanced information on configuring builds on the [anacond
 platform. If you are not already familiar with the build process, please begin by reading this guide on
 [how to submit your first build](/examples.html#SubmitYourFirstBuild).
 
-Please note that binstar-build defaults to the linux-64 platform, and that [anaconda.org](http://anaconda.org)provides free linux-64 workers.  If you do **not** need to build for other platforms, you can complete package builds using only [anaconda.org](http://anaconda.org). Further, all anaconda.org accounts allow you to
+Please note that anaconda build defaults to the linux-64 platform, and that [anaconda.org](http://anaconda.org)provides free linux-64 workers.  If you do **not** need to build for other platforms, you can complete package builds using only [anaconda.org](http://anaconda.org). Further, all anaconda.org accounts allow you to
 attach one free worker. If you need more workers or workers on other platforms, you will need to [create a binstar organization](/#CreatingAnOrganization) and [upgrade to a paid plan](/#PaidPlans).
 
 Binstar build workers allow you to run your builds
@@ -26,7 +26,7 @@ to the build workers you will create. At present, when you submit a job the defa
 To create your queue run:
 
 {% syntax bash %}
-	binstar-build queue --create USERNAME/QUEUENAME
+	anaconda build queue --create USERNAME/QUEUENAME
 {% endsyntax %}
 
 Where `USERNAME` is your [anaconda.org](http://anaconda.org)
@@ -45,19 +45,52 @@ In order to avoid the build-worker waiting on user input for conda commands, con
         conda config --set always_yes true
 {% endsyntax %}
 
-Next, launch the build-worker with:
+A worker needs to be registered before it can be run.  This command registers a worker for the queue USERNAME/QUEUE and outputs the worker's id and other arguments to the worker.yaml file.
 
 {% syntax bash %}
-	binstar-build worker USERNAME/QUEUENAME
+    anaconda build register --queue USERNAME/QUEUE --output worker.yaml
+{% endsyntax %}
+
+To see other options for registering workers, try
+{% syntax bash %}
+    anaconda build register --help
+{% endsyntax %}
+
+Next, launch the build-worker by using the yaml file you produced in the register step above:
+
+{% syntax bash %}
+	anaconda build worker worker.yaml
 {% endsyntax %}
 
 That's it!  You can now submit a job to your queue and your new build worker will pick it up and build it:
 
 {% syntax bash %}
-    binstar-build submit ./my-build --queue USERNAME/QUEUENAME
+    anaconda build submit ./my-build --queue USERNAME/QUEUENAME
 {% endsyntax %}
 
 **Please note** that you must leave your build worker process running in order to submit builds to it.  You may wish to attach build workers to your queue using a nohup command or similar.
+
+Finally, after killing the anaconda build worker process, it is required to deregister the worker, unless you plan to start the worker again with the same worker id and configuration.  The deregister step can be done by giving the configuration file that was an --output of the anaconda build register step:
+
+{% syntax bash %}
+    anaconda build deregister --config worker.yaml
+{% endsyntax %}
+
+Alternatively, the worker can be deregistered by giving the worker-id and queue, as shown here:
+
+{% syntax bash %}
+    anaconda build deregister --worker-id WORKER_ID --queue USERNAME/QUEUE
+{% endsyntax %}
+
+If you need to deregister a worker, but have lost the yaml file output from the register step, then check your Anaconda server instance's /settings/build-queue page to remove the worker or list the workers you have registered by a user on a machine with either of these commands:
+
+{% syntax bash %}
+    anaconda build register --list
+{% endsyntax %}
+
+{% syntax bash %}
+    anaconda build deregister --list
+{% endsyntax %}
 
 {% endcall %}
 
@@ -65,9 +98,9 @@ That's it!  You can now submit a job to your queue and your new build worker wil
 {% call subsection('Configuring Build Queues') %}
 By default your build worker will run builds on your `binstar/public` queue; you may change this one of two ways:
 
- 1. Use the `--queue` option when issuing a `binstar-build` [submit, save or trigger](cli.html#SubmittingBuilds) command, e.g.
+ 1. Use the `--queue` option when issuing a `anaconda build` [submit, save or trigger](cli.html#SubmittingBuilds) command, e.g.
     {% syntax bash %}
-    binstar-build save ./my-build --queue USERNAME/QUEUENAME
+    anaconda build save ./my-build --queue USERNAME/QUEUENAME
     {% endsyntax %}
  1. Specify a default queue for your build workers.
     This will affect all builds for your account.
@@ -95,53 +128,20 @@ Because build workers run on your machine, using the current user account, there
 We recommend you:
 
  1. Consider who you are giving access to your build queue.
- 1. The `binstar-build worker` builds are permanent, make sure users can not accidentally
+ 1. The `anaconda build worker` builds are permanent, make sure users can not accidentally
     change the state of your build machine.
-
-{% call subsubsection('Build-Worker Tokens') %}
-
-The first thing that you will want to do is remove your full login credentials from the worker.
-Otherwise build scripts would have the power to manage your anaconda.org account.
-
-To do this you need to create a token.
-
-{% syntax bash %}
-	# Create a token with a limited scope and put it into the file ~/.binstar.token
-	binstar auth --create -n "My Build Token" --scopes "build:worker" --out ~/.binstar.token
-
-	# Log out of your binstar account so build scripts can not use your credentials
-	binstar logout
-
-	# Launch the worker again with the new token as your credentials
-	binstar-build -t ~/.binstar.token worker USERNAME/QUEUENAME
-{% endsyntax %}
-
-The same token value can be used for all of the workers in the queue.
-{% endcall %}
-
-{% endcall %}
-
-{% call subsubsection('Create a binstar user account') %}
-
-Another security consideration you will want to consider is to
-create a new user account on your machine. Remember to remove
-all passwords or user accounts then run your
-`binstar-build -t ~/.binstar.token worker` from your new user account.
-
-{% endcall %}
-
 
 {% call subsection('Executing Builds in a Docker Container') %}
 
-The binstar-build cli includes the ability to build in a docker container::
+The anaconda build cli includes the ability to build in a docker container::
 
 {% syntax bash %}
 	docker pull binstar/linux-64
-	binstar-build docker-worker USERNAME/QUEUENAME --image binstar/linux-64
+	anaconda build docker-worker USERNAME/QUEUENAME --image binstar/linux-64
 {% endsyntax %}
 
 {% endcall %}
 
-
+{% endcall %}
 
 {% endcall %}
