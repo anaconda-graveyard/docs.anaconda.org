@@ -45,21 +45,21 @@ In order to avoid the build-worker waiting on user input for conda commands, con
         conda config --set always_yes true
 {% endsyntax %}
 
-A worker needs to be registered before it can be run.  This command registers a worker for the queue USERNAME/QUEUE and outputs the worker's id and other arguments to a yaml file named ~/.workers/<worker-id>.
+A worker needs to be registered before it can be run.  This command registers a worker for the queue USERNAME/QUEUE and outputs the worker's id and other arguments to a yaml file in ~/.workers/ with the worker's id as the yaml filename.
 
 {% syntax bash %}
-    anaconda build register --queue USERNAME/QUEUE
+    anaconda worker register USERNAME/QUEUE
 {% endsyntax %}
 
 To see other options for registering workers, try
 {% syntax bash %}
-    anaconda build register --help
+    anaconda worker register --help
 {% endsyntax %}
 
-The register step should print out a worker id you can use to run a worker:
+The register step should print out a worker id you can use to run a worker.  This command will start a worker with a ```worker_id```:
 
 {% syntax bash %}
-	anaconda build worker <worker-id-from-register-step>
+	anaconda worker run <worker-id-from-register-step>
 {% endsyntax %}
 
 That's it!  You can now submit a job to your queue and your new build worker will pick it up and build it:
@@ -70,26 +70,21 @@ That's it!  You can now submit a job to your queue and your new build worker wil
 
 **Please note** that you must leave your build worker process running in order to submit builds to it.  You may wish to attach build workers to your queue using a nohup command or similar.
 
-Finally, after killing the anaconda build worker process, it is required to deregister the worker, unless you plan to start the worker again with the same worker id and configuration.  The deregister step can be done by giving the configuration file that was an --output of the anaconda build register step:
+Finally, after killing the anaconda build worker process, it is required to deregister the worker, unless you plan to start the worker again with the same worker id and configuration.  The deregister step can be done with:
 
 {% syntax bash %}
-    anaconda build deregister --worker-id <worker-id-from-register-step>
+    anaconda worker deregister <worker-id-from-register-step>
 {% endsyntax %}
 
-Alternatively, the worker can be deregistered by giving the path to a worker config yaml file:
+If you need to deregister a worker, but have lost the yaml file output from the register step, then check your Anaconda server instance's /settings/build-queue page to remove the worker or list the workers you have registered with this command:
 
 {% syntax bash %}
-    anaconda build deregister --config ~/.workers/<worker-id-from-register-step>
+    anaconda worker list
 {% endsyntax %}
 
-If you need to deregister a worker, but have lost the yaml file output from the register step, then check your Anaconda server instance's /settings/build-queue page to remove the worker or list the workers you have registered by a user on a machine with either of these commands:
-
+Review all help for register, run, deregister, and list with:
 {% syntax bash %}
-    anaconda build register --list
-{% endsyntax %}
-
-{% syntax bash %}
-    anaconda build deregister --list
+    anaconda worker -h
 {% endsyntax %}
 
 {% endcall %}
@@ -137,7 +132,9 @@ The anaconda build cli includes the ability to build in a docker container::
 
 {% syntax bash %}
 	docker pull binstar/linux-64
-	anaconda build docker-worker USERNAME/QUEUENAME --image binstar/linux-64
+    anaconda worker register USERNAME/QUEUENAME
+    # prints worker-id
+	anaconda worker docker_run <worker-id> --image binstar/linux-64
 {% endsyntax %}
 
 {% endcall %}
