@@ -3,10 +3,10 @@
 {% call section('Build Workers', self) %}
 
 This section contains advanced information on configuring builds on the [anaconda.org](http://anaconda.org)
-platform. If you are not already familiar with the build process, please begin by reading this guide on
+platform. If you are not already familiar with the build process, begin by reading this guide on
 [how to submit your first build](/examples.html#SubmitYourFirstBuild).
 
-Please note that anaconda build defaults to the linux-64 platform, and that [anaconda.org](http://anaconda.org)provides free linux-64 workers.  If you do **not** need to build for other platforms, you can complete package builds using only [anaconda.org](http://anaconda.org). Further, all anaconda.org accounts allow you to
+NOTE: anaconda build defaults to the linux-64 platform, and that [anaconda.org](http://anaconda.org)provides free linux-64 workers.  If you do **not** need to build for other platforms, you can complete package builds using only [anaconda.org](http://anaconda.org). Further, all anaconda.org accounts allow you to
 attach one free worker. If you need more workers or workers on other platforms, you will need to [create a binstar organization](/#CreatingAnOrganization) and [upgrade to a paid plan](/#PaidPlans).
 
 Binstar build workers allow you to run your builds
@@ -30,7 +30,7 @@ To create your queue run:
 {% endsyntax %}
 
 Where `USERNAME` is your [anaconda.org](http://anaconda.org)
-username and `QUEUENAME` is an alphanumeric name of your choice.  For more information about configuring your build queues, please go [here](#/ConfiguringBuildQueues).
+username and `QUEUENAME` is an alphanumeric name of your choice.  For more information about configuring your build queues, go [here](#/ConfiguringBuildQueues).
 
 {% endcall %}
 
@@ -68,7 +68,7 @@ That's it!  You can now submit a job to your queue and your new build worker wil
     anaconda build submit ./my-build --queue USERNAME/QUEUENAME
 {% endsyntax %}
 
-**Please note** that you must leave your build worker process running in order to submit builds to it.  You may wish to attach build workers to your queue using a nohup command or similar.
+NOTE: that you must leave your build worker process running in order to submit builds to it.  You may wish to attach build workers to your queue using a nohup command or similar.
 
 Finally, after killing the anaconda build worker process, it is required to deregister the worker, unless you plan to start the worker again with the same worker id and configuration.  The deregister step can be done with:
 
