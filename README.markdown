@@ -23,7 +23,7 @@ Clone the repository:
 
 ``git clone git@github.com:Anaconda-Server/docs.anaconda.org.git``
 
-This creates a local copy of this repository. You only need to do this once, but all the following steps will be done each time you make a new change.
+This creates a local copy of this repository.
 
 ## Install dependencies:
 
@@ -34,6 +34,8 @@ source activate docs.anaconda.org
 ```
 
 Running `conda env create` without any arguments creates a new environment using the environment.yml file in the current directory, which was downloaded from the repository itself.
+
+You only need to clone the repository and install dependencies once, but all the following steps will be done each time you make a new change.
 
 ## Create a new branch:
 
