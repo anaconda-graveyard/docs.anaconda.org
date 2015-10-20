@@ -28,9 +28,12 @@ This creates a local copy of this repository. You only need to do this once, but
 ## Install dependencies:
 
 ```
+cd docs.anaconda.org
 conda env create
 source activate docs.anaconda.org
 ```
+
+Running `conda env create` without any arguments creates a new environment using the environment.yml file in the current directory, which was downloaded from the repository itself.
 
 ## Create a new branch:
 
