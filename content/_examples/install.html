@@ -35,3 +35,16 @@ Or from source
     pip install git+https://github.com/Anaconda-Server/conda-server-build
 
 {% endsection %}
+
+{% section %}
+
+If you are running anaconda-build workers on Linux, make sure you have the following prerequisite tools installed: tar, bzip2, ntp, chrpath, wget, dos2unix, gcc, gcc-c++, and git.
+
+{% example %}
+
+    yum install -y tar bzip2
+    yum install -y ntp chrpath wget dos2unix gcc gcc-c++
+    yum install -y git
+
+{% endsection %}
+
