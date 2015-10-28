@@ -3,16 +3,20 @@
 {% section %}
 {{page_header(self, resource, 'conda Packages')}}
 
-{{resource.add_subindex('Uploading a conda package')}}
-#### Uploading a package
+{{resource.add_subindex('How to upload a conda package')}}
+#### How to upload a package
 
 {% endsection %}
 
 
 {% section %}
 
-This example describes how to build and upload a [conda](http://conda.pydata.org/) package to anaconda.org.
-Before proceeding you have to install the mandatory toolset if it is not already on your system
+How to build and upload a [conda](http://conda.pydata.org/) package to anaconda.org. 
+
+NOTE: These instructions assume that you already use conda. If not, follow the miniconda 
+<a href="http://conda.pydata.org/docs/install/quick.html">quick install</a> instructions.
+
+Begin by having Anaconda client and conda build installed. In your terminal window, type:
 
 {% example %}
 
@@ -24,7 +28,7 @@ Before proceeding you have to install the mandatory toolset if it is not already
 
 {% section %}
 
-The next step is to choose the repository you would like to build the package for.
+Next, choose the repository you would like to build the package for.
 For the purposes of this example, we'll use a simple
 <a href="https://github.com/Anaconda-Server/binstar/tree/master/example-packages/conda">conda test package</a>
 
@@ -44,7 +48,7 @@ and
 <a href="https://github.com/Anaconda-Server/anaconda-client/blob/master/example-packages/conda/build.sh">build.sh</a>
 (for Linux or Mac) or bld.bat (for Windows).
 To build our package we are first going to turn automatic anaconda-client
-uploading off and then run the conda build command.
+uploading off, and then run the conda build command:
 
 
 {% example %}
@@ -68,7 +72,7 @@ You can check where the resulting file was placed with the `--output` option.
 
 {% section %}
 
-Now, upload your test package to anaconda.org using the [anaconda upload](cli.html#Upload) command.
+Finally, upload your test package to Anaconda Cloud using the [anaconda upload](cli.html#Upload) command:
 
 {% example %}
 
@@ -81,21 +85,21 @@ Now, upload your test package to anaconda.org using the [anaconda upload](cli.ht
 
 For more information on conda's overall build framework, please read:
 
-  * [conda build documentation](http://conda.pydata.org/docs/build.html)
-  * [conda build tutorials](http://conda.pydata.org/docs/build_tutorials.html)
+  * [Building conda packages](http://conda.pydata.org/docs/building/bpp.html)
+  * [Tutorials on conda build](http://conda.pydata.org/docs/build_tutorials.html)
 
 
 {% endsection %}
 
 {% section %}
 
-{{resource.add_subindex('Installing a conda package')}}
-#### Installing a conda package
+{{resource.add_subindex('How to install a conda package')}}
+#### How to install a conda package
 
 {% endsection %}
 {% section %}
 
-In order to install conda packages from anaconda.org you need to add a anaconda.org channel to your conda config.
+To install conda packages from Anaconda Cloud, you must add an anaconda.org channel to your conda config.
 
 Conda knows how to interact with anaconda.org. Specifying the channel `sean` translates to [https://conda.anaconda.org/sean](https://conda.anaconda.org/sean)
 
@@ -108,7 +112,7 @@ Conda knows how to interact with anaconda.org. Specifying the channel `sean` tra
 {% section %}
 
 Now you will be able to install public conda packages from sean's anaconda.org account.
-Let's try to install the [testci package](https://anaconda.org/sean/testci)
+To test, let's try to install the [testci package](https://anaconda.org/sean/testci)
 
 
 {% example %}
