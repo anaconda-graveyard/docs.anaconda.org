@@ -4,10 +4,12 @@
 
 {%   call subsection('Build Config File')%}
 
-Each package you build will have a build config file in its root directory named `.binstar.yml`.  If you are not already familiar with the build, process, please begin by reading this guide on
+Each package you build will have a build config file in its root directory named `.binstar.yml`.
+If you are not already familiar with the build, process, please begin by reading this guide on
 [how to submit your first build](/examples.html#SubmitYourFirstBuild).
 
-This yaml file contains a a number of tags with which you can control the way your build is run. Every tag is optional, and all tags can be written as a single command or as a list.
+This yaml file contains a a number of tags with which you can control the way your build is run.
+Every tag is optional, and all tags can be written as a single command or as a list.
 
 {% syntax yaml %}
 tag: single_command
@@ -52,7 +54,8 @@ For the `after_script` tag the environment variable,
 {%     call subsubsection('after_success and after_failure') %}
 
 If you use the after_success or after_failure tags,
-one or other of them will run after the [script](#script) tags depending on if the build was a success or a failure. **Build errors are not caught**.
+one or other of them will run after the [script](#script) tags depending on if the build was a
+success or a failure. **Build errors are not caught**.
 
 {% syntax yaml %}
 after_success:
@@ -262,4 +265,3 @@ Now the sub-build: `platform: linux-32 engine: python=3` will not be submitted.
 {%   endcall %}
 
 {% endcall %}
-
