@@ -10,7 +10,8 @@ You can view the packages in a user or organization's namespace by navigating to
 For example, the [conda](https://anaconda.org/conda) user namespace contains the conda user's packages.
 
 
-Please note that supported package managers <em>([conda](conda.html) and [pypi](pypi.html))</em> have
+Please note that supported package managers <em>([conda](examples.html#CondaPackages) 
+and [pypi](examples.html#PypiPackages))</em> have
 corresponding subdomains which must be observed in order to interact with the packages:
 
  *  To install **conda** packages from the conda user, use the repository
@@ -21,8 +22,8 @@ corresponding subdomains which must be observed in order to interact with the pa
 {% endcall %}
 {% call subsection('Channels') %}
 
-Furthermore each file within a package may be tagged in zero or more [channels](channels.html),
-this allows package authors to upload files for development or testing purposes without
+Furthermore each file within a package may be tagged in zero or more channels.
+This allows package authors to upload files for development or testing purposes without
 affecting non-development users.
 
 If you navigate to  [https://**pypi**.anaconda.org/conda](https://pypi.anaconda.org/conda) you will see a channel
@@ -33,8 +34,7 @@ For example all of the pypi packages tagged as 'dev' can be shown here:
  *  [https://pypi.anaconda.org/conda/channel/dev](https://pypi.anaconda.org/conda/channel/dev)
 
 The default channel is the **main** channel.
-If a file is tagged in the **main** channel then the channel name may be omitted from the url
-
+If a file is tagged in the **main** channel then the channel name may be omitted from the URL.
 For example the following repositories are equivalent:
 
  *  [https://**pypi**.anaconda.org/conda/channel/main](https://pypi.anaconda.org/conda/channel/main)
@@ -81,7 +81,20 @@ Run the command:
 `anaconda upload FILE-NAME`
 
 
-Your package can now be found on your profile page `https://anaconda.org/<USERNAME>/<PACKAGE>`
+Your package can now be found on your profile page: `https://anaconda.org/<USERNAME>/<PACKAGE>`
+
+{% endcall %}
+{% call subsection('Remove a past version from your packages') %}
+
+To remove past versions of your packages from anaconda.org use [anaconda-client](cli.html).
+
+Run the command:
+
+`anaconda remove jsmith/testpack/0.2`
+
+NOTE: Replace `jsmith`, `testpack`, and `0.2` with your actual user name, package name, and version.
+
+The change can now be seen on your profile page: `https://anaconda.org/<USERNAME>/<PACKAGE>`
 
 {% endcall %}
 {% call subsection('Use Cases') %}
