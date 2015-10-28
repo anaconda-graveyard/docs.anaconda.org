@@ -32,7 +32,7 @@ This will be the namespace or the context of the build.
 {% endsection %}
 {% section %}
 
-To add `.binstar.yml` file to your working directory, run `anaconda-build init` in your
+To add `.binstar.yml` file to your working directory, run `anaconda build init` in your
 working directory.
 
 
@@ -45,9 +45,9 @@ build that will print `This is my anaconda build!`
 
 {% example %}
 
-    anaconda-build init
-    anaconda-build submit .
-    anaconda-build tail -f #userdefined{USERNAME}/conda_build_test #userdefined{1}
+    anaconda build init
+    anaconda build submit .
+    anaconda build tail -f #userdefined{USERNAME}/conda_build_test #userdefined{1}
 
 {% endsection %}
 
@@ -107,8 +107,8 @@ Submitting this build is the same as the first:
 {% example %}
 
     conda build .
-    anaconda-build submit .
-    anaconda-build tail -f #userdefined{USERNAME}/conda_build_test #userdefined{2}
+    anaconda build submit .
+    anaconda build tail -f #userdefined{USERNAME}/conda_build_test #userdefined{2}
 
 {% endsection %}
 
@@ -158,7 +158,7 @@ Once the package source is pushed to github you can submit a build via a github 
 
 {% example %}
 
-    anaconda-build submit https://github.com/#userdefined{GITHUB_USERNAME}/conda_build_test
+    anaconda build submit https://github.com/#userdefined{GITHUB_USERNAME}/conda_build_test
 
 {% endsection %}
 
@@ -180,8 +180,8 @@ and [trigger]({{content_url('cli.html')}}#Trigger) them later.
 
 {% example %}
 
-	anaconda-build save -p #userdefined{USERNAME}/conda_build_test https://github.com/#userdefined{GITHUB_USERNAME}/conda_build_test --channel dev
-	anaconda-build trigger #userdefined{USERNAME}/conda_build_test
+	anaconda build save -p #userdefined{USERNAME}/conda_build_test https://github.com/#userdefined{GITHUB_USERNAME}/conda_build_test --channel dev
+	anaconda build trigger #userdefined{USERNAME}/conda_build_test
 
 {% endsection %}
 
@@ -271,7 +271,7 @@ git push
 # This should give enough time to let github send the webhook
 sleep 10
 
-anaconda-build list-all ~userdefined:USERNAME:/conda_build_test
+anaconda build list-all ~userdefined:USERNAME:/conda_build_test
 {% endsyntax %}
 
 
