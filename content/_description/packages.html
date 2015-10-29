@@ -41,7 +41,7 @@ For example the following repositories are equivalent:
  *  [https://**pypi**.anaconda.org/conda](https://pypi.anaconda.org/conda)
 
 {% endcall %}
-{% call subsection('Private Packages') %}
+{% call subsection('Private packages') %}
 
 Packages may also be private. This means that you must explicitly have access to view the package.
 To view and install private packages, you must identify yourself to anaconda.org.
@@ -56,7 +56,7 @@ Note: this is just an example. You will not see any extra private packages in th
     url [https://**pypi**.anaconda.org/t/&lt;TOKEN&gt;/conda](https://pypi.anaconda.org/conda)
 
 {% endcall %}
-{% call subsection('Creating a new Package') %}
+{% call subsection('Creating a new package') %}
 
 
 All packages you author must be created in a user account. To create a package go to [anaconda.org/new](https://anaconda.org/new).
@@ -84,11 +84,19 @@ Run the command:
 Your package can now be found on your profile page: `https://anaconda.org/<USERNAME>/<PACKAGE>`
 
 {% endcall %}
-{% call subsection('Remove a past version from your packages') %}
+{% call subsection('Remove a past version of one of your packages') %}
 
-To remove past versions of your packages from anaconda.org use [anaconda-client](cli.html).
+To remove a past version of one of your packages from anaconda.org:
 
-Run the command:
+1. Click the package name.
+
+2. Click the tab "Files".
+
+3. Click the checkbox to the left of the version you wish to remove.
+
+4. Click the "Actions" menu and then "Remove".
+
+You may instead use the [command line interface](cli.html):
 
 `anaconda remove jsmith/testpack/0.2`
 
@@ -97,7 +105,28 @@ NOTE: Replace `jsmith`, `testpack`, and `0.2` with your actual user name, packag
 The change can now be seen on your profile page: `https://anaconda.org/<USERNAME>/<PACKAGE>`
 
 {% endcall %}
-{% call subsection('Use Cases') %}
+{% call subsection('Delete one of your packages') %}
+
+To delete one of your packages from anaconda.org, including all of its versions:
+
+1. Click the package name.
+
+2. Click the tab "Settings".
+
+3. Click "Admin" on the left side menu.
+
+4. Click "Delete".
+
+You may instead use the [command line interface](cli.html):
+
+`anaconda remove jsmith/testpak`
+
+NOTE: Replace `jsmith` and `testpak` with your actual user name and package name.
+
+The change can now be seen on your profile page: `https://anaconda.org/<USERNAME>`
+
+{% endcall %}
+{% call subsection('Package installation use cases') %}
 
  * [You want to install conda packages](examples.html#CondaPackages)
  * [You want to install PyPI packages](examples.html#PypiPackages)
