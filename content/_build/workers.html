@@ -99,10 +99,16 @@ For users on linux there is an option for running the builder as the root user i
  *  The build user must be created ahead of time.
  *  The anaconda-build installation steps should be followed for the root Python, and anaconda-build should be installed into a conda environment called <code>anaconda.org</code>.
 
-With those prerequisites and the <code>anaconda worker register USERNAME/QUEUE</code> step mentioned above, the su worker can be started with:
+With those prerequisites and the <code>anaconda worker register USERNAME/QUEUE</code> step mentioned above, the su worker can be started with the worker id and a build user created in advance:
 
 {% syntax bash %}
-    anaconda worker su_run <worker-id-from-register-step>
+    anaconda worker su_run <worker-id-from-register-step> <build-user>
+{% endsyntax %}
+
+Other arguments can be passed to <code>su_run</code> as <code>run</code>.  See also
+
+{% syntax bash %}
+    anaconda worker su_run --help
 {% endsyntax %}
 
 {% endcall %}
