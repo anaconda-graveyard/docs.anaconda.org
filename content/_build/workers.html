@@ -97,7 +97,7 @@ For users on linux there is an option for running the builder as the root user i
  *  The worker must be started as the root user.
  *  The directory <code>/etc/worker-skel</code> must exist. It will become the template for new worker home directories. It has a <code>.bash_profile</code> and/or <code>.bashrc file</code> that places the root Python on the system path.
  *  The build user must be created ahead of time.
- *  The anaconda-build installation steps should be followed for the root Python.
+ *  The anaconda-build installation steps should be followed for the root Python, and anaconda-build should be installed into a conda environment called <code>anaconda.org</code>.
 
 With those prerequisites and the <code>anaconda worker register USERNAME/QUEUE</code> step mentioned above, the su worker can be started with:
 
