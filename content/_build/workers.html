@@ -91,7 +91,22 @@ Review all help for register, run, deregister, and list with:
     anaconda worker -h
 {% endsyntax %}
 
+For users on linux there is an option for running the builder as the root user in a process that uses <code>su</code> to run each build as a lesser user. This architecture then allows destruction of the lesser build user's home directory and processes and may be more stable by reducing the number of left over build artifacts from each build.  Running the su worker is similar to running a worker as outlined above, but there are a few prerequistes:
+
+ *  Python must be in a root install usable by root and the lesser user, e.g. a root install of Miniconda into <code>/opt/anaconda</code>.
+ *  The worker must be started as the root user.
+ *  The directory <code>/etc/worker-skel</code> must exist. It will become the template for new worker home directories. It has a <code>.bash_profile</code> and/or <code>.bashrc file</code> that places the root Python on the system path.
+ *  The build user must be created ahead of time.
+ *  The anaconda-build installation steps should be followed for the root Python.
+
+With those prerequisites and the <code>anaconda worker register USERNAME/QUEUE</code> step mentioned above, the su worker can be started with:
+
+{% syntax bash %}
+    anaconda worker su_run <worker-id-from-register-step>
+{% endsyntax %}
+
 {% endcall %}
+
 
 
 {% call subsection('Configuring Build Queues') %}
