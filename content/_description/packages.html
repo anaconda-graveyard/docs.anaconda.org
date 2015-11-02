@@ -3,16 +3,18 @@
 {%- call section('Packages', self) -%}
 {% call subsection('Namespaces') %}
 
-Packages on [anaconda.org](http://anaconda.org) are contained within namespaces.
-Each user and organization has their own namespace, called a **user namespace**  where they may host packages.
+Each user and organization has their own namespace, called a **user namespace** where they may host packages.
+You can view the public packages in a user or organization's namespace by navigating to their user page.
 
-You can view the packages in a user or organization's namespace by navigating to their user page.
-For example, the [conda](https://anaconda.org/conda) user namespace contains the conda user's packages.
+EXAMPLE: The [travis](https://anaconda.org/travis) user namespace contains packages that were uploaded
+and shared by the user named Travis. 
 
+NOTE: All packages are public if uploaded by users of free accounts. Packages may be designated as private by upgrading 
+to a paid account.
 
-Please note that supported package managers <em>([conda](examples.html#CondaPackages) 
-and [pypi](examples.html#PypiPackages))</em> have
-corresponding subdomains which must be observed in order to interact with the packages:
+Anaconda Cloud supports two package managers: <em>([conda](examples.html#CondaPackages) 
+and [PyPI](examples.html#PypiPackages))</em>. In order to interact with conda or PyPI packages, 
+you must use their corresponding subdomains: 
 
  *  To install **conda** packages from the conda user, use the repository
      url [https://**conda**.anaconda.org/conda](https://conda.anaconda.org/conda)
