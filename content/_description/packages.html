@@ -3,11 +3,11 @@
 {%- call section('Packages', self) -%}
 {% call subsection('Namespaces') %}
 
-Each user and organization has their own namespace, called a **user namespace** where they may host packages.
+Each user and organization has their own location called a **user namespace** where they may host packages.
 You can view the public packages in a user or organization's namespace by navigating to their user page.
 
-EXAMPLE: The [travis](https://anaconda.org/travis) user namespace contains packages that were uploaded
-and shared by the user named Travis. 
+EXAMPLE: The [travis](https://anaconda.org/travis) user namespace located at https://anaconda.org/travis contains packages that were uploaded
+and shared by the user whose account is named Travis. 
 
 NOTE: All packages are public if uploaded by users of free accounts. Packages may be designated as private by upgrading 
 to a paid account.
@@ -45,7 +45,7 @@ For example the following repositories are equivalent:
 {% endcall %}
 {% call subsection('Private packages') %}
 
-Packages may also be private. This means that you must explicitly have access to view the package.
+Packages may also be private. This means that a user must explicitly have access to view the package.
 To view and install private packages, you must identify yourself to anaconda.org.
 This is done with [access tokens](examples.html#UsingAnacondaOrgTokens).
 Once you have generated a token (`<TOKEN>`), you may prefix any repository url with `/t/<TOKEN>`
@@ -76,7 +76,7 @@ You will be prompted with two options:
 {% endcall %}
 {% call subsection('Add a file to your package') %}
 
-To upload files to anaconda.org it is recommended to use [anaconda-client](cli.html).
+To easily upload files to Anaconda Cloud use the [anaconda-client](cli.html) command line interface.
 
 Run the command:
 
