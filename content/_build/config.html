@@ -68,9 +68,9 @@ after_failure:
 {%     endcall %}
 {%     call subsubsection('build_targets') %}
 
-These files will be upload to your binstar package.
-These are files that will be uploaded to binstar with
-[binstar upload]({{content_url('cli.html')}}#Upload)
+These files will be uploaded to your Anaconda Cloud package.
+These are files that will be uploaded to Anaconda Cloud with
+[anaconda upload]({{content_url('cli.html')}}#Upload)
 
 You may use the key words `conda` or `pypi`
 
@@ -89,10 +89,10 @@ This selects the platform for which you wish to build your packages.
 
 **Please note:** by default only `linux-64` build-workers are available for public use on anaconda.org.   You can [add your own build workers](#LaunchingABuildWorker) if you need access to additional platforms.
 
-To see which platforms are available to you, issue the [binstar-build queue]({{content_url('cli.html')}}#Queue) command:
+To see which platforms are available to you, issue the [anaconda-build queue]({{content_url('cli.html')}}#Queue) command:
 {% syntax bash %}
-$ binstar-build queue
-Using binstar api site https://api.anaconda.org
+$ anaconda-build queue
+Using anaconda-server api site https://api.anaconda.org
 
 build/binstar/public           []
  + Worker hostname:docker-2        platform:linux-64        dist:centos
@@ -106,7 +106,7 @@ build/binstar/public           []
 
 {% endsyntax %}
 
-The binstar-build cli has the capacity to support the following platforms:
+The anaconda-build cli has the capacity to support the following platforms:
 
 {% syntax yaml %}
 platform:
@@ -147,7 +147,7 @@ An export of environment variables for the sub-build
 {% syntax yaml %}
 env:
   - FOO=BAR
-  - BINSTAR=GREAT JENKINS=OK
+  - ANACONDA=GREAT JENKINS=OK
 {% endsyntax %}
 
 
