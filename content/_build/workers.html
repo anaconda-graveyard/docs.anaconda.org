@@ -6,19 +6,19 @@ This section contains advanced information on configuring builds on the
 [anaconda.org](http://anaconda.org) platform. If you are not already familiar with the build
 process, begin by reading this guide on [how to submit your first build](/examples.html#SubmitYourFirstBuild).
 
-NOTE: anaconda build defaults to the linux-64 platform, and that [anaconda.org](http://anaconda.org)
+NOTE: Anaconda build defaults to the linux-64 platform, and [anaconda.org](http://anaconda.org)
 provides free linux-64 workers.  If you do **not** need to build for other platforms, you can
 complete package builds using only [anaconda.org](http://anaconda.org). Further, all anaconda.org
 accounts allow you to attach one free worker. If you need more workers or workers on other
-platforms, you will need to [create a binstar organization](/#CreatingAnOrganization) and
-[upgrade to a paid plan](/#PaidPlans).
+platforms, you will need to [create an organization](/#CreatingAnOrganization) and
+[upgrade to a paid plan](https://anaconda.org/about/pricing).
 
-Binstar build workers allow you to run your builds
+Anaconda build workers allow you to run your builds
 on your own machines. A build worker can run on any
 machine that supports bash (posix) or batch (win32).
 
 To follow along with this tutorial, you will need to
- [install the build cli](/examples.html#InstallingTheBinstarCommand).
+ [install the build cli](/examples.html#HowToInstallTheAnacondaClientCommandLineInterface).
 
 
 {% call subsection('Create a Build Queue') %}
@@ -34,7 +34,7 @@ To create your queue run:
 {% endsyntax %}
 
 Where `USERNAME` is your [anaconda.org](http://anaconda.org)
-username and `QUEUENAME` is an alphanumeric name of your choice.  For more information about configuring your build queues, go [here](#/ConfiguringBuildQueues).
+username and `QUEUENAME` is an alphanumeric name of your choice. For more information see [configuring your build queues](#ConfiguringBuildQueues).
 
 {% endcall %}
 
@@ -52,18 +52,18 @@ In order to avoid the build-worker waiting on user input for conda commands, con
 A worker needs to be registered before it can be run.  This command registers a worker for the queue USERNAME/QUEUE and outputs the worker's id and other arguments to a yaml file in ~/.workers/ with the worker's id as the yaml filename.
 
 {% syntax bash %}
-    anaconda worker register USERNAME/QUEUE
+    anaconda build worker register USERNAME/QUEUE
 {% endsyntax %}
 
 To see other options for registering workers, try
 {% syntax bash %}
-    anaconda worker register --help
+    anaconda build worker register --help
 {% endsyntax %}
 
 The register step should print out a worker id you can use to run a worker.  This command will start a worker with a ```worker_id```:
 
 {% syntax bash %}
-	anaconda worker run <worker-id-from-register-step>
+	anaconda build worker run <worker-id-from-register-step>
 {% endsyntax %}
 
 That's it!  You can now submit a job to your queue and your new build worker will pick it up and build it:
@@ -72,23 +72,23 @@ That's it!  You can now submit a job to your queue and your new build worker wil
     anaconda build submit ./my-build --queue USERNAME/QUEUENAME
 {% endsyntax %}
 
-NOTE: that you must leave your build worker process running in order to submit builds to it.  You may wish to attach build workers to your queue using a nohup command or similar.
+NOTE: You must leave your build worker process running in order to submit builds to it.  You may wish to attach build workers to your queue using a nohup command or similar.
 
 Finally, after killing the anaconda build worker process, it is required to deregister the worker, unless you plan to start the worker again with the same worker id and configuration.  The deregister step can be done with:
 
 {% syntax bash %}
-    anaconda worker deregister <worker-id-from-register-step>
+    anaconda build worker deregister <worker-id-from-register-step>
 {% endsyntax %}
 
 If you need to deregister a worker, but have lost the yaml file output from the register step, then check your Anaconda server instance's /settings/build-queue page to remove the worker or list the workers you have registered with this command:
 
 {% syntax bash %}
-    anaconda worker list
+    anaconda build worker list
 {% endsyntax %}
 
 Review all help for register, run, deregister, and list with:
 {% syntax bash %}
-    anaconda worker -h
+    anaconda build worker -h
 {% endsyntax %}
 
 {% endcall %}
@@ -127,8 +127,8 @@ Because build workers run on your machine, using the current user account, there
 We recommend you:
 
  1. Consider who you are giving access to your build queue.
- 1. The `anaconda build worker` builds are permanent, make sure users can not accidentally
-    change the state of your build machine.
+ 2. Remember that the `anaconda build worker` builds are permanent, and make 
+    sure users can not accidentally change the state of your build machine.
 
 {% call subsection('Executing Builds in a Docker Container') %}
 
@@ -136,9 +136,9 @@ The anaconda build cli includes the ability to build in a docker container::
 
 {% syntax bash %}
 	docker pull binstar/linux-64
-    anaconda worker register USERNAME/QUEUENAME
+    anaconda build worker register USERNAME/QUEUENAME
     # prints worker-id
-	anaconda worker docker_run <worker-id> --image binstar/linux-64
+	anaconda build worker docker_run <worker-id> --image binstar/linux-64
 {% endsyntax %}
 
 {% endcall %}
