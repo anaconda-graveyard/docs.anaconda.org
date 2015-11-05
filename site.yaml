@@ -23,9 +23,12 @@ context:
         home_url: index.html
         brand: Anaconda Cloud docs
         pages:
-          - name: Examples
-            url: examples.html
-            id: examples
+          - name: Using Anaconda Cloud
+            url: using.html
+            id: using
+          - name: Building Packages
+            url: building.html
+            id: building
           - name: Command Reference
             url: cli.html
             id: cli
