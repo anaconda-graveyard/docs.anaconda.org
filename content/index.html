@@ -34,21 +34,83 @@ We welcome your [feedback and suggestions](mailto:support@anaconda.org).
 
   {% endcall %}
 
-  {% call subsection('Getting started') %}
+{%- endcall -%}
 
-If you want to [author packages](examples.html#CondaPackages) or
-[access private packages](examples.html#Tokens) you will first need to
-[create an account](https://anaconda.org/account/register) on
-[anaconda.org](https://anaconda.org).
+{% call section('Quickstart', self) %}
 
-Now you will need to install the command line client:
+  {% call subsection('Using Anaconda Cloud')%}
 
-    conda install anaconda-client
+  **Search for a public package**
 
-Once you have done that, make sure you can login:
+  Anaconda Cloud hosts hundreds of useful Python packages for a wide variety of applications. You don't need an 
+  Anaconda Cloud account, or to be logged in, to search for public packages, download and install them. You need 
+  an account only to access private packages without a token, or to build and share your packages with others.
 
-    anaconda login
-    anaconda whoami
+  **Search for a public package on Anaconda Cloud**
+
+  1. In the top search box, type part or all of the name of a program you are searching for and press Enter.
+  2. Packages that match your search string are displayed. Click the package name to see more information.
+
+  **Refine your search results**
+
+  You can filter search results using three filter controls:
+
+  - All packages, conda only or PyPI only
+  - All types, Public and/or Private (only available if you are logged in)
+  - Platforms: All, Source, Linux-32, Linux-64, Noarch, OSX-64, Win-32, Win-64.  
+    "Source" packages are source code only, not yet built for any specific platform.  
+    "Noarch" packages are built to work on all platforms.
+
+  **Download a package from Anaconda Cloud**
+
+  After you have located a package and clicked on the name, the detail page displays specific install instructions 
+  for the current operating system. Copy and paste the full command into your terminal window.
+
+  EXAMPLE: To install a package with conda run:
+
+      conda install -c https://anaconda.org/USERNAME packagename
+
+      {% endcall %}
+
+      {% call subsection('Building packages with Anaconda Cloud')%}
+
+  Open an Anaconda Cloud account to upload packages, to access private packages without a token and/or to build packages 
+  for operating systems other than the one you are using. To build private packages, upgrade to a paid account. 
+
+  To build and upload packages, install the Anaconda Client command line interface (CLI) and Anaconda Build. 
+  Open a Terminal window and enter:
+
+      conda install anaconda-client anaconda-build
+
+  Next, log into your Anaconda Cloud account. In your terminal window, enter the following:
+
+      anaconda login
+      
+  At the prompt, enter your Anaconda Cloud username and password. 
+
+  Next, choose the package you would like to build. For this quickstart, you can download our test package:
+
+  	git clone https://github.com/Anaconda-Server/anaconda-client
+  	cd anaconda-client/example-packages/conda/
+
+  To build your test package, first install conda-build and turn off automatic anaconda-client uploading, then 
+  run the conda build command:
+
+      conda install conda-build
+      conda config --set anaconda_upload no
+      conda build .
+
+  Check your path to where the newly built file was placed so you can use it in the next step:
+
+      conda build . --output
+
+  Finally, log into your Anaconda Cloud account if you haven't already, and upload your newly built test package 
+  to your Anaconda Cloud account:
+
+      anaconda login
+      anaconda upload /your/path/conda-package.tar.bz2
+
+  For detailed information, see the [building packages](examples.html#UploadingCondaPackages) section. 
 
   {% endcall %}
 
@@ -58,7 +120,9 @@ Once you have done that, make sure you can login:
 
   {% call subsection('Community support') %}
 
-Please feel welcome to join our community support mailing lists for both [Anaconda](https://groups.google.com/a/continuum.io/forum/?fromgroups#!forum/anaconda) and [conda](https://groups.google.com/a/continuum.io/forum/#!forum/conda), ask questions, answer questions, and discuss ways to use Anaconda Cloud, requests for new features, and any other comments you may have.
+Please feel welcome to join our community support mailing lists for both [Anaconda](https://groups.google.com/a/continuum.io/forum/?fromgroups#!forum/anaconda) 
+and [conda](https://groups.google.com/a/continuum.io/forum/#!forum/conda), ask questions, answer questions, and discuss ways to use 
+Anaconda Cloud, requests for new features, and any other comments you may have.
 
   {% endcall %}
   
@@ -70,7 +134,8 @@ For support issues, please contact [Anaconda Cloud Support](mailto:support@anaco
 
   {% call subsection('Report a bug') %}
 
-Issues with Anaconda Cloud are tracked on [GitHub](https://github.com/Anaconda-Server/docs.anaconda.org/issues). If you think you have found a bug, please search to see if it has been reported, and please report it if no one else has.
+Issues with Anaconda Cloud are tracked on [GitHub](https://github.com/Anaconda-Server/docs.anaconda.org/issues). If you 
+think you have found a bug, please search to see if it has been reported, and please report it if no one else has.
 
   {% endcall %}
 
