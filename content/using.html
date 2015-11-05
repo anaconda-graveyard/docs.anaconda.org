@@ -1,0 +1,54 @@
+{% set page_id = 'using' %}
+{% extends "layout.html" %}
+{% from "macros.html" import section, sub_section, panel %}
+
+{% block content %}
+
+<div id="methods">
+<div class="method">
+
+{% section %}
+# Using Anaconda Cloud
+{% endsection %}
+
+{% include "_using/install.html" with context %}
+
+</div>
+
+<div class="method">
+{% include "_using/notebooks.html" with context %}
+</div>
+
+<div class="method">
+{% include "_using/envs.html" with context %}
+</div>
+
+<div class="method">
+{% include "_using/packages.html" with context %}
+</div>
+
+<div class="method">
+{% include "_using/conda.html" with context %}
+</div>
+
+<div class="method">
+{% include "_using/pypi.html" with context %}
+</div>
+
+<div class="method">
+{% include "_using/tokens.html" with context %}
+</div>
+
+<div class="method">
+{% include "_using/organizations.html" with context %}
+</div>
+
+<div class="method">
+{% include "_using/development_cycle.html" with context %}
+</div>
+
+
+</div>
+
+
+{% endblock %}
