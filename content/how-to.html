@@ -1,0 +1,73 @@
+{% set page_id = 'glossary' %}
+{% from "macros.html" import section, subsection with context %}
+{% extends "layout.html" %}
+
+{% block single_page_content %}
+
+{{page_header(self, resource, 'Anaconda Cloud How-Tos', 1)}}
+
+# Anaconda Cloud How-To's
+
+# How To…
+
+## Use Packages
+
+**Find a package**  
+In your browser, you can search Anaconda Cloud for packages by package name. From the top navigation bar of any page, enter the package name in the search box. You can filter your searches to specify only conda or PyPI packages, and you can sort results by upvotes or number of downloads by clicking the search results column heading.
+
+**Download and install a package from Anaconda Cloud**  
+To install a conda package, in your terminal window run ``conda install -c https://anaconda.org/USERNAME packagename``
+
+**Download and install a conda package from Anaconda Cloud**  
+To install a conda package, in your terminal window run ``conda install -c https://conda.anaconda.org/USERNAME packagename``
+
+**Download and install a PyPI package from Anaconda Cloud**  
+To install a PyPI package, in your terminal window run ``pip install --index-url pypi.anaconda.org/USERNAME packagename``
+
+
+## use anaconda-client CLI
+**Install the anaconda-client**  
+The anaconda-client command line interface is available via conda or pip. See installation and setup instructions.
+
+**Find my anaconda-client login credentials**  
+Your credentials for the anaconda-client are those you used to create an account on Anaconda Cloud. For help, go to Anaconda.org and click "forgot password." 
+
+**Log into the anaconda-client**  
+After you have downloaded and configured the anaconda-client, open a terminal window and run  ``anaconda login``
+
+**See a list of anaconda-client commands**  
+From a terminal window, run ``anaconda --help``  
+
+**Find out more about a particular anaconda-client command**  
+From a terminal window, run ``anaconda COMMANDNAME -h``  
+
+**See a list of all available anaconda-client configuration files**  
+From a terminal window, run ``anaconda config --files``  
+
+**See a list of all of my anaconda-client configuration variables**  
+From a terminal window, run ``anaconda config --show``  
+
+**Find out more information about the anaconda-client**  
+If you have a question that you cannot answer using the help command, documentation or community support email group, please contact us.
+
+## Build packages
+
+**How do I build and upload a package?**  
+See the Anaconda Cloud Build Guide for step-by-step instructions. For a quick run-through, try the Quickstart build guide section. 
+
+**How do I test a package I have built?**  
+Specify the '--use-local' option. For example: ``conda create --use-local -n test ....``
+
+**How do I upload a package to Anaconda Cloud?**  
+In a terminal window, run ``anaconda upload PACKAGENAME``
+
+**How can I get help uploading packages?**  
+For a complete list of upload options, including specifying a package's channel, availability to other users, and metadata, in a terminal window, run ``anaconda upload -h``  
+
+
+## Manage my account
+
+**How can I build private packages or get more package storage space?**  
+Upgrade to a paid plan. Log into Anaconda Cloud, from the toolbar select User Settings > Billing, and click the Change Plan button. 
+
+
