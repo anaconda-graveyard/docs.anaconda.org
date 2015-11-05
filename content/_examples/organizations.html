@@ -3,11 +3,47 @@
 {% section %}
 {{page_header(self, resource, 'Organizations')}}
 
+Organizations enable you to maintain group-owned repositories.
+
 {% endsection %}
 
 {% section %}
-{{resource.add_subindex('Add an owner')}}
-### Add another owner to your organization
+{{resource.add_subindex('Creating organizations')}}
+### Creating organizations
+
+You can create a new organization at [https://anaconda.org/new/organization](https://anaconda.org/new/organization).
+
+{% example %}
+### &nbsp;
+
+
+{% endsection %}
+
+{% section %}
+{{resource.add_subindex('Managing organizations')}}
+### Managing organizations
+
+You can view your organizations by navigating to your organizations dashboard:
+
+ *  https://anaconda.org/organization/:OrgName/dashboard
+
+Or by navigating to [anaconda.org](https://anaconda.org) and selecting the organization dropdown on the upper right.
+
+You can manage your organization's settings by navigating to:
+
+ *  https://anaconda.org/organization/:OrgName/settings/profile
+
+Or by navigating to [your settings](https://anaconda.org/settings) and selecting the organization dropdown on the upper right.
+
+{% example %}
+### &nbsp;
+
+
+{% endsection %}
+
+{% section %}
+{{resource.add_subindex('Adding an owner')}}
+### Adding another owner to your organization
 
 All organization owners have full access to the organization settings and all packages
 
@@ -32,9 +68,9 @@ The page url will be `https://anaconda.org/organization/#userdefined{ORGANIZATIO
 {% endsection %}
 
 {% section %}
-{{resource.add_subindex('Upload a Package to an Organization')}}
+{{resource.add_subindex('Uploading packages to an organization')}}
 
-### Upload a Package to an Organization
+### Uploading packages to an organization
 
 To upload a package to an organization, use the `-u/--user` option
 

@@ -1,7 +1,15 @@
-{% from "macros.html" import section, subsection with context  %}
+{% from "macros.html" import command_line_method, command_line_section with context %}
 
-{%- call section('Packages', self) -%}
-{% call subsection('Namespaces') %}
+{% section %}
+{{page_header(self, resource, 'Packages')}}
+
+{{resource.add_subindex('Namespaces')}}
+#### Namespaces
+
+{% endsection %}
+
+
+{% section %}
 
 Each user and organization has their own location called a **user namespace** where they may host packages.
 You can view the public packages in a user or organization's namespace by navigating to their user page.
@@ -21,8 +29,16 @@ you must use their corresponding subdomains:
  *  To install **pypi** packages from the conda user, use the repository
     url [https://**pypi**.anaconda.org/conda](https://pypi.anaconda.org/conda)
 
-{% endcall %}
-{% call subsection('Channels') %}
+{% endsection %}
+
+
+{% section %}
+
+{{resource.add_subindex('Channels')}}
+#### Channels
+
+{% endsection %}
+{% section %}
 
 Furthermore each file within a package may be tagged in zero or more channels.
 This allows package authors to upload files for development or testing purposes without
@@ -42,8 +58,15 @@ For example the following repositories are equivalent:
  *  [https://**pypi**.anaconda.org/conda/channel/main](https://pypi.anaconda.org/conda/channel/main)
  *  [https://**pypi**.anaconda.org/conda](https://pypi.anaconda.org/conda)
 
-{% endcall %}
-{% call subsection('Private packages') %}
+{% endsection %}
+
+{% section %}
+
+{{resource.add_subindex('Private packages')}}
+#### Private packages
+
+{% endsection %}
+{% section %}
 
 Packages may also be private. This means that a user must explicitly have access to view the package.
 To view and install private packages, you must identify yourself to anaconda.org.
@@ -57,14 +80,27 @@ Note: this is just an example. You will not see any extra private packages in th
  *  To install **private pypi** packages from the conda user, use the repository
     url [https://**pypi**.anaconda.org/t/&lt;TOKEN&gt;/conda](https://pypi.anaconda.org/conda)
 
-{% endcall %}
-{% call subsection('Creating a new package') %}
+{% endsection %}
 
+{% section %}
+
+{{resource.add_subindex('Creating packages')}}
+#### Creating packages
+
+{% endsection %}
+{% section %}
 
 All packages you author must be created in a user account. To create a package go to [anaconda.org/new](https://anaconda.org/new).
 
-{% endcall %}
-{% call subsection('Select the privacy access to your package') %}
+{% endsection %}
+
+{% section %}
+
+{{resource.add_subindex('Package privacy settings')}}
+#### Package privacy settings
+
+{% endsection %}
+{% section %}
 
 You will be prompted with two options:
 
@@ -72,9 +108,15 @@ You will be prompted with two options:
    Users must add your unique repository url to their package manager's configuration.
 1. **Private**: The new package will be hosted on your personal repository; however, you control the list of authorized users that will be able to access or modify this package.
 
+{% endsection %}
 
-{% endcall %}
-{% call subsection('Add a file to your package') %}
+{% section %}
+
+{{resource.add_subindex('Adding a file to a package')}}
+#### Adding a file to a package
+
+{% endsection %}
+{% section %}
 
 To easily upload files to Anaconda Cloud use the [anaconda-client](cli.html) command line interface.
 
@@ -85,8 +127,15 @@ Run the command:
 
 Your package can now be found on your profile page: `https://anaconda.org/<USERNAME>/<PACKAGE>`
 
-{% endcall %}
-{% call subsection('Remove a past version of one of your packages') %}
+{% endsection %}
+
+{% section %}
+
+{{resource.add_subindex('Removing a past version of a package')}}
+#### Removing a past version of a package
+
+{% endsection %}
+{% section %}
 
 To remove a past version of one of your packages from anaconda.org:
 
@@ -106,8 +155,15 @@ NOTE: Replace `jsmith`, `testpack`, and `0.2` with your actual user name, packag
 
 The change can now be seen on your profile page: `https://anaconda.org/<USERNAME>/<PACKAGE>`
 
-{% endcall %}
-{% call subsection('Delete one of your packages') %}
+{% endsection %}
+
+{% section %}
+
+{{resource.add_subindex('Deleting a package')}}
+#### Deleting a package
+
+{% endsection %}
+{% section %}
 
 To delete one of your packages from anaconda.org, including all of its versions:
 
@@ -127,11 +183,4 @@ NOTE: Replace `jsmith` and `testpak` with your actual user name and package name
 
 The change can now be seen on your profile page: `https://anaconda.org/<USERNAME>`
 
-{% endcall %}
-{% call subsection('Package installation use cases') %}
-
- * [You want to install conda packages](examples.html#CondaPackages)
- * [You want to install PyPI packages](examples.html#PypiPackages)
-
-{% endcall -%}
-{%- endcall  -%}
+{% endsection %}
