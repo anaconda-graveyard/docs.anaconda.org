@@ -1,0 +1,38 @@
+{% from "macros.html" import command_line_method, command_line_section with context %}
+
+{% section %}
+{{page_header(self, resource, 'Uploading environments')}}
+
+{{resource.add_subindex('Uploading a conda environment')}}
+#### Uploading a conda environment
+
+{% endsection %}
+
+
+{% section %}
+
+How to upload a 
+[conda environment](http://conda.pydata.org/docs/using/envs.html) to Anaconda Cloud
+
+You can visit `http://envs.anaconda.org/<USERNAME>`
+to see a list of your uploaded environments.
+
+{% example %}
+
+  conda env export -n my-environment
+
+  conda env upload my-environment
+
+{% endsection %}
+
+{% section %}
+
+You can also download and use your environment from Anaconda Cloud:
+
+{% example %}
+
+  conda env create user/my-environemnt
+
+  source activate my-environment
+
+{% endsection %}
