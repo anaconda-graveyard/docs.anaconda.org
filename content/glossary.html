@@ -1,0 +1,65 @@
+{% set page_id = 'glossary' %}
+{% from "macros.html" import section, subsection with context %}
+{% extends "layout.html" %}
+
+{% block single_page_content %}
+
+{{page_header(self, resource, 'Anaconda Cloud Glossary', 1)}}
+
+# Glossary
+
+**Anaconda**  
+An easy-to-install, free collection of Open Source packages, including Python and the conda package manager, with free community support. Over 150 packages are installed with Anaconda. The Anaconda repository contains over 250 additional Open Source packages that can be installed or updated after installing Anaconda with the ``conda install PACKAGENAME`` command.
+
+**Anaconda Cloud**  
+Anaconda Cloud hosts hundreds of useful Python packages, notebooks and environments for a wide variety of applications. You don’t need to have an Anaconda Cloud account, or to be logged in, to search for public packages, download and install them. Anaconda Cloud works with the Anaconda-Build command line interface to build packages on your local computer. Anaconda Cloud is located at anaconda.org.  
+
+**Anaconda-Build CLI**  
+The command line interface to Anaconda.org that lets you build cross-channel packages on your local computer. Contrast to conda-build which can build packages only for your local operating system.
+
+**Anaconda-Client CLI**  
+The Anaconda-Client command line interface (CLI) allows you to log into Anaconda.org directly from your terminal window and manage your account. Anaconda-Client must be installed before you can build cross-platform packages with Anaconda-Build. It is not necessary for downloading or installing packages from Anaconda.org.
+
+**Binstar**  
+Binstar was an early project name for Anaconda Cloud. You may still see the term Binstar in certain command and directory names. 
+
+**Channels**  
+The URLs on Anaconda.org where conda looks for packages. Using the Anaconda-Client CLI, package developers can create additional channels such as development (channel/dev) or test (channel/test) which will be searched only if the user specifies the channel.  
+https://anaconda.org/travis - the default channel  
+https://anaconda.org/travis/channel/main - same as the default channel  
+https://anaconda.org/travis/channel/dev - contains the packages in development  
+https://anaconda.org/travis/channel/test - contains packages ready to test.  
+
+**Conda**  
+The conda package manager and environment manager program that installs and updates packages and their dependencies, and lets you easily switch between environments on your local computer.  
+
+**Conda-Build**  
+The command line interface that lets you build packages for your local operating system. Contrast to Anaconda.org that lets you build cross-channel packages.
+
+**Conda package**   
+A tarball (compressed file) containing system-level libraries, Python modules, executable programs, or other components. 
+
+**Miniconda**  
+A minimal installer for conda. Like Anaconda, Miniconda is a software package that includes the conda package manager and Python and its dependencies, but does not include any other packages. Once conda is installed by installing either Anaconda or miniconda, other software packages may be installed directly from the command line with ‘conda install’. See also Anaconda and conda.
+
+**Noarch package**  
+A conda package that contains nothing specific to any system architecture, so it may be installed from any system. When conda does a search for packages on any system in a channel, conda always checks both the system-specific subdirectory, for example, "linux-64" *and* the ``noarch`` directory. 
+
+**OnSite**  
+Anaconda Cloud is powered by Anaconda Server by Continuum Analytics. Run your own Anaconda server behind firewalls or air-gapped environments. Contact [sales](mailto:sales@continuum.io) for more information.
+
+**Organization**  
+An organization account is a type of account on Anaconda.org that allows multiple individual users to administer packages and control package access to different user groups. It also includes a large amount of storage space. 
+
+**Repository**  
+A storage location from which software packages may be retrieved and installed on a computer.  
+
+**Source package**  
+“Source” packages are source code only, not yet built for any specific platform, and might be compatible with all, some, or only one of the platforms. 
+
+**Token**  
+A token (or authentication token) is the mechanism by which you authenticate to the anaconda-client. It is an alpha-numeric code that is inserted into a URL that allows access by anyone who has the URL. You can use anaconda-client to generate new tokens to give other users specifically scoped access to packages and collections.
+
+**User Namespace**  
+The part of Anaconda Cloud where a user or organization may host packages. For example,  the *user namespace* https://anaconda.org/travis contains packages that were uploaded and shared by the user named Travis.
+
