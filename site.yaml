@@ -29,12 +29,12 @@ context:
           - name: Building Packages
             url: building.html
             id: building
-          - name: Command Reference
-            url: cli.html
-            id: cli
           - name: Build Reference
             url: build-config.html
             id: build-config
+          - name: Command Reference
+            url: cli.html
+            id: cli
           - name: FAQ
             url: faq.html
             id: faq
