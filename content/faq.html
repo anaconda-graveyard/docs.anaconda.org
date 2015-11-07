@@ -11,200 +11,69 @@
 
 {% call section('General Questions') %}
 
+#####Q. What is Anaconda Cloud?
 
-#####Q. What is Anaconda.org?
+A. Anaconda Cloud (Anaconda.org) is a package management service that makes it easy to find, access, store and share public and private notebooks, environments, and conda and PyPI packages, and to keep up with updates made to the packages and environments you're using.
 
-A. Anaconda.org is a package management service.  You can read more [here](/index.html).
+#####Q. What kind of packages does Anaconda Cloud support?
 
-#####Q. How much does it cost?
+A. Anaconda Cloud supports conda and PyPI packages, as well as notebooks and environments.
 
-A. Anaconda.org is always free for public packages. For information on storage size limits and on upgrading your account for benefits like private packaging, see our [plans and pricing](https://anaconda.org/about/plans/).
+#####Q. Who can find and install my packages?
+
+A. If you have a free account, all of your packages are public, so after you upload them to Anaconda Cloud anyone can search for and download them. If you wish to designate private packages, you can [purchase a paid account](https://anaconda.org/about/pricing).  
+
+#####Q. How do I build and upload a package?
+
+A. Please see [Building packages with Anaconda Cloud](/index.html#BuildingPackagesWithAnacondaCloud).
 
 #####Q. What is Continuum Analytics?
 
-A. Continuum Analytics is a software development and consulting company based in Austin, TX.  We are committed to the open source community.  You can find out more about us [here](http://continuum.io/about-continuum).
+A. Continuum Analytics is a software development and consulting company of passionate open source advocates based in Austin, Texas, USA. We are committed to the open source community. We created the Anaconda Python distribution and contribute to many other open source-based data analytics tools. You can find out more about us [here](http://continuum.io/our-story).
 
-#####Q. What are Anaconda.org's terms of service?
+#####Q. What are Anaconda Cloud's Terms of Service?
 
 A. You can read our terms of service [here](https://anaconda.org/about/legal/terms). For any additional questions, please [email us](mailto:support@anaconda.org).
 
 {% endcall %}
 
-{% call section('Getting Started') %}
+{% call section('Accounts and Pricing') %}
 
-### Getting Started
+#####Q. How much does Anaconda Cloud cost?
 
+A. Anaconda Cloud is always free for downloading and uploading public packages, and for academic users. If you want private packages or extra storage space, you can upgrade to a private account. For more information, see our [plans and pricing](https://anaconda.org/about/pricing).
 
-#####Q. How do I get started with Anaconda.org?
+#####Q. Do you offer free access for academic use?
 
-A. First, you will need to sign up for a Anaconda.org account [here](https://anaconda.org/).  Then install the [anaconda-client](https://github.com/Anaconda-Server/anaconda-client), available via conda and pip.  Although you can perform many tasks from the website, the anaconda-client is required to build and upload packages.
+Yes. Our academic accounts even include free add-ons such as IOPro and Anaconda Accelerate. You must sign up for Anaconda Cloud with an .edu email address. Other features such as private packages and advanced build worker options require a paid plan.
 
-{% endcall %}
+#####Q. How do I get started with Anaconda Cloud?
 
-{% call section('Accounts') %}
-
-###Accounts
+A. You can search, download and install hundreds of public packages without even having an account. If you wish to build and upload packages, you will need to sign up for an [Anaconda Cloud account](https://anaconda.org/). See our [Building Packages section](/index.html#BuildingPackagesWithAnacondaCloud) for more help. 
 
 #####Q. What kind of account do I have?
 
-A. By default your account is a personal, free account.  All packages you upload to Anaconda.org will be public, and you will be the only person with administrative access to your account.
+A. By default your account is a personal, free account.  All packages you upload to Anaconda Cloud will be public, and you will be the only person with administrative access to your account.
+
+#####Q. What's included in the free version of Anaconda Cloud?
+
+A. The Free plan allows you to search for, create and host public packages, and provides up to 3 GB storage space. [Compare plans](https://anaconda.org/about/pricing).
+
+#####Q. What's included in the paid personal version of Anaconda Cloud?
+
+A. With our paid personal subscription, you can create and host private packages, and use 10 GB of storage space. [Compare plans](https://anaconda.org/about/pricing).
+
+#####Q. What's included in the paid organization version of Anaconda Cloud?
+
+A. With our paid subscriptions, you can create and host private packages, multiple users and groups, and use 100 GB of storage space. [Compare plans](https://anaconda.org/about/pricing).
 
 #####Q. How can I upgrade my account?
 
-A. You can upgrade to a paid account [here](https://anaconda.org/settings/billing).  This will allow you to create private packages and increase your storage limit.
+A. You can upgrade to a paid account [here](https://anaconda.org/settings/billing). This will allow you to create private packages and increase your storage limit.
 
-#####Q. What is an organization? How is it different from an individual account?
+#####Q. What is an organization account, and how is it different from an individual account?
 
-A. An organization account allows multiple individual users to administer packages and have more granular control of package access by other users.
-
-{% endcall %}
-
-{% call section('Packages') %}
-
-###Packages
-
-
-#####Q. What kind of packages does Anaconda.org support?
-
-A. Anaconda.org supports conda and PyPI packages.
-
-
-#####Q. Who can find and install my packages?
-A. By default, all of your packages are public, and after you upload them to Anaconda.org anyone can search for and download them.  To enable private package uploading, you can [purchase a paid account](https://anaconda.org/about/pricing).  Please see our information on [searching for public packages](/faq.html#FindingPackages).
-
-#####Q. How do I build and upload a package?
-A. Please see our instructions on [package processing and workflow](/faq.html#HowDoI).
-
-{% endcall %}
-
-{% call section('Channels') %}
-
-###Channels
-
-#####Q. What is a channel?
-
-A. Channels are one way Anaconda.org helps you control who can access your packages.  When you tag a package as belonging to a specific channel, only users who are listening to that channel will see the package and be able to install it.
-
-By default, all packages you upload are sent to your `main` channel.  However, you could also have a `dev` channel that only your internal development team can access.  You can upload a package to the `dev` channel, allow other internal users to test it, and then promote it to the `main` channel when it is ready to be released.  You can find more information on channels [here](/channels.html).
-
-
-{% endcall %}
-
-{% call section('Tokens') %}
-
-### Tokens
-
-#####Q. What is a token?
-A. A token is the mechanism by which you authenticate to the anaconda-client.  In addition, you can generate new tokens to give other users specifically scoped access to packages and collections.  You can find more information on tokens [here](/token_gen.html).
-
-{% endcall %}
-
-{% call section('Using the anaconda-client') %}
-
-### Using the anaconda-client
-
-#####Q. How do I install the anaconda-client?
-A. The anaconda-client is available via conda or pip.  You can find installation and setup instructions [here](https://github.com/Anaconda-Server/anaconda-client).
-
-#####Q. What are my login credentials for the anaconda-client?
-
-A. Your credentials for the anaconda-client will match those you created on [https://anaconda.org](https://anaconda.org).
-
-
-#####Q. How do I log into the anaconda-client?
-
-A. Once you have configured the anaconda-client, simply execute the following command from the shell:
-```
-anaconda login
-```
-
-#####Q. How can I see what anaconda-client commands are supported?
-
-```
-anaconda -h
-```
-
-#####Q. How can I find out more about a particular anaconda-client command (e.g. *auth*)?
-
-```
-anaconda auth -h
-```
-
-#####Q. How can I see a list of all available anaconda-client configuration files?
-
-```
-anaconda config --files
-```
-
-#####Q. How can I see a list of all of my anaconda-client configuration variables?
-
-```
-anaconda config --show
-```
-
-#####Q. Where can I find more information about the anaconda-client?
-
-A. If you have a question which you cannot answer using anaconda.org help, please [email us](mailto:support@anaconda.org).
-
-
-{% endcall %}
-
-{% call section('How Do I...') %}
-
-###How Do I...
-
-#####Q. How do I build a package?
-
-A. Please reference [this guide](/building.html#BuildsInAnacondaOrg) for step-by-step instructions on building a package.
-
-#####Q. I have built a package using 'conda build', how do I test the package before uploading to Anaconda.org?
-
-A. Specify the '--use-local' option, e.g.  `conda create --use-local -n test ....`
-
-
-#####Q. How do I upload a package?
-```
-anaconda upload package_name
-```
-
-For a complete list of upload options, including specifying a package's channel, availability to other users, and metadata, use	 `anaconda upload -h`.
-
-#####Q. How do I install a package from Anaconda.org?
-
-A. To install a conda package, execute the following command:
-```
-conda install --channel https://conda.anaconda.org/:REPOSITORY-PATH PACKAGE
-```
-
-Where REPOSITORY-PATH PACKAGE is the path to the package on anaconda.org.
-For example, to install [this package](https://anaconda.org/auto/pyxmlsecurity):
-
-```
-conda install -c https://conda.anaconda.org/auto pyxmlsecurity
-```
-
-To install this PyPI package, execute the following command:
-
-```
-pip install --index-url pypi.anaconda.org/REPOSITORY-PATH/simple PACKAGE
-```
-
-For example, to install [this package](https://anaconda.org/pypi/lxml):
-
-```
-pip install -i https://pypi.anaconda.org/pypi/simple lxml
-```
-
-You may read more about installing [conda](/using.html#InstallingCondaPackages) and [PyPI](/using.html#InstallingPypiPackages) packages.
-
-{% endcall %}
-
-{% call section('Finding Packages') %}
-
-### Finding Packages
-
-#####Q. How do I find a package on Anaconda.org?
-A. You can search [anaconda.org](https://anaconda.org) for packages by username or package name.  Additionally, you can filter searches to specify only conda or PyPI packages, and you can sort results by upvotes or number of downloads.
+A. An organization account allows multiple individual users to administer packages and have more control of package access by other users. An individual account is for use by one person. 
 
 {% endcall %}
 

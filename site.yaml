@@ -35,9 +35,15 @@ context:
           - name: Command Reference
             url: cli.html
             id: cli
+          - name: How To...
+            url: howto.html
+            id: howto
           - name: FAQ
             url: faq.html
             id: faq
+          - name: Glossary
+            url: glossary.html
+            id: glossary
           - name: OnSite
             url: http://docs.continuum.io/anaconda-server/index.html
             id: null
