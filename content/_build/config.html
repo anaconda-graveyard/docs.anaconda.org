@@ -1,8 +1,8 @@
 {% from "macros.html" import section, subsection, subsubsection with context %}
 
-{% call section('Build configuration', self) %}
+{% call section('Anaconda Build Advanced Config', self) %}
 
-{%   call subsection('Build Config File')%}
+{%   call subsection('Build Config')%}
 
 Each package you build will have a build config file in its root directory named `.binstar.yml`.
 If you are not already familiar with the build process, please begin by reading this guide on
@@ -85,7 +85,7 @@ build_targets: /opt/anaconda/my-package.tar.bz2
 {%     endcall %}
 {%     call subsubsection('platform') %}
 
-This selects the platform for which you wish to build your packages.
+This selects the platforms for which you wish to build your packages.
 
 **Please note:** by default only `linux-64` build-workers are available for public use on anaconda.org.   You can [add your own build workers](#LaunchingABuildWorker) if you need access to additional platforms.
 
