@@ -1,9 +1,43 @@
 {% from "macros.html" import section with context %}
 
 {% section %}
-{{page_header(self, resource, 'Builds in Anaconda.org')}}
+{{page_header(self, resource, 'Overview')}}
+
+The **Anaconda Cloud Build System** provides **Continuous Integration** powered by **conda** and **conda environments** for all platforms, through a simple yet powerful interface.
+
+The build process follows a set of instructions specified in a `.binstar.yml` file, including the test enviornments to use, build instructions, testing and additional scripts to be executed run.
+
+To launch a build process, we use the Anaconda CLI which may include conda recipes for the creation of conda packages, which can then be uploaded to Anaconda Cloud to quickly share with others or access yourself from anywhere.
+
+Additionally you can configure automatic build hooks so the process is triggered automatically.
+
+{{resource.add_subindex('Components')}}
+### Components
+
+
+#### Anaconda Cloud
+
+#### Build Queues
+
+#### Workers
+
 
 {% endsection %}
+
+{% section %}
+{{resource.add_subindex('Use cases')}}
+### Use cases
+
+- I have packages (language agnostic) I'm storing on Anaconda Cloud that I want to compile into conda packages so it's easy for people to conda install those packages from my user channel (my account on Anaconda Cloud)
+- I'm part of a workgroup or team using a GitHub repository that has basic Continuous Integration needs that can be centralized with Anaconda Cloud so people can easily download our opensource packages for different platforms
+- I'm part of an organization that needs to build and distribute cross-platform conda packages across MacOS, Windows and Linux
+
+{% endsection %}
+
+{% section %}
+{{page_header(self, resource, 'Builds in Anaconda.org')}}
+{% endsection %}
+
 {% section %}
 {{resource.add_subindex('Submit your first build')}}
 ### Submit your first build
