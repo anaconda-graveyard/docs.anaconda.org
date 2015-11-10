@@ -40,6 +40,24 @@ Binstar was an early project name for Anaconda Cloud. You may still see the term
 Binstar in certain command and directory names. 
 {% endcall %}
 
+{% call subsection('Build Queue')%}
+A build queue holds new package building and testing requests (also called "build jobs" or "builds") when a user or organization requests a build to be created. This can be done automatically with continuous integration (CI) with sites such as Github or manually through the user interface.
+
+- A user (organization or individual) submits jobs to a queue with the CLI.
+- A queue may have multiple workers attached to it.
+- Most queues are private. Anaconda Cloud also offers a public queue for building Linux-64 packages, which can be used by any Anaconda Cloud user.
+{% endcall %}
+
+{% call subsection('Build Worker')%}
+A build worker is a machine running the Anaconda Build client, typically an Amazon Web Services (AWS) instance.
+
+When a build worker is first created, it must be registered with an Anaconda Build queue in order for the queue to know about it and delegate incoming requests of the right type to that build worker.
+
+- Each worker runs on only one platform, so it can only receive and execute build jobs that should be executed on that platform. For example, to build a job for Win-32 you must create a Win-32 worker.
+- More than one worker may be attached to a queue to reduce wait time in the queue. There may be more than one worker for one operating system. For example, a queue could have two Linux-32 workers and one Win-64 worker. 
+- The worker will do the actual work of building, compiling and testing the package and may optionally then upload the compiled package to Anaconda Cloud. 
+{% endcall %}
+
 {% call subsection('Channels')%}
 The URLs on Anaconda.org where conda looks for packages. Using the Anaconda-Client 
 CLI, package developers can create additional channels such as development (channel/dev) 
