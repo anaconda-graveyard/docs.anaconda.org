@@ -2,13 +2,24 @@
 
 {% section %}
 
-{{page_header(self, resource, 'Installing the anaconda-client command line interface')}}
+{{page_header(self, resource, 'Installing anaconda-client and anaconda-build')}}
 
 {% endsection %}
 
 {% section %}
 
-How to install anaconda-client with [conda](http://conda.pydata.org/)
+These two tools work together. The Anaconda client command line interface (CLI) is used to connect to and manage your Anaconda Cloud account, upload packages you
+have created, and generate access tokens to allow access to private packages. View the complete list of tasks after installing 
+by running `anaconda -h`
+
+Anaconda build is used to build private or public packages that you can upload to Anaconda Cloud using the Anaconda CLI.
+
+These tools can be installed any of three ways: from your conda environment, via PIP, or via PIP from source. We recommend 
+using conda.
+
+Install the anaconda client tools anaconda-client and anaconda-build at the same time into your [conda](http://conda.pydata.org/) 
+environment:
+
 {% example %}
 
     conda install anaconda-client anaconda-build
@@ -17,7 +28,7 @@ How to install anaconda-client with [conda](http://conda.pydata.org/)
 
 {% section %}
 
-How to install anaconda-client with [pip](https://pip.pypa.io/en/latest/)
+How to install anaconda-client and anaconda-build with [pip](https://pip.pypa.io/en/latest/):
 
 {% example %}
 
@@ -27,7 +38,7 @@ How to install anaconda-client with [pip](https://pip.pypa.io/en/latest/)
 
 {% section %}
 
-Or pip install from source
+Or you can pip install both anaconda-client and anaconda-build from source:
 
 {% example %}
 
