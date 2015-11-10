@@ -45,7 +45,7 @@ Build Queue - the location where new package building/testing requests are sent 
 
 - A user (organization or direct user) submits jobs to a queue via the CLI
 - A queue may have multiple workers attached to it
-- A queue may either be public or private, but in most cases the queue will be private. (Exception: Anaconda Cloud hosts a public queue for building Linux-64 packages). 
+- Most queues are private. Anaconda Cloud also offers a public queue for building Linux-64 packages, which can be used by any Anaconda Cloud user.
 {% endcall %}
 
 {% call subsection('Build Worker')%}
@@ -53,8 +53,8 @@ Build Worker - A specific instance of a computer (typically an AWS instance) tha
 
 When a build worker is first created, it must be registered with a Anaconda Build Queue in order for the Queue to know about it and delegate incoming requests of the right type to that build worker.
 
-- A worker defines a platform, so for example, if you want a Win-32 machine you must create a win-32 worker.
-- Multiple different workers may be attached to a queue in order to avoid wait time in the queue. This means you may attach N number of workers for a given operating system, for example, you could have 2 Linux-32 machines, 1 win-64 machines. 
+- Each worker runs on only one platform, so it can only receive and execute build jobs that should be executed on that platform. For example, to build a job for Win-32 you must create a Win-32 worker.
+- Multiple different workers may be attached to a queue in order to avoid wait time in the queue. This means you may attach N number of workers for a given operating system. For example, you could have two Linux-32 workers and one Win-64 worker. 
 - The worker will do the actual work of building/compiling/testing the package and then (optionally) uploading the compiled package to Anaconda Cloud. 
 {% endcall %}
 
