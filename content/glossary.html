@@ -41,21 +41,21 @@ Binstar in certain command and directory names.
 {% endcall %}
 
 {% call subsection('Build Queue')%}
-Build Queue - the location where new package building/testing requests are sent when a user or organization requests a build to be created (either automatically through CI with Github or manually triggered through the UI).
+A build queue is the location where new package building and testing requests (also called "build jobs" or "builds") are sent when a user or organization requests a build to be created. This can be done automatically with continuous integration (CI) with sites such as Github or manually through the user interface.
 
-- A user (organization or direct user) submits jobs to a queue via the CLI
-- A queue may have multiple workers attached to it
+- A user (organization or individual) submits jobs to a queue with the CLI.
+- A queue may have multiple workers attached to it.
 - Most queues are private. Anaconda Cloud also offers a public queue for building Linux-64 packages, which can be used by any Anaconda Cloud user.
 {% endcall %}
 
 {% call subsection('Build Worker')%}
-Build Worker - A specific instance of a computer (typically an AWS instance) that is running the Anaconda Build client.
+A build worker is a machine running the Anaconda Build client, typically an Amazon Web Services (AWS) instance.
 
-When a build worker is first created, it must be registered with a Anaconda Build Queue in order for the Queue to know about it and delegate incoming requests of the right type to that build worker.
+When a build worker is first created, it must be registered with an Anaconda Build queue in order for the queue to know about it and delegate incoming requests of the right type to that build worker.
 
 - Each worker runs on only one platform, so it can only receive and execute build jobs that should be executed on that platform. For example, to build a job for Win-32 you must create a Win-32 worker.
-- Multiple different workers may be attached to a queue in order to avoid wait time in the queue. This means you may attach N number of workers for a given operating system. For example, you could have two Linux-32 workers and one Win-64 worker. 
-- The worker will do the actual work of building/compiling/testing the package and then (optionally) uploading the compiled package to Anaconda Cloud. 
+- More than one worker may be attached to a queue to reduce wait time in the queue. There may be more than one worker for one operating system. For example, a queue could have two Linux-32 workers and one Win-64 worker. 
+- The worker will do the actual work of building, compiling and testing the package and may optionally then upload the compiled package to Anaconda Cloud. 
 {% endcall %}
 
 {% call subsection('Channels')%}
