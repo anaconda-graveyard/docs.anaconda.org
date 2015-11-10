@@ -99,7 +99,7 @@ By default your build worker will run builds on your `binstar/public` queue; you
 
  1. Use the `--queue` option when issuing a `anaconda build` [submit, save or trigger](cli.html#SubmittingBuilds) command, e.g.
     {% syntax bash %}
-    anaconda build save ./my-build --queue USERNAME/QUEUENAME
+    anaconda build submit ./my-build --queue USERNAME/QUEUENAME
     {% endsyntax %}
  1. Specify a default queue for your build workers.
     This will affect all builds for your account.
