@@ -5,7 +5,7 @@
 
 The **Anaconda Build System** provides **Continuous Integration** powered by **conda** and **conda environments** for all platforms, through a simple yet powerful interface.
 
-The build process follows a **Anaconda Build Recipe** (a set of instructions specified in a `.binstar.yml` or a `.anaconda.yml` file), which includes the (conda) test enviornments to use, build instructions and additional scripts to be executed. A **Build Recipe** does not require the creation of a **conda package** as a final product. However, creating **conda packages** and uploading them to Anaconda Cloud provides a seamless and comprenhensive workflow for the maintenance and distribution of packages.
+The build process follows an **Anaconda Build Recipe** (a set of instructions specified in a `.binstar.yml` or `.anaconda.yml` file), which includes the (conda) test enviornments to use, build instructions and additional scripts to be executed. A **Build Recipe** does not require the creation of a **conda package** as a final product. However, creating **conda packages** and uploading them to Anaconda Cloud provides a seamless and comprehensive workflow for the maintenance and distribution of packages.
 
 <div class="alert alert-info">
 <strong>Note:</strong> We can add something regarding suggested/recommended workflows?
@@ -18,37 +18,37 @@ The build process follows a **Anaconda Build Recipe** (a set of instructions spe
 
 There are several use cases for which Anaconda Build can be used to provide an efficient packaging workflow. A user may:
 
-- Have a series of packages and wants to compile them into conda packages so it's easy for other users to conda install those packages from the user channel on Anaconda Cloud.
+- Have a series of packages and want to compile them into conda packages so it's easy for other users to conda install those packages from the first user's channel on Anaconda Cloud.
 
-- Be part of a workgroup or team using a GitHub repository that has basic Continuous Integration needs that can be centralized with Anaconda Cloud so other potential users can easily download their opensource packages for different platforms.
+- Be part of a workgroup or team using a GitHub repository that has basic Continuous Integration needs that can be centralized with Anaconda Cloud so other potential users can easily download their open source packages for different platforms.
 
-- Be part of an organization that needs to build and distribute cross-platform conda packages across MacOS, Windows and Linux.
+- Be part of an organization that needs to build and distribute cross-platform conda packages across OS X, Windows and Linux.
 
 
-{{resource.add_subindex('Sytem Components')}}
+{{resource.add_subindex('System Components')}}
 ### System Components
 The **Anaconda Cloud Build System** is based on three main components:
 <br>
 <br>
 #### Build Queues
 
-The **Build Queues** are in charge of receiving build job requests from users and assigning these requests to the different available workers. This component is hosted on **Anaconda Cloud**.
+The **Build Queues** receive build job requests from users and assign these requests to the different available workers. Queues are hosted on **Anaconda Cloud**.
 
-<div class="alert alert-info">
-<strong>Note:</strong> New Build Queues can only be created by organizations on Anaconda Cloud. For more information on creating a new organization, visit ---
-</div>
+Each Anaconda Cloud user may use the public Linux-64 build queue provided by Anaconda Cloud. New Build Queues can be created by organizations on Anaconda Cloud.
+
+When an organization creates a queue no groups have access to it, and the organization can grant access to that queue to one or more groups. The organization can create groups, add organizations and individual users to a group or remove them, and can turn on or off a group's access to a queue.
 
 
 #### Workers
 
-These are instances that perform the actual build instructions and testing specified in the **Anaconda Build Recipe**. Different workers can be created for different platforms including: 
+These are machines that perform the actual build instructions and testing specified in the **Anaconda Build Recipe**. They are often Amazon Web Services (AWS) instances. Different workers can be created for different platforms including: 
 
 - Windows 32/64
 - Linux 32/64
-- OSX 64
+- OS X 64
 
 <div class="alert alert-info">
-<strong>Note:</strong> by default only linux-64 Build Workers are available for public use with Anaconda Cloud. You can add your own Build Workers (on your local machine or on the cloud) if you need access to additional platforms.
+<strong>Note:</strong> by default only Linux-64 Build Workers are available for public use with Anaconda Cloud. For access to additional platforms you can add your own Build Workers on your local machine, in virtual machines (VMs) or on cloud computing providers such as AWS.
 </div>
 
 
@@ -56,11 +56,7 @@ These are instances that perform the actual build instructions and testing speci
 
 Users are responsible for creating and launching anaconda builds from the command line interface into a (previously created) build queue.
 
-Access to build queues is controlled using group access, so access can be given to an user/organization based on different groups.
-
-<div class="alert alert-info">
-<strong>Note:</strong> Groups is a feature of organization users only.
-</div>
+To enable a user to use a queue other than the Anaconda Cloud public Linux-64 queue, the organization that created the queue must add the user to a group and grant that group access to the queue.
 
 {% endsection %}
 
@@ -76,12 +72,11 @@ Access to build queues is controlled using group access, so access can be given 
 In order to get started with the Anaconda Build System you must first:
 
 1. Create an account on Anaconda Cloud at <a href="https://anaconda.org/">anaconda.org</a>
-2. Install **miniconda**, you can download it <a href="http://conda.pydata.org/miniconda.html">here</a>
-3. Install the anaconda client, `$ conda install anaconda-client`
-4. Install the anaconda client, `$ conda install anaconda-build`
-5. Login into Anaconda Cloud from the command line using the anaconda client, `$ anaconda login`
-6. (**Optional**) Create an organization to be able to create new queues, at <a href="https://anaconda.org/new/organization">anaconda.org</a>
-7. Start building!
+2. Install Anaconda or <a href="http://conda.pydata.org/miniconda.html">Miniconda</a>
+3. Install Anaconda Client and Anaconda Build: `conda install anaconda-client anaconda-build`
+4. Log in to Anaconda Cloud from the command line using Anaconda Client: `anaconda login`
+5. (**Optional**) Create an organization to be able to create new queues, at <a href="https://anaconda.org/new/organization">anaconda.org/new/organization</a>
+6. Start building!
 
 {% endsection %}
 
@@ -116,9 +111,9 @@ This will be the namespace or the context of the build.
 
 Let's create a simple build config file and submit an empty build job to illustrate the basic steps. 
 
-The `.binstar.yml` or `.anaconda.yml` holds the Anaconda Build Recipe for how to build and test your package. It tells the build system which platforms to build on, which environment variables to use and which scripts to execute.
+The `.binstar.yml` or `.anaconda.yml` file holds the Anaconda Build Recipe for how to build and test your package. It tells the build system which platforms to build on, which environment variables to use and which scripts to execute.
 
-To add `.binstar.yml` file to your working directory, run `anaconda build init` in your
+To add a `.binstar.yml` file to your working directory, run `anaconda build init` in your
 working directory.
 
 
@@ -150,8 +145,7 @@ Let's create a conda package to show that anaconda build can do some actual work
 You need to add a `meta.yaml` file and modify your `.binstar.yml` file so it contains the following keys:
 
 <div class="alert alert-info">
-<strong>Note:</strong> Publicly available <strong>Conda Recipes</strong> can be found 
-<a href="https://github.com/conda/conda-recipes">here</a>.
+<strong>Note:</strong> Please see our publicly available <a href="https://github.com/conda/conda-recipes">Conda Recipes</a>.
 </div>
 
 {% example %}
@@ -209,7 +203,7 @@ Submitting this build is the same as the first:
 {% endsection %}
 {% section %}
 By default anaconda.org puts all new packages in a `dev` channel in your account.
-see [using channels for testing and production](#UsingChannelsForTestingAndProduction)
+See [using channels for testing and production](#UsingChannelsForTestingAndProduction)
 for a more in depth example on how to use channels.
 
 {% example %}
@@ -270,7 +264,7 @@ You can [save]({{content_url('cli.html')}}#Save) these options to anaconda.org
 and [trigger]({{content_url('cli.html')}}#Trigger) them later.
 
 <div class="alert alert-info">
-<strong>Note:</strong> Using the anaconda build save command affects the Continuous Integration section of the package settings on Anaconda Cloud.
+<strong>Note:</strong> Using the anaconda build save command affects the Continuous Integration (CI) section of the package settings on Anaconda Cloud. For example, running an "anaconda build save" command that uses the "--channel" flag will update the channel used by CI services. The CI section of the package settings can be seen by going to the package's page on Anaconda Cloud and choosing "Settings" and then "Continuous Integration", or by examining the package's binstar.yaml file.
 </div>
 
 {% example %}
@@ -320,7 +314,7 @@ No files will be uploaded to anaconda.org.
     <a href="{{content_url('build-config.html')}}#Build_Targets">build_targets</a>.
     <div class="alert alert-warning">
     <i class="glyphicon glyphicon-exclamation-sign"></i>
-    This can casuse a lot of files to accumulate in your account, use carefully.
+    This can cause a lot of files to accumulate in your account, use carefully.
     </div>
 <dd>
 <dt>Add Webhook<dt>
@@ -354,8 +348,8 @@ Now, test that the web hook is correct by pushing an empty commit.
 To debug webhooks, first submit your build again with [anaconda-client trigger](#SaveAndTriggerYourBuilds)
 This should highlight the issue with your build.
 
-If `anaconda trigger` works, but the webhook still does not -
-Go to github and inspect the webhook requests and responses.
+If `anaconda trigger` works, but the webhook still does not, 
+go to github and inspect the webhook requests and responses.
 
 {% example %}
 
