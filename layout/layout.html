@@ -15,7 +15,8 @@
         <title>{%block title%}{{site_title}}{%endblock%}</title>
     </head>
     <body data-spy="scroll" data-target="#sidenav">
-    
+    {% include "_google_tag.html" %}
+
     {% block body %}
     
     {{header(page_id)}}
