@@ -37,6 +37,14 @@ Running `conda env create` without any arguments creates a new environment using
 
 You only need to clone the repository and install dependencies once, but all the following steps will be done each time you make a new change.
 
+## Update packages:
+
+```
+conda update --all
+```
+
+Running `hyde gen --regen` calls commands such as `anaconda worker -h` to build the Command Reference section of the documentation. If a new version of anaconda or anaconda-client or anaconda-build has been released since you installed the docs.anaconda.org environment, then building the site in your environment will produce docs reflecting the old versions you have installed, not the current versions, and this is a common source of errors. To prevent this, always update your packages before building the site.
+
 ## Create a new branch:
 
 Enter the repository and make sure the master branch is selected:
