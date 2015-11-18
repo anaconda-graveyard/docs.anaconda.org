@@ -57,7 +57,7 @@ class CommandLinePlugin(Plugin):
         repo = self.site.config.context.data.repo
         branch = self.site.config.context.data.get('branch', 'master')
 
-        url = '%s/edit/%s/content/%s' % (repo, branch, filename)
+        url = '%s/blob/%s/content/%s' % (repo, branch, filename)
 
         result = '<a title="Edit on Github" href="%s">' % url
         result += '<span class="glyphicon glyphicon-pencil"></span></a>'
