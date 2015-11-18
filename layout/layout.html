@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="description" content="{{ resource.meta.description }}">
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -18,11 +18,9 @@
     {% include "_google_tag.html" %}
 
     {% block body %}
-    
+
     {{header(page_id)}}
-    
-    <script>document.getElementById('topNav').style.display = 'none';</script>
-    
+
     <div class="content-wrapper clearfix">
     {%-    block content -%}
       <div class="col-sm-12 single-page">
@@ -31,22 +29,21 @@
       {%-      endblock -%}
       {%- endfilter -%}
       </div>
-    
+
     {%-    endblock -%}
     </div> <!-- content -->
-    
+
     <div class="navigation">
       {% include "_left_cols.html" with context %}
     </div> <!-- navigation -->
-    
+
     {% endblock %}
-    
+
     {% block scripts %}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="{{ media_url('bootstrap/js/bootstrap.js') }}"></script>
-    <script type="text/javascript" src="{{ media_url('script.js') }}"></script>
     {% endblock %}
-    
+
     {% include "_footer.html" %}
     <div id="modalBG"></div>
     </body>
