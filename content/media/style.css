@@ -3,6 +3,14 @@ html, body {
   height: 100%;
 }
 
+a {
+  color: #43B02A;
+}
+
+a:hover {
+  color: #318239;
+}
+
 .content-wrapper {
   min-height: 100%;
   padding-top: 50px;
@@ -58,6 +66,25 @@ footer a {
 .navbar-header.navbar-header-always > .navbar-toggle {
     display: block;
 }
+
+.navbar-inverse .navbar-nav > li > a {
+  color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: #43B02A;
+}
+
+.navbar-inverse {
+    background-color: #1B2833;
+    border-color: #1B2833;
+}
+
+.navbar-inverse .navbar-nav > .active > a  {
+  color: #43b02a;
+  background-color: transparent;
+}
+
 
 
 .cmdline-title {
@@ -140,7 +167,7 @@ figure .userdefined, code .userdefined {
 }
  */
 .sidenav ul.nav.nav0 > li.active > a {
-  background: #428bca;
+  background: #43B02A;
   color: white;
 }
 
