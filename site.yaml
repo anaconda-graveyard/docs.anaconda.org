@@ -16,37 +16,34 @@ context:
         branch: master
         imports:
           - binstar
-        site_title: anaconda.org documentation
+        site_title: Anaconda Cloud Documentation
         author:
             name: Continuum Analytics
             url: "https://anaconda.org/"
         home_url: index.html
-        brand: Anaconda Cloud docs
+        brand: Anaconda Cloud
         pages:
+          - name: Quickstart
+            url: quickstart.html
+            id: quickstart
+          - name: Get Involved
+            url: get-involved.html
+            id: get-involved
+          - name: Managing Your Account
+            url: managing-account.html
+            id: managing-account
           - name: Using Anaconda Cloud
             url: using.html
             id: using
-          - name: Building Packages
-            url: building.html
-            id: building
-          - name: Build Reference
-            url: build-config.html
-            id: build-config
+          - name: Anaconda Build
+            url: build.html
+            id: build
+          - name: Reference
+            url: reference.html
+            id: reference
           - name: Command Reference
             url: cli.html
             id: cli
-          - name: How To...
-            url: howto.html
-            id: howto
-          - name: FAQ
-            url: faq.html
-            id: faq
-          - name: Glossary
-            url: glossary.html
-            id: glossary
-          - name: OnSite
-            url: http://docs.continuum.io/anaconda-server/index.html
-            id: null
 
 simple_copy:
     - media/js/*
