@@ -10,7 +10,7 @@
   
   The **Anaconda Build System** provides **Continuous Integration** powered by **conda** and **conda environments** for all platforms, through a simple yet powerful interface.
 
-  The build process follows an **Anaconda Build Recipe** (a set of instructions specified in a `.binstar.yml` or `.anaconda.yml` file), which includes the (conda) test environments to use, build instructions and additional scripts to be executed. A **Build Recipe** does not require the creation of a **conda package** as a final product. However, creating **conda packages** and uploading them to Anaconda Cloud provides a seamless and comprehensive workflow for the maintenance and distribution of packages.
+  The build process follows an **Anaconda Build Recipe** (a set of instructions specified in a `.binstar.yml` file), which includes the (conda) test environments to use, build instructions and additional scripts to be executed. A **Build Recipe** does not require the creation of a **conda package** as a final product. However, creating **conda packages** and uploading them to Anaconda Cloud provides a seamless and comprehensive workflow for the maintenance and distribution of packages.
   
   {% endcall %}
 
@@ -95,7 +95,7 @@
   
   Let's create a simple build config file and submit an empty build job to illustrate the basic steps. 
 
-  The `.binstar.yml` or `.anaconda.yml` file holds the Anaconda Build Recipe for how to build and test your package. It tells the build system which platforms to build on, which environment variables to use and which scripts to execute.
+  The `.binstar.yml` file holds the Anaconda Build Recipe for how to build and test your package. It tells the build system which platforms to build on, which environment variables to use and which scripts to execute.
 
   To add a `.binstar.yml` file to your working directory, run `anaconda build init` in your
   working directory.
