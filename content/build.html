@@ -643,6 +643,12 @@ exclude: true
 
   {% endcall %}
 
+  {% call subsection('Running workers in the background')%}
+
+  The [Chalmers process control system](https://github.com/Anaconda-Server/chalmers) can be used to run build workers in the background across all platforms. Please see the readme file in that repository for further information.
+
+  {% endcall %}
+
   {% call subsection('Configuring build queues')%}
   
   By default your build worker will run builds on your `binstar/public` queue. You may change this in two ways:
