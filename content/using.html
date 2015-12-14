@@ -66,25 +66,28 @@
 
   {% endcall %}
 
-  {% call subsection('Channels')%}
+  {% call subsection('Labels')%}
 
-  Each file within a package may be tagged in one or more channels. A file may also not be tagged in any channels.
-  One common use of channels is to divide a package's files into development, testing, and main channels called 
-  dev, test, and main. This allows package authors to upload files for development or testing purposes without
-  affecting non-development users.
+  Each file within a package may be tagged with one or more labels, or not tagged at all. 
+  Labels are commonly used to divide a package's files into sections labeled development, 
+  testing (and/or other custom labels), and main or dev, test, main or other custom label. 
+  The use of labels allows package authors to upload files for development or testing 
+  purposes without affecting non-development users. 
+  
+  Packages that are uploaded are labeled "main" by default. The version labeled main 
+  is also delivered by default unless a user specifies a different label. 
+  
+  At [https://**pypi**.anaconda.org/conda](https://pypi.anaconda.org/conda) a dropdown 
+  menu lists all the available labels.
 
-  At [https://**pypi**.anaconda.org/conda](https://pypi.anaconda.org/conda) a channel
-  dropdown lists all the available channels in this user namespace.
+  For example, all of the pypi packages labeled as 'dev' can be shown here:
 
-  For example all of the pypi packages tagged as 'dev' can be shown here:
+   *  [https://pypi.anaconda.org/conda/label/dev](https://pypi.anaconda.org/conda/label/dev)
 
-   *  [https://pypi.anaconda.org/conda/channel/dev](https://pypi.anaconda.org/conda/channel/dev)
-
-  The default channel is the **main** channel.
-  If a file is tagged in the **main** channel then the channel name may be omitted from the URL.
+  The default label is **main**. If a file is labeled as **main** then the label name may be omitted from the URL.
   For example the following repositories are equivalent:
 
-   *  [https://**pypi**.anaconda.org/conda/channel/main](https://pypi.anaconda.org/conda/channel/main)
+   *  [https://**pypi**.anaconda.org/conda/label/main](https://pypi.anaconda.org/conda/label/main)
    *  [https://**pypi**.anaconda.org/conda](https://pypi.anaconda.org/conda)
 
   {% endcall %}
@@ -389,19 +392,20 @@ To upload a package to an organization, use the `-u/--user` option:
 
 {%- endcall -%}
 
-{% call section('Channels and The Development Cycle', self) %}
+{% call section('Using labels in the development cycle', self) %}
 
-Channels can be used to facilitate a development cycle and organize the code that is in development, in testing, and in production.
+Labels can be used to facilitate a development cycle and organize the code that is in development, 
+in testing, and in production.
 
-Anacona Cloud channels allow you to upload files to your packages and control how they are accessed.
+Anacona Cloud labels allow you to upload files to your packages and control how they are accessed.
 
-With Anaconda Cloud channels you can upload a file to a specific channel,
-but only users listening to that channel will be able to install it.
+With Anaconda Cloud labels you can upload a file to a specific label,
+so only users who put that label in the URL they search will be able to install it.
 This is particularly useful for moving a package through a development and testing flow.
 
-In this example we will show you how to use a `test` channel,
+In this example we will show you how to use a `test` label,
 so that you can upload files without affecting your production quality packages.
-Without a `--channel` argument the default channel is `main`.
+Without a `--label` argument the default label is `main`.
 
 Let's start with a conda package. If you don't have one, use our example conda package.
 Before you build the package edit the version in the `meta.yaml` file in `anaconda-client/example-packages/conda/` to be 2.0.
@@ -414,16 +418,16 @@ Before you build the package edit the version in the `meta.yaml` file in `anacon
 
 Now, upload your test package to Anaconda Cloud using the [anaconda-client upload](cli.html#Upload) command.
 
-The `--channel` option tells Anaconda Cloud not to put the upload into your `main`
-channel where all users will be able to install it.
+Adding the `--label` option tells Anaconda Cloud to make the upload visible 
+only to users who specify that label.
 
-    anaconda upload #userdefined{/path/to/conda-package-2.0.tar.bz2} --channel #userdefined{test}
+    anaconda upload #userdefined{/path/to/conda-package-2.0.tar.bz2} --label #userdefined{test}
 
-You will notice now that even when you search your conda `main` channel,
+You will notice now that even when you search conda `main`,
 you won't see the `2.0` version of the test package. This is because you have to tell conda
-to look in your new `test` channel.
+to look for your new `test` label.
 
-The `--override` argument tells conda not to use any channels in your `~/.condarc` file.
+The `--override` argument tells conda not to use any labels in your `~/.condarc` file.
 
 No 2.0 results:
 
@@ -433,15 +437,15 @@ Your 2.0 package is here:
 
     conda search --override -c #userdefined{USERNAME}/channel/#userdefined{test} #userdefined{conda-package}
 
-You can give the channel `#userdefined{USERNAME}/channel/test` to your testers.
-Once they finish testing you may then want to copy the `test` packages back to your `main`
+You can give the label `#userdefined{USERNAME}/channel/test` to your testers.
+Once they finish testing, you may then want to copy the `test` packages back to your `main`
 channel.
 
-You can also manage your package channels on the web page: `https://anaconda.org/#userdefined{USERNAME}/#userdefined{conda-package}`
+You can also manage your package labels from your dashboard: `https://anaconda.org/#userdefined{USERNAME}/#userdefined{conda-package}`
 
-    anaconda channel --copy #userdefined{test} main
+    anaconda label --copy #userdefined{test} main
 
-Now version 2.0 is in your main channel:
+Now your version 2.0 is in main:
 
     conda search --override -c #userdefined{USERNAME} #userdefined{conda-package}
 
