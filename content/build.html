@@ -458,6 +458,23 @@ env:
 
   {% endcall %}
 
+  {% call subsection('quiet') %}
+  The ```quiet``` key in ```.binstar.yml``` can reduce the amount of superfluous printing to the build logs.  For example, if you see installation messages similar to the following ones in your build log, you can redact these messages by using the ```quiet``` key.
+  {% syntax text %}
+
+    Fetching packages ...
+    ncurses-5.9-1.   0% |                              | ETA:  --:--:--   0.00  B/s
+    ncurses-5.9-1.   2% |                               | ETA:  0:00:00  36.09 MB/s
+    ncurses-5.9-1.   4% |#                              | ETA:  0:00:00  54.15 MB/s
+    ncurses-5.9-1.   6% |##                             | ETA:  0:00:00  66.78 MB/s
+    ncurses-5.9-1.   9% |##                             | ETA:  0:00:00  76.02 MB/s
+
+  {% endsyntax %}
+  More specifically, the following usage of ```quiet``` in the ```.binstar.yml``` file will redact from the build log any message that ends with ```\r```:
+  {% syntax yaml %}
+  quiet: True
+  {% endsyntax %}
+  {% endcall %}
   {% call subsection('Build matrix')%}
 
   When you submit one `.binstar.yml` file many sub-builds are launched, one for each combination of the values of the [platform](#Platform), [engine](#Engine) and [env](#Env) tags.
