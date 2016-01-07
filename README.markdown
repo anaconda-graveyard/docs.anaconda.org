@@ -165,3 +165,7 @@ cd ~/githubwork/docs.anaconda.org
 ```
 
 Review your changes at http://docs.anaconda.org/ .
+
+## Renaming files and removing files from past versions
+
+If you rename a file on the site from alpha.html to bravo.html and run the scripts, they will upload the new bravo.html, but the old alpha.html file will still be on the server with the outdated and probably incorrect content. To delete such a file, you may edit the scripts to change 's3cmd -c ~/.s3cfg sync --recursive deploy/ s3://"$BUCKET"/' to 's3cmd -c ~/.s3cfg sync --recursive --delete-removed deploy/ s3://"$BUCKET"/' and change 's3cmd -c ~/.s3cfg sync --recursive deploy/ s3://"$BUCKET"/draft/' to 's3cmd -c ~/.s3cfg sync --recursive --delete-removed deploy/ s3://"$BUCKET"/draft/' and then run them, which will delete removed files such as alpha.html. However, running deploy.sh with this modification will also remove the entire draft section of the site. When you are done, please change the scripts back to their earlier version.
