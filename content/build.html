@@ -166,11 +166,11 @@ about:
 
   {% call subsubsection('Install your new conda package') %}
 
-  By default Anaconda Cloud puts all new packages in a `dev` channel in your account.
-  See [Channels and The Development Cycle](using.html#ChannelsAndTheDevelopmentCycle)
-  for a more in depth example on how to use channels.
+  By default Anaconda Cloud puts all new packages in a `dev` label in your account.
+  See [Using labels in the development cycle](using.html#UsingLabelsInTheDevelopmentCycle)
+  for a more in depth example on how to use labels.
 
-    conda install -c #userdefined{USERNAME}/channel/dev conda_build_test
+    conda install -c #userdefined{USERNAME}/label/dev conda_build_test
 
   {% endcall %}
 
@@ -210,14 +210,14 @@ about:
   Once you have [submitted a build from github](#GithubBuilds)
   you may want to save your build configuration, especially if you are using
   [extra options]({{content_url('cli.html')}}#Submit)
-  like `-p`, `--sub-dir`, `--channel`, `--queue` or `--email`.
+  like `-p`, `--sub-dir`, `--label`, `--queue` or `--email`.
 
   You can [save]({{content_url('cli.html')}}#Save) these options to Anaconda Cloud
   and [trigger]({{content_url('cli.html')}}#Trigger) them later.
 
-  Note: Using the anaconda build save command affects the Continuous Integration (CI) section of the package settings on Anaconda Cloud. For example, running an "anaconda build save" command that uses the "--channel" flag will update the channel used by CI services. The CI section of the package settings can be seen by going to the package's page on Anaconda Cloud and choosing "Settings" and then "Continuous Integration", or by examining the package's binstar.yaml file.
+  Note: Using the anaconda build save command affects the Continuous Integration (CI) section of the package settings on Anaconda Cloud. For example, running an "anaconda build save" command that uses the "--label" flag will update the channel used by CI services. The CI section of the package settings can be seen by going to the package's page on Anaconda Cloud and choosing "Settings" and then "Continuous Integration", or by examining the package's binstar.yaml file.
 
-    anaconda build save -p #userdefined{USERNAME}/conda_build_test https://github.com/#userdefined{GITHUB_USERNAME}/conda_build_test --channel dev
+    anaconda build save -p #userdefined{USERNAME}/conda_build_test https://github.com/#userdefined{GITHUB_USERNAME}/conda_build_test --label dev
     anaconda build trigger #userdefined{USERNAME}/conda_build_test
 
   {% endcall %}
