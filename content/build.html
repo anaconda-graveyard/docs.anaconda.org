@@ -430,17 +430,17 @@ engine:
 
   {% endcall %}
 
-  {% call subsubsection('env') %}
+  {% call subsubsection('envvars') %}
 
   An export of environment variables for the sub-build:
 
 {% syntax yaml %}
-env:
+envvars:
   - FOO=BAR
   - ANACONDA=GREAT JENKINS=OK
 {% endsyntax %}
 
-  The items in the `env` tag describe the third of the three axes of the [build matrix](#BuildMatrix).
+  The items in the `envvars` tag describe the third of the three axes of the [build matrix](#BuildMatrix).  The sub-build field `envvars` was formerly called `env` and there is backwards compatability for older sub-build configurations using `env`.
 
   {% endcall %}
 
