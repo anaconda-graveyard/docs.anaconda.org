@@ -7,15 +7,15 @@
 {% call section('Overview', self) %}
 
   {% call subsection('How Anaconda Build works')%}
-  
+
   The **Anaconda Build System** provides **Continuous Integration** powered by **conda** and **conda environments** for all platforms, through a simple yet powerful interface.
 
   The build process follows an **Anaconda Build Recipe** (a set of instructions specified in a `.binstar.yml` or `.anaconda.yml` file), which includes the (conda) test environments to use, build instructions and additional scripts to be executed. A **Build Recipe** does not require the creation of a **conda package** as a final product. However, creating **conda packages** and uploading them to Anaconda Cloud provides a seamless and comprehensive workflow for the maintenance and distribution of packages.
-  
+
   {% endcall %}
 
   {% call subsection('Why use Anaconda Build?')%}
-  
+
   There are several use cases for which Anaconda Build can be used to provide an efficient packaging workflow. A user may:
 
   - Have a series of packages and want to compile them into conda packages so it's easy for other users to conda install those packages from the first user's channel on Anaconda Cloud.
@@ -23,41 +23,41 @@
   - Be part of a workgroup or team using a GitHub repository that has basic Continuous Integration needs that can be centralized with Anaconda Cloud so other potential users can easily download their open source packages for different platforms.
 
   - Be part of an organization that needs to build and distribute cross-platform conda packages across OS X, Windows and Linux.
-  
+
   {% endcall %}
 
   {% call subsection('System components')%}
-  
+
   The **Anaconda Cloud Build System** is based on three main components:
 
   {% call subsubsection('Build queues') %}
-  
+
   The **Build Queues** receive build job requests from users and assign these requests to the different available workers. Queues are hosted on **Anaconda Cloud**.
 
   Each Anaconda Cloud user may use the public Linux-64 build queue provided by Anaconda Cloud. New build queues can be created by organizations on Anaconda Cloud.
 
   When an organization creates a queue no groups have access to it, and the organization can grant access to that queue to one or more groups. The organization can create groups, add organizations and individual users to a group or remove them, and can turn on or off a group's access to a queue.
-  
+
   {% endcall %}
 
   {% call subsubsection('Workers') %}
-  
-  These are machines that perform the actual build instructions and testing specified in the **Anaconda Build Recipe**. They are often Amazon Web Services (AWS) instances. Different workers can be created for different platforms including: 
+
+  These are machines that perform the actual build instructions and testing specified in the **Anaconda Build Recipe**. They are often Amazon Web Services (AWS) instances. Different workers can be created for different platforms including:
 
   - Windows 32/64
   - Linux 32/64
   - OS X 64
-  
+
   Note: By default only Linux-64 build workers are available for public use with Anaconda Cloud. For access to additional platforms you can add your own build workers on your local machine, in virtual machines (VMs) or on cloud computing providers such as AWS.
-  
+
   {% endcall %}
 
   {% call subsubsection('Users') %}
-  
+
   Users are responsible for creating and launching anaconda builds from the command line interface into a (previously created) build queue.
 
   To enable a user to use a queue other than the Anaconda Cloud public Linux-64 queue, the organization that created the queue must add the user to a group and grant that group access to the queue.
-  
+
   {% endcall %}
 
   {% endcall %}
@@ -67,7 +67,7 @@
 {% call section('Builds in Anaconda Cloud', self) %}
 
   {% call subsection('Prerequisites')%}
-  
+
   Before using the Anaconda Build System:
 
   1. Create an account on Anaconda Cloud at <a href="https://anaconda.org/">anaconda.org</a>
@@ -79,12 +79,12 @@
   {% endcall %}
 
   {% call subsection('Submit a build')%}
-  
+
   {% call subsubsection('Create a package') %}
-  
+
   If you are not familiar with anaconda-client, create a package first.
   This will be the namespace or the context of the build.
-  
+
     mkdir conda_build_test
     cd conda_build_test
     anaconda package --create #userdefined{USERNAME}/conda_build_test
@@ -92,16 +92,16 @@
   {% endcall %}
 
   {% call subsubsection('Create a build config') %}
-  
-  Let's create a simple build config file and submit an empty build job to illustrate the basic steps. 
+
+  Let's create a simple build config file and submit an empty build job to illustrate the basic steps.
 
   The `.binstar.yml` or `.anaconda.yml` file holds the Anaconda Build Recipe for how to build and test your package. It tells the build system which platforms to build on, which environment variables to use and which scripts to execute.
 
   To add a `.binstar.yml` file to your working directory, run `anaconda build init` in your
   working directory.
-  
+
   Note: This should be the same directory as your `meta.yaml` file if you are building a conda package.
-  
+
   Once this is complete you should be able to submit your first
   build that will print `This is my anaconda build!`
 
@@ -110,15 +110,15 @@
     anaconda build tail -f #userdefined{USERNAME}/conda_build_test #userdefined{1}
 
   We have just created an empty package with a single Build Recipe instruction, namely printing `This is my anaconda build!`.
-  
+
   {% endcall %}
 
   {% call subsubsection('Create conda package') %}
-  
+
   Let's create a conda package to show that anaconda build can do some actual work.
 
   You need to add a `meta.yaml` file and modify your `.binstar.yml` file so it contains the following keys:
-  
+
 <div class="file">
 <span class="title">.binstar.yml</span>
 {% syntax yaml %}
@@ -146,18 +146,18 @@ about:
   summary: This is an anaconda build test!
 {% endsyntax %}
 </div>
-  
+
   Note: Please see our publicly available <a href="https://github.com/conda/conda-recipes">Conda Recipes</a>.
 
   {% endcall %}
 
   {% call subsubsection('Submit your conda build') %}
-  
+
   Once your have created the `meta.yaml` file you can test that your conda
   build runs locally with [conda build](http://conda.pydata.org/docs/build.html).
 
   Submitting this build is the same as the first:
-  
+
     conda build .
     anaconda build submit .
     anaconda build tail -f #userdefined{USERNAME}/conda_build_test #userdefined{2}
@@ -165,28 +165,28 @@ about:
   {% endcall %}
 
   {% call subsubsection('Install your new conda package') %}
-  
+
   By default Anaconda Cloud puts all new packages in a `dev` channel in your account.
   See [Channels and The Development Cycle](using.html#ChannelsAndTheDevelopmentCycle)
   for a more in depth example on how to use channels.
-  
+
     conda install -c #userdefined{USERNAME}/channel/dev conda_build_test
-  
+
   {% endcall %}
 
   {% endcall %}
 
   {% call subsection('GitHub builds')%}
-  
+
   {% call subsubsection('Create a git repo') %}
-  
+
   Let's use the package you have created in the [submit a build](#SubmitABuild) example.
   First [create a new github repository](https://github.com/new).
   You will then need to push the files to github.
 
   First:
   <a class="btn btn-xs btn-success" href="https://github.com/new">create a new github repository</a>
-  
+
     git init
     git add * .binstar.yml
     git commit -m "first commit"
@@ -194,19 +194,19 @@ about:
     git push -u origin master
 
   {% endcall %}
-  
+
   {% call subsubsection('Submit the build') %}
-  
+
   Once the package source is pushed to github you can submit a build via a github url.
-  
+
     anaconda build submit https://github.com/#userdefined{GITHUB_USERNAME}/conda_build_test
-  
+
   {% endcall %}
 
   {% endcall %}
 
   {% call subsection('Save and trigger your builds')%}
-  
+
   Once you have [submitted a build from github](#GithubBuilds)
   you may want to save your build configuration, especially if you are using
   [extra options]({{content_url('cli.html')}}#Submit)
@@ -214,27 +214,27 @@ about:
 
   You can [save]({{content_url('cli.html')}}#Save) these options to Anaconda Cloud
   and [trigger]({{content_url('cli.html')}}#Trigger) them later.
-  
+
   Note: Using the anaconda build save command affects the Continuous Integration (CI) section of the package settings on Anaconda Cloud. For example, running an "anaconda build save" command that uses the "--channel" flag will update the channel used by CI services. The CI section of the package settings can be seen by going to the package's page on Anaconda Cloud and choosing "Settings" and then "Continuous Integration", or by examining the package's binstar.yaml file.
-  
+
     anaconda build save -p #userdefined{USERNAME}/conda_build_test https://github.com/#userdefined{GITHUB_USERNAME}/conda_build_test --channel dev
     anaconda build trigger #userdefined{USERNAME}/conda_build_test
 
   {% endcall %}
 
   {% call subsection('Continuous Integration: run a build on git push')%}
-  
+
   Once you have saved a build you can view the information on the website at
 
   `https://anaconda.org/#userdefined{USERNAME}/conda_build_test/settings/ci`
 
   To get to this page, navigate to your package (`https://anaconda.org/#userdefined{USERNAME}/conda_build_test`).
   Then choose `settings` and `Continuous Integration`.
-  
+
   ![Continuous Integration page]({{media_url('img/ci.png')}})
-  
+
   Click "Edit". The fields we care about for enabling continuous integration are:
-  
+
   <dl class="dl-horizontal">
   <dt>branches to test<dt>
   <dd> This is a python regular expression (regex) describing what branches should trigger builds in `test-only` mode.
@@ -256,7 +256,7 @@ about:
     to your github package.
   <dd>
   </dl>
-  
+
   For this example:
 
   * Set `Test Branches` to `refs/heads/.*`, which matches all git branches.
@@ -264,11 +264,11 @@ about:
   * Make sure `Add Webhook` is checked.
 
   You should see an active webhook at the end of this process.
-  
+
   ![Continuous Integration page]({{media_url('img/webhook-ci.png')}})
-  
+
   Now, test that the web hook is correct by pushing an empty commit.
-  
+
 {% syntax bash %}
 git commit -m "Trigger build" --allow-empty
 git push
@@ -282,9 +282,9 @@ anaconda build list-all ~userdefined:USERNAME:/conda_build_test
   To debug webhooks, first submit your build again with [anaconda-client trigger](#SaveAndTriggerYourBuilds).
   This should highlight the issue with your build.
 
-  If `anaconda trigger` works, but the webhook still does not, 
+  If `anaconda trigger` works, but the webhook still does not,
   go to github and inspect the webhook requests and responses.
-  
+
   {% endcall %}
 
 {%- endcall -%}
@@ -309,7 +309,7 @@ tag:
 {% endsyntax %}
 
   {% call subsubsection('script') %}
-  
+
   Define the main script to run on the build machine:
 
 {% syntax yaml %}
@@ -323,11 +323,11 @@ script:
   - some_command
   - another_command
 {% endsyntax %}
-  
+
   {% endcall %}
 
   {% call subsubsection('before_script and after_script') %}
-  
+
   You can also define scripts to be run before and after the main script:
 
 {% syntax yaml %}
@@ -340,7 +340,7 @@ after_script:  another_command
   {% endcall %}
 
   {% call subsubsection('after_success and after_failure') %}
-  
+
   If you use the after_success or after_failure tags,
   one or the other of them will run after the [script](#Script) tags depending on if the build was a
   success or a failure. **Build errors are not caught**.
@@ -355,7 +355,7 @@ after_failure:
   {% endcall %}
 
   {% call subsubsection('build_targets') %}
-  
+
   These files will be uploaded to your Anaconda Cloud package.
   These are files that will be uploaded to Anaconda Cloud with
   [anaconda upload]({{content_url('cli.html')}}#Upload).
@@ -373,7 +373,7 @@ build_targets: /opt/anaconda/my-package.tar.bz2
   {% endcall %}
 
   {% call subsubsection('platform') %}
-  
+
   This selects the platforms for which you wish to build your packages.
 
   **Please note:** by default only `linux-64` build-workers are available for public use on Anaconda Cloud. You can [add your own build workers](#LaunchingABuildWorker) if you need access to additional platforms.
@@ -412,7 +412,7 @@ platform:
   {% endcall %}
 
   {% call subsubsection('engine') %}
-  
+
   Sets the initial conda packages you want to build with:
 
 {% syntax yaml %}
@@ -429,7 +429,7 @@ engine:
   {% endcall %}
 
   {% call subsubsection('env') %}
-  
+
   An export of environment variables for the sub-build:
 
 {% syntax yaml %}
@@ -474,7 +474,7 @@ env:
    8. platform: `linux-32` engine: `python=3` env: `CXX=clang++`
 
   {% call subsubsection('Multiple build matrices') %}
-  
+
   Sometimes it is not best to define one large build matrix.
   For example, if you are running a build on Windows, the matrix:
 
@@ -512,7 +512,7 @@ script: build.bat
   {% endcall %}
 
   {% call subsubsection('Excluding an item in the matrix') %}
-  
+
   You can exclude a sub-build entry from a matrix with the exclude tag.
 
 {% syntax yaml %}
@@ -571,9 +571,9 @@ exclude: true
   [install the build cli](/using.html#InstallingAnacondaClientAndAnacondaBuild).
 
   {% call subsection('Create a build queue')%}
-  
-  The first thing you will need to do is create a build queue. A build queue holds 
-  submitted builds until a build worker is ready to remove the build and run it. 
+
+  The first thing you will need to do is create a build queue. A build queue holds
+  submitted builds until a build worker is ready to remove the build and run it.
   At present, when you submit a job the default build queue is `binstar/public`.
 
   To create your queue run:
@@ -582,13 +582,13 @@ exclude: true
 	anaconda build queue --create USERNAME/QUEUENAME
 {% endsyntax %}
 
-  Where `USERNAME` is your [Anaconda Cloud](http://anaconda.org) username and `QUEUENAME` 
+  Where `USERNAME` is your [Anaconda Cloud](http://anaconda.org) username and `QUEUENAME`
   is an alphanumeric name of your choice. For more information see [configuring your build queues](#ConfiguringBuildQueues).
 
   {% endcall %}
 
   {% call subsection('Launching a build worker')%}
-  
+
   Before you can begin using the queue you created, you will need to attach a build-worker to the queue. The basic build worker runs on your machine (Linux, OS X or Windows) as the current user
   (see [security considerations](#SecurityConsiderations)) and accepts jobs from the build queue that you specify.
 
@@ -649,8 +649,9 @@ For users on linux there is an option for running the builder as the root user i
 
  *  Python must be in a root install usable by root and the lesser user, e.g. a root install of Miniconda into <code>/opt/anaconda</code>.
  *  The worker must be started as the root user.
- *  The directory <code>/etc/worker-skel</code> must exist. It will become the template for new worker home directories. It has a <code>.bash_profile</code> and/or <code>.bashrc</code> file that places the root Python on the system path.
- *  The build user must be created ahead of time.
+ *  The directory <code>/etc/worker-skel</code> must exist. It will become the template for new worker home directories. It has a <code>.bash_profile</code> and/or <code>.bashrc</code> file that places the root Python on the system path with a statement like <code>PATH=/opt/anaconda/bin:$PATH</code>.
+ * The <code>/etc/worker-skel</code> and build user home directory must have an empty hidden file called <code>.su_worker</code>.  These files indicate user approval for deletion of build user home directory.  Do not create a <code>.su_worker</code> file in root's home directory or any other directory not to be deleted.
+ *  The build user must be created ahead of time or the su worker will run <code>useradd</code> to add a user. Note, however, automated user creation with <code>useradd</code> is not available on all POSIX systems.
  *  The anaconda-build installation steps should be followed for the root Python, and anaconda-build, conda-build, and anaconda-client should be installed.
  * If anaconda-build and anaconda-client are installed in a conda environment other than the root environment, then the <code>.bashrc</code> or <code>.bash_profile</code> in <code>/etc/worker-skel</code> should use <code>source activate some-environment</code>, where <code>some-environment</code> is replaced by the name of anaconda-build and anaconda-client conda environment.
 
@@ -669,7 +670,7 @@ Other arguments can be passed to <code>su_run</code> as <code>run</code>.  See a
   {% endcall %}
 
   {% call subsection('Configuring build queues')%}
-  
+
   By default your build worker will run builds on your `binstar/public` queue. You may change this in two ways:
 
    1. Use the `--queue` option when issuing a `anaconda build` [submit, save or trigger](cli.html#SubmittingBuilds) command:
@@ -682,7 +683,7 @@ Other arguments can be passed to <code>su_run</code> as <code>run</code>.  See a
       and clicking the **Set as Default** option for the queue you would like to use.
 
   {% call subsubsection('Share your build queue') %}
-  
+
   Once a build queue is created, you can control who may submit jobs to it. For build queues associated with an organization rather than an individual user, the default behavior is that only organization owners may submit jobs to the queue.
 
   To share access to your queue:
@@ -690,13 +691,13 @@ Other arguments can be passed to <code>su_run</code> as <code>run</code>.  See a
    1. Navigate your browser to [anaconda.org/settings/build-queue](https://anaconda.org/settings/build-queue). If you are an owner in multiple organizations, be sure to select the correct one in the drop-down in the upper right corner of the page.
    1. Click on the <i class="glyphicon glyphicon-pencil"></i> icon of the queue you want to share.
    1. Add the user by name (individual accounts) or by group (organization accounts).
-  
+
   {% endcall %}
 
   {% endcall %}
 
   {% call subsection('Security considerations')%}
-  
+
   Because build workers run on your machine, using the current user account, there are a few security considerations associated with launching a build worker.  Remember the build worker runs user-defined build scripts from the jobs that are submitted to it.
 
   We recommend you:
