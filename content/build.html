@@ -454,6 +454,16 @@ env:
    - r
    - defaults
   {% endsyntax %}
+  
+  If private packages are required in your build, make sure to include a [token](reference.html#Token) in the channel
+  configuration.
+  
+  This shows the install_channels configured for building a package that depends on jsmith's private packages.
+  {% syntax yaml %}
+  install_channels:
+  - t/TOKEN/jsmith
+  - defaults
+  {% endsyntax %}
   {% endcall %}
 
   {% endcall %}
