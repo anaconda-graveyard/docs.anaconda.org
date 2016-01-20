@@ -107,7 +107,7 @@
   {% endcall %}
 
   {% call subsubsection('Find help uploading packages') %}
-  For a complete list of upload options, including specifying a package's channel, availability to other users, and metadata, in a terminal window, run:
+  For a complete list of upload options, including specifying a package's channel, label, availability to other users, and metadata, in a terminal window, run:
   
     anaconda upload -h
     
@@ -247,15 +247,17 @@ When a build worker is first created, it must be registered with an Anaconda Bui
 - The worker will do the actual work of building, compiling and testing the package and may optionally then upload the compiled package to Anaconda Cloud. 
 {% endcall %}
 
-{% call subsection('Channels')%}
+{% call subsection('Labels')%}
 The URLs on Anaconda Cloud where conda looks for packages. Using the Anaconda-Client 
-CLI, package developers can create additional channels such as development (channel/dev) 
-or test (channel/test) which will be searched only if the user specifies the channel.  
+CLI, package developers can create additional labels such as development (labels/dev) 
+test (labels/test) or other labels which will be searched 
+only if the user specifies the label.  
 
-https://anaconda.org/travis - the default channel  
-https://anaconda.org/travis/channel/main - same as the default channel  
-https://anaconda.org/travis/channel/dev - contains the packages in development  
-https://anaconda.org/travis/channel/test - contains packages ready to test.  
+https://anaconda.org/travis/labels/main - the label searched by default
+https://anaconda.org/travis - same as default label with "main" implicit
+https://anaconda.org/travis/labels/dev - contains the packages in development  
+https://anaconda.org/travis/labels/test - contains packages ready to test
+https://anaconda.org/travis/labels/any-custom-label - any label you wish to use.
 {% endcall %}
 
 {% call subsection('Conda')%}
