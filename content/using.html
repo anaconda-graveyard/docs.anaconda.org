@@ -72,21 +72,27 @@
   The use of labels allows package authors to upload files for development or testing 
   purposes without affecting non-development users. 
   
-  Packages that are uploaded are labeled "main" by default. The version labeled main 
-  is also delivered by default unless a user specifies a different label. 
-  
-  At [https://**pypi**.anaconda.org/conda](https://pypi.anaconda.org/conda) a dropdown 
-  menu lists all the available labels.
+  At the channel [https://conda.anaconda.org/sean](https://conda.anaconda.org/sean) 
+  a dropdown menu lists all the available labels.
 
-  For example, all of the pypi packages labeled as 'dev' can be shown here:
+  For example, all of the conda packages labeled as "dev" can be shown here:
 
-   *  [https://pypi.anaconda.org/conda/label/dev](https://pypi.anaconda.org/conda/label/dev)
+   *  [https://conda.anaconda.org/sean/label/dev](https://conda.anaconda.org/sean/label/dev)
 
-  The default label is **main**. If a file is labeled as **main** then the label name may be omitted from the URL.
-  For example the following repositories are equivalent:
+  The default label is **main**, so packages that are uploaded without specifying 
+  a label are automatically labeled "main". The version labeled main is also 
+  delivered by default unless a user specifies a different label. So, if a file 
+  is labeled as **main** then the label name may be omitted from the URL. For 
+  example the following repositories are equivalent:
 
-   *  [https://**pypi**.anaconda.org/conda/label/main](https://pypi.anaconda.org/conda/label/main)
-   *  [https://**pypi**.anaconda.org/conda](https://pypi.anaconda.org/conda)
+   *  [https://conda.anaconda.org/sean/label/main](https://conda.anaconda.org/sean/label/main)
+   *  [https://conda.anaconda.org/sean](https://conda.anaconda.org/sean)
+   
+   Commands such as ``conda install`` can be used with a channel or used with a 
+   channel and a label:
+   
+     conda install —channel sean selenium
+     conda install —channel sean/label/dev selenium
 
   {% endcall %}
 
