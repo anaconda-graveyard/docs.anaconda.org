@@ -258,11 +258,19 @@
 
   {% call subsection('Uploading packages')%}
 
-  To easily upload package files to Anaconda Cloud use the [anaconda-client](cli.html) command line interface:
+  To easily upload package files to Anaconda Cloud use the [anaconda-client](cli.html) command line interface. In this
+  example, we will upload a standard CSV file named flower-names.csv.
+  
+  If you haven't already, create a namespace for your package:
+  
+     anaconda package --create <USERNAME>/flower-names
 
-      anaconda upload FILE-NAME
+  Now you can upload data to your new namespace. Unlike uploading notebooks or packages, there is no auto-detect 
+  for data. You must explicitly specify the 'package', 'package-type' and 'version' fields as shown:
 
-  Your package can now be found on your profile page: `https://anaconda.org/<USERNAME>/<PACKAGE>`
+     anaconda upload --package flower-names --package-type file --version 1  flower-names.csv
+ 
+  Your package can now be found on your profile page: `https://anaconda.org/<USERNAME>flower-names`
 
   {% endcall %}
 
