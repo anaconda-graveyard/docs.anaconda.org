@@ -252,11 +252,47 @@
 
   {% call subsection('Uploading packages')%}
 
-  To easily upload package files to Anaconda Cloud use the [anaconda-client](cli.html) command line interface:
+  To easily upload package files to Anaconda Cloud use the [anaconda-client](cli.html) command line interface and the (cli.html#Upload) command:
 
-      anaconda upload FILE-NAME
+      anaconda login
+      anaconda upload PACKAGENAME
 
-  Your package can now be found on your profile page: `https://anaconda.org/<USERNAME>/<PACKAGE>`
+  Anaconda Cloud automatically detects packages and notebooks, package or notebook types, and their versions. 
+
+  Your package is now available at: `https://anaconda.org/<USERNAME>/<PACKAGENAME>`
+
+  Your package can be also downloaded by anyone using the Anaconda CLI:
+
+      anaconda download USERNAME/PACKAGENAME
+
+  {% endcall %}
+
+  {% call subsection('Uploading other types of files')%}
+
+  
+  In addition to uploading packages, you can also upload other types of files to Anaconda Cloud. In this example we will upload a spreadsheet named baby-names in comma separated value (CSV) format. Any type of file can be uploaded with the Anaconda CLI by using these steps.
+
+  1. Use the [anaconda-client](cli.html) command line interface to create a new namespace for your file on Anaconda Cloud:
+
+        anaconda login
+        anaconda package --create USERNAME/baby-names
+
+  2. Now you can upload the file to your new namespace. Unlike uploading packages or notebooks, there is no auto-detect for other types of files. You must explicitly specify the ‘PACKAGENAME’, 'package-type' and 'version' fields. 
+
+
+  In this example the package name is baby-names, the package type is a file, this is the first version that we are uploading, and the full filename is baby-names1.csv:
+
+  'anaconda upload --PACKAGENAME baby-names --package-type file --version 1  baby-names1.csv'
+
+  {% endcall %}
+
+  {% call subsection('Downloading other types of files')%}
+
+  Your file is available at `https://anaconda.org/<USERNAME>/<babynames>`
+  
+  Your file can be also downloaded by anyone using the Anaconda CLI:
+
+        anaconda download USERNAME/baby-names
 
   {% endcall %}
 
