@@ -252,7 +252,7 @@
 
   {% call subsection('Uploading packages')%}
 
-  To easily upload package files to Anaconda Cloud use the [anaconda-client](cli.html) command line interface and the (cli.html#Upload) command:
+  To easily upload package files to Anaconda Cloud use the [anaconda-client](cli.html) command line interface and the [anaconda-client](cli.html#Upload) command:
 
       anaconda login
       anaconda upload PACKAGENAME
@@ -282,7 +282,7 @@
 
   In this example the package name is baby-names, the package type is a file, this is the first version that we are uploading, and the full filename is baby-names1.csv:
 
-  'anaconda upload --PACKAGENAME baby-names --package-type file --version 1  baby-names1.csv'
+        anaconda upload --PACKAGENAME baby-names --package-type file --version 1  baby-names1.csv
 
   {% endcall %}
 
@@ -290,7 +290,7 @@
 
   Your file is available at `https://anaconda.org/<USERNAME>/<babynames>`
   
-  Your file can be also downloaded by anyone using the Anaconda CLI:
+  Your file can also be downloaded by anyone using the Anaconda CLI:
 
         anaconda download USERNAME/baby-names
 
