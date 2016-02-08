@@ -1,7 +1,7 @@
 mode: development # Use "hyde publish -c prod.yaml to have this automatically switch to production
 media_root: media # Relative path from content folder.
-media_url: /media # URL where the media files are served from.
-base_url: /
+media_url: /static/docs/media # URL where the media files are served from.
+base_url: /static/docs
 
 plugins:
     - hyde.ext.plugins.meta.MetaPlugin
@@ -16,12 +16,12 @@ context:
         branch: master
         imports:
           - binstar
-        site_title: Anaconda Cloud Documentation
+        site_title: Anaconda Repository Documentation
         author:
             name: Continuum Analytics
             url: "https://anaconda.org/"
         home_url: index.html
-        brand: Anaconda Cloud
+        brand: Anaconda Repository
         pages:
           - name: Quickstart
             url: quickstart.html
@@ -32,7 +32,7 @@ context:
           - name: Managing Your Account
             url: managing-account.html
             id: managing-account
-          - name: Using Anaconda Cloud
+          - name: Using Anaconda Repository
             url: using.html
             id: using
           - name: Anaconda Build
