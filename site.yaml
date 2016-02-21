@@ -26,13 +26,10 @@ context:
           - name: Quickstart
             url: quickstart.html
             id: quickstart
-          - name: Get Involved
-            url: get-involved.html
-            id: get-involved
-          - name: Managing Your Account
+          - name: Account Management
             url: managing-account.html
             id: managing-account
-          - name: Using Anaconda Repository
+          - name: Anaconda Repository
             url: using.html
             id: using
           - name: Anaconda Build
