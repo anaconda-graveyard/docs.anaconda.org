@@ -454,10 +454,10 @@ env:
    - r
    - defaults
   {% endsyntax %}
-  
+
   If private packages are required in your build, make sure to include a [token](reference.html#Token) in the channel
   configuration.
-  
+
   This shows the install_channels configured for building a package that depends on jsmith's private packages.
   {% syntax yaml %}
   install_channels:
@@ -673,13 +673,32 @@ exclude: true
   anaconda worker deregister <worker-id-from-register-step>
 {% endsyntax %}
 
-  If you need to deregister a worker, but have lost the yaml file output from the register step, then check your Anaconda server instance's /settings/build-queue page to remove the worker or list the workers you have registered with this command:
+  If you need to deregister a worker, then check your Anaconda server instance's /settings/build-queue page to remove the worker or list the workers you have registered with this command:
 
 {% syntax bash %}
   anaconda worker list
 {% endsyntax %}
 
+  There is an option for listing only the workers registered from the current hostname:
+
+{% syntax bash %}
+  anaconda worker list --this-host-only
+{% endsyntax %}
+
+  Registered workers can also be filtered by queue or organization with one of these commands:
+
+{% syntax bash %}
+  anaconda worker list --queue USERNAME/QUEUE
+{% endsyntax %}
+
+  Or:
+
+{% syntax bash %}
+  anaconda worker list --org ORGNAME
+{% endsyntax %}
+
   Review all help for register, run, deregister, and list with:
+
 {% syntax bash %}
   anaconda worker -h
 {% endsyntax %}
