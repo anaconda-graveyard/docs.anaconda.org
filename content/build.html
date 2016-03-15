@@ -220,6 +220,14 @@ about:
     anaconda build save -p #userdefined{USERNAME}/conda_build_test https://github.com/#userdefined{GITHUB_USERNAME}/conda_build_test --channel dev
     anaconda build trigger #userdefined{USERNAME}/conda_build_test
 
+  It is also possible to trigger a build on a specific queue, build host, repository branch, and/or distribution.  For information on options, see
+
+    anaconda build trigger --help
+
+  Here is an example of triggering a build on a queue, repository branch, and linux-64 distribution:
+
+    anaconda build trigger #userdefined{USERNAME}/conda_build_test --dist linux-64 --branch master --queue #userdefined{USERNAME}/#userdefined{QUEUENAME}
+
   {% endcall %}
 
   {% call subsection('Continuous Integration: run a build on git push')%}
