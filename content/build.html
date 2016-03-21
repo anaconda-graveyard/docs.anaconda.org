@@ -711,6 +711,32 @@ exclude: true
   anaconda worker -h
 {% endsyntax %}
 
+{% endcall %}
+
+{% call subsection('Launching a build worker as root')%}
+
+For users on linux there is an option for running the builder as the root user in a process that uses <code>su</code> to run each build as a lesser user. This architecture then allows destruction of the lesser build user's home directory and processes and may be more stable by reducing the number of left over build artifacts from each build.  Running the su worker is similar to running a worker as outlined above, but there are a few prerequistes:
+
+ *  Python must be in a root install usable by root and the lesser user, e.g. a root install of Miniconda into <code>/opt/anaconda</code>.
+ *  The worker must be started as the root user.
+ *  The directory <code>/etc/worker-skel</code> must exist. It will become the template for new worker home directories. It has a <code>.bash_profile</code> and/or <code>.bashrc</code> file that places the root Python on the system path with a statement like <code>PATH=/opt/anaconda/bin:$PATH</code>.
+ * The <code>/etc/worker-skel</code> and build user home directory must have an empty hidden file called <code>.su_worker</code>.  These files indicate user approval for deletion of build user home directory.  Do not create a <code>.su_worker</code> file in root's home directory or any other directory not to be deleted.
+ *  The build user must be created ahead of time or the su worker will run <code>useradd</code> to add a user. Note, however, automated user creation with <code>useradd</code> is not available on all POSIX systems.
+ *  The anaconda-build installation steps should be followed for the root Python, and anaconda-build, conda-build, and anaconda-client should be installed.
+ * If anaconda-build and anaconda-client are installed in a conda environment other than the root environment, then the <code>.bashrc</code> or <code>.bash_profile</code> in <code>/etc/worker-skel</code> should use <code>source activate some-environment</code>, where <code>some-environment</code> is replaced by the name of anaconda-build and anaconda-client conda environment.
+
+With those prerequisites and the <code>anaconda worker register USERNAME/QUEUE</code> step mentioned above, the su worker can be started with the worker id and a build user created in advance:
+
+{% syntax bash %}
+    anaconda worker su_run <worker-id-from-register-step> <build-user>
+{% endsyntax %}
+
+Other arguments can be passed to <code>su_run</code> as <code>run</code>.  See also
+
+{% syntax bash %}
+    anaconda worker su_run --help
+{% endsyntax %}
+
   {% endcall %}
 
   {% call subsection('Running workers in the background')%}
