@@ -8,9 +8,9 @@
 
   {% call subsection('Search for a public package')%}
 
-  Anaconda Cloud hosts hundreds of useful Python packages for a wide variety of applications. You don't need an 
+  [Anaconda Cloud](www.anaconda.org) hosts hundreds of useful Python packages for a wide variety of applications. You don't need an 
   Anaconda Cloud account, or to be logged in, to search for public packages, download and install them. You need 
-  an account only to access private packages without a token, or to build and share your packages with others.
+  an account only to access [private packages](http://docs.anaconda.org/using.html#PrivatePackages) without a [token](http://docs.anaconda.org/using.html#Tokens), or to build and share your packages with others.
 
   1. In the top search box, type part or all of the name of a program you are searching for and press Enter.
   2. Packages that match your search string are displayed. Click the package name to see more information.
@@ -37,7 +37,7 @@
   NOTE: For the following examples to work, you need to have 
   [conda](http://conda.pydata.org/docs/download.html) downloaded and installed.
 
-  EXAMPLE: To download and install a package with conda run:
+  EXAMPLE: To download and install a package with conda, run:
 
       conda install -c https://anaconda.org/USERNAME packagename
 
@@ -107,9 +107,9 @@
 
   Save a [conda environment](http://conda.pydata.org/docs/using/envs.html) and upload it to Anaconda Cloud:
 
-    conda env export -n my-environment
+    conda env export -n my-environment -f my-environment.yml
 
-    conda env upload my-environment
+    conda env upload -f my-environment
 
   A list of your uploaded environments is at:
   
