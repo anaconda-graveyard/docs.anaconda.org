@@ -673,6 +673,18 @@ exclude: true
   anaconda build submit ./my-build --queue USERNAME/QUEUENAME
 {% endsyntax %}
 
+  It is also possible to immediately tail a build log, by supplying the `--tail` or `-f` optional arguments to `anaconda build submit`.  For example, the following command would tail all sub-build logs in order:
+
+{% syntax bash %}
+  anaconda build submit ./my-build --queue USERNAME/QUEUENAME --tail
+{% endsyntax %}
+
+  To tail only specific sub-builds created by an `anaconda build submit` call, add the `--sub-builds` integer(s) as follows:
+{% syntax bash %}
+  anaconda build submit ./my-build --queue USERNAME/QUEUENAME --tail --sub-builds 1 2
+{% endsyntax %}
+
+
   NOTE: You must leave your build worker process running in order to submit builds to it.  You may wish to attach build workers to your queue using a nohup command or similar.
 
   Finally, after killing the anaconda build worker process, it is required to deregister the worker, unless you plan to start the worker again with the same worker id and configuration.  The deregister step can be done with:
